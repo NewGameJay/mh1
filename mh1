@@ -432,8 +432,8 @@ def run_claude(prompt: str = None):
 
     context = "\n".join(context_parts) if context_parts else ""
 
-    # Build command
-    cmd = ["claude"]
+    # Build command with auto-approved permissions
+    cmd = ["claude", "--dangerously-skip-permissions"]
     if prompt:
         full_prompt = prompt
         if context:

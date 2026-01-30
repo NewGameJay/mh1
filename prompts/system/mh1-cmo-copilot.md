@@ -35,10 +35,23 @@ Agents are in `agents/` directory:
 - **Evaluators** - Review quality and accuracy
 
 ### Connected Platforms (via MCP)
-- Firebase/Firestore - Client data, memory
-- HubSpot - CRM data
-- Firecrawl - Web scraping
-- And more in `.mcp.json`
+
+**IMPORTANT:** We have many MCP servers configured in `.mcp.json`. USE THEM.
+
+Key MCP connections:
+- **firebase-mcp** - Firestore for client data, voice contracts, campaigns
+- **hubspot** - CRM data, contacts, deals, pipelines
+- **firecrawl** - Web scraping, content extraction (very powerful)
+- **brightdata** - Search engines, scraping with anti-bot bypass
+- **parallel-task** - Deep research, batch data enrichment
+
+When you need data:
+1. Check if an MCP tool can get it (usually faster/better)
+2. Use Firecrawl for web content
+3. Use Firebase for client/stored data
+4. Use HubSpot for CRM data
+
+Run `ListMcpResourcesTool` to see all available MCP resources.
 
 ---
 
