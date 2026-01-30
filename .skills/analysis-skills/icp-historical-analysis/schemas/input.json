@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ICP Historical Analysis Input",
+  "description": "Input schema for the icp-historical-analysis skill",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "description": "Firebase Client ID. If not provided, reads from inputs/active_client.md"
+    },
+    "founder_id": {
+      "type": "string",
+      "description": "Founder/profile document ID for posts (required)"
+    },
+    "lookback_days": {
+      "type": "integer",
+      "minimum": 7,
+      "maximum": 90,
+      "default": 14,
+      "description": "Number of days to analyze (default: 14)"
+    },
+    "icp_definitions": {
+      "type": "array",
+      "description": "Override ICP definitions from client context",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "ICP segment name (e.g., 'Primary', 'Secondary')"
+          },
+          "criteria": {
+            "type": "object",
+            "properties": {
+              "titles": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Job titles that match this ICP"
+              },
+              "company_sizes": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Company size ranges (e.g., '50-500')"
+              },
+              "industries": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Industries that match"
+              },
+              "seniority_levels": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Seniority levels (e.g., 'Director+', 'Manager+')"
+              }
+            }
+          },
+          "priority": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Priority for this ICP (1 = highest)"
+          }
+        },
+        "required": ["name", "criteria"]
+      }
+    },
+    "min_engagement": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 0,
+      "description": "Minimum total engagement to include a post in analysis"
+    },
+    "tenant_id": {
+      "type": "string",
+      "description": "Tenant identifier for budget tracking (defaults to client_id)"
+    },
+    "execution_mode": {
+      "type": "string",
+      "enum": ["suggest", "preview", "execute"],
+      "default": "suggest",
+      "description": "Execution mode (suggest=read-only, preview=show changes, execute=persist results)"
+    }
+  },
+  "required": ["founder_id"],
+  "additionalProperties": false
+}

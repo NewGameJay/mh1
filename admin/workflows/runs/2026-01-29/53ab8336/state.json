@@ -1,0 +1,9 @@
+{
+  "current_step": 1,
+  "outputs": {
+    "checkpoint-step": {
+      "checkpoint": "saved"
+    }
+  },
+  "tenant_id": "test"
+}

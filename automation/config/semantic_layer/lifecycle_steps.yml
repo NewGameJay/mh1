@@ -1,0 +1,406 @@
+# MH1 Semantic Layer Template - Lifecycle Steps
+# This file defines event-to-lifecycle mappings for customer journey analysis
+# 
+# To customize for your company:
+# 1. Copy this file to clients/{client_id}/config/semantic_layer/
+# 2. Replace placeholders with your specific values
+# 3. Add/remove event types as needed for your business
+#
+# Placeholders used in this file:
+#   {company_name} - Your company name (e.g., "Acme Corp")
+#   {database}     - Your data warehouse database name
+#   {schema}       - Your schema name
+#   {events_table} - Your events table name
+#
+# Generated: 2026-01-15
+# Updated: 2026-01-27 (Converted to company-agnostic template)
+
+# =============================================================================
+# LIFECYCLE STEPS DEFINITION
+# =============================================================================
+# The 8-stage model covers the complete customer journey from discovery to 
+# advocacy. Customize stages based on your business model.
+
+lifecycle_steps:
+  # -------------------------------------------------------------------------
+  # Stage 1: Awareness
+  # -------------------------------------------------------------------------
+  # Initial touchpoint - user discovers your product/service
+  awareness:
+    description: "Initial touchpoint - user discovers {company_name}"
+    order: 1
+    events:
+      - page_viewed
+      - ad_impression
+      - social_impression
+      - external_pixel_fired
+    canonical_events:
+      - event_type: page_view
+        conversion_type: unspecified
+      - event_type: impression
+        conversion_type: awareness
+    industry_examples:
+      saas: ["landing_page_view", "blog_visit", "pricing_page_view"]
+      ecommerce: ["homepage_view", "category_browse", "search"]
+      b2b_services: ["website_visit", "content_download", "webinar_registration"]
+    
+  # -------------------------------------------------------------------------
+  # Stage 2: Engagement
+  # -------------------------------------------------------------------------
+  # User interacts with content, explores product/service
+  engagement:
+    description: "User interacts with {company_name} content"
+    order: 2
+    events:
+      - content_viewed
+      - link_clicked
+      - video_watched
+      - page_exit
+      - feature_used
+    canonical_events:
+      - event_type: view
+        conversion_type: unspecified
+      - event_type: click
+        conversion_type: unspecified
+      - event_type: interaction
+        conversion_type: unspecified
+    industry_examples:
+      saas: ["feature_explored", "demo_video_watched", "docs_read"]
+      ecommerce: ["product_viewed", "add_to_wishlist", "size_guide_viewed"]
+      b2b_services: ["case_study_read", "comparison_page_viewed", "faq_viewed"]
+    
+  # -------------------------------------------------------------------------
+  # Stage 3: Contact Captured (Lead)
+  # -------------------------------------------------------------------------
+  # User provides contact information, becomes a lead
+  contact_captured:
+    description: "User provides contact information"
+    order: 3
+    events:
+      - contact_collection
+      - contact_collected
+      - newsletter_signup
+      - lead_magnet_download
+    canonical_events:
+      - event_type: form_view
+        conversion_type: contact_collection
+      - event_type: conversion
+        conversion_type: contact_collection
+    is_conversion: true
+    conversion_value: "Contact information captured"
+    industry_examples:
+      saas: ["free_trial_signup", "demo_request", "newsletter_subscribe"]
+      ecommerce: ["account_created", "wishlist_signup", "back_in_stock_alert"]
+      b2b_services: ["consultation_request", "whitepaper_download", "webinar_signup"]
+    
+  # -------------------------------------------------------------------------
+  # Stage 4: Form/Intent Viewed (MQL Signal)
+  # -------------------------------------------------------------------------
+  # User views high-intent content (forms, pricing, demos)
+  form_viewed:
+    description: "User views high-intent content"
+    order: 4
+    events:
+      - form_viewed
+      - pricing_viewed
+      - demo_scheduled
+    canonical_events:
+      - event_type: page_view
+        conversion_type: form_submission
+      - event_type: page_view
+        conversion_type: pricing_view
+    is_conversion: false
+    industry_examples:
+      saas: ["pricing_page_view", "demo_calendar_opened", "upgrade_modal_shown"]
+      ecommerce: ["checkout_started", "shipping_calculator_used", "payment_method_viewed"]
+      b2b_services: ["proposal_requested", "contract_template_viewed", "scope_call_scheduled"]
+    
+  # -------------------------------------------------------------------------
+  # Stage 5: Form/Intent Completed (SQL)
+  # -------------------------------------------------------------------------
+  # User submits high-intent form, becomes SQL
+  form_completed:
+    description: "User submits high-intent form"
+    order: 5
+    events:
+      - form_submitted
+      - demo_completed
+      - trial_started
+    canonical_events:
+      - event_type: conversion
+        conversion_type: form_submission
+    is_conversion: true
+    conversion_value: "Form submission completed"
+    industry_examples:
+      saas: ["trial_activated", "demo_completed", "sales_call_scheduled"]
+      ecommerce: ["checkout_completed_without_payment", "quote_requested"]
+      b2b_services: ["proposal_sent", "contract_sent", "pilot_started"]
+    
+  # -------------------------------------------------------------------------
+  # Stage 6: Form Abandoned (Funnel Exit)
+  # -------------------------------------------------------------------------
+  # User started conversion flow but did not complete
+  form_abandoned:
+    description: "User started form but did not complete"
+    order: 6
+    events:
+      - form_abandoned
+      - checkout_abandoned
+      - trial_abandoned
+    canonical_events:
+      - event_type: abandon
+        conversion_type: form_submission
+    is_conversion: false
+    is_funnel_exit: true
+    industry_examples:
+      saas: ["trial_not_activated", "demo_no_show", "upgrade_abandoned"]
+      ecommerce: ["cart_abandoned", "checkout_abandoned", "payment_failed"]
+      b2b_services: ["proposal_expired", "contract_unsigned", "pilot_cancelled"]
+    
+  # -------------------------------------------------------------------------
+  # Stage 7: Purchase (Customer)
+  # -------------------------------------------------------------------------
+  # User completes purchase, becomes customer
+  purchase:
+    description: "User completes a purchase"
+    order: 7
+    events:
+      - purchase_completed
+      - subscription_started
+      - contract_signed
+    canonical_events:
+      - event_type: conversion
+        conversion_type: purchase
+    is_conversion: true
+    conversion_value: "Purchase transaction completed"
+    is_critical_conversion: true
+    industry_examples:
+      saas: ["subscription_started", "plan_upgraded", "add_on_purchased"]
+      ecommerce: ["order_completed", "payment_confirmed", "subscription_box_purchased"]
+      b2b_services: ["contract_signed", "retainer_started", "project_kicked_off"]
+
+  # -------------------------------------------------------------------------
+  # Stage 8: Retention/Advocacy (Optional)
+  # -------------------------------------------------------------------------
+  # Post-purchase engagement and advocacy
+  retention:
+    description: "Customer continues engaging and advocates"
+    order: 8
+    events:
+      - repeat_purchase
+      - referral_sent
+      - review_submitted
+      - renewal_completed
+    canonical_events:
+      - event_type: conversion
+        conversion_type: retention
+      - event_type: conversion
+        conversion_type: advocacy
+    is_conversion: true
+    conversion_value: "Customer retained or referred"
+    industry_examples:
+      saas: ["renewal_completed", "upsell_accepted", "referral_sent", "case_study_approved"]
+      ecommerce: ["repeat_order", "review_submitted", "friend_referred", "loyalty_earned"]
+      b2b_services: ["contract_renewed", "scope_expanded", "testimonial_given", "referral_made"]
+
+# =============================================================================
+# FUNNEL DEFINITION
+# =============================================================================
+# Standard funnel configuration - customize based on your business model
+
+funnel:
+  name: "{company_name} Customer Journey"
+  description: "Standard funnel from awareness to purchase"
+  
+  # Configure which stages are included in your funnel
+  steps:
+    - step: awareness
+      order: 1
+      description: "Initial discovery"
+      
+    - step: engagement
+      order: 2
+      description: "Content interaction"
+      
+    - step: contact_captured
+      order: 3
+      description: "Contact information collected"
+      is_mql: true  # Marketing Qualified Lead
+      
+    - step: form_viewed
+      order: 4
+      description: "High-intent engagement"
+      
+    - step: form_completed
+      order: 5
+      description: "Form/demo submission"
+      is_sql: true  # Sales Qualified Lead
+      
+    - step: purchase
+      order: 6
+      description: "Purchase completion"
+      is_customer: true
+
+    - step: retention
+      order: 7
+      description: "Post-purchase engagement"
+      is_retained: true
+
+# =============================================================================
+# CONVERSION DEFINITIONS
+# =============================================================================
+# Define what constitutes each conversion type for your business
+
+conversions:
+  mql:
+    step: contact_captured
+    description: "Marketing Qualified Lead - contact information captured"
+    value_type: "qualitative"
+    
+  sql:
+    step: form_completed
+    description: "Sales Qualified Lead - high-intent action completed"
+    value_type: "qualitative"
+    
+  customer:
+    step: purchase
+    description: "Customer - purchase completed"
+    value_type: "revenue"
+    
+  engagement:
+    step: engagement
+    description: "Engagement metric - user interacts with content"
+    value_type: "behavioral"
+
+  retention:
+    step: retention
+    description: "Retention metric - customer continues engaging"
+    value_type: "behavioral"
+
+# =============================================================================
+# DATA COVERAGE (Template)
+# =============================================================================
+# Update these values based on your actual data
+
+coverage:
+  total_events: "{total_event_count}"
+  events_with_email: "{events_with_email_count}"
+  events_with_user_id: "{events_with_user_id_count}"
+  date_range: "{data_start_date} to {data_end_date}"
+
+# =============================================================================
+# ANONYMOUS USER TRACKING
+# =============================================================================
+# Configure based on your tracking implementation
+
+anonymous_tracking:
+  method: "{tracking_method}"  # Options: cookie-based, device-id, fingerprint
+  coverage: "{coverage_percentage}% of events have {tracking_identifier}"
+  limitation: "Cannot directly map to authenticated users"
+  recommendation: "Use {tracking_identifier}-to-user stitching for better identity resolution"
+
+# =============================================================================
+# CRM LIFECYCLE STAGES
+# =============================================================================
+# Map your CRM lifecycle stages to the funnel steps above
+# This example uses HubSpot - adapt for your CRM (Salesforce, Pipedrive, etc.)
+
+crm_lifecycle:
+  platform: "{crm_platform}"  # hubspot, salesforce, pipedrive, etc.
+  
+  stages:
+    - stage: "subscriber"
+      description: "Contact has subscribed to marketing communications"
+      date_property: "{crm_subscriber_date_field}"
+      
+    - stage: "lead"
+      description: "Contact has shown interest but not yet qualified"
+      date_property: "{crm_lead_date_field}"
+      maps_to_funnel: "awareness"
+      
+    - stage: "marketing_qualified_lead"
+      description: "MQL - Marketing Qualified Lead"
+      date_property: "{crm_mql_date_field}"
+      maps_to_funnel: "contact_captured"
+      is_mql: true
+      
+    - stage: "sales_qualified_lead"
+      description: "SQL - Sales Qualified Lead"
+      date_property: "{crm_sql_date_field}"
+      maps_to_funnel: "form_completed"
+      is_sql: true
+      
+    - stage: "opportunity"
+      description: "Contact has an open opportunity"
+      date_property: "{crm_opportunity_date_field}"
+      maps_to_funnel: "form_completed"
+      
+    - stage: "customer"
+      description: "Contact has become a customer"
+      date_property: "{crm_customer_date_field}"
+      maps_to_funnel: "purchase"
+      is_customer: true
+
+  # Add custom stages specific to your CRM
+  custom_stages: []
+  # Example:
+  # - stage_id: "custom_stage_1"
+  #   name: "Enterprise Opportunity"
+  #   description: "Large deal in pipeline"
+  #   maps_to_funnel: "form_completed"
+      
+  mapping_strategy:
+    approach: "Use CRM lifecycle stages as source of truth for contact progression"
+    date_tracking: "CRM provides timestamp properties for each lifecycle stage transition"
+    join_key: "{primary_join_key}"  # e.g., "ORG_ID → CRM_COMPANY_ID"
+    normalization: "Map CRM lifecycle stages to canonical funnel steps before joining with warehouse events"
+    
+  notes:
+    - "CRM lifecycle stages are contact-level, not event-level"
+    - "Lifecycle stage dates track when contacts transitioned to each stage"
+    - "Map custom lifecycle stages to canonical funnel steps"
+    - "MQL/SQL stage definitions should align between CRM and warehouse"
+
+# =============================================================================
+# INDUSTRY-SPECIFIC TEMPLATES
+# =============================================================================
+# Copy the appropriate template as a starting point for your business
+
+industry_templates:
+  saas:
+    description: "Software-as-a-Service business model"
+    key_conversions:
+      - "free_trial_signup"
+      - "trial_to_paid_conversion"
+      - "plan_upgrade"
+      - "annual_renewal"
+    funnel_focus: "Trial activation and paid conversion"
+    typical_stages: ["awareness", "engagement", "trial", "activation", "paid", "expansion"]
+    
+  ecommerce:
+    description: "Online retail and direct-to-consumer"
+    key_conversions:
+      - "add_to_cart"
+      - "checkout_completed"
+      - "repeat_purchase"
+    funnel_focus: "Cart completion and repeat purchases"
+    typical_stages: ["browse", "cart", "checkout", "purchase", "repeat"]
+    
+  b2b_services:
+    description: "Business-to-business professional services"
+    key_conversions:
+      - "consultation_booked"
+      - "proposal_sent"
+      - "contract_signed"
+    funnel_focus: "Lead qualification and deal closure"
+    typical_stages: ["awareness", "consideration", "evaluation", "decision", "closed"]
+    
+  marketplace:
+    description: "Two-sided marketplace"
+    key_conversions:
+      - "buyer_signup"
+      - "seller_signup"
+      - "first_transaction"
+      - "repeat_transaction"
+    funnel_focus: "Both supply and demand side activation"
+    typical_stages: ["visit", "signup", "listing/browse", "transaction", "retention"]

@@ -1,0 +1,271 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Content Calendar Schema",
+  "description": "Schema for CONTENT_CALENDAR_FINAL.json output",
+  "type": "object",
+  "required": ["campaign", "metrics", "posts"],
+  "properties": {
+    "campaign": {
+      "type": "object",
+      "required": ["client_name", "platform", "generated_at", "post_count"],
+      "properties": {
+        "client_name": {
+          "type": "string",
+          "description": "Client display name"
+        },
+        "client_id": {
+          "type": "string",
+          "description": "Firebase Client ID"
+        },
+        "founder_name": {
+          "type": "string",
+          "description": "Founder name"
+        },
+        "founder_id": {
+          "type": "string",
+          "description": "Firebase Founder ID"
+        },
+        "platform": {
+          "type": "string",
+          "enum": ["linkedin", "twitter"],
+          "description": "Target social platform"
+        },
+        "generated_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp of generation"
+        },
+        "post_count": {
+          "type": "integer",
+          "description": "Total number of posts in calendar",
+          "minimum": 1
+        },
+        "run_id": {
+          "type": "string",
+          "description": "Unique run identifier (e.g., ghostwrite-linkedin-2026-01-22)"
+        },
+        "date_range": {
+          "type": "object",
+          "properties": {
+            "start": {
+              "type": "string",
+              "format": "date",
+              "description": "First scheduled post date"
+            },
+            "end": {
+              "type": "string",
+              "format": "date",
+              "description": "Last scheduled post date"
+            }
+          }
+        },
+        "schedule": {
+          "type": "object",
+          "properties": {
+            "frequency": {
+              "type": "string",
+              "description": "Posting frequency (e.g., '3 posts/week')"
+            },
+            "days": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Days of the week to post"
+            },
+            "time": {
+              "type": "string",
+              "description": "Optimal posting time (e.g., '9:00 AM ET')"
+            }
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "description": "Campaign quality metrics",
+      "properties": {
+        "voice_authenticity_avg": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10,
+          "description": "Average voice confidence score across all posts"
+        },
+        "qa_passed": {
+          "type": "integer",
+          "description": "Number of posts that passed QA"
+        },
+        "qa_failed": {
+          "type": "integer",
+          "description": "Number of posts that failed QA (after regeneration)"
+        },
+        "manual_review_required": {
+          "type": "integer",
+          "description": "Number of posts flagged for manual review"
+        },
+        "funnel_distribution": {
+          "type": "object",
+          "description": "Posts per funnel stage",
+          "properties": {
+            "TOFU": { "type": "integer" },
+            "MOFU": { "type": "integer" },
+            "BOFU": { "type": "integer" }
+          }
+        },
+        "template_usage": {
+          "type": "object",
+          "description": "Count of posts per template ID",
+          "additionalProperties": { "type": "integer" }
+        },
+        "source_distribution": {
+          "type": "object",
+          "description": "Posts per source type",
+          "properties": {
+            "thought_leader": { "type": "integer" },
+            "parallel_event": { "type": "integer" },
+            "strategic": { "type": "integer" },
+            "social_listening": { "type": "integer" }
+          }
+        }
+      }
+    },
+    "posts": {
+      "type": "array",
+      "description": "All posts in the content calendar",
+      "items": {
+        "type": "object",
+        "required": ["post_number", "scheduled_date", "funnel_stage", "post_text"],
+        "properties": {
+          "post_number": {
+            "type": "integer",
+            "description": "Sequential post number (1-based)"
+          },
+          "post_id": {
+            "type": "string",
+            "description": "Unique post identifier"
+          },
+          "scheduled_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Scheduled publication date"
+          },
+          "scheduled_day": {
+            "type": "string",
+            "description": "Day of the week"
+          },
+          "scheduled_week": {
+            "type": "integer",
+            "description": "Week number in the calendar"
+          },
+          "template_id": {
+            "type": "integer",
+            "description": "LinkedIn template ID used"
+          },
+          "template_name": {
+            "type": "string",
+            "description": "Human-readable template name"
+          },
+          "funnel_stage": {
+            "type": "string",
+            "enum": ["TOFU", "MOFU", "BOFU"],
+            "description": "Marketing funnel stage"
+          },
+          "post_text": {
+            "type": "string",
+            "description": "Full post content"
+          },
+          "character_count": {
+            "type": "integer",
+            "description": "Character count of post content"
+          },
+          "topic": {
+            "type": "string",
+            "description": "Topic title"
+          },
+          "angle": {
+            "type": "string",
+            "description": "Content angle"
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "voice_confidence": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 10
+              },
+              "source_type": { "type": "string" },
+              "source_ref": { "type": "string" },
+              "inspiration_summary": { "type": "string" },
+              "relevance_score": { "type": "number" },
+              "context_files_used": {
+                "type": "array",
+                "items": { "type": "string" }
+              },
+              "anti_ai_compliance": {
+                "type": "string",
+                "enum": ["PASS", "FAIL", "REVIEW"]
+              }
+            }
+          },
+          "qa_status": {
+            "type": "string",
+            "enum": ["pass", "fail", "needs-manual-review"]
+          },
+          "qa_issues": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": { "type": "string" },
+                "severity": { "type": "string" },
+                "description": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "source_data_summary": {
+      "type": "object",
+      "description": "Summary of source data used for generation",
+      "properties": {
+        "social_listening_posts": { "type": "integer" },
+        "thought_leader_posts": { "type": "integer" },
+        "parallel_events": { "type": "integer" },
+        "founder_posts_analyzed": { "type": "integer" },
+        "context_docs_loaded": { "type": "integer" }
+      }
+    },
+    "publishing_notes": {
+      "type": "object",
+      "description": "Publishing recommendations",
+      "properties": {
+        "best_days": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "best_time": { "type": "string" },
+        "posts_per_week": { "type": "integer" },
+        "content_mix_tips": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "engagement_tips": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "generation_metadata": {
+      "type": "object",
+      "description": "Metadata about the generation process",
+      "properties": {
+        "skill_name": { "type": "string" },
+        "skill_version": { "type": "string" },
+        "generated_at": { "type": "string", "format": "date-time" },
+        "execution_time_ms": { "type": "integer" },
+        "tokens_used": { "type": "integer" },
+        "cost_usd": { "type": "number" }
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+# LinkedIn Keyword Search - Default Configuration
+# Crustdata API integration for LinkedIn post discovery
+
+api:
+  provider: crustdata
+  credits_per_post: 1
+  credits_exact_match: 3
+  credits_reactors: 5
+  credits_comments: 5
+
+rate_limits:
+  requests_per_minute: 10
+  max_concurrent: 3
+  cooldown_on_error: 60  # seconds
+
+collection:
+  max_results: 100
+  include_engagement: true
+  include_reactions: false
+  include_comments: false
+
+filters:
+  date_range: "past_week"  # past_day, past_week, past_month
+  language: "en"
+  exclude_reposts: true
+
+output:
+  format: json
+  save_to_client_dir: true
+  path_template: "clients/{client_id}/signals/linkedin/{timestamp}.json"
+
+firestore:
+  collection: "signals"
+  merge_duplicates: true
+  dedup_field: "id"

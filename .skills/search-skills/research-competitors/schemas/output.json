@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Research Competitors Output",
+  "description": "Output schema for the research-competitors skill",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["success", "review", "failed", "budget_exceeded"]
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "company_name": {"type": "string"},
+        "industry": {"type": "string"},
+        "competitors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "website": {"type": "string"},
+              "description": {"type": "string"},
+              "products": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {"type": "string"},
+                    "description": {"type": "string"},
+                    "features": {"type": "array", "items": {"type": "string"}}
+                  }
+                }
+              },
+              "pricing": {
+                "type": "object",
+                "properties": {
+                  "available": {"type": "boolean"},
+                  "tiers": {"type": "array"}
+                }
+              },
+              "target_audience": {"type": "string"},
+              "differentiators": {"type": "array", "items": {"type": "string"}},
+              "content_approach": {
+                "type": "object",
+                "properties": {
+                  "blog": {"type": "boolean"},
+                  "newsletter": {"type": "boolean"},
+                  "social": {"type": "array", "items": {"type": "string"}},
+                  "topics": {"type": "array", "items": {"type": "string"}}
+                }
+              }
+            }
+          }
+        },
+        "positioning_matrix": {
+          "type": "object",
+          "properties": {
+            "features": {"type": "array", "items": {"type": "string"}},
+            "comparison": {"type": "object"}
+          }
+        },
+        "market_gaps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "gap": {"type": "string"},
+              "opportunity": {"type": "string"},
+              "priority": {"type": "string", "enum": ["high", "medium", "low"]}
+            }
+          }
+        },
+        "content_strategies": {"type": "array"},
+        "research_doc": {"type": "string"},
+        "research_doc_path": {"type": "string"}
+      }
+    },
+    "evaluation": {"type": "object"},
+    "release_action": {"type": "string"},
+    "run_id": {"type": "string"},
+    "_meta": {
+      "type": "object",
+      "properties": {
+        "client_id": {"type": "string"},
+        "tenant_id": {"type": "string"},
+        "run_id": {"type": "string"},
+        "competitors_analyzed": {"type": "integer"},
+        "runtime_seconds": {"type": "number"},
+        "cost_usd": {"type": "number"},
+        "timestamp": {"type": "string"}
+      }
+    },
+    "error": {"type": "string"},
+    "error_type": {"type": "string"}
+  },
+  "required": ["status"]
+}

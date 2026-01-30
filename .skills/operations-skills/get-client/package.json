@@ -1,0 +1,12 @@
+{
+  "name": "get-client-skill",
+  "version": "1.0.0",
+  "description": "Fetches Firestore client documents",
+  "type": "module",
+  "scripts": {
+    "get-client": "node get-client.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.0.0"
+  }
+}

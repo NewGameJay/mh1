@@ -1,0 +1,50 @@
+# Firebase Bulk Upload - Default Configuration
+# Batch upload operations for social listening data
+
+batch:
+  max_size: 500  # Firestore batch limit
+  retry_on_failure: true
+  max_retries: 3
+  retry_delay: 1.0  # seconds
+
+validation:
+  require_client_id: true
+  validate_schema: true
+  strict_mode: false  # If true, fail on any validation error
+
+platforms:
+  linkedin:
+    collection: "signals"
+    max_upload: 100
+    required_fields:
+      - id
+      - content
+      - author
+      - timestamp
+  twitter:
+    collection: "signals"
+    max_upload: 50
+    required_fields:
+      - id
+      - content
+      - author
+      - timestamp
+  reddit:
+    collection: "signals"
+    max_upload: 200
+    required_fields:
+      - id
+      - content
+      - author
+      - timestamp
+      - subreddit
+
+deduplication:
+  enabled: true
+  field: "id"
+  strategy: "skip"  # skip, overwrite, merge
+
+scoring:
+  update_existing: true
+  score_field: "relevanceScore"
+  min_score_for_update: 0

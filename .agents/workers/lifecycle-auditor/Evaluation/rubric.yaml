@@ -1,0 +1,256 @@
+# Lifecycle Auditor Evaluation Rubric
+# Used to score agent outputs and identify improvement areas
+
+name: lifecycle-auditor-evaluation
+version: 1.0.0
+min_passing_score: 0.8
+
+# Scoring weights (must sum to 1.0)
+weights:
+  data_accuracy: 0.25
+  completeness: 0.20
+  actionability: 0.20
+  statistical_validity: 0.15
+  platform_awareness: 0.10
+  efficiency: 0.10
+
+criteria:
+  data_accuracy:
+    description: "Correctness of all statistics, counts, and calculated metrics"
+    levels:
+      - score: 1.0
+        description: "All counts verified against source, conversion rates mathematically correct, no errors"
+      - score: 0.8
+        description: "Minor rounding differences, all major figures accurate"
+      - score: 0.6
+        description: "Some calculation errors but conclusions still valid"
+      - score: 0.4
+        description: "Multiple calculation errors, some conclusions affected"
+      - score: 0.2
+        description: "Significant errors in key metrics"
+      - score: 0.0
+        description: "Fundamentally incorrect data or fabricated statistics"
+    auto_checks:
+      - type: sum_verification
+        description: "Verify stage counts sum to total"
+      - type: rate_calculation
+        description: "Verify conversion rates match (next_stage / current_stage)"
+      - type: benchmark_validity
+        description: "Verify benchmarks are from appropriate industry/context"
+
+  completeness:
+    description: "All required audit sections present and thoroughly addressed"
+    levels:
+      - score: 1.0
+        description: "All required sections present with comprehensive analysis"
+      - score: 0.8
+        description: "All required sections, some areas could be deeper"
+      - score: 0.6
+        description: "Most sections present, 1-2 missing or shallow"
+      - score: 0.4
+        description: "Several required sections missing"
+      - score: 0.2
+        description: "Only partially addresses audit scope"
+      - score: 0.0
+        description: "Does not provide meaningful audit output"
+    required_elements:
+      - "summary.total_accounts"
+      - "summary.by_stage"
+      - "summary.health_score"
+      - "bottlenecks (array)"
+      - "recommendations (array)"
+      - "_meta.tenant_id"
+      - "_meta.runtime_seconds"
+      - "_meta.cost_usd"
+    conditional_elements:
+      - name: "at_risk"
+        condition: "execution intent includes churn/retention analysis"
+      - name: "upsell_candidates"
+        condition: "execution intent includes expansion opportunities"
+      - name: "cohort_comparison"
+        condition: "request includes trend/quarterly analysis"
+
+  actionability:
+    description: "Recommendations are specific, prioritized, and implementable"
+    levels:
+      - score: 1.0
+        description: "Each recommendation has specific action, owner, timeline, and quantified impact"
+      - score: 0.8
+        description: "Clear actions with impact estimates, some missing timelines/owners"
+      - score: 0.6
+        description: "Actionable items present but impact not always quantified"
+      - score: 0.4
+        description: "Vague recommendations, unclear how to implement"
+      - score: 0.2
+        description: "Generic advice not tied to audit findings"
+      - score: 0.0
+        description: "No actionable recommendations or completely irrelevant"
+    recommendation_requirements:
+      - field: "priority"
+        values: ["high", "medium", "low"]
+        required: true
+      - field: "category"
+        values: ["retention", "conversion", "expansion", "data_quality"]
+        required: true
+      - field: "action"
+        required: true
+        min_length: 20
+      - field: "impact"
+        required: true
+        should_quantify: true
+
+  statistical_validity:
+    description: "Appropriate handling of sample sizes and statistical limitations"
+    levels:
+      - score: 1.0
+        description: "Proper sample size handling, confidence noted, no misleading precision"
+      - score: 0.8
+        description: "Good statistical awareness, minor issues with presentation"
+      - score: 0.6
+        description: "Most issues handled but some rates from small samples"
+      - score: 0.4
+        description: "Rates calculated from insufficient data without caveats"
+      - score: 0.2
+        description: "Statistically invalid conclusions presented confidently"
+      - score: 0.0
+        description: "Complete disregard for sample size requirements"
+    checks:
+      - name: minimum_stage_count
+        threshold: 10
+        action: "Flag conversion rates calculated from stages with <10 contacts"
+      - name: total_record_threshold
+        threshold: 100
+        action: "Require 'directional only' caveat if below"
+      - name: anomaly_detection
+        patterns:
+          - ">100% conversion rate without explanation"
+          - "0% conversion with non-zero source stage"
+          - "Identical rates across multiple transitions"
+
+  platform_awareness:
+    description: "Correct handling of CRM platform specifics and custom configurations"
+    levels:
+      - score: 1.0
+        description: "Correctly discovered custom stages, used platform-appropriate queries"
+      - score: 0.8
+        description: "Good platform handling, minor opportunities for optimization"
+      - score: 0.6
+        description: "Standard approach worked but missed some platform nuances"
+      - score: 0.4
+        description: "Some platform issues but audit still completed"
+      - score: 0.2
+        description: "Major platform issues affected audit quality"
+      - score: 0.0
+        description: "Wrong platform assumptions, audit invalid"
+    platform_checks:
+      hubspot:
+        - "Used correct property names (lifecyclestage not lifecycle_stage)"
+        - "Queried timestamp fields for velocity if requested"
+        - "Handled pagination for large datasets"
+      salesforce:
+        - "Discovered custom lifecycle field name"
+        - "Handled Lead vs Contact model appropriately"
+        - "Included converted leads in funnel if applicable"
+      pipedrive:
+        - "Used correct deal stage field"
+        - "Mapped pipeline stages to lifecycle model"
+
+  efficiency:
+    description: "Resource usage appropriate for dataset size and request scope"
+    levels:
+      - score: 1.0
+        description: "Optimal resource use, appropriate model selection, fast execution"
+      - score: 0.8
+        description: "Good efficiency, minor improvements possible"
+      - score: 0.6
+        description: "Acceptable but room for optimization"
+      - score: 0.4
+        description: "Wasteful, unnecessary API calls or model usage"
+      - score: 0.2
+        description: "Very inefficient, significant waste"
+      - score: 0.0
+        description: "Extremely wasteful or timed out"
+    metrics:
+      - name: runtime_seconds
+        threshold_good: 60
+        threshold_acceptable: 120
+        threshold_max: 180
+      - name: cost_usd
+        threshold_good: 0.50
+        threshold_acceptable: 1.00
+        threshold_max: 2.00
+      - name: model_selection
+        rules:
+          - "Use Haiku for chunk processing in large datasets"
+          - "Use Sonnet for synthesis and recommendations only"
+          - "Avoid Sonnet for simple counts and calculations"
+
+# Automatic failure conditions
+auto_fail_conditions:
+  - condition: "data_accuracy < 0.4"
+    reason: "Fundamental data accuracy issues"
+  - condition: "completeness < 0.4"
+    reason: "Missing too many required audit sections"
+  - condition: "statistical_validity < 0.4"
+    reason: "Invalid statistical conclusions"
+  - condition: "fabricated_statistics"
+    reason: "Statistics not supported by source data"
+  - condition: "runtime_seconds > 180"
+    reason: "Exceeded maximum runtime (3 minutes)"
+  - condition: "cost_usd > 2.00"
+    reason: "Exceeded maximum cost per run"
+
+# Scoring aggregation
+aggregation:
+  method: weighted_average
+  round_to: 2
+  passing_threshold: 0.8
+  excellence_threshold: 0.9
+
+# Release policy thresholds
+release_thresholds:
+  auto_deliver: 0.85
+  refine_and_deliver: 0.75
+  human_review: 0.60
+  blocked: 0.0
+
+# Test cases reference
+test_cases:
+  directory: "test-cases/"
+  required_coverage:
+    - "small_dataset_handling"
+    - "large_dataset_chunking"
+    - "custom_stage_discovery"
+    - "benchmark_comparison"
+    - "recommendation_quality"
+    - "multi_platform_support"
+
+# Specific rubric items for lifecycle audit domain
+domain_specific:
+  funnel_health_score:
+    description: "Health score calculation validates against actual metrics"
+    formula: "weighted_average(conversion_rates vs benchmarks)"
+    acceptable_range: [0.0, 1.0]
+
+  bottleneck_identification:
+    description: "Bottlenecks correctly identified from conversion data"
+    severity_thresholds:
+      high: "gap > 0.15 from benchmark"
+      medium: "gap > 0.08 from benchmark"
+      low: "gap > 0.03 from benchmark"
+
+  at_risk_scoring:
+    description: "Risk scores reflect actual engagement and behavior data"
+    factors:
+      - "days_since_last_activity"
+      - "stage_progression_velocity"
+      - "engagement_trend"
+    acceptable_range: [0.0, 1.0]
+
+  upsell_scoring:
+    description: "Upsell scores reflect expansion potential"
+    factors:
+      - "current_engagement_level"
+      - "usage_vs_limits"
+      - "growth_signals"
+    acceptable_range: [0.0, 1.0]

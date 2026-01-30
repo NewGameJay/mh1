@@ -1,0 +1,12 @@
+{
+  "current_step": 2,
+  "outputs": {
+    "step-1": {
+      "step": 1
+    },
+    "step-2": {
+      "step": 2
+    }
+  },
+  "tenant_id": "test"
+}

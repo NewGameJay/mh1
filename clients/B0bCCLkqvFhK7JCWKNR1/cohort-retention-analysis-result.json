@@ -1,0 +1,150 @@
+{
+  "retention_curves": [
+    {
+      "cohort": "Jul 2025",
+      "cohort_size": 22,
+      "retention": {
+        "day_0": 1.0,
+        "day_7": 0.767,
+        "day_14": 0.709,
+        "day_30": 0.62,
+        "day_60": 0.506,
+        "day_90": 0.387
+      }
+    },
+    {
+      "cohort": "Jul 2025",
+      "cohort_size": 23,
+      "retention": {
+        "day_0": 1.0,
+        "day_7": 0.884,
+        "day_14": 0.759,
+        "day_30": 0.677,
+        "day_60": 0.544,
+        "day_90": 0.426
+      }
+    },
+    {
+      "cohort": "Aug 2025",
+      "cohort_size": 20,
+      "retention": {
+        "day_0": 1.0,
+        "day_7": 0.84,
+        "day_14": 0.761,
+        "day_30": 0.702,
+        "day_60": 0.62,
+        "day_90": 0.504
+      }
+    },
+    {
+      "cohort": "Sep 2025",
+      "cohort_size": 19,
+      "retention": {
+        "day_0": 1.0,
+        "day_7": 0.838,
+        "day_14": 0.78,
+        "day_30": 0.664,
+        "day_60": 0.595,
+        "day_90": 0.509
+      }
+    },
+    {
+      "cohort": "Oct 2025",
+      "cohort_size": 17,
+      "retention": {
+        "day_0": 1.0,
+        "day_7": 0.792,
+        "day_14": 0.69,
+        "day_30": 0.639,
+        "day_60": 0.519,
+        "day_90": 0.419
+      }
+    },
+    {
+      "cohort": "Nov 2025",
+      "cohort_size": 17,
+      "retention": {
+        "day_0": 1.0,
+        "day_7": 0.877,
+        "day_14": 0.799,
+        "day_30": 0.743,
+        "day_60": 0.66,
+        "day_90": 0.548
+      }
+    }
+  ],
+  "cohort_comparison": {
+    "cohort_a": "Nov 2025",
+    "cohort_b": "Jul 2025",
+    "retention_diff_day_30": 0.123,
+    "retention_diff_day_90": 0.161,
+    "p_value": 0.04,
+    "significant": true,
+    "effect_size": 0.18,
+    "interpretation": "Nov 2025 better vs Jul 2025"
+  },
+  "retention_drivers": [
+    {
+      "factor": "completed_onboarding",
+      "correlation": 0.68,
+      "retained_rate": 0.79,
+      "not_retained_rate": 0.38,
+      "significance": "high",
+      "recommendation": "Onboarding completion 2.1x retention"
+    }
+  ],
+  "churn_analysis": {
+    "median_churn_day": 42,
+    "churn_spike_periods": [
+      "day_7_to_14",
+      "day_30_to_45"
+    ],
+    "primary_churn_reasons": [
+      {
+        "reason": "no_activity_after_signup",
+        "percentage": 0.38
+      }
+    ]
+  },
+  "segment_insights": [
+    {
+      "segment": "customer",
+      "retention_day_30": 0.85,
+      "retention_day_90": 0.72,
+      "vs_average": "+18%"
+    }
+  ],
+  "recommendations": [
+    {
+      "priority": "high",
+      "category": "activation",
+      "action": "Implement 7-day onboarding drip campaign",
+      "expected_impact": "+10-15% 30-day retention",
+      "based_on": "38% churned had no activity"
+    },
+    {
+      "priority": "high",
+      "category": "retention",
+      "action": "Re-engage 7 at-risk accounts",
+      "expected_impact": "Save 7 accounts",
+      "based_on": "Lifecycle audit"
+    }
+  ],
+  "_meta": {
+    "tenant_id": "B0bCCLkqvFhK7JCWKNR1",
+    "run_id": "cra_20260129213514",
+    "runtime_seconds": 2.8,
+    "cost_usd": 0.65,
+    "data_quality": {
+      "total_customers_analyzed": 100,
+      "cohorts_analyzed": 6,
+      "min_cohort_size": 17,
+      "data_completeness": 0.92
+    },
+    "lifecycle_config_used": "clients/B0bCCLkqvFhK7JCWKNR1/context/lifecycle.yaml",
+    "warnings": [
+      "Synthetic data",
+      "Small cohorts"
+    ]
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Qualify Leads Input",
+  "description": "Input schema for the qualify-leads skill",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "description": "Firebase Client ID. If not provided, reads from inputs/active_client.md"
+    },
+    "founder_id": {
+      "type": "string",
+      "description": "Founder/profile document ID for posts (required)"
+    },
+    "lookback_days": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 30,
+      "default": 7,
+      "description": "Number of days to pull reactors from (default: 7)"
+    },
+    "icp_definitions": {
+      "type": "array",
+      "description": "Override ICP definitions from client context",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "ICP segment name (e.g., 'Primary', 'Secondary')"
+          },
+          "criteria": {
+            "type": "object",
+            "properties": {
+              "titles": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Job titles that match this ICP"
+              },
+              "company_sizes": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Company size ranges (e.g., '50-500')"
+              },
+              "industries": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Industries that match"
+              },
+              "seniority_levels": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Seniority levels (e.g., 'Director+', 'Manager+')"
+              }
+            }
+          },
+          "priority": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Priority for this ICP (1 = highest)"
+          }
+        },
+        "required": ["name", "criteria"]
+      }
+    },
+    "min_posts": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 1,
+      "description": "Minimum posts required to run analysis"
+    },
+    "include_commenters": {
+      "type": "boolean",
+      "default": true,
+      "description": "Include post commenters in lead qualification"
+    },
+    "include_reactors": {
+      "type": "boolean",
+      "default": true,
+      "description": "Include post reactors in lead qualification"
+    },
+    "generate_messages": {
+      "type": "boolean",
+      "default": true,
+      "description": "Generate personalized draft outreach messages"
+    },
+    "max_leads": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 500,
+      "default": 100,
+      "description": "Maximum number of qualified leads to return"
+    },
+    "tenant_id": {
+      "type": "string",
+      "description": "Tenant identifier for budget tracking (defaults to client_id)"
+    },
+    "execution_mode": {
+      "type": "string",
+      "enum": ["suggest", "preview", "execute"],
+      "default": "suggest",
+      "description": "Execution mode (suggest=read-only, preview=show changes, execute=persist results)"
+    }
+  },
+  "required": ["founder_id"],
+  "additionalProperties": false
+}

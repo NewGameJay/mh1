@@ -1,0 +1,277 @@
+# Model Routing Configuration
+# Determines which model to use for different task types
+
+version: "1.0"
+
+# Default model for unspecified tasks
+default_model: "claude-sonnet-4"
+
+# Task-based routing
+routing_rules:
+  # High reasoning tasks - use strongest model
+  strategy:
+    model: "claude-sonnet-4"
+    temperature: 0.3
+    max_tokens: 8192
+    description: "Strategic analysis, synthesis, planning"
+    examples:
+      - "Create 90-day roadmap"
+      - "Analyze competitive landscape"
+      - "Synthesize audit findings"
+
+  synthesis:
+    model: "claude-sonnet-4"
+    temperature: 0.4
+    max_tokens: 8192
+    description: "Combining multiple sources into coherent output"
+    examples:
+      - "Combine interview transcripts into report"
+      - "Merge data from multiple systems"
+
+  # Extraction tasks - use fast model
+  extraction:
+    model: "claude-haiku"
+    temperature: 0.1
+    max_tokens: 4096
+    description: "Pulling structured data from unstructured sources"
+    examples:
+      - "Extract metrics from report"
+      - "Parse email for key fields"
+      - "Pull data from API response"
+
+  formatting:
+    model: "claude-haiku"
+    temperature: 0.0
+    max_tokens: 4096
+    description: "Reformatting, cleanup, normalization"
+    examples:
+      - "Convert JSON to Markdown"
+      - "Format data for export"
+      - "Normalize field names"
+
+  # Writing tasks - use model with best coherence
+  long_form_writing:
+    model: "claude-sonnet-4"
+    temperature: 0.5
+    max_tokens: 16384
+    description: "Long-form content generation"
+    examples:
+      - "Write blog post"
+      - "Create email sequence"
+      - "Draft case study"
+
+  short_form_writing:
+    model: "claude-sonnet-4"
+    temperature: 0.6
+    max_tokens: 2048
+    description: "Short copy, headlines, CTAs"
+    examples:
+      - "Write ad copy variants"
+      - "Generate subject lines"
+      - "Create social posts"
+
+  # Code tasks - use accurate model
+  code_generation:
+    model: "claude-sonnet-4"
+    temperature: 0.2
+    max_tokens: 8192
+    description: "Writing or modifying code"
+    examples:
+      - "Write Python script"
+      - "Create SQL query"
+      - "Build N8N workflow JSON"
+
+  code_review:
+    model: "claude-sonnet-4"
+    temperature: 0.1
+    max_tokens: 4096
+    description: "Reviewing and debugging code"
+    examples:
+      - "Review PR"
+      - "Debug error"
+      - "Identify security issues"
+
+  # Evaluation tasks
+  evaluation:
+    model: "claude-sonnet-4"
+    temperature: 0.1
+    max_tokens: 4096
+    description: "Quality assessment and scoring"
+    examples:
+      - "Evaluate output quality"
+      - "Score against rubric"
+      - "Check for hallucinations"
+
+  # Classification tasks
+  classification:
+    model: "claude-haiku"
+    temperature: 0.0
+    max_tokens: 1024
+    description: "Categorization and tagging"
+    examples:
+      - "Tag content by vertical"
+      - "Classify email type"
+      - "Detect sentiment"
+
+# Fallback rules
+fallback:
+  # If primary model fails, fall back to this
+  primary_fallback: "claude-sonnet-4"
+  
+  # If confidence is low, escalate to stronger model
+  confidence_threshold: 0.6
+  escalation_model: "claude-sonnet-4"
+
+# Sub-call routing (for decomposed tasks within a workflow)
+# Based on RLM paper: use cheaper models for sub-tasks, stronger for synthesis
+sub_call_routing:
+  # When processing chunks of larger context
+  chunk_processing:
+    model: "claude-haiku"
+    temperature: 0.1
+    max_tokens: 2048
+    description: "Processing individual chunks in a decomposed task"
+  
+  # When filtering/extracting from offloaded context
+  filtering:
+    model: "claude-haiku"
+    temperature: 0.0
+    max_tokens: 1024
+    description: "Filtering records based on criteria"
+  
+  # When extracting structured data from chunks
+  extraction:
+    model: "claude-haiku"
+    temperature: 0.1
+    max_tokens: 2048
+    description: "Extracting structured data from unstructured content"
+  
+  # When classifying or tagging content
+  classification:
+    model: "claude-haiku"
+    temperature: 0.0
+    max_tokens: 1024
+    description: "Categorizing or tagging content"
+  
+  # When verifying sub-call results
+  verification:
+    model: "claude-haiku"
+    temperature: 0.1
+    max_tokens: 1024
+    description: "Verifying or cross-checking sub-call output"
+  
+  # Final aggregation uses stronger model
+  aggregation:
+    model: "claude-sonnet-4"
+    temperature: 0.3
+    max_tokens: 8192
+    description: "Synthesizing results from multiple sub-calls"
+  
+  # Complex synthesis requires strongest reasoning
+  synthesis:
+    model: "claude-sonnet-4"
+    temperature: 0.4
+    max_tokens: 8192
+    description: "Complex synthesis of aggregated findings"
+
+# Context-size-based routing thresholds
+context_routing:
+  # If input context < 8K tokens, process directly (inline)
+  inline_threshold: 8000
+  
+  # If input context 8K-50K, use chunked processing
+  chunked_threshold: 50000
+  
+  # If input context > 50K, require explicit context manager (offload)
+  offload_threshold: 50000
+  
+  # Default chunk size for chunked processing
+  default_chunk_size: 500
+
+# Cost awareness (for logging, not enforcement)
+cost_tracking:
+  enabled: true
+  log_tokens: true
+  log_cost_estimate: true
+  log_sub_calls: true  # Track sub-call costs separately
+
+# Rate limiting
+rate_limits:
+  requests_per_minute: 60
+  tokens_per_minute: 100000
+  max_sub_calls_per_run: 100  # Safety limit on sub-calls
+
+# === P1 ADDITIONS ===
+
+# Evidence-based reliability routing (from r7.pdf)
+reliability_routing:
+  maximum_reliability:
+    threshold: 0.99
+    model: claude-sonnet-4
+    use_cases:
+      - client_facing_output
+      - production_critical
+      - financial_calculations
+    note: "GPT-4.1/qwen2.5:32b equivalent - 100% success rate"
+  
+  high_reliability:
+    threshold: 0.96
+    model: claude-sonnet-4
+    fallback: claude-haiku
+    use_cases:
+      - important_internal
+      - quality_sensitive
+    note: "qwen2.5:14b equivalent - 96.6% minimum viable production"
+  
+  standard:
+    threshold: 0.90
+    model: claude-haiku
+    use_cases:
+      - batch_processing
+      - internal_drafts
+      - exploration
+    retry_on_failure: true
+
+# Query-type aware retrieval (from r8.pdf)
+retrieval_routing:
+  direct_kb_mapping:
+    rejection_rate: 0.0279
+    query_types:
+      - product_specific
+      - catalog_lookup
+      - entity_match
+      - sku_search
+    note: "5× better than semantic for product queries"
+  
+  semantic_embedding:
+    rejection_rate: 0.15
+    query_types:
+      - conceptual
+      - general_knowledge
+      - thematic
+      - exploratory
+    note: "Use for non-entity queries only"
+
+# Step count monitoring (from r7.pdf)
+step_count_limits:
+  claude-haiku: 12
+  claude-sonnet-4: 8
+  claude-opus-4: 6
+  warn_on_exceed: true
+  log_efficiency_ratio: true
+  note: "Smaller models take 2.4× more steps - monitor for inefficiency"
+
+# SRAC quality gates (from r12.pdf)
+quality_gates:
+  srac:
+    enabled: true
+    threshold: 3.5
+    dimensions:
+      specificity: 0.25
+      relevance: 0.25
+      actionability: 0.30
+      concision: 0.20
+    apply_to:
+      - client_deliverables
+      - marketing_content
+      - recommendations

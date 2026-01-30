@@ -1,0 +1,397 @@
+[
+  {
+    "_template_info": {
+      "version": "2.0.0",
+      "updated": "2026-01-27",
+      "purpose": "Company-agnostic query templates for data warehouse and CRM access",
+      "placeholders": {
+        "{DATABASE}": "Your database name",
+        "{SCHEMA}": "Your schema name",
+        "{HEALTH_TABLE}": "Your health scores/metrics table",
+        "{EVENTS_TABLE}": "Your events/activity table",
+        "{ORGS_TABLE}": "Your organizations dimension table",
+        "{ACCOUNT_ID_FIELD}": "Account identifier field",
+        "{ACCOUNT_NAME_FIELD}": "Account name field",
+        "{HEALTH_SCORE_FIELD}": "Health score field",
+        "{HEALTH_STATUS_FIELD}": "Health status field",
+        "{ARR_FIELD}": "ARR/revenue field",
+        "{MRR_FIELD}": "MRR field",
+        "{REPORT_DATE_FIELD}": "Report date field",
+        "{CS_OWNER_FIELD}": "CS owner/account manager field",
+        "{ORG_ID_FIELD}": "Organization identifier field",
+        "{TIMESTAMP_FIELD}": "Event timestamp field",
+        "{EVENT_TYPE_FIELD}": "Event type/name field"
+      }
+    }
+  },
+  {
+    "id": "health_status_distribution",
+    "name": "Health Status Distribution",
+    "description": "Distribution of accounts by health status with ARR",
+    "source": "snowflake",
+    "platform": "snowflake",
+    "cost_class": "small",
+    "parameters": {},
+    "query": "SELECT COALESCE({HEALTH_STATUS_FIELD}, 'NULL/Unassigned') AS health_status, COUNT(*) AS account_count, SUM({ARR_FIELD}) AS total_arr, ROUND(AVG({HEALTH_SCORE_FIELD}), 1) AS avg_health_score, ROUND(SUM(CASE WHEN {HEALTH_STATUS_FIELD} = 'At-Risk' THEN {ARR_FIELD} ELSE 0 END), 2) AS at_risk_arr FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE} WHERE {REPORT_DATE_FIELD} = (SELECT MAX({REPORT_DATE_FIELD}) FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE}) GROUP BY 1 ORDER BY 2 DESC",
+    "output_columns": ["health_status", "account_count", "total_arr", "avg_health_score", "at_risk_arr"]
+  },
+  {
+    "id": "top_accounts_arr",
+    "name": "Top Accounts by ARR",
+    "description": "Top accounts sorted by Annual Recurring Revenue",
+    "source": "snowflake",
+    "platform": "snowflake",
+    "cost_class": "small",
+    "parameters": {
+      "limit": {
+        "type": "integer",
+        "required": false,
+        "default": 20
+      }
+    },
+    "query": "SELECT {ACCOUNT_ID_FIELD}, {ACCOUNT_NAME_FIELD}, {HEALTH_STATUS_FIELD}, {HEALTH_SCORE_FIELD}, {ARR_FIELD}, {CS_OWNER_FIELD} FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE} WHERE {REPORT_DATE_FIELD} = (SELECT MAX({REPORT_DATE_FIELD}) FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE}) AND {ARR_FIELD} > 0 ORDER BY {ARR_FIELD} DESC LIMIT {limit}",
+    "output_columns": ["account_id", "account_name", "health_status", "health_score", "arr", "cs_owner"]
+  },
+  {
+    "id": "at_risk_high_value",
+    "name": "High Value At-Risk Accounts",
+    "description": "Accounts with ARR above threshold that are marked At-Risk",
+    "source": "snowflake",
+    "platform": "snowflake",
+    "cost_class": "small",
+    "parameters": {
+      "arr_threshold": {
+        "type": "integer",
+        "required": false,
+        "default": 24000
+      }
+    },
+    "query": "SELECT {ACCOUNT_ID_FIELD}, {ACCOUNT_NAME_FIELD}, {HEALTH_STATUS_FIELD}, {HEALTH_SCORE_FIELD}, {ARR_FIELD}, {CS_OWNER_FIELD} FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE} WHERE {REPORT_DATE_FIELD} = (SELECT MAX({REPORT_DATE_FIELD}) FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE}) AND {HEALTH_STATUS_FIELD} = 'At-Risk' AND {ARR_FIELD} >= {arr_threshold} ORDER BY {ARR_FIELD} DESC",
+    "output_columns": ["account_id", "account_name", "health_status", "health_score", "arr", "cs_owner"]
+  },
+  {
+    "id": "sales_pipeline_deals",
+    "name": "Sales Pipeline Deals",
+    "description": "Open deals in the Sales Pipeline",
+    "source": "hubspot",
+    "platform": "hubspot",
+    "cost_class": "medium",
+    "parameters": {
+      "pipeline_id": {
+        "type": "string",
+        "required": true,
+        "description": "HubSpot pipeline ID for sales pipeline"
+      },
+      "limit": {
+        "type": "integer",
+        "required": false,
+        "default": 100
+      }
+    },
+    "query": "{\"filterGroups\": [{\"filters\": [{\"propertyName\": \"pipeline\", \"operator\": \"EQ\", \"value\": \"{pipeline_id}\"}, {\"propertyName\": \"hs_is_closed\", \"operator\": \"EQ\", \"value\": \"false\"}]}], \"sorts\": [{\"propertyName\": \"amount\", \"direction\": \"DESCENDING\"}], \"properties\": [\"dealname\", \"amount\", \"arr\", \"dealstage\", \"closedate\", \"hubspot_owner_id\"], \"limit\": {limit}}",
+    "output_columns": ["dealname", "amount", "arr", "dealstage", "closedate", "hubspot_owner_id"]
+  },
+  {
+    "id": "renewal_pipeline_deals",
+    "name": "Renewal Pipeline Deals",
+    "description": "Open deals in the Renewal Pipeline",
+    "source": "hubspot",
+    "platform": "hubspot",
+    "cost_class": "medium",
+    "parameters": {
+      "pipeline_id": {
+        "type": "string",
+        "required": true,
+        "description": "HubSpot pipeline ID for renewal pipeline"
+      },
+      "limit": {
+        "type": "integer",
+        "required": false,
+        "default": 100
+      }
+    },
+    "query": "{\"filterGroups\": [{\"filters\": [{\"propertyName\": \"pipeline\", \"operator\": \"EQ\", \"value\": \"{pipeline_id}\"}, {\"propertyName\": \"hs_is_closed\", \"operator\": \"EQ\", \"value\": \"false\"}]}], \"sorts\": [{\"propertyName\": \"amount\", \"direction\": \"DESCENDING\"}], \"properties\": [\"dealname\", \"amount\", \"arr\", \"dealstage\", \"closedate\", \"days_until_renewal\"], \"limit\": {limit}}",
+    "output_columns": ["dealname", "amount", "arr", "dealstage", "closedate", "days_until_renewal"]
+  },
+  {
+    "id": "churn_risk_contacts",
+    "name": "Contacts at Churn Risk",
+    "description": "Contacts with subscription churn date within threshold days",
+    "source": "hubspot",
+    "platform": "hubspot",
+    "cost_class": "medium",
+    "parameters": {
+      "days_threshold": {
+        "type": "integer",
+        "required": false,
+        "default": 30
+      },
+      "churn_date_property": {
+        "type": "string",
+        "required": false,
+        "default": "days_until_subscription_churn",
+        "description": "HubSpot property for days until churn"
+      }
+    },
+    "query": "{\"filterGroups\": [{\"filters\": [{\"propertyName\": \"{churn_date_property}\", \"operator\": \"LTE\", \"value\": \"{days_threshold}\"}]}], \"properties\": [\"email\", \"firstname\", \"lastname\", \"company\", \"{churn_date_property}\"], \"limit\": 100}",
+    "output_columns": ["email", "firstname", "lastname", "company", "days_until_churn"]
+  },
+  {
+    "id": "upsell_candidates",
+    "name": "Upsell Candidates",
+    "description": "Healthy accounts with high engagement below ARR threshold",
+    "source": "snowflake",
+    "platform": "snowflake",
+    "cost_class": "medium",
+    "parameters": {
+      "max_arr": {
+        "type": "integer",
+        "required": false,
+        "default": 24000,
+        "description": "Maximum ARR threshold for upsell candidates"
+      },
+      "min_health_score": {
+        "type": "integer",
+        "required": false,
+        "default": 70,
+        "description": "Minimum health score for candidates"
+      },
+      "limit": {
+        "type": "integer",
+        "required": false,
+        "default": 50
+      }
+    },
+    "query": "SELECT {ACCOUNT_ID_FIELD}, {ACCOUNT_NAME_FIELD}, {HEALTH_STATUS_FIELD}, {ARR_FIELD}, {HEALTH_SCORE_FIELD}, {CS_OWNER_FIELD} FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE} WHERE {REPORT_DATE_FIELD} = (SELECT MAX({REPORT_DATE_FIELD}) FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE}) AND {HEALTH_STATUS_FIELD} = 'Healthy' AND {ARR_FIELD} > 0 AND {ARR_FIELD} < {max_arr} AND {HEALTH_SCORE_FIELD} >= {min_health_score} ORDER BY {HEALTH_SCORE_FIELD} DESC, {ARR_FIELD} DESC LIMIT {limit}",
+    "output_columns": ["account_id", "account_name", "health_status", "arr", "health_score", "cs_owner"]
+  },
+  {
+    "id": "recent_activity_by_org",
+    "name": "Recent Activity by Organization",
+    "description": "Get recent event activity for an organization",
+    "source": "snowflake",
+    "platform": "snowflake",
+    "cost_class": "medium",
+    "parameters": {
+      "org_id": {
+        "type": "string",
+        "required": true
+      },
+      "days": {
+        "type": "integer",
+        "required": false,
+        "default": 7
+      }
+    },
+    "query": "SELECT {ORG_ID_FIELD}, {EVENT_TYPE_FIELD}, COUNT(*) as event_count, MAX({TIMESTAMP_FIELD}) as last_event FROM {DATABASE}.{SCHEMA}.{EVENTS_TABLE} WHERE {ORG_ID_FIELD} = '{org_id}' AND {TIMESTAMP_FIELD} > DATEADD(day, -{days}, CURRENT_DATE()) GROUP BY 1, 2 ORDER BY event_count DESC",
+    "output_columns": ["org_id", "event_type", "event_count", "last_event"]
+  },
+  {
+    "id": "session_patterns",
+    "name": "Session Patterns by Organization",
+    "description": "Analyze session patterns (daily activity and duration) for an organization",
+    "source": "snowflake",
+    "platform": "snowflake",
+    "cost_class": "medium",
+    "parameters": {
+      "org_id": {
+        "type": "string",
+        "required": true
+      },
+      "days": {
+        "type": "integer",
+        "required": false,
+        "default": 30
+      }
+    },
+    "query": "SELECT {ORG_ID_FIELD}, DATE({TIMESTAMP_FIELD}) as session_date, COUNT(*) as events, DATEDIFF(minute, MIN({TIMESTAMP_FIELD}), MAX({TIMESTAMP_FIELD})) as session_duration_min FROM {DATABASE}.{SCHEMA}.{EVENTS_TABLE} WHERE {ORG_ID_FIELD} = '{org_id}' AND {TIMESTAMP_FIELD} > DATEADD(day, -{days}, CURRENT_DATE()) GROUP BY 1, 2 ORDER BY session_date DESC",
+    "output_columns": ["org_id", "session_date", "events", "session_duration_min"]
+  },
+  {
+    "id": "engagement_velocity",
+    "name": "Engagement Velocity",
+    "description": "Compare this week vs last week engagement for detecting spikes",
+    "source": "snowflake",
+    "platform": "snowflake",
+    "cost_class": "medium",
+    "parameters": {
+      "org_id": {
+        "type": "string",
+        "required": true
+      }
+    },
+    "query": "SELECT {ORG_ID_FIELD}, SUM(CASE WHEN {TIMESTAMP_FIELD} > DATEADD(day, -7, CURRENT_DATE()) THEN 1 ELSE 0 END) as events_this_week, SUM(CASE WHEN {TIMESTAMP_FIELD} BETWEEN DATEADD(day, -14, CURRENT_DATE()) AND DATEADD(day, -7, CURRENT_DATE()) THEN 1 ELSE 0 END) as events_last_week FROM {DATABASE}.{SCHEMA}.{EVENTS_TABLE} WHERE {ORG_ID_FIELD} = '{org_id}' AND {TIMESTAMP_FIELD} > DATEADD(day, -14, CURRENT_DATE()) GROUP BY 1",
+    "output_columns": ["org_id", "events_this_week", "events_last_week"]
+  },
+  {
+    "id": "conversion_funnel",
+    "name": "Conversion Funnel by Organization",
+    "description": "Event funnel analysis showing progression through key stages",
+    "source": "snowflake",
+    "platform": "snowflake",
+    "cost_class": "medium",
+    "parameters": {
+      "org_id": {
+        "type": "string",
+        "required": true
+      },
+      "days": {
+        "type": "integer",
+        "required": false,
+        "default": 90
+      }
+    },
+    "query": "SELECT {ORG_ID_FIELD}, SUM(CASE WHEN {EVENT_TYPE_FIELD} = 'page_view' THEN 1 ELSE 0 END) as page_views, SUM(CASE WHEN {EVENT_TYPE_FIELD} = 'click' THEN 1 ELSE 0 END) as clicks, SUM(CASE WHEN {EVENT_TYPE_FIELD} = 'conversion' THEN 1 ELSE 0 END) as conversions FROM {DATABASE}.{SCHEMA}.{EVENTS_TABLE} WHERE {ORG_ID_FIELD} = '{org_id}' AND {TIMESTAMP_FIELD} > DATEADD(day, -{days}, CURRENT_DATE()) GROUP BY 1",
+    "output_columns": ["org_id", "page_views", "clicks", "conversions"]
+  },
+  {
+    "id": "churned_accounts",
+    "name": "Churned Accounts with Reactivation Potential",
+    "description": "Accounts that churned with significant historical value - reactivation candidates",
+    "source": "snowflake",
+    "platform": "snowflake",
+    "cost_class": "medium",
+    "parameters": {
+      "min_arr": {
+        "type": "integer",
+        "required": false,
+        "default": 5000
+      },
+      "churned_status": {
+        "type": "string",
+        "required": false,
+        "default": "Churned",
+        "description": "Health status value for churned accounts"
+      },
+      "limit": {
+        "type": "integer",
+        "required": false,
+        "default": 100
+      }
+    },
+    "query": "SELECT {ACCOUNT_ID_FIELD}, {ACCOUNT_NAME_FIELD}, {HEALTH_STATUS_FIELD}, {ARR_FIELD} as last_arr, {HEALTH_SCORE_FIELD}, {CS_OWNER_FIELD}, {REPORT_DATE_FIELD} as last_active_date FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE} WHERE {REPORT_DATE_FIELD} = (SELECT MAX({REPORT_DATE_FIELD}) FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE}) AND {HEALTH_STATUS_FIELD} = '{churned_status}' AND {ARR_FIELD} >= {min_arr} ORDER BY {ARR_FIELD} DESC LIMIT {limit}",
+    "output_columns": ["account_id", "account_name", "health_status", "last_arr", "health_score", "cs_owner", "last_active_date"]
+  },
+  {
+    "id": "dormant_high_value",
+    "name": "Dormant High-Value Accounts",
+    "description": "Active subscriptions with low health scores - engagement risk",
+    "source": "snowflake",
+    "platform": "snowflake",
+    "cost_class": "medium",
+    "parameters": {
+      "max_health_score": {
+        "type": "integer",
+        "required": false,
+        "default": 40
+      },
+      "min_arr": {
+        "type": "integer",
+        "required": false,
+        "default": 10000
+      },
+      "limit": {
+        "type": "integer",
+        "required": false,
+        "default": 50
+      }
+    },
+    "query": "SELECT {ACCOUNT_ID_FIELD}, {ACCOUNT_NAME_FIELD}, {ARR_FIELD}, {HEALTH_SCORE_FIELD}, {HEALTH_STATUS_FIELD}, {CS_OWNER_FIELD} FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE} WHERE {REPORT_DATE_FIELD} = (SELECT MAX({REPORT_DATE_FIELD}) FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE}) AND {ARR_FIELD} >= {min_arr} AND {HEALTH_STATUS_FIELD} NOT IN ('Churned') AND {HEALTH_SCORE_FIELD} < {max_health_score} ORDER BY {ARR_FIELD} DESC LIMIT {limit}",
+    "output_columns": ["account_id", "account_name", "arr", "health_score", "health_status", "cs_owner"]
+  },
+  {
+    "id": "lifecycle_distribution",
+    "name": "Lifecycle Stage Distribution",
+    "description": "Breakdown of accounts by lifecycle/health stage",
+    "source": "snowflake",
+    "platform": "snowflake",
+    "cost_class": "medium",
+    "parameters": {},
+    "query": "SELECT COALESCE({HEALTH_STATUS_FIELD}, 'Unknown') as lifecycle_stage, COUNT(*) as account_count, SUM({ARR_FIELD}) as total_arr, ROUND(AVG({HEALTH_SCORE_FIELD}), 1) as avg_health_score FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE} WHERE {REPORT_DATE_FIELD} = (SELECT MAX({REPORT_DATE_FIELD}) FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE}) GROUP BY 1 ORDER BY account_count DESC",
+    "output_columns": ["lifecycle_stage", "account_count", "total_arr", "avg_health_score"]
+  },
+  {
+    "id": "activity_by_owner",
+    "name": "Account Activity by Owner",
+    "description": "Account metrics grouped by CS owner/account manager",
+    "source": "snowflake",
+    "platform": "snowflake",
+    "cost_class": "medium",
+    "parameters": {},
+    "query": "SELECT {CS_OWNER_FIELD} as owner, COUNT(DISTINCT {ACCOUNT_ID_FIELD}) as accounts_managed, SUM({ARR_FIELD}) as total_arr, AVG({HEALTH_SCORE_FIELD}) as avg_health_score, SUM(CASE WHEN {HEALTH_STATUS_FIELD} = 'At-Risk' THEN 1 ELSE 0 END) as at_risk_count, SUM(CASE WHEN {HEALTH_STATUS_FIELD} = 'Healthy' THEN 1 ELSE 0 END) as healthy_count FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE} WHERE {REPORT_DATE_FIELD} = (SELECT MAX({REPORT_DATE_FIELD}) FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE}) AND {CS_OWNER_FIELD} IS NOT NULL GROUP BY 1 ORDER BY total_arr DESC",
+    "output_columns": ["owner", "accounts_managed", "total_arr", "avg_health_score", "at_risk_count", "healthy_count"]
+  },
+  {
+    "id": "owner_performance",
+    "name": "Owner Performance Metrics",
+    "description": "Account health trends and performance by owner",
+    "source": "snowflake",
+    "platform": "snowflake",
+    "cost_class": "medium",
+    "parameters": {},
+    "query": "SELECT {CS_OWNER_FIELD} as owner_name, COUNT(*) as total_accounts, SUM({ARR_FIELD}) as total_arr, ROUND(SUM(CASE WHEN {HEALTH_STATUS_FIELD} = 'Healthy' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 1) as healthy_rate, ROUND(AVG({HEALTH_SCORE_FIELD}), 1) as avg_health FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE} WHERE {REPORT_DATE_FIELD} = (SELECT MAX({REPORT_DATE_FIELD}) FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE}) AND {CS_OWNER_FIELD} IS NOT NULL GROUP BY 1 ORDER BY total_arr DESC",
+    "output_columns": ["owner_name", "total_accounts", "total_arr", "healthy_rate", "avg_health"]
+  },
+  {
+    "id": "segment_analysis",
+    "name": "Segment Analysis by Owner",
+    "description": "Account health by segment and owner",
+    "source": "snowflake",
+    "platform": "snowflake",
+    "cost_class": "medium",
+    "parameters": {},
+    "query": "SELECT {CS_OWNER_FIELD} as owner, {HEALTH_STATUS_FIELD} as segment, COUNT(*) as account_count, SUM({ARR_FIELD}) as segment_arr, ROUND(AVG({HEALTH_SCORE_FIELD}), 1) as avg_score FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE} WHERE {REPORT_DATE_FIELD} = (SELECT MAX({REPORT_DATE_FIELD}) FROM {DATABASE}.{SCHEMA}.{HEALTH_TABLE}) AND {CS_OWNER_FIELD} IS NOT NULL GROUP BY 1, 2 ORDER BY segment_arr DESC",
+    "output_columns": ["owner", "segment", "account_count", "segment_arr", "avg_score"]
+  },
+  {
+    "id": "email_performance_by_owner",
+    "name": "Email Performance by Sales Owner",
+    "description": "Email engagement metrics grouped by HubSpot owner for sales performance tracking",
+    "source": "hubspot",
+    "platform": "hubspot",
+    "cost_class": "medium",
+    "parameters": {
+      "limit": {
+        "type": "integer",
+        "required": false,
+        "default": 500
+      }
+    },
+    "query": "{\"filterGroups\": [{\"filters\": [{\"propertyName\": \"hubspot_owner_id\", \"operator\": \"HAS_PROPERTY\"}]}], \"properties\": [\"email\", \"hubspot_owner_id\", \"hs_email_last_send_date\", \"hs_email_last_open_date\", \"hs_email_last_click_date\", \"hs_email_open\", \"hs_email_click\", \"hs_email_replied\", \"company\"], \"limit\": {limit}}",
+    "output_columns": ["email", "hubspot_owner_id", "hs_email_last_send_date", "hs_email_open", "hs_email_click", "hs_email_replied", "company"]
+  },
+  {
+    "id": "deals_by_owner",
+    "name": "Deal Pipeline by Owner",
+    "description": "Current deal status and value grouped by sales owner for pipeline analysis",
+    "source": "hubspot",
+    "platform": "hubspot",
+    "cost_class": "medium",
+    "parameters": {
+      "limit": {
+        "type": "integer",
+        "required": false,
+        "default": 500
+      }
+    },
+    "query": "{\"filterGroups\": [{\"filters\": [{\"propertyName\": \"hubspot_owner_id\", \"operator\": \"HAS_PROPERTY\"}]}], \"sorts\": [{\"propertyName\": \"amount\", \"direction\": \"DESCENDING\"}], \"properties\": [\"dealname\", \"amount\", \"hubspot_owner_id\", \"dealstage\", \"pipeline\", \"closedate\", \"createdate\", \"hs_forecast_probability\", \"hs_is_closed\"], \"limit\": {limit}}",
+    "output_columns": ["dealname", "amount", "hubspot_owner_id", "dealstage", "pipeline", "closedate", "hs_forecast_probability", "hs_is_closed"]
+  },
+  {
+    "id": "inactive_customers",
+    "name": "Inactive Paying Customers",
+    "description": "Customers with subscriptions but no recent engagement - dormant account candidates",
+    "source": "hubspot",
+    "platform": "hubspot",
+    "cost_class": "medium",
+    "parameters": {
+      "limit": {
+        "type": "integer",
+        "required": false,
+        "default": 100
+      }
+    },
+    "query": "{\"filterGroups\": [{\"filters\": [{\"propertyName\": \"lifecyclestage\", \"operator\": \"EQ\", \"value\": \"customer\"}]}], \"sorts\": [{\"propertyName\": \"notes_last_updated\", \"direction\": \"ASCENDING\"}], \"properties\": [\"email\", \"company\", \"lifecyclestage\", \"hubspot_owner_id\", \"notes_last_updated\", \"hs_email_last_open_date\"], \"limit\": {limit}}",
+    "output_columns": ["email", "company", "lifecyclestage", "hubspot_owner_id", "notes_last_updated", "hs_email_last_open_date"]
+  }
+]

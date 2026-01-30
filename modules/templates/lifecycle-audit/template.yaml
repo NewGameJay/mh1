@@ -1,0 +1,95 @@
+name: Lifecycle Audit
+id: lifecycle-audit
+description: |
+  Comprehensive analysis of customer lifecycle stages, engagement patterns, and churn risk.
+  Identifies conversion bottlenecks, at-risk accounts, and upsell opportunities with
+  actionable recommendations for improving customer journey health.
+category: analytics
+version: "1.0.0"
+
+# Timing
+typical_duration: "2-4 hours"
+estimated_cost: "$5-15"
+
+# Required inputs
+required_inputs:
+  - type: API_CREDENTIAL
+    name: crm_access
+    description: Access to CRM (HubSpot, Salesforce, Pipedrive, Zoho, Dynamics)
+    platforms:
+      - hubspot
+      - salesforce
+      - pipedrive
+      - zoho
+      - dynamics
+  - type: DATA_SOURCE
+    name: customer_data
+    description: Customer records with lifecycle stage information
+    min_records: 20
+
+# Optional enrichment
+optional_inputs:
+  - type: API_CREDENTIAL
+    name: warehouse_access
+    description: Data warehouse for usage/engagement enrichment (Snowflake, BigQuery, etc.)
+    platforms:
+      - snowflake
+      - bigquery
+      - redshift
+      - databricks
+      - postgresql
+
+# Suggested skills
+suggested_skills:
+  - name: lifecycle-audit
+    description: Core lifecycle stage analysis
+    required: true
+    order: 1
+  - name: cohort-retention-analysis
+    description: Build retention curves and compare cohorts
+    required: false
+    order: 2
+  - name: churn-prediction
+    description: Identify at-risk accounts
+    required: false
+    order: 3
+  - name: at-risk-detection
+    description: Detect engagement decline patterns
+    required: false
+    order: 4
+
+# Default outputs
+default_outputs:
+  - name: Lifecycle Stage Distribution Report
+    format: markdown
+    description: Visual breakdown of customers by lifecycle stage
+  - name: Engagement Score Analysis
+    format: json
+    description: Per-account engagement metrics and trends
+  - name: Churn Risk Assessment
+    format: json
+    description: At-risk accounts with risk scores and reasons
+  - name: Recommendations Document
+    format: markdown
+    description: Prioritized action items for improving lifecycle health
+
+# Quality gates
+quality_gates:
+  - name: data_completeness
+    description: Minimum data coverage requirements met
+    threshold: 0.8
+  - name: analysis_depth
+    description: All requested analyses completed
+    threshold: 1.0
+  - name: recommendation_quality
+    description: Actionable recommendations generated
+    threshold: 0.7
+
+# Tags for discovery
+tags:
+  - lifecycle
+  - analytics
+  - churn
+  - retention
+  - crm
+  - customer-intelligence

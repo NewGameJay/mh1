@@ -1,0 +1,419 @@
+# MH1 Platform Registry
+# Living document tracking supported platforms and integration queue
+# Updated: 2026-01-28
+
+---
+
+# SUPPORTED PLATFORMS
+# Full skill support available
+
+crm:
+  supported:
+    - name: HubSpot
+      api_type: rest
+      mcp: user-hubspot
+      skills:
+        - crm-discovery
+        - pipeline-analysis
+        - deal-velocity
+        - renewal-tracker
+        - account-360
+        - churn-prediction
+      docs: https://developers.hubspot.com/docs/api
+      
+    - name: Salesforce
+      api_type: rest
+      mcp: null  # Direct API
+      skills:
+        - crm-discovery
+        - pipeline-analysis
+        - deal-velocity
+        - renewal-tracker
+        - account-360
+      docs: https://developer.salesforce.com/docs/apis
+      
+    - name: Pipedrive
+      api_type: rest
+      mcp: null
+      skills:
+        - crm-discovery
+        - pipeline-analysis
+        - deal-velocity
+      docs: https://developers.pipedrive.com/docs/api/v1
+      
+    - name: Zoho CRM
+      api_type: rest
+      mcp: null
+      skills:
+        - crm-discovery
+        - pipeline-analysis
+      docs: https://www.zoho.com/crm/developer/docs/api/v2/
+      
+    - name: Microsoft Dynamics 365
+      api_type: odata
+      mcp: null
+      skills:
+        - crm-discovery
+        - pipeline-analysis
+      docs: https://docs.microsoft.com/en-us/dynamics365/
+
+data_warehouse:
+  supported:
+    - name: Snowflake
+      api_type: sql
+      mcp: user-snowflake
+      skills:
+        - data-warehouse-discovery
+        - at-risk-detection
+        - upsell-candidates
+        - dormant-detection
+        - engagement-velocity
+        - conversion-funnel
+        - identity-mapping
+        - data-quality-audit
+      docs: https://docs.snowflake.com/
+      
+    - name: BigQuery
+      api_type: sql
+      mcp: null
+      skills:
+        - data-warehouse-discovery
+        - at-risk-detection
+        - identity-mapping
+      docs: https://cloud.google.com/bigquery/docs
+      
+    - name: Redshift
+      api_type: sql
+      mcp: null
+      skills:
+        - data-warehouse-discovery
+        - at-risk-detection
+      docs: https://docs.aws.amazon.com/redshift/
+      
+    - name: Databricks
+      api_type: sql
+      mcp: null
+      skills:
+        - data-warehouse-discovery
+      docs: https://docs.databricks.com/
+      
+    - name: PostgreSQL
+      api_type: sql
+      mcp: null
+      skills:
+        - data-warehouse-discovery
+      docs: https://www.postgresql.org/docs/
+
+analytics:
+  supported:
+    - name: Segment
+      api_type: rest
+      integration_type: event_mapping
+      docs: https://segment.com/docs/connections/
+      
+    - name: Amplitude
+      api_type: rest
+      integration_type: event_mapping
+      docs: https://www.docs.developers.amplitude.com/
+      
+    - name: Mixpanel
+      api_type: rest
+      integration_type: event_mapping
+      docs: https://developer.mixpanel.com/reference
+      
+    - name: Google Analytics 4
+      api_type: rest
+      integration_type: event_mapping
+      docs: https://developers.google.com/analytics/devguides/reporting/data/v1
+
+email_marketing:
+  supported:
+    - name: HubSpot Marketing
+      api_type: rest
+      skills:
+        - email-copy-generator
+        - cohort-email-builder
+      docs: https://developers.hubspot.com/docs/api/marketing
+      
+    - name: Salesforce Marketing Cloud
+      api_type: rest
+      skills:
+        - email-copy-generator
+        - cohort-email-builder
+      docs: https://developer.salesforce.com/docs/marketing
+      
+    - name: Marketo
+      api_type: rest
+      skills:
+        - email-copy-generator
+        - cohort-email-builder
+      docs: https://developers.marketo.com/rest-api/
+      
+    - name: Klaviyo
+      api_type: rest
+      skills:
+        - email-copy-generator
+      docs: https://developers.klaviyo.com/en/reference
+
+---
+
+# INTEGRATION QUEUE
+# Platforms requested but not yet supported
+
+priority_high:
+  # Strong client demand, good API, strategic value
+  
+  - name: Monday.com
+    category: crm_project_management
+    request_count: 5
+    api_quality: good
+    docs: https://developer.monday.com/api-reference/
+    complexity: medium
+    estimated_hours: 12
+    skills_to_create:
+      - monday-discovery
+      - monday-board-analysis
+    notes: "Popular with SMB clients, GraphQL API"
+    
+  - name: Airtable
+    category: database_spreadsheet
+    request_count: 4
+    api_quality: good
+    docs: https://airtable.com/developers/web/api
+    complexity: medium
+    estimated_hours: 10
+    skills_to_create:
+      - airtable-discovery
+      - airtable-sync
+    notes: "Used as lightweight CRM by many clients"
+    
+  - name: Shopify
+    category: ecommerce
+    request_count: 4
+    api_quality: excellent
+    docs: https://shopify.dev/docs/api
+    complexity: medium
+    estimated_hours: 16
+    skills_to_create:
+      - shopify-discovery
+      - shopify-customer-intelligence
+      - shopify-order-analysis
+    notes: "GraphQL Admin API, REST Storefront API"
+    
+  - name: ActiveCampaign
+    category: marketing_automation
+    request_count: 3
+    api_quality: good
+    docs: https://developers.activecampaign.com/reference
+    complexity: low
+    estimated_hours: 8
+    skills_to_create:
+      - activecampaign-discovery
+      - activecampaign-automation
+    notes: "Popular mid-market ESP"
+
+priority_medium:
+  # Moderate demand, decent API
+  
+  - name: Zendesk
+    category: support
+    request_count: 3
+    api_quality: good
+    docs: https://developer.zendesk.com/api-reference
+    complexity: medium
+    estimated_hours: 12
+    skills_to_create:
+      - zendesk-discovery
+      - support-analytics
+    notes: "Ticket, user, and satisfaction data"
+    
+  - name: Intercom
+    category: support_chat
+    request_count: 2
+    api_quality: good
+    docs: https://developers.intercom.com/docs
+    complexity: medium
+    estimated_hours: 10
+    skills_to_create:
+      - intercom-discovery
+      - conversation-analytics
+    notes: "Conversations, users, companies"
+    
+  - name: Mailchimp
+    category: email
+    request_count: 3
+    api_quality: good
+    docs: https://mailchimp.com/developer/marketing/api/
+    complexity: low
+    estimated_hours: 8
+    skills_to_create:
+      - mailchimp-discovery
+      - mailchimp-campaign-analytics
+    notes: "Legacy but still popular"
+    
+  - name: ClickUp
+    category: project_management
+    request_count: 2
+    api_quality: good
+    docs: https://clickup.com/api
+    complexity: medium
+    estimated_hours: 10
+    skills_to_create:
+      - clickup-discovery
+      - task-analytics
+    notes: "Tasks, goals, time tracking"
+    
+  - name: Notion
+    category: knowledge_base
+    request_count: 2
+    api_quality: good
+    docs: https://developers.notion.com/
+    complexity: medium
+    estimated_hours: 8
+    skills_to_create:
+      - notion-discovery
+      - notion-content-sync
+    notes: "Pages, databases, blocks"
+
+priority_low:
+  # Occasional requests, may require more work
+  
+  - name: Copper CRM
+    category: crm
+    request_count: 1
+    api_quality: good
+    docs: https://developer.copper.com/
+    complexity: low
+    estimated_hours: 8
+    notes: "Google Workspace native CRM"
+    
+  - name: Freshsales
+    category: crm
+    request_count: 1
+    api_quality: good
+    docs: https://developers.freshworks.com/crm/api/
+    complexity: low
+    estimated_hours: 8
+    notes: "Part of Freshworks suite"
+    
+  - name: Braze
+    category: marketing_automation
+    request_count: 2
+    api_quality: good
+    docs: https://www.braze.com/docs/api
+    complexity: medium
+    estimated_hours: 12
+    notes: "Enterprise marketing automation"
+    
+  - name: Iterable
+    category: marketing_automation
+    request_count: 1
+    api_quality: good
+    docs: https://api.iterable.com/api/docs
+    complexity: medium
+    estimated_hours: 10
+    notes: "Growth marketing platform"
+    
+  - name: WooCommerce
+    category: ecommerce
+    request_count: 1
+    api_quality: good
+    docs: https://woocommerce.github.io/woocommerce-rest-api-docs/
+    complexity: medium
+    estimated_hours: 12
+    notes: "WordPress e-commerce"
+    
+  - name: BigCommerce
+    category: ecommerce
+    request_count: 1
+    api_quality: good
+    docs: https://developer.bigcommerce.com/api-docs
+    complexity: medium
+    estimated_hours: 12
+    notes: "Enterprise e-commerce"
+
+---
+
+# INDUSTRY-SPECIFIC PLATFORMS
+# May require specialized skills
+
+healthcare:
+  - name: Epic
+    category: ehr
+    notes: "Complex integration, HIPAA compliance required"
+    complexity: very_high
+    
+  - name: Cerner
+    category: ehr
+    notes: "HL7 FHIR integration"
+    complexity: very_high
+    
+  - name: Healthie
+    category: practice_management
+    docs: https://docs.healthie.com/
+    complexity: medium
+
+fintech:
+  - name: Plaid
+    category: banking_data
+    docs: https://plaid.com/docs/
+    complexity: medium
+    
+  - name: Stripe
+    category: payments
+    docs: https://stripe.com/docs/api
+    complexity: low
+    
+  - name: Chargebee
+    category: subscription_billing
+    docs: https://apidocs.chargebee.com/docs/api
+    complexity: medium
+
+real_estate:
+  - name: Zillow
+    category: listings
+    complexity: medium
+    
+  - name: MLS
+    category: listings
+    notes: "Requires RESO certification"
+    complexity: high
+
+---
+
+# NOT RECOMMENDED
+# Platforms we've evaluated and decided not to support
+
+not_supported:
+  - name: Custom legacy systems
+    reason: "Case-by-case evaluation required"
+    alternative: "Custom integration via skill-builder"
+    
+  - name: Platforms without API
+    reason: "No programmatic access"
+    alternative: "Zapier/Make.com integration or manual process"
+    
+  - name: Deprecated platforms
+    reason: "End of life"
+    alternative: "Migration to supported platform"
+
+---
+
+# USAGE
+# How to use this registry
+
+# Check if platform is supported:
+# grep -A 5 "{platform_name}" config/platform_registry.yaml
+
+# Add new platform request:
+# 1. Add to priority_high/medium/low based on criteria
+# 2. Include request_count, api_quality, docs, complexity
+# 3. Estimate hours and list skills to create
+
+# Promote platform to supported:
+# 1. Create skills
+# 2. Move from queue to supported section
+# 3. Update skills list
+
+# Track request counts:
+# Increment request_count when client asks for platform

@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "[SKILL_NAME] Output Schema",
+  "type": "object",
+  "required": ["output_1"],
+  "properties": {
+    "output_1": {
+      "type": "string",
+      "description": "Description of output_1"
+    },
+    "output_2": {
+      "type": "array",
+      "description": "Description of output_2",
+      "items": {
+        "type": "string"
+      }
+    },
+    "_meta": {
+      "type": "object",
+      "description": "Execution metadata",
+      "properties": {
+        "tenant_id": {"type": "string"},
+        "run_id": {"type": "string"},
+        "execution_mode": {"type": "string"},
+        "runtime_seconds": {"type": "number"},
+        "cost_usd": {"type": "number"},
+        "release_action": {
+          "type": "string",
+          "enum": ["auto_deliver", "auto_refine", "human_review", "blocked"]
+        },
+        "data_quality": {
+          "type": "object",
+          "properties": {
+            "records_processed": {"type": "integer"},
+            "records_skipped": {"type": "integer"},
+            "field_coverage": {"type": "object"}
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

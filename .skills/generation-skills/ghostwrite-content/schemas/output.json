@@ -1,0 +1,156 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Ghostwrite Content Output",
+  "description": "Output schema for the ghostwrite-content skill",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["success", "review", "failed", "budget_exceeded"],
+      "description": "Execution status"
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "summary": {
+          "type": "object",
+          "properties": {
+            "client_id": {"type": "string"},
+            "client_name": {"type": "string"},
+            "founder_id": {"type": "string"},
+            "platform": {"type": "string"},
+            "post_count_requested": {"type": "integer"},
+            "campaign_dir": {"type": "string"}
+          }
+        },
+        "context": {
+          "type": "object",
+          "description": "Loaded context bundle"
+        },
+        "source_data": {
+          "type": "object",
+          "properties": {
+            "source_posts": {"type": "object"},
+            "thought_leaders": {"type": "object"},
+            "parallel_events": {"type": "object"},
+            "files": {
+              "type": "object",
+              "properties": {
+                "source_posts": {"type": "string"},
+                "thought_leaders": {"type": "string"},
+                "parallel_events": {"type": "string"}
+              }
+            }
+          }
+        },
+        "generation_status": {
+          "type": "object",
+          "description": "Status of the generation pipeline"
+        },
+        "data_quality": {
+          "type": "object",
+          "properties": {
+            "founderPosts": {"type": "integer"},
+            "voiceConfidence": {"type": "number"},
+            "contextDocsLoaded": {"type": "integer"},
+            "issues": {"type": "array", "items": {"type": "string"}},
+            "warnings": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "posts": {
+          "type": "array",
+          "description": "Generated posts (when execution_mode is execute)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {"type": "string"},
+              "content": {"type": "string"},
+              "template_id": {"type": "integer"},
+              "funnel_stage": {"type": "string"},
+              "topic": {"type": "string"},
+              "voice_confidence": {"type": "number"},
+              "scheduled_date": {"type": "string"},
+              "qa_status": {"type": "string"}
+            }
+          }
+        },
+        "content_calendar": {
+          "type": "object",
+          "description": "Content calendar data (when posts are generated)"
+        }
+      }
+    },
+    "evaluation": {
+      "type": "object",
+      "description": "Quality evaluation results",
+      "properties": {
+        "score": {"type": "number"},
+        "pass": {"type": "boolean"},
+        "breakdown": {
+          "type": "object",
+          "properties": {
+            "schema_validity": {"type": "number"},
+            "factuality": {"type": "number"},
+            "completeness": {"type": "number"},
+            "brand_voice": {"type": "number"},
+            "risk_flags": {"type": "number"},
+            "context_efficiency": {"type": "number"}
+          }
+        },
+        "issues": {"type": "array", "items": {"type": "object"}},
+        "suggestions": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "release_action": {
+      "type": "string",
+      "enum": ["auto_deliver", "auto_refine", "human_review", "blocked"],
+      "description": "Recommended release action based on evaluation"
+    },
+    "release_message": {
+      "type": "string",
+      "description": "Human-readable release action message"
+    },
+    "run_id": {
+      "type": "string",
+      "description": "Unique run identifier"
+    },
+    "run_dir": {
+      "type": "string",
+      "description": "Directory containing run artifacts"
+    },
+    "_meta": {
+      "type": "object",
+      "properties": {
+        "client_id": {"type": "string"},
+        "client_name": {"type": "string"},
+        "tenant_id": {"type": "string"},
+        "run_id": {"type": "string"},
+        "execution_mode": {"type": "string"},
+        "runtime_seconds": {"type": "number"},
+        "cost_usd": {"type": "number"},
+        "release_action": {"type": "string"},
+        "skill_version": {"type": "string"},
+        "data_quality": {"type": "object"},
+        "tokens": {
+          "type": "object",
+          "properties": {
+            "input": {"type": "integer"},
+            "output": {"type": "integer"},
+            "total": {"type": "integer"}
+          }
+        },
+        "sub_calls": {"type": "integer"},
+        "timestamp": {"type": "string"}
+      }
+    },
+    "error": {
+      "type": "string",
+      "description": "Error message if status is failed"
+    },
+    "error_type": {
+      "type": "string",
+      "description": "Error type if status is failed"
+    }
+  },
+  "required": ["status"]
+}

@@ -1,0 +1,137 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SocialSignalOutput",
+  "description": "Standard output format for social listening keyword search skills",
+  "type": "object",
+  "required": ["posts", "metadata"],
+  "properties": {
+    "posts": {
+      "type": "array",
+      "description": "Array of collected social posts",
+      "items": {
+        "type": "object",
+        "required": ["id", "platform", "content", "author", "timestamp"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the post"
+          },
+          "platform": {
+            "type": "string",
+            "enum": ["linkedin", "twitter", "reddit"],
+            "description": "Source platform"
+          },
+          "content": {
+            "type": "string",
+            "description": "Post text content"
+          },
+          "author": {
+            "type": "string",
+            "description": "Author username or profile identifier"
+          },
+          "author_name": {
+            "type": "string",
+            "description": "Author display name"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Post creation timestamp in ISO 8601 format"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Direct URL to the post"
+          },
+          "engagement": {
+            "type": "object",
+            "description": "Engagement metrics",
+            "properties": {
+              "likes": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "comments": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "shares": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "views": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          },
+          "subreddit": {
+            "type": "string",
+            "description": "Reddit subreddit (reddit only)"
+          },
+          "hashtags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Hashtags found in the post"
+          },
+          "mentions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "User mentions in the post"
+          },
+          "relevanceScore": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "AI-generated relevance score (0-1)"
+          },
+          "sentiment": {
+            "type": "string",
+            "enum": ["positive", "negative", "neutral"],
+            "description": "Sentiment classification"
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["query", "collected_at", "count"],
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Search query used"
+        },
+        "collected_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Collection timestamp"
+        },
+        "count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of posts collected"
+        },
+        "platform": {
+          "type": "string",
+          "description": "Platform searched"
+        },
+        "client_id": {
+          "type": "string",
+          "description": "Client identifier"
+        },
+        "date_range": {
+          "type": "string",
+          "description": "Date range filter used"
+        },
+        "api_credits_used": {
+          "type": "integer",
+          "description": "API credits consumed"
+        }
+      }
+    }
+  }
+}

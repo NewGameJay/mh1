@@ -1,0 +1,133 @@
+# Suggested Skills for Lifecycle Audit Template
+#
+# This file defines the recommended skill sequence for lifecycle analysis.
+# Skills are executed in order, with dependencies respected.
+
+template_id: lifecycle-audit
+version: "1.0.0"
+
+# Required skills - must be executed
+required_skills:
+  - name: lifecycle-audit
+    description: |
+      Core lifecycle stage analysis. Examines customer distribution across stages,
+      calculates conversion rates, identifies bottlenecks, and generates recommendations.
+    version: "2.0.0"
+    order: 1
+    estimated_cost: "$0.50-2.00"
+    estimated_duration: "30-120s"
+    inputs:
+      tenant_id: "{{client_id}}"
+      limit: 1000
+      execution_mode: "suggest"
+    outputs:
+      - summary
+      - bottlenecks
+      - at_risk
+      - upsell_candidates
+      - recommendations
+
+# Optional skills - enhance analysis if prerequisites are met
+optional_skills:
+  - name: cohort-retention-analysis
+    description: |
+      Build retention curves and compare cohorts statistically.
+      Requires data warehouse access for historical data.
+    version: "1.0.0"
+    order: 2
+    depends_on:
+      - lifecycle-audit
+    prerequisites:
+      - type: data_source
+        name: warehouse_access
+        description: Snowflake, BigQuery, or other warehouse with customer data
+    estimated_cost: "$0.75-2.50"
+    estimated_duration: "30-120s"
+    inputs:
+      client_id: "{{client_id}}"
+      lookback_months: 12
+      min_cohort_size: 30
+    outputs:
+      - retention_curves
+      - cohort_comparison
+      - retention_drivers
+      - churn_analysis
+
+  - name: churn-prediction
+    description: |
+      Identify accounts at risk of churning using health status and engagement signals.
+      Provides risk scores and prioritized outreach lists.
+    version: "2.0.0"
+    order: 3
+    depends_on:
+      - lifecycle-audit
+    prerequisites:
+      - type: field
+        name: health_status_field
+        description: Customer health status in CRM or warehouse
+    estimated_cost: "$0.30-1.00"
+    estimated_duration: "2-5min"
+    inputs:
+      client_id: "{{client_id}}"
+      threshold_days: 30
+    outputs:
+      - at_risk_accounts
+      - risk_scores
+      - churn_signals
+
+  - name: at-risk-detection
+    description: |
+      Detect engagement decline patterns using activity and usage data.
+      Complements churn-prediction with behavioral signals.
+    version: "1.0.0"
+    order: 4
+    depends_on:
+      - lifecycle-audit
+    prerequisites:
+      - type: data_source
+        name: engagement_data
+        description: Usage or activity data available
+    estimated_cost: "$0.20-0.50"
+    estimated_duration: "1-3min"
+    inputs:
+      client_id: "{{client_id}}"
+      lookback_days: 30
+    outputs:
+      - declining_accounts
+      - engagement_trends
+      - alert_recommendations
+
+# Skill combinations for common scenarios
+scenarios:
+  - name: basic_audit
+    description: Quick lifecycle check with core analysis only
+    skills:
+      - lifecycle-audit
+    estimated_cost: "$0.50-2.00"
+    estimated_duration: "1-2min"
+
+  - name: full_audit
+    description: Comprehensive analysis with retention and churn
+    skills:
+      - lifecycle-audit
+      - cohort-retention-analysis
+      - churn-prediction
+    estimated_cost: "$2.00-5.00"
+    estimated_duration: "5-10min"
+
+  - name: retention_focus
+    description: Deep dive into retention patterns
+    skills:
+      - lifecycle-audit
+      - cohort-retention-analysis
+    estimated_cost: "$1.25-4.50"
+    estimated_duration: "3-5min"
+
+  - name: churn_focus
+    description: Focus on churn risk identification
+    skills:
+      - lifecycle-audit
+      - churn-prediction
+      - at-risk-detection
+    estimated_cost: "$1.00-3.50"
+    estimated_duration: "4-8min"

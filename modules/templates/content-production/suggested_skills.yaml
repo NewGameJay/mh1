@@ -1,0 +1,149 @@
+# Suggested Skills for Content Production Template
+#
+# This file defines the recommended skill sequence for content creation.
+# Skills are executed in order, with dependencies respected.
+
+template_id: content-production
+version: "1.0.0"
+
+# Required skills - must be executed
+required_skills:
+  - name: ghostwrite-content
+    description: |
+      Generate authentic LinkedIn posts in the founder's voice using collected
+      social listening data and voice contracts. Core skill for content production.
+    version: "1.1.0"
+    order: 1
+    estimated_cost: "$5.00"
+    estimated_duration: "15-30min"
+    inputs:
+      client_id: "{{client_id}}"
+      founder_id: "{{founder_id}}"
+      post_count: 20
+      platform: "linkedin"
+      execution_mode: "suggest"
+    outputs:
+      - posts
+      - content_calendar
+      - voice_analysis
+      - qa_report
+
+# Optional skills - enhance content production
+optional_skills:
+  - name: social-listening-collect
+    description: |
+      Collect social media posts from LinkedIn, Twitter, and Reddit that match
+      client keywords. Provides fresh inspiration for content topics.
+    version: "1.1.0"
+    order: 0
+    prerequisites:
+      - type: config
+        name: keywords
+        description: Keyword file at clients/{client_id}/social-listening/keywords.md
+    estimated_cost: "$2.00"
+    estimated_duration: "5-10min"
+    inputs:
+      client_id: "{{client_id}}"
+      platforms: ["linkedin", "twitter", "reddit"]
+      date_range: "past-week"
+    outputs:
+      - scored_posts
+      - collection_report
+      - stats
+
+  - name: email-sequences
+    description: |
+      Generate email nurture sequences based on content strategy.
+      Uses voice contract and brand context for consistency.
+    version: "1.0.0"
+    order: 2
+    depends_on:
+      - ghostwrite-content
+    prerequisites:
+      - type: context
+        name: email_strategy
+        description: Email campaign strategy defined
+    estimated_cost: "$3.00"
+    estimated_duration: "10-15min"
+    inputs:
+      client_id: "{{client_id}}"
+      sequence_type: "nurture"
+      email_count: 5
+    outputs:
+      - email_sequence
+      - subject_lines
+      - send_schedule
+
+  - name: newsletter-builder
+    description: |
+      Create newsletter content from recent posts and curated topics.
+      Compiles into formatted newsletter ready for sending.
+    version: "1.0.0"
+    order: 3
+    depends_on:
+      - ghostwrite-content
+    estimated_cost: "$1.50"
+    estimated_duration: "5-10min"
+    inputs:
+      client_id: "{{client_id}}"
+      topic_source: "recent_posts"
+    outputs:
+      - newsletter_content
+      - subject_line
+      - preview_text
+
+  - name: content-atomizer
+    description: |
+      Break down long-form content (blogs, webinars, podcasts) into
+      social media pieces. Great for content repurposing.
+    version: "1.0.0"
+    order: 4
+    depends_on:
+      - ghostwrite-content
+    prerequisites:
+      - type: content
+        name: long_form_content
+        description: Long-form content available for atomization
+    estimated_cost: "$2.00"
+    estimated_duration: "5-10min"
+    inputs:
+      client_id: "{{client_id}}"
+      source_type: "blog"
+    outputs:
+      - social_posts
+      - thread_version
+      - quote_cards
+
+# Skill combinations for common scenarios
+scenarios:
+  - name: quick_linkedin
+    description: Fast LinkedIn content generation only
+    skills:
+      - ghostwrite-content
+    estimated_cost: "$5.00"
+    estimated_duration: "15-30min"
+
+  - name: full_social
+    description: Complete social content with fresh signals
+    skills:
+      - social-listening-collect
+      - ghostwrite-content
+    estimated_cost: "$7.00"
+    estimated_duration: "20-40min"
+
+  - name: multi_channel
+    description: LinkedIn + email + newsletter
+    skills:
+      - ghostwrite-content
+      - email-sequences
+      - newsletter-builder
+    estimated_cost: "$9.50"
+    estimated_duration: "30-55min"
+
+  - name: content_repurposing
+    description: Long-form to social atomization
+    skills:
+      - content-atomizer
+      - ghostwrite-content
+    estimated_cost: "$7.00"
+    estimated_duration: "20-40min"

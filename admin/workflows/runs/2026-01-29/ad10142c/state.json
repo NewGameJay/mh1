@@ -1,0 +1,2110 @@
+{
+  "current_step": 5,
+  "outputs": {
+    "discovery": {
+      "total_contacts": 100,
+      "by_stage": {
+        "sql": 12,
+        "mql": 12,
+        "subscriber": 12,
+        "lead": 29,
+        "customer": 19,
+        "opportunity": 8,
+        "evangelist": 8
+      },
+      "contacts": {
+        "sql": [
+          {
+            "id": "contact_0",
+            "email": "user0@example.com",
+            "firstname": "User",
+            "lastname": "0",
+            "company": "Acme Corp",
+            "lifecyclestage": "sql"
+          },
+          {
+            "id": "contact_16",
+            "email": "user16@example.com",
+            "firstname": "User",
+            "lastname": "16",
+            "company": "BigBrand",
+            "lifecyclestage": "sql"
+          },
+          {
+            "id": "contact_20",
+            "email": "user20@example.com",
+            "firstname": "User",
+            "lastname": "20",
+            "company": "BigBrand",
+            "lifecyclestage": "sql"
+          },
+          {
+            "id": "contact_28",
+            "email": "user28@example.com",
+            "firstname": "User",
+            "lastname": "28",
+            "company": "TechCo",
+            "lifecyclestage": "sql"
+          },
+          {
+            "id": "contact_33",
+            "email": "user33@example.com",
+            "firstname": "User",
+            "lastname": "33",
+            "company": "TechCo",
+            "lifecyclestage": "sql"
+          },
+          {
+            "id": "contact_53",
+            "email": "user53@example.com",
+            "firstname": "User",
+            "lastname": "53",
+            "company": "StartupX",
+            "lifecyclestage": "sql"
+          },
+          {
+            "id": "contact_54",
+            "email": "user54@example.com",
+            "firstname": "User",
+            "lastname": "54",
+            "company": "StartupX",
+            "lifecyclestage": "sql"
+          },
+          {
+            "id": "contact_57",
+            "email": "user57@example.com",
+            "firstname": "User",
+            "lastname": "57",
+            "company": "TechCo",
+            "lifecyclestage": "sql"
+          },
+          {
+            "id": "contact_67",
+            "email": "user67@example.com",
+            "firstname": "User",
+            "lastname": "67",
+            "company": "Acme Corp",
+            "lifecyclestage": "sql"
+          },
+          {
+            "id": "contact_72",
+            "email": "user72@example.com",
+            "firstname": "User",
+            "lastname": "72",
+            "company": "BigBrand",
+            "lifecyclestage": "sql"
+          },
+          {
+            "id": "contact_79",
+            "email": "user79@example.com",
+            "firstname": "User",
+            "lastname": "79",
+            "company": "StartupX",
+            "lifecyclestage": "sql"
+          },
+          {
+            "id": "contact_95",
+            "email": "user95@example.com",
+            "firstname": "User",
+            "lastname": "95",
+            "company": "Acme Corp",
+            "lifecyclestage": "sql"
+          }
+        ],
+        "mql": [
+          {
+            "id": "contact_1",
+            "email": "user1@example.com",
+            "firstname": "User",
+            "lastname": "1",
+            "company": "StartupX",
+            "lifecyclestage": "mql"
+          },
+          {
+            "id": "contact_14",
+            "email": "user14@example.com",
+            "firstname": "User",
+            "lastname": "14",
+            "company": "TechCo",
+            "lifecyclestage": "mql"
+          },
+          {
+            "id": "contact_30",
+            "email": "user30@example.com",
+            "firstname": "User",
+            "lastname": "30",
+            "company": "BigBrand",
+            "lifecyclestage": "mql"
+          },
+          {
+            "id": "contact_46",
+            "email": "user46@example.com",
+            "firstname": "User",
+            "lastname": "46",
+            "company": "TechCo",
+            "lifecyclestage": "mql"
+          },
+          {
+            "id": "contact_47",
+            "email": "user47@example.com",
+            "firstname": "User",
+            "lastname": "47",
+            "company": "Acme Corp",
+            "lifecyclestage": "mql"
+          },
+          {
+            "id": "contact_48",
+            "email": "user48@example.com",
+            "firstname": "User",
+            "lastname": "48",
+            "company": "Acme Corp",
+            "lifecyclestage": "mql"
+          },
+          {
+            "id": "contact_49",
+            "email": "user49@example.com",
+            "firstname": "User",
+            "lastname": "49",
+            "company": "BigBrand",
+            "lifecyclestage": "mql"
+          },
+          {
+            "id": "contact_66",
+            "email": "user66@example.com",
+            "firstname": "User",
+            "lastname": "66",
+            "company": "TechCo",
+            "lifecyclestage": "mql"
+          },
+          {
+            "id": "contact_68",
+            "email": "user68@example.com",
+            "firstname": "User",
+            "lastname": "68",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "mql"
+          },
+          {
+            "id": "contact_69",
+            "email": "user69@example.com",
+            "firstname": "User",
+            "lastname": "69",
+            "company": "BigBrand",
+            "lifecyclestage": "mql"
+          },
+          {
+            "id": "contact_76",
+            "email": "user76@example.com",
+            "firstname": "User",
+            "lastname": "76",
+            "company": "TechCo",
+            "lifecyclestage": "mql"
+          },
+          {
+            "id": "contact_84",
+            "email": "user84@example.com",
+            "firstname": "User",
+            "lastname": "84",
+            "company": "TechCo",
+            "lifecyclestage": "mql"
+          }
+        ],
+        "subscriber": [
+          {
+            "id": "contact_2",
+            "email": "user2@example.com",
+            "firstname": "User",
+            "lastname": "2",
+            "company": "BigBrand",
+            "lifecyclestage": "subscriber"
+          },
+          {
+            "id": "contact_4",
+            "email": "user4@example.com",
+            "firstname": "User",
+            "lastname": "4",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "subscriber"
+          },
+          {
+            "id": "contact_7",
+            "email": "user7@example.com",
+            "firstname": "User",
+            "lastname": "7",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "subscriber"
+          },
+          {
+            "id": "contact_10",
+            "email": "user10@example.com",
+            "firstname": "User",
+            "lastname": "10",
+            "company": "TechCo",
+            "lifecyclestage": "subscriber"
+          },
+          {
+            "id": "contact_12",
+            "email": "user12@example.com",
+            "firstname": "User",
+            "lastname": "12",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "subscriber"
+          },
+          {
+            "id": "contact_35",
+            "email": "user35@example.com",
+            "firstname": "User",
+            "lastname": "35",
+            "company": "Acme Corp",
+            "lifecyclestage": "subscriber"
+          },
+          {
+            "id": "contact_39",
+            "email": "user39@example.com",
+            "firstname": "User",
+            "lastname": "39",
+            "company": "StartupX",
+            "lifecyclestage": "subscriber"
+          },
+          {
+            "id": "contact_45",
+            "email": "user45@example.com",
+            "firstname": "User",
+            "lastname": "45",
+            "company": "StartupX",
+            "lifecyclestage": "subscriber"
+          },
+          {
+            "id": "contact_58",
+            "email": "user58@example.com",
+            "firstname": "User",
+            "lastname": "58",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "subscriber"
+          },
+          {
+            "id": "contact_63",
+            "email": "user63@example.com",
+            "firstname": "User",
+            "lastname": "63",
+            "company": "StartupX",
+            "lifecyclestage": "subscriber"
+          },
+          {
+            "id": "contact_81",
+            "email": "user81@example.com",
+            "firstname": "User",
+            "lastname": "81",
+            "company": "TechCo",
+            "lifecyclestage": "subscriber"
+          },
+          {
+            "id": "contact_85",
+            "email": "user85@example.com",
+            "firstname": "User",
+            "lastname": "85",
+            "company": "StartupX",
+            "lifecyclestage": "subscriber"
+          }
+        ],
+        "lead": [
+          {
+            "id": "contact_3",
+            "email": "user3@example.com",
+            "firstname": "User",
+            "lastname": "3",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_5",
+            "email": "user5@example.com",
+            "firstname": "User",
+            "lastname": "5",
+            "company": "StartupX",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_6",
+            "email": "user6@example.com",
+            "firstname": "User",
+            "lastname": "6",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_8",
+            "email": "user8@example.com",
+            "firstname": "User",
+            "lastname": "8",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_11",
+            "email": "user11@example.com",
+            "firstname": "User",
+            "lastname": "11",
+            "company": "Acme Corp",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_15",
+            "email": "user15@example.com",
+            "firstname": "User",
+            "lastname": "15",
+            "company": "StartupX",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_17",
+            "email": "user17@example.com",
+            "firstname": "User",
+            "lastname": "17",
+            "company": "TechCo",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_18",
+            "email": "user18@example.com",
+            "firstname": "User",
+            "lastname": "18",
+            "company": "Acme Corp",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_27",
+            "email": "user27@example.com",
+            "firstname": "User",
+            "lastname": "27",
+            "company": "TechCo",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_29",
+            "email": "user29@example.com",
+            "firstname": "User",
+            "lastname": "29",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_34",
+            "email": "user34@example.com",
+            "firstname": "User",
+            "lastname": "34",
+            "company": "TechCo",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_36",
+            "email": "user36@example.com",
+            "firstname": "User",
+            "lastname": "36",
+            "company": "StartupX",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_40",
+            "email": "user40@example.com",
+            "firstname": "User",
+            "lastname": "40",
+            "company": "StartupX",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_44",
+            "email": "user44@example.com",
+            "firstname": "User",
+            "lastname": "44",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_51",
+            "email": "user51@example.com",
+            "firstname": "User",
+            "lastname": "51",
+            "company": "StartupX",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_55",
+            "email": "user55@example.com",
+            "firstname": "User",
+            "lastname": "55",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_56",
+            "email": "user56@example.com",
+            "firstname": "User",
+            "lastname": "56",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_60",
+            "email": "user60@example.com",
+            "firstname": "User",
+            "lastname": "60",
+            "company": "TechCo",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_62",
+            "email": "user62@example.com",
+            "firstname": "User",
+            "lastname": "62",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_70",
+            "email": "user70@example.com",
+            "firstname": "User",
+            "lastname": "70",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_74",
+            "email": "user74@example.com",
+            "firstname": "User",
+            "lastname": "74",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_75",
+            "email": "user75@example.com",
+            "firstname": "User",
+            "lastname": "75",
+            "company": "TechCo",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_78",
+            "email": "user78@example.com",
+            "firstname": "User",
+            "lastname": "78",
+            "company": "TechCo",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_80",
+            "email": "user80@example.com",
+            "firstname": "User",
+            "lastname": "80",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_82",
+            "email": "user82@example.com",
+            "firstname": "User",
+            "lastname": "82",
+            "company": "BigBrand",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_83",
+            "email": "user83@example.com",
+            "firstname": "User",
+            "lastname": "83",
+            "company": "BigBrand",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_87",
+            "email": "user87@example.com",
+            "firstname": "User",
+            "lastname": "87",
+            "company": "TechCo",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_89",
+            "email": "user89@example.com",
+            "firstname": "User",
+            "lastname": "89",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_97",
+            "email": "user97@example.com",
+            "firstname": "User",
+            "lastname": "97",
+            "company": "StartupX",
+            "lifecyclestage": "lead"
+          }
+        ],
+        "customer": [
+          {
+            "id": "contact_9",
+            "email": "user9@example.com",
+            "firstname": "User",
+            "lastname": "9",
+            "company": "StartupX",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 14,
+              "login_trend": 1,
+              "feature_adoption": 0.19872566593785668
+            }
+          },
+          {
+            "id": "contact_19",
+            "email": "user19@example.com",
+            "firstname": "User",
+            "lastname": "19",
+            "company": "Acme Corp",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 13,
+              "login_trend": 0,
+              "feature_adoption": 0.8644731245633717
+            }
+          },
+          {
+            "id": "contact_23",
+            "email": "user23@example.com",
+            "firstname": "User",
+            "lastname": "23",
+            "company": "Acme Corp",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 60,
+              "login_trend": -1,
+              "feature_adoption": 0.09239942734790607
+            }
+          },
+          {
+            "id": "contact_37",
+            "email": "user37@example.com",
+            "firstname": "User",
+            "lastname": "37",
+            "company": "BigBrand",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 22,
+              "login_trend": -1,
+              "feature_adoption": 0.8815923455607131
+            }
+          },
+          {
+            "id": "contact_38",
+            "email": "user38@example.com",
+            "firstname": "User",
+            "lastname": "38",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 9,
+              "login_trend": -1,
+              "feature_adoption": 0.2530682915164434
+            }
+          },
+          {
+            "id": "contact_41",
+            "email": "user41@example.com",
+            "firstname": "User",
+            "lastname": "41",
+            "company": "Acme Corp",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 19,
+              "login_trend": 0,
+              "feature_adoption": 0.12843473807143868
+            }
+          },
+          {
+            "id": "contact_42",
+            "email": "user42@example.com",
+            "firstname": "User",
+            "lastname": "42",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 41,
+              "login_trend": 1,
+              "feature_adoption": 0.6513893374762276
+            }
+          },
+          {
+            "id": "contact_43",
+            "email": "user43@example.com",
+            "firstname": "User",
+            "lastname": "43",
+            "company": "BigBrand",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 24,
+              "login_trend": -1,
+              "feature_adoption": 0.8186364580548826
+            }
+          },
+          {
+            "id": "contact_52",
+            "email": "user52@example.com",
+            "firstname": "User",
+            "lastname": "52",
+            "company": "Acme Corp",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 31,
+              "login_trend": 0,
+              "feature_adoption": 0.019901345648071556
+            }
+          },
+          {
+            "id": "contact_59",
+            "email": "user59@example.com",
+            "firstname": "User",
+            "lastname": "59",
+            "company": "BigBrand",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 23,
+              "login_trend": 1,
+              "feature_adoption": 0.21744712993022763
+            }
+          },
+          {
+            "id": "contact_61",
+            "email": "user61@example.com",
+            "firstname": "User",
+            "lastname": "61",
+            "company": "StartupX",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 41,
+              "login_trend": 1,
+              "feature_adoption": 0.37725167325006015
+            }
+          },
+          {
+            "id": "contact_64",
+            "email": "user64@example.com",
+            "firstname": "User",
+            "lastname": "64",
+            "company": "BigBrand",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 23,
+              "login_trend": 1,
+              "feature_adoption": 0.692820802986683
+            }
+          },
+          {
+            "id": "contact_65",
+            "email": "user65@example.com",
+            "firstname": "User",
+            "lastname": "65",
+            "company": "Acme Corp",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 49,
+              "login_trend": 0,
+              "feature_adoption": 0.4286467279599341
+            }
+          },
+          {
+            "id": "contact_71",
+            "email": "user71@example.com",
+            "firstname": "User",
+            "lastname": "71",
+            "company": "StartupX",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 55,
+              "login_trend": 1,
+              "feature_adoption": 0.2705863566652018
+            }
+          },
+          {
+            "id": "contact_73",
+            "email": "user73@example.com",
+            "firstname": "User",
+            "lastname": "73",
+            "company": "BigBrand",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 8,
+              "login_trend": 1,
+              "feature_adoption": 0.632023168069671
+            }
+          },
+          {
+            "id": "contact_86",
+            "email": "user86@example.com",
+            "firstname": "User",
+            "lastname": "86",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 4,
+              "login_trend": -1,
+              "feature_adoption": 0.41266837334832307
+            }
+          },
+          {
+            "id": "contact_88",
+            "email": "user88@example.com",
+            "firstname": "User",
+            "lastname": "88",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 34,
+              "login_trend": -1,
+              "feature_adoption": 0.995346303256157
+            }
+          },
+          {
+            "id": "contact_90",
+            "email": "user90@example.com",
+            "firstname": "User",
+            "lastname": "90",
+            "company": "StartupX",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 34,
+              "login_trend": -1,
+              "feature_adoption": 0.30691852227127947
+            }
+          },
+          {
+            "id": "contact_91",
+            "email": "user91@example.com",
+            "firstname": "User",
+            "lastname": "91",
+            "company": "BigBrand",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 6,
+              "login_trend": 0,
+              "feature_adoption": 0.13793459166375843
+            }
+          }
+        ],
+        "opportunity": [
+          {
+            "id": "contact_13",
+            "email": "user13@example.com",
+            "firstname": "User",
+            "lastname": "13",
+            "company": "Acme Corp",
+            "lifecyclestage": "opportunity"
+          },
+          {
+            "id": "contact_22",
+            "email": "user22@example.com",
+            "firstname": "User",
+            "lastname": "22",
+            "company": "Acme Corp",
+            "lifecyclestage": "opportunity"
+          },
+          {
+            "id": "contact_24",
+            "email": "user24@example.com",
+            "firstname": "User",
+            "lastname": "24",
+            "company": "TechCo",
+            "lifecyclestage": "opportunity"
+          },
+          {
+            "id": "contact_26",
+            "email": "user26@example.com",
+            "firstname": "User",
+            "lastname": "26",
+            "company": "TechCo",
+            "lifecyclestage": "opportunity"
+          },
+          {
+            "id": "contact_32",
+            "email": "user32@example.com",
+            "firstname": "User",
+            "lastname": "32",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "opportunity"
+          },
+          {
+            "id": "contact_93",
+            "email": "user93@example.com",
+            "firstname": "User",
+            "lastname": "93",
+            "company": "StartupX",
+            "lifecyclestage": "opportunity"
+          },
+          {
+            "id": "contact_96",
+            "email": "user96@example.com",
+            "firstname": "User",
+            "lastname": "96",
+            "company": "Acme Corp",
+            "lifecyclestage": "opportunity"
+          },
+          {
+            "id": "contact_99",
+            "email": "user99@example.com",
+            "firstname": "User",
+            "lastname": "99",
+            "company": "StartupX",
+            "lifecyclestage": "opportunity"
+          }
+        ],
+        "evangelist": [
+          {
+            "id": "contact_21",
+            "email": "user21@example.com",
+            "firstname": "User",
+            "lastname": "21",
+            "company": "BigBrand",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 38,
+              "login_trend": -1,
+              "feature_adoption": 0.15142038372365962
+            }
+          },
+          {
+            "id": "contact_25",
+            "email": "user25@example.com",
+            "firstname": "User",
+            "lastname": "25",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 55,
+              "login_trend": 0,
+              "feature_adoption": 0.03389209960409767
+            }
+          },
+          {
+            "id": "contact_31",
+            "email": "user31@example.com",
+            "firstname": "User",
+            "lastname": "31",
+            "company": "Acme Corp",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 37,
+              "login_trend": 0,
+              "feature_adoption": 0.8425253419173656
+            }
+          },
+          {
+            "id": "contact_50",
+            "email": "user50@example.com",
+            "firstname": "User",
+            "lastname": "50",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 10,
+              "login_trend": 0,
+              "feature_adoption": 0.6696206080979027
+            }
+          },
+          {
+            "id": "contact_77",
+            "email": "user77@example.com",
+            "firstname": "User",
+            "lastname": "77",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 32,
+              "login_trend": -1,
+              "feature_adoption": 0.8427653102447692
+            }
+          },
+          {
+            "id": "contact_92",
+            "email": "user92@example.com",
+            "firstname": "User",
+            "lastname": "92",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 48,
+              "login_trend": 1,
+              "feature_adoption": 0.0035059088151009332
+            }
+          },
+          {
+            "id": "contact_94",
+            "email": "user94@example.com",
+            "firstname": "User",
+            "lastname": "94",
+            "company": "BigBrand",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 48,
+              "login_trend": -1,
+              "feature_adoption": 0.6660003955257241
+            }
+          },
+          {
+            "id": "contact_98",
+            "email": "user98@example.com",
+            "firstname": "User",
+            "lastname": "98",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 17,
+              "login_trend": -1,
+              "feature_adoption": 0.705597636819938
+            }
+          }
+        ]
+      },
+      "data_validation": {
+        "valid": true,
+        "record_count": 100,
+        "field_coverage": {
+          "email": 1.0,
+          "company": 1.0,
+          "lifecyclestage": 1.0
+        },
+        "issues": [],
+        "warnings": []
+      },
+      "source": "hubspot"
+    },
+    "enrichment": {
+      "sql": [
+        {
+          "id": "contact_0",
+          "email": "user0@example.com",
+          "firstname": "User",
+          "lastname": "0",
+          "company": "Acme Corp",
+          "lifecyclestage": "sql"
+        },
+        {
+          "id": "contact_16",
+          "email": "user16@example.com",
+          "firstname": "User",
+          "lastname": "16",
+          "company": "BigBrand",
+          "lifecyclestage": "sql"
+        },
+        {
+          "id": "contact_20",
+          "email": "user20@example.com",
+          "firstname": "User",
+          "lastname": "20",
+          "company": "BigBrand",
+          "lifecyclestage": "sql"
+        },
+        {
+          "id": "contact_28",
+          "email": "user28@example.com",
+          "firstname": "User",
+          "lastname": "28",
+          "company": "TechCo",
+          "lifecyclestage": "sql"
+        },
+        {
+          "id": "contact_33",
+          "email": "user33@example.com",
+          "firstname": "User",
+          "lastname": "33",
+          "company": "TechCo",
+          "lifecyclestage": "sql"
+        },
+        {
+          "id": "contact_53",
+          "email": "user53@example.com",
+          "firstname": "User",
+          "lastname": "53",
+          "company": "StartupX",
+          "lifecyclestage": "sql"
+        },
+        {
+          "id": "contact_54",
+          "email": "user54@example.com",
+          "firstname": "User",
+          "lastname": "54",
+          "company": "StartupX",
+          "lifecyclestage": "sql"
+        },
+        {
+          "id": "contact_57",
+          "email": "user57@example.com",
+          "firstname": "User",
+          "lastname": "57",
+          "company": "TechCo",
+          "lifecyclestage": "sql"
+        },
+        {
+          "id": "contact_67",
+          "email": "user67@example.com",
+          "firstname": "User",
+          "lastname": "67",
+          "company": "Acme Corp",
+          "lifecyclestage": "sql"
+        },
+        {
+          "id": "contact_72",
+          "email": "user72@example.com",
+          "firstname": "User",
+          "lastname": "72",
+          "company": "BigBrand",
+          "lifecyclestage": "sql"
+        },
+        {
+          "id": "contact_79",
+          "email": "user79@example.com",
+          "firstname": "User",
+          "lastname": "79",
+          "company": "StartupX",
+          "lifecyclestage": "sql"
+        },
+        {
+          "id": "contact_95",
+          "email": "user95@example.com",
+          "firstname": "User",
+          "lastname": "95",
+          "company": "Acme Corp",
+          "lifecyclestage": "sql"
+        }
+      ],
+      "mql": [
+        {
+          "id": "contact_1",
+          "email": "user1@example.com",
+          "firstname": "User",
+          "lastname": "1",
+          "company": "StartupX",
+          "lifecyclestage": "mql"
+        },
+        {
+          "id": "contact_14",
+          "email": "user14@example.com",
+          "firstname": "User",
+          "lastname": "14",
+          "company": "TechCo",
+          "lifecyclestage": "mql"
+        },
+        {
+          "id": "contact_30",
+          "email": "user30@example.com",
+          "firstname": "User",
+          "lastname": "30",
+          "company": "BigBrand",
+          "lifecyclestage": "mql"
+        },
+        {
+          "id": "contact_46",
+          "email": "user46@example.com",
+          "firstname": "User",
+          "lastname": "46",
+          "company": "TechCo",
+          "lifecyclestage": "mql"
+        },
+        {
+          "id": "contact_47",
+          "email": "user47@example.com",
+          "firstname": "User",
+          "lastname": "47",
+          "company": "Acme Corp",
+          "lifecyclestage": "mql"
+        },
+        {
+          "id": "contact_48",
+          "email": "user48@example.com",
+          "firstname": "User",
+          "lastname": "48",
+          "company": "Acme Corp",
+          "lifecyclestage": "mql"
+        },
+        {
+          "id": "contact_49",
+          "email": "user49@example.com",
+          "firstname": "User",
+          "lastname": "49",
+          "company": "BigBrand",
+          "lifecyclestage": "mql"
+        },
+        {
+          "id": "contact_66",
+          "email": "user66@example.com",
+          "firstname": "User",
+          "lastname": "66",
+          "company": "TechCo",
+          "lifecyclestage": "mql"
+        },
+        {
+          "id": "contact_68",
+          "email": "user68@example.com",
+          "firstname": "User",
+          "lastname": "68",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "mql"
+        },
+        {
+          "id": "contact_69",
+          "email": "user69@example.com",
+          "firstname": "User",
+          "lastname": "69",
+          "company": "BigBrand",
+          "lifecyclestage": "mql"
+        },
+        {
+          "id": "contact_76",
+          "email": "user76@example.com",
+          "firstname": "User",
+          "lastname": "76",
+          "company": "TechCo",
+          "lifecyclestage": "mql"
+        },
+        {
+          "id": "contact_84",
+          "email": "user84@example.com",
+          "firstname": "User",
+          "lastname": "84",
+          "company": "TechCo",
+          "lifecyclestage": "mql"
+        }
+      ],
+      "subscriber": [
+        {
+          "id": "contact_2",
+          "email": "user2@example.com",
+          "firstname": "User",
+          "lastname": "2",
+          "company": "BigBrand",
+          "lifecyclestage": "subscriber"
+        },
+        {
+          "id": "contact_4",
+          "email": "user4@example.com",
+          "firstname": "User",
+          "lastname": "4",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "subscriber"
+        },
+        {
+          "id": "contact_7",
+          "email": "user7@example.com",
+          "firstname": "User",
+          "lastname": "7",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "subscriber"
+        },
+        {
+          "id": "contact_10",
+          "email": "user10@example.com",
+          "firstname": "User",
+          "lastname": "10",
+          "company": "TechCo",
+          "lifecyclestage": "subscriber"
+        },
+        {
+          "id": "contact_12",
+          "email": "user12@example.com",
+          "firstname": "User",
+          "lastname": "12",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "subscriber"
+        },
+        {
+          "id": "contact_35",
+          "email": "user35@example.com",
+          "firstname": "User",
+          "lastname": "35",
+          "company": "Acme Corp",
+          "lifecyclestage": "subscriber"
+        },
+        {
+          "id": "contact_39",
+          "email": "user39@example.com",
+          "firstname": "User",
+          "lastname": "39",
+          "company": "StartupX",
+          "lifecyclestage": "subscriber"
+        },
+        {
+          "id": "contact_45",
+          "email": "user45@example.com",
+          "firstname": "User",
+          "lastname": "45",
+          "company": "StartupX",
+          "lifecyclestage": "subscriber"
+        },
+        {
+          "id": "contact_58",
+          "email": "user58@example.com",
+          "firstname": "User",
+          "lastname": "58",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "subscriber"
+        },
+        {
+          "id": "contact_63",
+          "email": "user63@example.com",
+          "firstname": "User",
+          "lastname": "63",
+          "company": "StartupX",
+          "lifecyclestage": "subscriber"
+        },
+        {
+          "id": "contact_81",
+          "email": "user81@example.com",
+          "firstname": "User",
+          "lastname": "81",
+          "company": "TechCo",
+          "lifecyclestage": "subscriber"
+        },
+        {
+          "id": "contact_85",
+          "email": "user85@example.com",
+          "firstname": "User",
+          "lastname": "85",
+          "company": "StartupX",
+          "lifecyclestage": "subscriber"
+        }
+      ],
+      "lead": [
+        {
+          "id": "contact_3",
+          "email": "user3@example.com",
+          "firstname": "User",
+          "lastname": "3",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_5",
+          "email": "user5@example.com",
+          "firstname": "User",
+          "lastname": "5",
+          "company": "StartupX",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_6",
+          "email": "user6@example.com",
+          "firstname": "User",
+          "lastname": "6",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_8",
+          "email": "user8@example.com",
+          "firstname": "User",
+          "lastname": "8",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_11",
+          "email": "user11@example.com",
+          "firstname": "User",
+          "lastname": "11",
+          "company": "Acme Corp",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_15",
+          "email": "user15@example.com",
+          "firstname": "User",
+          "lastname": "15",
+          "company": "StartupX",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_17",
+          "email": "user17@example.com",
+          "firstname": "User",
+          "lastname": "17",
+          "company": "TechCo",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_18",
+          "email": "user18@example.com",
+          "firstname": "User",
+          "lastname": "18",
+          "company": "Acme Corp",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_27",
+          "email": "user27@example.com",
+          "firstname": "User",
+          "lastname": "27",
+          "company": "TechCo",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_29",
+          "email": "user29@example.com",
+          "firstname": "User",
+          "lastname": "29",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_34",
+          "email": "user34@example.com",
+          "firstname": "User",
+          "lastname": "34",
+          "company": "TechCo",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_36",
+          "email": "user36@example.com",
+          "firstname": "User",
+          "lastname": "36",
+          "company": "StartupX",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_40",
+          "email": "user40@example.com",
+          "firstname": "User",
+          "lastname": "40",
+          "company": "StartupX",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_44",
+          "email": "user44@example.com",
+          "firstname": "User",
+          "lastname": "44",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_51",
+          "email": "user51@example.com",
+          "firstname": "User",
+          "lastname": "51",
+          "company": "StartupX",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_55",
+          "email": "user55@example.com",
+          "firstname": "User",
+          "lastname": "55",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_56",
+          "email": "user56@example.com",
+          "firstname": "User",
+          "lastname": "56",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_60",
+          "email": "user60@example.com",
+          "firstname": "User",
+          "lastname": "60",
+          "company": "TechCo",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_62",
+          "email": "user62@example.com",
+          "firstname": "User",
+          "lastname": "62",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_70",
+          "email": "user70@example.com",
+          "firstname": "User",
+          "lastname": "70",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_74",
+          "email": "user74@example.com",
+          "firstname": "User",
+          "lastname": "74",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_75",
+          "email": "user75@example.com",
+          "firstname": "User",
+          "lastname": "75",
+          "company": "TechCo",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_78",
+          "email": "user78@example.com",
+          "firstname": "User",
+          "lastname": "78",
+          "company": "TechCo",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_80",
+          "email": "user80@example.com",
+          "firstname": "User",
+          "lastname": "80",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_82",
+          "email": "user82@example.com",
+          "firstname": "User",
+          "lastname": "82",
+          "company": "BigBrand",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_83",
+          "email": "user83@example.com",
+          "firstname": "User",
+          "lastname": "83",
+          "company": "BigBrand",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_87",
+          "email": "user87@example.com",
+          "firstname": "User",
+          "lastname": "87",
+          "company": "TechCo",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_89",
+          "email": "user89@example.com",
+          "firstname": "User",
+          "lastname": "89",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "lead"
+        },
+        {
+          "id": "contact_97",
+          "email": "user97@example.com",
+          "firstname": "User",
+          "lastname": "97",
+          "company": "StartupX",
+          "lifecyclestage": "lead"
+        }
+      ],
+      "customer": [
+        {
+          "id": "contact_9",
+          "email": "user9@example.com",
+          "firstname": "User",
+          "lastname": "9",
+          "company": "StartupX",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 14,
+            "login_trend": 1,
+            "feature_adoption": 0.19872566593785668
+          }
+        },
+        {
+          "id": "contact_19",
+          "email": "user19@example.com",
+          "firstname": "User",
+          "lastname": "19",
+          "company": "Acme Corp",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 13,
+            "login_trend": 0,
+            "feature_adoption": 0.8644731245633717
+          }
+        },
+        {
+          "id": "contact_23",
+          "email": "user23@example.com",
+          "firstname": "User",
+          "lastname": "23",
+          "company": "Acme Corp",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 60,
+            "login_trend": -1,
+            "feature_adoption": 0.09239942734790607
+          }
+        },
+        {
+          "id": "contact_37",
+          "email": "user37@example.com",
+          "firstname": "User",
+          "lastname": "37",
+          "company": "BigBrand",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 22,
+            "login_trend": -1,
+            "feature_adoption": 0.8815923455607131
+          }
+        },
+        {
+          "id": "contact_38",
+          "email": "user38@example.com",
+          "firstname": "User",
+          "lastname": "38",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 9,
+            "login_trend": -1,
+            "feature_adoption": 0.2530682915164434
+          }
+        },
+        {
+          "id": "contact_41",
+          "email": "user41@example.com",
+          "firstname": "User",
+          "lastname": "41",
+          "company": "Acme Corp",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 19,
+            "login_trend": 0,
+            "feature_adoption": 0.12843473807143868
+          }
+        },
+        {
+          "id": "contact_42",
+          "email": "user42@example.com",
+          "firstname": "User",
+          "lastname": "42",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 41,
+            "login_trend": 1,
+            "feature_adoption": 0.6513893374762276
+          }
+        },
+        {
+          "id": "contact_43",
+          "email": "user43@example.com",
+          "firstname": "User",
+          "lastname": "43",
+          "company": "BigBrand",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 24,
+            "login_trend": -1,
+            "feature_adoption": 0.8186364580548826
+          }
+        },
+        {
+          "id": "contact_52",
+          "email": "user52@example.com",
+          "firstname": "User",
+          "lastname": "52",
+          "company": "Acme Corp",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 31,
+            "login_trend": 0,
+            "feature_adoption": 0.019901345648071556
+          }
+        },
+        {
+          "id": "contact_59",
+          "email": "user59@example.com",
+          "firstname": "User",
+          "lastname": "59",
+          "company": "BigBrand",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 23,
+            "login_trend": 1,
+            "feature_adoption": 0.21744712993022763
+          }
+        },
+        {
+          "id": "contact_61",
+          "email": "user61@example.com",
+          "firstname": "User",
+          "lastname": "61",
+          "company": "StartupX",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 41,
+            "login_trend": 1,
+            "feature_adoption": 0.37725167325006015
+          }
+        },
+        {
+          "id": "contact_64",
+          "email": "user64@example.com",
+          "firstname": "User",
+          "lastname": "64",
+          "company": "BigBrand",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 23,
+            "login_trend": 1,
+            "feature_adoption": 0.692820802986683
+          }
+        },
+        {
+          "id": "contact_65",
+          "email": "user65@example.com",
+          "firstname": "User",
+          "lastname": "65",
+          "company": "Acme Corp",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 49,
+            "login_trend": 0,
+            "feature_adoption": 0.4286467279599341
+          }
+        },
+        {
+          "id": "contact_71",
+          "email": "user71@example.com",
+          "firstname": "User",
+          "lastname": "71",
+          "company": "StartupX",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 55,
+            "login_trend": 1,
+            "feature_adoption": 0.2705863566652018
+          }
+        },
+        {
+          "id": "contact_73",
+          "email": "user73@example.com",
+          "firstname": "User",
+          "lastname": "73",
+          "company": "BigBrand",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 8,
+            "login_trend": 1,
+            "feature_adoption": 0.632023168069671
+          }
+        },
+        {
+          "id": "contact_86",
+          "email": "user86@example.com",
+          "firstname": "User",
+          "lastname": "86",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 4,
+            "login_trend": -1,
+            "feature_adoption": 0.41266837334832307
+          }
+        },
+        {
+          "id": "contact_88",
+          "email": "user88@example.com",
+          "firstname": "User",
+          "lastname": "88",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 34,
+            "login_trend": -1,
+            "feature_adoption": 0.995346303256157
+          }
+        },
+        {
+          "id": "contact_90",
+          "email": "user90@example.com",
+          "firstname": "User",
+          "lastname": "90",
+          "company": "StartupX",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 34,
+            "login_trend": -1,
+            "feature_adoption": 0.30691852227127947
+          }
+        },
+        {
+          "id": "contact_91",
+          "email": "user91@example.com",
+          "firstname": "User",
+          "lastname": "91",
+          "company": "BigBrand",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 6,
+            "login_trend": 0,
+            "feature_adoption": 0.13793459166375843
+          }
+        }
+      ],
+      "opportunity": [
+        {
+          "id": "contact_13",
+          "email": "user13@example.com",
+          "firstname": "User",
+          "lastname": "13",
+          "company": "Acme Corp",
+          "lifecyclestage": "opportunity"
+        },
+        {
+          "id": "contact_22",
+          "email": "user22@example.com",
+          "firstname": "User",
+          "lastname": "22",
+          "company": "Acme Corp",
+          "lifecyclestage": "opportunity"
+        },
+        {
+          "id": "contact_24",
+          "email": "user24@example.com",
+          "firstname": "User",
+          "lastname": "24",
+          "company": "TechCo",
+          "lifecyclestage": "opportunity"
+        },
+        {
+          "id": "contact_26",
+          "email": "user26@example.com",
+          "firstname": "User",
+          "lastname": "26",
+          "company": "TechCo",
+          "lifecyclestage": "opportunity"
+        },
+        {
+          "id": "contact_32",
+          "email": "user32@example.com",
+          "firstname": "User",
+          "lastname": "32",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "opportunity"
+        },
+        {
+          "id": "contact_93",
+          "email": "user93@example.com",
+          "firstname": "User",
+          "lastname": "93",
+          "company": "StartupX",
+          "lifecyclestage": "opportunity"
+        },
+        {
+          "id": "contact_96",
+          "email": "user96@example.com",
+          "firstname": "User",
+          "lastname": "96",
+          "company": "Acme Corp",
+          "lifecyclestage": "opportunity"
+        },
+        {
+          "id": "contact_99",
+          "email": "user99@example.com",
+          "firstname": "User",
+          "lastname": "99",
+          "company": "StartupX",
+          "lifecyclestage": "opportunity"
+        }
+      ],
+      "evangelist": [
+        {
+          "id": "contact_21",
+          "email": "user21@example.com",
+          "firstname": "User",
+          "lastname": "21",
+          "company": "BigBrand",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 38,
+            "login_trend": -1,
+            "feature_adoption": 0.15142038372365962
+          }
+        },
+        {
+          "id": "contact_25",
+          "email": "user25@example.com",
+          "firstname": "User",
+          "lastname": "25",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 55,
+            "login_trend": 0,
+            "feature_adoption": 0.03389209960409767
+          }
+        },
+        {
+          "id": "contact_31",
+          "email": "user31@example.com",
+          "firstname": "User",
+          "lastname": "31",
+          "company": "Acme Corp",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 37,
+            "login_trend": 0,
+            "feature_adoption": 0.8425253419173656
+          }
+        },
+        {
+          "id": "contact_50",
+          "email": "user50@example.com",
+          "firstname": "User",
+          "lastname": "50",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 10,
+            "login_trend": 0,
+            "feature_adoption": 0.6696206080979027
+          }
+        },
+        {
+          "id": "contact_77",
+          "email": "user77@example.com",
+          "firstname": "User",
+          "lastname": "77",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 32,
+            "login_trend": -1,
+            "feature_adoption": 0.8427653102447692
+          }
+        },
+        {
+          "id": "contact_92",
+          "email": "user92@example.com",
+          "firstname": "User",
+          "lastname": "92",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 48,
+            "login_trend": 1,
+            "feature_adoption": 0.0035059088151009332
+          }
+        },
+        {
+          "id": "contact_94",
+          "email": "user94@example.com",
+          "firstname": "User",
+          "lastname": "94",
+          "company": "BigBrand",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 48,
+            "login_trend": -1,
+            "feature_adoption": 0.6660003955257241
+          }
+        },
+        {
+          "id": "contact_98",
+          "email": "user98@example.com",
+          "firstname": "User",
+          "lastname": "98",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 17,
+            "login_trend": -1,
+            "feature_adoption": 0.705597636819938
+          }
+        }
+      ]
+    },
+    "analysis": {
+      "stage_counts": {
+        "subscriber": 12,
+        "lead": 29,
+        "mql": 12,
+        "sql": 12,
+        "opportunity": 8,
+        "customer": 19,
+        "evangelist": 8
+      },
+      "conversions": [
+        {
+          "from_stage": "subscriber",
+          "to_stage": "lead",
+          "from_count": 12,
+          "to_count": 29,
+          "rate": 2.417,
+          "benchmark": 0.4
+        },
+        {
+          "from_stage": "lead",
+          "to_stage": "mql",
+          "from_count": 29,
+          "to_count": 12,
+          "rate": 0.414,
+          "benchmark": 0.3
+        },
+        {
+          "from_stage": "mql",
+          "to_stage": "sql",
+          "from_count": 12,
+          "to_count": 12,
+          "rate": 1.0,
+          "benchmark": 0.25
+        },
+        {
+          "from_stage": "sql",
+          "to_stage": "opportunity",
+          "from_count": 12,
+          "to_count": 8,
+          "rate": 0.667,
+          "benchmark": 0.35
+        },
+        {
+          "from_stage": "opportunity",
+          "to_stage": "customer",
+          "from_count": 8,
+          "to_count": 19,
+          "rate": 2.375,
+          "benchmark": 0.2
+        },
+        {
+          "from_stage": "customer",
+          "to_stage": "evangelist",
+          "from_count": 19,
+          "to_count": 8,
+          "rate": 0.421,
+          "benchmark": 0.25
+        }
+      ],
+      "bottlenecks": [],
+      "context_handling": {
+        "strategy": "inline",
+        "input_size_tokens": 4236,
+        "chunks_processed": 0,
+        "sub_calls": []
+      }
+    },
+    "scoring": {
+      "at_risk": [
+        {
+          "email": "user23@example.com",
+          "name": "User 23",
+          "company": "Acme Corp",
+          "stage": "customer",
+          "risk_score": 0.8,
+          "risk_factors": {
+            "days_inactive": 60,
+            "negative_trend": true
+          }
+        },
+        {
+          "email": "user88@example.com",
+          "name": "User 88",
+          "company": "Enterprise Inc",
+          "stage": "customer",
+          "risk_score": 0.8,
+          "risk_factors": {
+            "days_inactive": 34,
+            "negative_trend": true
+          }
+        },
+        {
+          "email": "user90@example.com",
+          "name": "User 90",
+          "company": "StartupX",
+          "stage": "customer",
+          "risk_score": 0.8,
+          "risk_factors": {
+            "days_inactive": 34,
+            "negative_trend": true
+          }
+        },
+        {
+          "email": "user42@example.com",
+          "name": "User 42",
+          "company": "Enterprise Inc",
+          "stage": "customer",
+          "risk_score": 0.6,
+          "risk_factors": {
+            "days_inactive": 41,
+            "negative_trend": false
+          }
+        },
+        {
+          "email": "user52@example.com",
+          "name": "User 52",
+          "company": "Acme Corp",
+          "stage": "customer",
+          "risk_score": 0.6,
+          "risk_factors": {
+            "days_inactive": 31,
+            "negative_trend": false
+          }
+        },
+        {
+          "email": "user61@example.com",
+          "name": "User 61",
+          "company": "StartupX",
+          "stage": "customer",
+          "risk_score": 0.6,
+          "risk_factors": {
+            "days_inactive": 41,
+            "negative_trend": false
+          }
+        },
+        {
+          "email": "user65@example.com",
+          "name": "User 65",
+          "company": "Acme Corp",
+          "stage": "customer",
+          "risk_score": 0.6,
+          "risk_factors": {
+            "days_inactive": 49,
+            "negative_trend": false
+          }
+        },
+        {
+          "email": "user71@example.com",
+          "name": "User 71",
+          "company": "StartupX",
+          "stage": "customer",
+          "risk_score": 0.6,
+          "risk_factors": {
+            "days_inactive": 55,
+            "negative_trend": false
+          }
+        }
+      ],
+      "upsell_candidates": []
+    },
+    "synthesis": {
+      "recommendations": [
+        {
+          "priority": "high",
+          "category": "retention",
+          "action": "Launch re-engagement campaign for 8 at-risk accounts",
+          "context": "Average risk score: 68%",
+          "impact": "Potential save of 8 accounts",
+          "suggested_tactics": [
+            "Personal outreach from CSM",
+            "Offer exclusive content or training",
+            "Review product friction points"
+          ]
+        }
+      ],
+      "health_score": 0.46
+    }
+  },
+  "tenant_id": "test_tenant"
+}

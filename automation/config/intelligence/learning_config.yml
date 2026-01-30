@@ -1,0 +1,19 @@
+# MH1 Intelligence System - Learning Configuration
+# Controls Bayesian learning and concept drift detection
+
+bayesian_update:
+  prior_weight: 10              # Weight given to prior belief
+  min_confidence: 0.01
+  max_confidence: 0.99
+
+concept_drift:
+  enabled: true
+  window_size: 20               # Samples to compare
+  threshold_sigma: 2.0          # Standard deviations
+  relearning_boost: 0.3         # Temporary exploration boost after drift
+
+exploration_exploitation:
+  base_exploration_rate: 0.15
+  min_exploration_rate: 0.05
+  max_exploration_rate: 0.30
+  decay_per_evidence: 0.01      # Reduce exploration as evidence grows

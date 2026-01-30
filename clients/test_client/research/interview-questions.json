@@ -1,0 +1,191 @@
+{
+  "questions": [
+    {
+      "id": 17,
+      "category": "strategy",
+      "question": "What's the core mission that drives your company?",
+      "purpose": "Understand company purpose",
+      "gap_addressed": "Company mission not documented",
+      "priority": "high"
+    },
+    {
+      "id": 18,
+      "category": "audience",
+      "question": "Walk us through your ideal customer's typical day and challenges.",
+      "purpose": "Build detailed ICP",
+      "gap_addressed": "Target audience not clearly defined",
+      "priority": "high"
+    },
+    {
+      "id": 19,
+      "category": "audience",
+      "question": "Who are the key decision-makers you need to reach?",
+      "purpose": "Understand buying process",
+      "gap_addressed": "Target audience not clearly defined",
+      "priority": "high"
+    },
+    {
+      "id": 20,
+      "category": "competitive",
+      "question": "When you win deals, what do customers say was the deciding factor?",
+      "purpose": "Identify true differentiators",
+      "gap_addressed": "Key differentiators not identified",
+      "priority": "high"
+    },
+    {
+      "id": 1,
+      "category": "strategy",
+      "question": "What are your top 3 business priorities for the next 6 months?",
+      "purpose": "Understand strategic focus for content alignment",
+      "gap_addressed": null,
+      "priority": "medium"
+    },
+    {
+      "id": 2,
+      "category": "strategy",
+      "question": "What's the biggest challenge you're currently facing in reaching your target customers?",
+      "purpose": "Identify pain points to address in content",
+      "gap_addressed": null,
+      "priority": "medium"
+    },
+    {
+      "id": 3,
+      "category": "audience",
+      "question": "Describe your ideal customer - what does their day-to-day look like?",
+      "purpose": "Build detailed ICP understanding",
+      "gap_addressed": null,
+      "priority": "medium"
+    },
+    {
+      "id": 4,
+      "category": "audience",
+      "question": "What objections do you most commonly hear from prospects?",
+      "purpose": "Understand barriers to conversion",
+      "gap_addressed": null,
+      "priority": "medium"
+    },
+    {
+      "id": 5,
+      "category": "voice",
+      "question": "If your brand had a personality, how would you describe it in 3 words?",
+      "purpose": "Define brand voice characteristics",
+      "gap_addressed": null,
+      "priority": "medium"
+    },
+    {
+      "id": 6,
+      "category": "voice",
+      "question": "Are there any topics or tones you want to specifically avoid in content?",
+      "purpose": "Identify content guardrails",
+      "gap_addressed": null,
+      "priority": "medium"
+    },
+    {
+      "id": 7,
+      "category": "voice",
+      "question": "Share an example of content (yours or others) that you feel represents your ideal voice.",
+      "purpose": "Get concrete voice examples",
+      "gap_addressed": null,
+      "priority": "medium"
+    },
+    {
+      "id": 8,
+      "category": "competitive",
+      "question": "What do customers tell you sets you apart from alternatives?",
+      "purpose": "Understand differentiation from customer perspective",
+      "gap_addressed": null,
+      "priority": "medium"
+    },
+    {
+      "id": 9,
+      "category": "competitive",
+      "question": "Which competitors do you most frequently lose deals to, and why?",
+      "purpose": "Identify competitive weaknesses to address",
+      "gap_addressed": null,
+      "priority": "medium"
+    },
+    {
+      "id": 10,
+      "category": "content",
+      "question": "What content topics have performed best for you in the past?",
+      "purpose": "Build on proven content themes",
+      "gap_addressed": null,
+      "priority": "medium"
+    },
+    {
+      "id": 11,
+      "category": "content",
+      "question": "What topics do you want to be known for as a thought leader?",
+      "purpose": "Define thought leadership direction",
+      "gap_addressed": null,
+      "priority": "medium"
+    },
+    {
+      "id": 12,
+      "category": "content",
+      "question": "What content format resonates most with your audience (long-form, short tips, stories)?",
+      "purpose": "Understand format preferences",
+      "gap_addressed": null,
+      "priority": "medium"
+    },
+    {
+      "id": 13,
+      "category": "founder",
+      "question": "What's a contrarian or unique perspective you hold about your industry?",
+      "purpose": "Identify distinctive POV for content",
+      "gap_addressed": null,
+      "priority": "medium"
+    },
+    {
+      "id": 14,
+      "category": "founder",
+      "question": "What question do you wish more people asked you?",
+      "purpose": "Surface unexplored expertise areas",
+      "gap_addressed": null,
+      "priority": "medium"
+    },
+    {
+      "id": 15,
+      "category": "metrics",
+      "question": "How will you measure the success of our content efforts?",
+      "purpose": "Align on success metrics",
+      "gap_addressed": null,
+      "priority": "medium"
+    },
+    {
+      "id": 16,
+      "category": "metrics",
+      "question": "What would a home run look like in the first 90 days?",
+      "purpose": "Set clear expectations",
+      "gap_addressed": null,
+      "priority": "medium"
+    }
+  ],
+  "research_gaps": [
+    {
+      "area": "mission",
+      "description": "Company mission not documented"
+    },
+    {
+      "area": "audience",
+      "description": "Target audience not clearly defined"
+    },
+    {
+      "area": "differentiators",
+      "description": "Key differentiators not identified"
+    },
+    {
+      "area": "products",
+      "description": "Products/services not documented"
+    },
+    {
+      "area": "competitors",
+      "description": "No competitor research available"
+    },
+    {
+      "area": "founders",
+      "description": "No founder research available"
+    }
+  ],
+  "assumptions_to_validate": []
+}

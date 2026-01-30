@@ -1,0 +1,713 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>MRD #1 v2: ICP Research &amp; Customer Intelligence</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2edbc009-929c-815a-8530-c65a65926dc4" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎯</span></div><h1 class="page-title" dir="auto">MRD #1 v2: ICP Research &amp; Customer Intelligence</h1><p class="page-description" dir="auto"></p><table class="properties"><tbody><tr class="property-row property-row-person"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/user-circle_gray.svg" style="width:14px;height:14px;display:block"/></span>Co-Pilot</th><td><span class="user"><img src="https://lh3.googleusercontent.com/a/ACg8ocJvbT_eT0qhutS0lTFHJnhNbQNMeRfctHBXgb0zzVQEF_6VMw=s100" class="icon user-icon"/>Aneesha Rao</span></td></tr><tr class="property-row property-row-person"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/friends_gray.svg" style="width:14px;height:14px;display:block"/></span>Builders</th><td><span class="user"><span class="icon text-icon user-icon"><span class="user-icon-inner">J</span></span>Josh Flores</span><span class="user"><img src="https://lh3.googleusercontent.com/a/ACg8ocIjh4BJG-Jc7-fZz221heoKH2P-9rAZb3COvg1YDsc7wgt2_Q=s100" class="icon user-icon"/>Viral Patel</span></td></tr><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/checkmark-square_gray.svg" style="width:14px;height:14px;display:block"/></span>Client Approval</th><td><div class="checkbox checkbox-off"></div></td></tr><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/checkmark-square_gray.svg" style="width:14px;height:14px;display:block"/></span>PM approval</th><td><div class="checkbox checkbox-off"></div></td></tr><tr class="property-row property-row-status"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/burst_gray.svg" style="width:14px;height:14px;display:block"/></span>Status</th><td><span class="status-value"><div class="status-dot"></div>Not started</span></td></tr><tr class="property-row property-row-rollup"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/search_gray.svg" style="width:14px;height:14px;display:block"/></span>Uncompleted dependencies</th><td>0</td></tr><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/checkmark-square_gray.svg" style="width:14px;height:14px;display:block"/></span>Blocked Automation</th><td><div class="checkbox checkbox-off"></div></td></tr><tr class="property-row property-row-relation"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-northeast_gray.svg" style="width:14px;height:14px;display:block"/></span>Clients</th><td><a href="https://www.notion.so/FFC-2edbc009929c81ffa304dd6a4442a6a6?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/postcard_pink.svg"/>FFC</a></td></tr><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/clock_gray.svg" style="width:14px;height:14px;display:block"/></span>Create</th><td><time>@January 19, 2026 2:59 AM</time></td></tr><tr class="property-row property-row-last_edited_time"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/clock_gray.svg" style="width:14px;height:14px;display:block"/></span>Last edited</th><td><time>@January 27, 2026 2:30 PM</time></td></tr><tr class="property-row property-row-formula"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/formula_gray.svg" style="width:14px;height:14px;display:block"/></span>Time in State</th><td>⚪️ New / No Data</td></tr></tbody></table></header><div class="page-body"><div style="display:contents" dir="auto"><p id="2edbc009-929c-810c-bf77-dec738bdba71" class=""><strong>Status:</strong> Active</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8163-8f0c-d99e9b2bde0c" class=""><strong>Priority:</strong> P0 (Foundational)</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81d4-83b8-f7c268acfad0" class=""><strong>Owner:</strong> MH-1 Team</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81c8-9b33-c18283133ed7" class=""><strong>Sprint Duration:</strong> 2 weeks (Current Sprint)</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8134-929b-ec942ddcb9d9" class=""><strong>Last Updated:</strong> January 16, 2026</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8101-830b-cbb80f777580" class=""><strong>Replaces:</strong> MRD #1 (Product Packaging &amp; Segmentation Testing) - now tabled pending ICP clarity</p></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-81bf-96d1-d460b7da36ee"/></div><div style="display:contents" dir="auto"><h2 id="2edbc009-929c-81e8-8834-f1a6b0d1d038" class="">Executive Summary</h2></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8129-850b-dcb010a97d24" class="">Following the <strong>January 14, 2026 bi-weekly sprint call</strong>, FFC leadership made a strategic decision to <strong>pause product packaging experimentation</strong> and focus on <strong>foundational customer research and ICP definition</strong>. This pivot recognizes that testing offer variants and segmentation strategies is premature when the fundamental question of &quot;who are we serving?&quot; remains unclear.</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8146-be3b-f3f27e59a7b6" class="">This MRD outlines the <strong>research-first approach</strong> that will inform future product development, replacing the previous test-and-iterate segmentation strategy with a <strong>learn-then-build</strong> methodology.</p></div><div style="display:contents" dir="auto"><blockquote id="2edbc009-929c-8112-a521-d5f16534426f" class=""><strong>Critical insight from leadership:</strong> &quot;We need to understand retention data, get the P&amp;L documentation, and have clear ICP definitions before deeper module work can be meaningful.&quot;</blockquote></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-8172-ad9a-e4ed43417086"/></div><div style="display:contents" dir="auto"><h2 id="2edbc009-929c-81c6-9ec6-c0518ff46c71" class="">Problem Statement</h2></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-8190-9d03-d0c8dda95539" class="">What Changed?</h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8132-b586-d70f72fad74d" class="">The original MRD #1 (Product Packaging &amp; Segmentation Testing) assumed:</p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-819e-a6c2-d63a89a451c9" class="bulleted-list"><li style="list-style-type:disc">✅ ICP definitions existed and were validated</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8194-8042-f86bfd67bc7d" class="bulleted-list"><li style="list-style-type:disc">✅ Cohort insights would inform offer testing</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8139-8b87-c39a75513b52" class="bulleted-list"><li style="list-style-type:disc">✅ The current product model had proven retention patterns</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8128-a63c-f9f733cf7b09" class="">The <strong>January 14 call revealed these assumptions are false:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8182-b279-d20de0cebd66" class="bulleted-list"><li style="list-style-type:disc">❌ Tent House founders observed are &quot;really different&quot; from expected ICP</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-813f-8238-dae4b56ca2ab" class="bulleted-list"><li style="list-style-type:disc">❌ Cohort Builder (MRD #4) is on hold until new product exists</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8195-8f62-f24abe5c4b31" class="bulleted-list"><li style="list-style-type:disc">❌ Missing critical data: retention assumptions, P&amp;L per offering, discount strategy</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8170-8c47-ce87470cb429" class="bulleted-list"><li style="list-style-type:disc">❌ 2% conversion rate suggests fundamental product-market fit questions</li></ul></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-81df-bfaa-e69fc360323a" class="">Why This Matters</h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-813d-81f3-fdf9ed07e91b" class=""><strong>You cannot optimize what you don&#x27;t understand.</strong> Testing pricing tiers, bundle configurations, and offer variants is expensive theater if the underlying product doesn&#x27;t resonate with a clearly defined customer segment.</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-816c-80f0-d673992d21fd" class="">Alison&#x27;s strategic clarity: <em>Focus on ICP + new product development rather than automating current operations when the root product isn&#x27;t clicking with customers.</em></p></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-8120-8697-fb939537e14a"/></div><div style="display:contents" dir="auto"><h2 id="2edbc009-929c-81a6-b37e-cd80efd09f36" class="">Objectives</h2></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-8101-919f-d32157fd72a7" class="">Primary Goal</h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8161-9f7a-c0130c273230" class=""><strong>Define validated ICPs and document customer insights that will inform new product development and go-to-market strategy.</strong></p></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-81da-bbcd-db69fe918a2d" class="">Success Criteria</h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8198-bb14-f543c7f26702" class=""><strong>By end of 2-week sprint:</strong></p></div><div style="display:contents" dir="auto"><ol type="1" id="2edbc009-929c-81db-9d58-d7fef78f5e04" class="numbered-list" start="1"><li>✅ <strong>ICP Documentation:</strong> One-pager per target founder type with demographics, psychographics, business characteristics, pain points, and willingness-to-pay signals</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2edbc009-929c-8121-a811-f8197e55202e" class="numbered-list" start="2"><li>✅ <strong>Retention Analysis:</strong> Documented retention data with qualitative justification (not just projections) explaining why certain founders stay vs. churn (Retention goals/Benchmarks on where we need to go)</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2edbc009-929c-81cf-8c9b-efb7f41cf26b" class="numbered-list" start="3"><li>✅ <strong>Product Positioning Matrix:</strong> Clear understanding of which product offerings resonate with which founder segments</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2edbc009-929c-81e6-bb29-c5e5938b460e" class="numbered-list" start="4"><li>✅ <strong>Pricing Intelligence:</strong> Average basket size, discount strategy effectiveness, and revenue per offering documented</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2edbc009-929c-81aa-8eb5-e56fef2807ae" class="numbered-list" start="5"><li>✅ <strong>Customer Research Repository:</strong> Interview notes, survey data, and behavioral analysis accessible to full team</li></ol></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81d5-a2a8-d9da016c9e37" class=""><strong>Strategic outcome:</strong> Team can confidently answer &quot;Who are we building for?&quot; and &quot;What do they actually need?&quot; before investing in product experimentation.</p></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-8161-9f74-c88d32f9967e"/></div><div style="display:contents" dir="auto"><h2 id="2edbc009-929c-81d1-a828-e6695a205e61" class="">Scope</h2></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-8172-a8d9-e66039a97be8" class="">In Scope for This Sprint</h3></div><div style="display:contents" dir="auto"><h4 id="2edbc009-929c-81a1-9cde-fa6d685bcc22" class="">1. Customer Research &amp; ICP Definition (Priority 1)</h4></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-818f-a2fd-f7f5b640bc3d" class=""><strong>Activities:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8161-b5f6-f2bd43ac63dc" class="bulleted-list"><li style="list-style-type:disc">Interview 10-15 current Tent House founders across different cohorts</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8135-b746-f4584dd239bf" class="bulleted-list"><li style="list-style-type:disc">Analyze retention cohorts: who stays vs. who churns and why</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81b6-a93a-f4beeb88944b" class="bulleted-list"><li style="list-style-type:disc">Document founder archetypes with validated characteristics</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8191-9b89-e1e4fb780b0a" class="bulleted-list"><li style="list-style-type:disc">Map current product offerings to founder segment fit</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81be-bb5a-dc4e35b6097d" class="bulleted-list"><li style="list-style-type:disc">Identify unmet needs and product gaps</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81da-b113-dacb430aae97" class=""><strong>Deliverable:</strong> ICP one-pagers per founder segment with confidence levels</p></div><div style="display:contents" dir="auto"><h4 id="2edbc009-929c-8175-96af-fd8e1a8e875c" class="">2. Product Packaging Analysis (Priority 1)</h4></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81c7-abe5-dc7fb264c09f" class=""><strong>Activities:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81f8-be98-e191aeb9c941" class="bulleted-list"><li style="list-style-type:disc">Audit all current product offerings (standalone accelerator, bundles, pricing tiers)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8118-9ee0-c88f9c67222d" class="bulleted-list"><li style="list-style-type:disc">Document actual purchase behavior vs. intended strategy</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-818d-9a78-ddabd8934917" class="bulleted-list"><li style="list-style-type:disc">Analyze discount effectiveness and average basket size</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81cc-8d86-f92e7008fc66" class="bulleted-list"><li style="list-style-type:disc">Map product features to founder value perception</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81d4-a974-f0bf5a4505e4" class="bulleted-list"><li style="list-style-type:disc">Identify which offerings drive retention vs. churn</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-814d-955c-d21b63cd20d7" class=""><strong>Deliverable:</strong> Product positioning matrix showing offering-to-segment fit</p></div><div style="display:contents" dir="auto"><h4 id="2edbc009-929c-816e-9f76-f4bc1752f8f0" class="">3. Newsletter Automation Setup (Priority 2)</h4></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81ca-b348-e7d67d67ce79" class=""><strong>Activities:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81e2-a5c4-feafda65a6a6" class="bulleted-list"><li style="list-style-type:disc">Onboard FFC onto MH-1&#x27;s existing newsletter generation module</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81dc-a950-e57fc90eb6b4" class="bulleted-list"><li style="list-style-type:disc">Tune content generation for Tent House audience</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8143-8a25-dd1bee24f77b" class="bulleted-list"><li style="list-style-type:disc">Set up workflow for weekly newsletter deployment</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8118-bb6e-c270d436ddd4" class="bulleted-list"><li style="list-style-type:disc">Document process for ongoing newsletter management</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-810a-bf11-fec3779aea84" class=""><strong>Deliverable:</strong> Automated weekly newsletter (&quot;one of the best areas of AI application&quot; per leadership)</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8118-b3ec-d88734e6fc16" class=""><strong>Strategic context:</strong> Once ICP segments are defined, newsletter can be personalized per founder type, becoming &quot;a real pillar of the entire company.&quot;</p></div><div style="display:contents" dir="auto"><h4 id="2edbc009-929c-811b-99e5-d601970702e4" class="">4. ManyChat Audit (Priority 3)</h4></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8120-ab62-eb7651488373" class=""><strong>Activities:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8178-a2c3-e5cfd814b0f5" class="bulleted-list"><li style="list-style-type:disc">Review current ManyChat setup and usage</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8100-89a4-ee5637b7fe29" class="bulleted-list"><li style="list-style-type:disc">Identify quick optimization opportunities</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-819a-8ac3-f62205a37897" class="bulleted-list"><li style="list-style-type:disc">Document recommendations for improved engagement</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-816c-8678-d95334834e21" class=""><strong>Deliverable:</strong> ManyChat optimization recommendations</p></div><div style="display:contents" dir="auto"><h4 id="2edbc009-929c-81a2-ac81-c6a83711661e" class="">5. Spot Cohort Support (Priority 4)</h4></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-811f-b498-e73db9c1f486" class=""><strong>Activities:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8147-85e6-c5677f6b4aac" class="bulleted-list"><li style="list-style-type:disc">Create email marketing sequences for January cohort</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8149-a4d2-d575e9862dd2" class="bulleted-list"><li style="list-style-type:disc">Provide tactical optimizations (e.g., application drop-off fixes)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81f6-bea3-eaece1f3fed4" class="bulleted-list"><li style="list-style-type:disc">Support Kalli&#x27;s cohort execution with ad-hoc AI assistance</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81f7-849d-eb7da4f5c8b2" class=""><strong>Deliverable:</strong> Email sequences and tactical support (NOT full cohort automation)</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8111-bc39-f9cad269a13b" class=""><strong>Important constraint:</strong> MH-1 will NOT build full cohort automation system this sprint - that would &quot;consume all resources.&quot;</p></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-8130-8288-fdd5d8f2a936" class="">Explicitly Out of Scope</h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81d4-a316-fef38081a8e3" class="">❌ <strong>Product packaging testing</strong> - Tabled until ICP work is complete</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81b3-94a3-f5920f84e107" class="">❌ <strong>Segmentation A/B tests</strong> - Premature without validated ICPs</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-818b-8f50-ee98a1ce5e4f" class="">❌ <strong>Offer variant launches</strong> - Requires foundational positioning clarity first</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81ca-892e-ff1fb1645508" class="">❌ <strong>Cohort Builder automation</strong> - On hold &quot;until we have the new product&quot; per Chris Toy</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81f0-bd46-ee47a11bd19d" class="">❌ <strong>Full cohort management</strong> - FFC will handle January cohort case-by-case; automation planned for future cohorts</p></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-816b-9589-f619c8556ae2"/></div><div style="display:contents" dir="auto"><h2 id="2edbc009-929c-81d9-bbf7-e0e0ff354f22" class="">Approach &amp; Methodology</h2></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-81a7-8e19-fefa7c0b8314" class="">Phase 1: Discovery (Days 1-3)</h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8189-9d6d-cae82c7df906" class=""><strong>Customer Interview Recruitment:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8124-941d-ce2271377097" class="bulleted-list"><li style="list-style-type:disc">Select founders from different cohorts (early, mid, recent)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8196-8503-e7e7968395a5" class="bulleted-list"><li style="list-style-type:disc">Include both high-engagement and at-risk founders</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81c8-9fdd-f772bffafadd" class="bulleted-list"><li style="list-style-type:disc">Ensure representation across business stages and backgrounds</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8106-8896-c184a680e46f" class=""><strong>Data Gathering:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8167-9243-f920d1443331" class="bulleted-list"><li style="list-style-type:disc">Pull retention data from existing cohorts</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-812f-b8d6-db9e0b778276" class="bulleted-list"><li style="list-style-type:disc">Compile purchase history and basket analysis</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81bc-b992-d17e22a413af" class="bulleted-list"><li style="list-style-type:disc">Review historical feedback and support tickets</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8127-981c-f82da47da994" class="bulleted-list"><li style="list-style-type:disc">Analyze behavioral data (engagement patterns, feature usage)</li></ul></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-8183-9d72-f3263b0f3c64" class="">Phase 2: Research Execution (Days 4-8)</h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8101-93b4-c8884591af21" class=""><strong>Qualitative Research:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81e4-aa1d-fd3a823a8995" class="bulleted-list"><li style="list-style-type:disc">Conduct 10-15 founder interviews (30-45 min each)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81e6-b6ee-efc438810406" class="bulleted-list"><li style="list-style-type:disc">Focus on: motivations, pain points, decision criteria, product value perception, unmet needs</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8184-9bcf-f0c9584a78f2" class="bulleted-list"><li style="list-style-type:disc">Document verbatim quotes for pattern identification</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81ab-8452-f4e85828b026" class=""><strong>Quantitative Analysis:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-819c-801e-d52300d79d11" class="bulleted-list"><li style="list-style-type:disc">Cohort retention analysis with statistical significance</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81c8-8444-f5b3143e2607" class="bulleted-list"><li style="list-style-type:disc">Purchase behavior segmentation</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81a4-9529-df9856184b1d" class="bulleted-list"><li style="list-style-type:disc">Discount effectiveness measurement</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81e5-83dd-f7ff05deabe8" class="bulleted-list"><li style="list-style-type:disc">Feature adoption tracking</li></ul></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-8193-895b-cd95c5e79f80" class="">Phase 3: Synthesis &amp; Documentation (Days 9-12)</h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81bf-b0fc-ce56ee18af2e" class=""><strong>ICP Development:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8150-8b4f-f6127240b4fb" class="bulleted-list"><li style="list-style-type:disc">Identify founder archetypes from interview patterns</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8171-809a-d72eea48629b" class="bulleted-list"><li style="list-style-type:disc">Validate archetypes against behavioral data</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-819c-a32d-f9727d7ebb13" class="bulleted-list"><li style="list-style-type:disc">Create detailed one-pagers per segment</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81d1-8c22-c6803063fe88" class="bulleted-list"><li style="list-style-type:disc">Assign confidence levels based on sample size</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81bc-91f7-d3fafa58537e" class=""><strong>Product Positioning:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81d8-8a15-dd480079184e" class="bulleted-list"><li style="list-style-type:disc">Map offerings to validated segments</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-818f-826a-df928d47d458" class="bulleted-list"><li style="list-style-type:disc">Identify product gaps and opportunities</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81e7-9d49-e02e0500e156" class="bulleted-list"><li style="list-style-type:disc">Document pricing sensitivity insights</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8129-8f0f-fe0c52129dc0" class="bulleted-list"><li style="list-style-type:disc">Create go-to-market recommendations</li></ul></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-81c7-a405-ff398f271b29" class="">Phase 4: Delivery &amp; Alignment (Days 13-14)</h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8148-8a29-feba99682af5" class=""><strong>Stakeholder Review:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8184-b35d-c128c658d607" class="bulleted-list"><li style="list-style-type:disc">Present findings to FFC leadership</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81ef-93b1-c17aa991d5cb" class="bulleted-list"><li style="list-style-type:disc">Validate ICP definitions with team&#x27;s tacit knowledge</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-818b-ac7d-c241ab41d5a5" class="bulleted-list"><li style="list-style-type:disc">Align on priority segments for new product development</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-815a-99f3-e42d1fbdd629" class="bulleted-list"><li style="list-style-type:disc">Get approval on next steps</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8132-930c-fa731b384bc0" class=""><strong>Documentation:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8104-bd92-ecae77c5cb52" class="bulleted-list"><li style="list-style-type:disc">Finalize all deliverables in shared workspace</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-810f-914c-dab2087f638a" class="bulleted-list"><li style="list-style-type:disc">Create accessible research repository</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8194-be41-fb1708ff781f" class="bulleted-list"><li style="list-style-type:disc">Establish process for ongoing customer intelligence</li></ul></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-81e9-bf53-d2d57d02ea92"/></div><div style="display:contents" dir="auto"><h2 id="2edbc009-929c-81ac-99aa-cc22d341dfee" class="">Key Stakeholders &amp; Roles</h2></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-813a-aa2f-e606e26d6b1b" class=""><strong>FFC Leadership (Decision Authority):</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81f8-8902-cf55f78370c7" class="bulleted-list"><li style="list-style-type:disc">Alison - Strategic direction, resource allocation</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-813f-aa5f-eb9a3860fdd5" class="bulleted-list"><li style="list-style-type:disc">Chris Toy - Product strategy, scope boundaries</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81a2-a48a-c1a2247877d3" class="bulleted-list"><li style="list-style-type:disc">Aneesha Rao - Customer insights validation, data requirements</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81fa-9858-e56767e5746e" class=""><strong>MH-1 Team (Execution):</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-817c-9c93-d66e3c239a9a" class="bulleted-list"><li style="list-style-type:disc">Cameron Rzonca - Engagement lead, research coordination</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81f3-bc05-f190be03c838" class="bulleted-list"><li style="list-style-type:disc">MH-1 Module Team - Newsletter automation setup</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81d7-b291-d9b468c70c8e" class=""><strong>Cohort Operations:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81aa-aeda-c3edabd5f360" class="bulleted-list"><li style="list-style-type:disc">Kalli Prins - January cohort acquisition lead (&quot;trying a few new things&quot;)</li></ul></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-811a-be4a-ff5514dfc9d0"/></div><div style="display:contents" dir="auto"><h2 id="2edbc009-929c-8126-a4ee-ee73d768e651" class="">Timeline &amp; Milestones</h2></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81f0-811d-f5e461486fc7" class=""><strong>Sprint Start:</strong> January 13, 2026</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-815f-b424-dc5279aeb76c" class=""><strong>Sprint End:</strong> January 27, 2026</p></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-8197-af17-f6a74d13da19" class="">Week 1 (Jan 13-19)</h3></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8186-946c-ccc2295add35" class="bulleted-list"><li style="list-style-type:disc">Days 1-2: Recruit interview participants, gather existing data</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81c1-bca6-d995f6894950" class="bulleted-list"><li style="list-style-type:disc">Days 3-5: Conduct founder interviews (5-8 interviews)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8187-a740-cdcc27f57c78" class="bulleted-list"><li style="list-style-type:disc">Days 5-7: Begin retention and purchase behavior analysis</li></ul></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-81d7-b864-e9cd1cd281a2" class="">Week 2 (Jan 20-27)</h3></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81ab-aa44-c90317e6f36b" class="bulleted-list"><li style="list-style-type:disc">Days 8-9: Complete remaining interviews, finish quantitative analysis</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8195-813e-efe2ce945872" class="bulleted-list"><li style="list-style-type:disc">Days 10-11: Synthesize findings, create ICP one-pagers</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81cc-93a6-dcefb95ace8d" class="bulleted-list"><li style="list-style-type:disc">Days 12-13: Develop product positioning matrix, compile recommendations</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8105-830c-f2912cac9701" class="bulleted-list"><li style="list-style-type:disc">Day 14: Present findings, get stakeholder alignment</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81dc-b6e0-e4bfffd5705f" class=""><strong>Critical Milestone:</strong> January 27 - ICP definitions approved, enabling next phase of work</p></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-813d-8bed-e251762a3919"/></div><div style="display:contents" dir="auto"><h2 id="2edbc009-929c-8162-9efa-ce2236ed04c4" class="">Dependencies &amp; Blockers</h2></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-811d-9688-f484c98f50f6" class="">Critical Dependencies</h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81e9-bcad-d1ee377e1a6f" class=""><strong>Data Access Required:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8197-afbb-e95af7447a10" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Retention data per cohort (with actual numbers, not projections)</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-819f-a80d-d3d3101f0be3" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">P&amp;L per product offering</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81de-a2f4-d804afdfa53a" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Purchase history and discount usage</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8123-93b9-f9915514f76c" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Average basket size per customer segment</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81ef-b480-d04ccd2a81d1" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Customer support ticket themes</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8144-a399-eab7b293bcb8" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Application form completion rates</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81aa-b9b6-fab5004a2cc2" class=""><strong>Stakeholder Availability:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-811d-b23f-e3438d742584" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Founder interview scheduling (10-15 participants)</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8127-991e-d049223afacf" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Aneesha available for data interpretation</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8194-9f2e-c855234f2516" class="to-do-list"><li><div class="checkbox checkbox-off"></div> <span class="to-do-children-unchecked">Leadership available for findings review (Day 14)</span><div class="indented"></div></li></ul></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-81bf-b9c4-cd54cdbd89cb" class="">Known Blockers</h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81b6-b7ec-ec68a02e4cd3" class="">⚠️ <strong>Missing baseline documentation</strong> - Aneesha noted critical gaps:</p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-814b-b73b-e70748552347" class="bulleted-list"><li style="list-style-type:disc">One-pagers per product offering (don&#x27;t exist yet)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81a0-bb97-fb4f100b26a0" class="bulleted-list"><li style="list-style-type:disc">ICP documentation per product (incomplete)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8125-b871-ee7a5f89fcc6" class="bulleted-list"><li style="list-style-type:disc">Retention assumptions with qualitative justification (projections only)</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8133-a6c3-d7bb78bb164f" class=""><strong>Mitigation:</strong> This sprint will CREATE these missing documents through primary research.</p></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-8144-ba37-ec44df80aaa0"/></div><div style="display:contents" dir="auto"><h2 id="2edbc009-929c-81c5-9a4d-efdcf33ef5e9" class="">Success Metrics</h2></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-8143-9e9b-ebe3d8cc1287" class="">Quantitative Measures</h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-814a-b45a-d8a1f8212057" class=""><strong>Research Execution:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-814d-b45c-c5b1c694fc94" class="bulleted-list"><li style="list-style-type:disc">✅ 10-15 founder interviews completed</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8155-9aaa-fe418c51910f" class="bulleted-list"><li style="list-style-type:disc">✅ 100% of existing cohorts analyzed for retention patterns</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-815d-a556-e90ae295298d" class="bulleted-list"><li style="list-style-type:disc">✅ Product purchase data mapped to founder segments</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81ff-bd73-facbb8569d82" class=""><strong>Documentation Quality:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-810b-8427-e7c54fcffb48" class="bulleted-list"><li style="list-style-type:disc">✅ ICP one-pagers validated by leadership</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8105-a48b-fab8d5a77689" class="bulleted-list"><li style="list-style-type:disc">✅ Product positioning matrix approved</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8110-933f-e7c95fd911de" class="bulleted-list"><li style="list-style-type:disc">✅ Retention analysis includes qualitative justification (not just numbers)</li></ul></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-81ff-bb05-ea73aa43a9c4" class="">Qualitative Measures</h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8149-8719-c3cf2c408bf6" class=""><strong>Strategic Clarity:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81f7-85df-c10b50a95a2f" class="bulleted-list"><li style="list-style-type:disc">Can leadership confidently describe their ideal customer?</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81f7-ad71-e0c857b78267" class="bulleted-list"><li style="list-style-type:disc">Do ICP definitions explain observed retention patterns?</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-818c-9b22-caca5d1add2a" class="bulleted-list"><li style="list-style-type:disc">Is there alignment on which founder types to prioritize?</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81ef-9ace-c84baee7e5b4" class=""><strong>Actionability:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-815f-b786-f6380804714b" class="bulleted-list"><li style="list-style-type:disc">Can marketing team target ads based on ICP definitions?</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8120-8d16-fd676fa8849a" class="bulleted-list"><li style="list-style-type:disc">Can product team prioritize features based on segment needs?</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-817e-a1b5-d38a01d0e42d" class="bulleted-list"><li style="list-style-type:disc">Can sales team qualify leads based on ICP fit?</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8120-9292-f1c7bf0b66fa" class=""><strong>Foundation for Next Phase:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-812b-baa9-e1526ec9ccc0" class="bulleted-list"><li style="list-style-type:disc">Does the team feel ready to design new product offerings?</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81e5-9cb2-c4d42b8c427d" class="bulleted-list"><li style="list-style-type:disc">Are there clear hypotheses to test in future sprints?</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8143-9613-c6eae2841478" class="bulleted-list"><li style="list-style-type:disc">Is there confidence that future work will build on solid understanding?</li></ul></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-81f3-a4e1-f56cc63c3add"/></div><div style="display:contents" dir="auto"><h2 id="2edbc009-929c-818d-84d8-f886cf947c94" class="">Risks &amp; Mitigation</h2></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-814b-9f92-cb231bb21777" class="">Risk 1: Low Interview Participation</h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81ca-b0e6-f0f20808508b" class=""><strong>Impact:</strong> Insufficient qualitative data for pattern identification</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8129-a209-e7056bdf1a2b" class=""><strong>Likelihood:</strong> Medium</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81e2-b6b7-f7fa8491cf3c" class=""><strong>Mitigation:</strong> </p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81e9-9aa2-eba010edb60f" class="bulleted-list"><li style="list-style-type:disc">Offer incentives for interview participation (e.g., extended access, credits)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81ab-946c-e0a4c0920d4e" class="bulleted-list"><li style="list-style-type:disc">Make scheduling flexible (15-min quick calls available)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8139-9a84-fa83daf298fb" class="bulleted-list"><li style="list-style-type:disc">Use existing relationships for warm introductions</li></ul></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-816f-b61e-e490c20c3671" class="">Risk 2: Inconclusive Findings</h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8198-9465-fcc6c75dc68f" class=""><strong>Impact:</strong> Cannot define clear ICP segments, delaying next phase</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-817e-9af7-d6662194e4e1" class=""><strong>Likelihood:</strong> Low-Medium</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8131-9454-f8e52c992a3d" class=""><strong>Mitigation:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-819b-8b0b-d5b6f651bf8d" class="bulleted-list"><li style="list-style-type:disc">Triangulate qualitative and quantitative data</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-815e-a8c1-c47cfbcbb596" class="bulleted-list"><li style="list-style-type:disc">Accept that &quot;we serve multiple distinct segments&quot; is a valid finding</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81f3-a7bf-ec2748768251" class="bulleted-list"><li style="list-style-type:disc">Document confidence levels and areas requiring further research</li></ul></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-81b9-be0a-e6614b140647" class="">Risk 3: Scope Creep into Execution</h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-812a-bdb9-f97b037ad5cc" class=""><strong>Impact:</strong> Sprint extends beyond research into building solutions</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8166-8c90-f829e3382274" class=""><strong>Likelihood:</strong> Medium</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-811f-a257-d348dffa7dd6" class=""><strong>Mitigation:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8112-93bb-fdc028d18190" class="bulleted-list"><li style="list-style-type:disc">Clear scope boundaries established in this MRD</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-817e-a969-c0ddbf7cc4bd" class="bulleted-list"><li style="list-style-type:disc">Leadership explicitly separated &quot;learn&quot; phase from &quot;build&quot; phase</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81ba-b98e-ee7d635adca2" class="bulleted-list"><li style="list-style-type:disc">Hold execution work for subsequent sprints after ICP validation</li></ul></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-8110-b301-f1b761ae0756" class="">Risk 4: January Cohort Demands Overwhelm Research Priority</h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81c6-8f04-eacc58ad8a9f" class=""><strong>Impact:</strong> Team gets pulled into cohort operations, delaying ICP work</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-812c-9906-d4b2b2db1267" class=""><strong>Likelihood:</strong> Medium-High</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8152-a23b-ed5c572b0fd8" class=""><strong>Mitigation:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81a2-ad47-e48a0d4cd9cf" class="bulleted-list"><li style="list-style-type:disc">Chris Toy clarified: January cohort is &quot;case by case&quot; with Kalli leading</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81c5-84aa-f75b843403e2" class="bulleted-list"><li style="list-style-type:disc">MH-1 provides spot help only, not full project management</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-810f-aca1-d800fbeb8cd5" class="bulleted-list"><li style="list-style-type:disc">Alison aware of resource reallocation need on FFC side</li></ul></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-8133-9abe-cedbe7f3172a"/></div><div style="display:contents" dir="auto"><h2 id="2edbc009-929c-8101-941c-e123b0b8d067" class="">Next Steps After This Sprint</h2></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8128-915a-ef1e5ddae74b" class=""><strong>If ICP work is successful, subsequent sprints will:</strong></p></div><div style="display:contents" dir="auto"><ol type="1" id="2edbc009-929c-81ec-8538-f96d6818b797" class="numbered-list" start="1"><li><strong>Design new product offerings</strong> based on validated segment needs</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2edbc009-929c-8131-9822-cd5778e3506d" class="numbered-list" start="2"><li><strong>Test offer variants</strong> with clear hypotheses tied to ICP insights</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2edbc009-929c-81fb-adce-d7613d72d8f5" class="numbered-list" start="3"><li><strong>Build newsletter personalization</strong> per founder archetype</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2edbc009-929c-817a-ad4f-d1aab7076581" class="numbered-list" start="4"><li><strong>Develop cohort automation</strong> once product-market fit is proven</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2edbc009-929c-81c4-95c0-dcb8c85cac84" class="numbered-list" start="5"><li><strong>Launch segmentation testing</strong> with confidence in target definitions</li></ol></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8189-ac48-f54ecc3d6ac2" class=""><strong>This is the foundational work that makes all future work meaningful.</strong></p></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-812a-b680-ddebfc8d9a17"/></div><div style="display:contents" dir="auto"><h2 id="2edbc009-929c-81e8-bb1d-e7412a78b0b8" class="">Appendix: Context from January 14 Call</h2></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-81cf-bc18-dab466cd31e8" class="">Key Decisions Made</h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-815f-bfcd-d1ed718af635" class=""><strong>Cohort Builder Tabled:</strong></p></div><div style="display:contents" dir="auto"><blockquote id="2edbc009-929c-813f-8d4b-d6dbb3036d7d" class="">&quot;We probably just kind of get by as we can with this current cohort... I think we should hold back on [automating cohort management] until we have the new product.&quot; — Chris Toy</blockquote></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81e3-a56f-d6024ae194ff" class=""><strong>Resource Reallocation Acknowledged:</strong></p></div><div style="display:contents" dir="auto"><blockquote id="2edbc009-929c-816b-b9b0-e275c69c5d14" class="">&quot;That means that like, we need to, on our end, totally reallocate resources because that is the biggest thing that we have going on right now.&quot; — Alison</blockquote></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8138-8fda-f2008a7cb736" class=""><strong>ICP Surprise Revealed:</strong></p></div><div style="display:contents" dir="auto"><blockquote id="2edbc009-929c-8199-af1f-e4f5ba5543f6" class="">Aneesha noted Tent House founders were &quot;really different&quot; from her mental model — indicating foundational assumptions need validation.</blockquote></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8133-8a80-cbe87700dd02" class=""><strong>Newsletter as Strategic Asset:</strong></p></div><div style="display:contents" dir="auto"><blockquote id="2edbc009-929c-8173-b56c-c678536666db" class="">Chris positioned newsletter module as &quot;one of the best areas of AI application&quot; that will become &quot;a real pillar of the entire company&quot; once ICP segments enable personalization.</blockquote></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-8132-b493-fe1c63ade88a" class="">Missing Data Identified by Aneesha</h3></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-816a-8a3b-f5d438fbc0b8" class="bulleted-list"><li style="list-style-type:disc">One-pagers per product offering</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8125-92ec-c297b527f52c" class="bulleted-list"><li style="list-style-type:disc">Average basket size / discount strategy per offering  </li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8146-8e90-c980c8750c19" class="bulleted-list"><li style="list-style-type:disc">ICP documentation per product</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81be-a2fd-d91b01b718c5" class="bulleted-list"><li style="list-style-type:disc">Retention assumptions with qualitative justification (not just projections)</li></ul></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-81f8-8321-fa5f7cacaae9" class="">January Cohort Approach</h3></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8130-b8dc-efaaaa02b35a" class="bulleted-list"><li style="list-style-type:disc">Kalli leading acquisition, &quot;trying a few new things&quot;</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81a3-8aee-d58e6b5972c3" class="bulleted-list"><li style="list-style-type:disc">Case-by-case execution while MH-1 learns operations</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-817a-bb61-cd2694ea5eed" class="bulleted-list"><li style="list-style-type:disc">Automation planned for subsequent cohorts after learning period</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81cc-a574-fdf13b34c966" class="bulleted-list"><li style="list-style-type:disc">MH-1 provides email sequences and spot optimizations only</li></ul></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-813a-9a4a-dd37f1ec673b"/></div><div style="display:contents" dir="auto"><h2 id="2edbc009-929c-8111-9e27-c480660df5ca" class="">Document History</h2></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-819d-825a-f0dc19837109" class=""><strong>Version:</strong> 2.0</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81ad-8053-f80ad63ddda6" class=""><strong>Created:</strong> January 16, 2026</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81ff-b9ea-c8b2f75886a5" class=""><strong>Owner:</strong> Cameron Rzonca</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-817b-918b-c33cd9a5e21f" class=""><strong>Status:</strong> Active</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-814f-9bef-e30207f4181f" class=""><strong>Replaces:</strong> MRD #1 (Product Packaging &amp; Segmentation Testing)</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8167-ac4d-cf1dddde911a" class=""><strong>Change Log:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8124-a068-dab52f34d6dd" class="bulleted-list"><li style="list-style-type:disc">2026-01-16: V2.0 - Complete strategic pivot from testing to research based on January 14 sprint call decisions</li></ul></div><div style="display:contents" dir="ltr"><figure id="2edbc009-929c-8199-9f73-d4d7bb194827" class="link-to-page"><a href="MRD%20#1%20v2%20ICP%20Research%20&amp;%20Customer%20Intelligence/MRD%20#1%20Product%20Packaging%20&amp;%20Offer%20Segmentation%20Test%202edbc009929c81999f73d4d7bb194827.html"><span class="icon">📦</span>MRD #1: Product Packaging &amp; Offer Segmentation Testing</a></figure></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

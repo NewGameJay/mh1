@@ -1,0 +1,38 @@
+{
+  "run_id": "dde84376",
+  "type": "workflow",
+  "name": "lifecycle-audit",
+  "version": "v2.0.0",
+  "status": "failed",
+  "start_time": "2026-01-29T22:10:49.857690+00:00",
+  "end_time": "2026-01-29T22:10:52.869958+00:00",
+  "duration_seconds": 3.01,
+  "tokens": {
+    "input": 0,
+    "output": 0,
+    "total": 0
+  },
+  "steps": [
+    {
+      "step_name": "discovery",
+      "status": "failed",
+      "output": null,
+      "tokens_input": 0,
+      "tokens_output": 0,
+      "duration_seconds": 3.01,
+      "error": "Data requirements not met: ['Insufficient records: 10 < 20 minimum']",
+      "sub_calls": []
+    }
+  ],
+  "error": null,
+  "evaluation": null,
+  "client": "all",
+  "tenant_id": "test_tenant",
+  "tags": [],
+  "context_handling": {
+    "strategy": "inline",
+    "input_size_tokens": 0,
+    "chunks_processed": 0,
+    "sub_calls": []
+  }
+}

@@ -1,0 +1,249 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Ghostwrite Content Output Schema",
+  "description": "Schema for the complete output of the ghostwrite-content skill",
+  "type": "object",
+  "required": ["skill_name", "client_id", "timestamp", "status", "data"],
+  "properties": {
+    "skill_name": {
+      "type": "string",
+      "const": "ghostwrite-content",
+      "description": "Name of the skill that generated this output"
+    },
+    "client_id": {
+      "type": "string",
+      "description": "Firebase Client ID"
+    },
+    "founder_id": {
+      "type": "string",
+      "description": "Firebase Founder document ID"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of generation"
+    },
+    "version": {
+      "type": "string",
+      "description": "Skill version that generated this output"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["success", "review", "failed", "budget_exceeded"],
+      "description": "Execution status"
+    },
+    "data": {
+      "type": "object",
+      "description": "Primary output data",
+      "properties": {
+        "campaign": {
+          "type": "object",
+          "properties": {
+            "client_name": { "type": "string" },
+            "platform": { "type": "string", "enum": ["linkedin", "twitter"] },
+            "generated_at": { "type": "string", "format": "date-time" },
+            "post_count": { "type": "integer" },
+            "campaign_dir": { "type": "string" },
+            "run_id": { "type": "string" },
+            "date_range": {
+              "type": "object",
+              "properties": {
+                "start": { "type": "string", "format": "date" },
+                "end": { "type": "string", "format": "date" }
+              }
+            },
+            "schedule": {
+              "type": "object",
+              "properties": {
+                "frequency": { "type": "string" },
+                "days": { "type": "array", "items": { "type": "string" } },
+                "time": { "type": "string" }
+              }
+            }
+          }
+        },
+        "posts": {
+          "type": "array",
+          "description": "Generated posts",
+          "items": {
+            "$ref": "#/definitions/post"
+          }
+        },
+        "metrics": {
+          "type": "object",
+          "properties": {
+            "voice_authenticity_avg": { "type": "number", "minimum": 0, "maximum": 10 },
+            "qa_passed": { "type": "integer" },
+            "qa_failed": { "type": "integer" },
+            "manual_review_required": { "type": "integer" },
+            "funnel_distribution": {
+              "type": "object",
+              "properties": {
+                "TOFU": { "type": "integer" },
+                "MOFU": { "type": "integer" },
+                "BOFU": { "type": "integer" }
+              }
+            }
+          }
+        },
+        "source_data": {
+          "type": "object",
+          "properties": {
+            "source_posts_count": { "type": "integer" },
+            "thought_leaders_count": { "type": "integer" },
+            "parallel_events_count": { "type": "integer" },
+            "founder_posts_analyzed": { "type": "integer" }
+          }
+        },
+        "context_summary": {
+          "type": "object",
+          "description": "Summary of context used for generation",
+          "properties": {
+            "voice_contract_loaded": { "type": "boolean" },
+            "brand_context_loaded": { "type": "boolean" },
+            "audience_context_loaded": { "type": "boolean" },
+            "strategy_context_loaded": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Execution metadata",
+      "properties": {
+        "execution_time_ms": { "type": "integer" },
+        "stages_completed": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "model_calls": { "type": "integer" },
+        "tokens_used": {
+          "type": "object",
+          "properties": {
+            "input": { "type": "integer" },
+            "output": { "type": "integer" },
+            "total": { "type": "integer" }
+          }
+        },
+        "cost_usd": { "type": "number" },
+        "checkpoints": { "type": "array", "items": { "type": "string" } },
+        "warnings": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "quality_gates": {
+      "type": "object",
+      "description": "Quality gate results",
+      "properties": {
+        "schema_valid": { "type": "boolean" },
+        "voice_authenticity": { "type": "number" },
+        "qa_compliance": { "type": "number" },
+        "completeness": { "type": "number" },
+        "all_passed": { "type": "boolean" }
+      }
+    },
+    "evaluation": {
+      "type": "object",
+      "description": "Quality evaluation results",
+      "properties": {
+        "score": { "type": "number", "minimum": 0, "maximum": 1 },
+        "pass": { "type": "boolean" },
+        "breakdown": {
+          "type": "object",
+          "properties": {
+            "schema_validity": { "type": "number" },
+            "factuality": { "type": "number" },
+            "completeness": { "type": "number" },
+            "brand_voice": { "type": "number" },
+            "risk_flags": { "type": "number" },
+            "context_efficiency": { "type": "number" }
+          }
+        },
+        "issues": { "type": "array", "items": { "type": "object" } },
+        "suggestions": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "release_action": {
+      "type": "string",
+      "enum": ["auto_deliver", "auto_refine", "human_review", "blocked"],
+      "description": "Recommended release action based on evaluation"
+    },
+    "release_message": {
+      "type": "string",
+      "description": "Human-readable release action message"
+    },
+    "files_generated": {
+      "type": "object",
+      "description": "Paths to generated files",
+      "properties": {
+        "content_calendar_md": { "type": "string" },
+        "content_calendar_json": { "type": "string" },
+        "final_posts_json": { "type": "string" },
+        "readme": { "type": "string" },
+        "qa_report": { "type": "string" }
+      }
+    },
+    "firestore_paths": {
+      "type": "object",
+      "description": "Firestore paths where data was persisted",
+      "properties": {
+        "posts_collection": { "type": "string" },
+        "content_calendar": { "type": "string" },
+        "post_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "error": {
+      "type": "string",
+      "description": "Error message if status is failed"
+    },
+    "error_type": {
+      "type": "string",
+      "description": "Error type if status is failed"
+    }
+  },
+  "definitions": {
+    "post": {
+      "type": "object",
+      "required": ["post_number", "content", "funnel_stage"],
+      "properties": {
+        "post_number": { "type": "integer" },
+        "post_id": { "type": "string" },
+        "content": { "type": "string" },
+        "character_count": { "type": "integer" },
+        "scheduled_date": { "type": "string", "format": "date" },
+        "scheduled_day": { "type": "string" },
+        "template_id": { "type": "integer" },
+        "template_name": { "type": "string" },
+        "funnel_stage": { "type": "string", "enum": ["TOFU", "MOFU", "BOFU"] },
+        "topic_id": { "type": "string" },
+        "topic": { "type": "string" },
+        "angle": { "type": "string" },
+        "voice_confidence": { "type": "number", "minimum": 0, "maximum": 10 },
+        "qa_status": { "type": "string", "enum": ["pass", "fail", "needs-manual-review"] },
+        "source_type": { "type": "string" },
+        "source_ref": { "type": "string" },
+        "inspiration_summary": { "type": "string" },
+        "context_files_used": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "voice_contract_applied": {
+          "type": "object",
+          "properties": {
+            "sentence_avg_length": { "type": "number" },
+            "signature_phrases_used": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "constraints_validated": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

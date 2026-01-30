@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Ghostwrite Content Input",
+  "description": "Input schema for the ghostwrite-content skill",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "description": "Firebase Client ID. If not provided, reads from inputs/active_client.md"
+    },
+    "founder_id": {
+      "type": "string",
+      "description": "Firebase founder document ID (required)"
+    },
+    "client_name": {
+      "type": "string",
+      "description": "Client display name (optional, defaults to client_id)"
+    },
+    "tenant_id": {
+      "type": "string",
+      "description": "Tenant identifier for budget tracking (defaults to client_id)"
+    },
+    "platform": {
+      "type": "string",
+      "enum": ["linkedin", "twitter"],
+      "default": "linkedin",
+      "description": "Target social platform"
+    },
+    "post_count": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 50,
+      "default": 20,
+      "description": "Number of posts to generate"
+    },
+    "min_relevance": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 10,
+      "default": 5,
+      "description": "Minimum relevance score for source posts"
+    },
+    "max_source_posts": {
+      "type": "integer",
+      "minimum": 5,
+      "maximum": 100,
+      "default": 25,
+      "description": "Maximum source posts to include"
+    },
+    "execution_mode": {
+      "type": "string",
+      "enum": ["suggest", "preview", "execute"],
+      "default": "suggest",
+      "description": "Execution mode: suggest (read-only), preview (show changes), execute (apply changes)"
+    },
+    "context_only": {
+      "type": "boolean",
+      "default": false,
+      "description": "Generate context snapshot files only (no posts generated)"
+    },
+    "auto_topics": {
+      "type": "boolean",
+      "default": false,
+      "description": "Auto-select top-scoring topics without user interaction"
+    },
+    "voice_contract": {
+      "description": "Voice contract defining founder's writing style. If not provided, loaded from Firebase.",
+      "$ref": "../../templates/voice-contracts/schema.json"
+    }
+  },
+  "required": ["founder_id"],
+  "additionalProperties": false
+}

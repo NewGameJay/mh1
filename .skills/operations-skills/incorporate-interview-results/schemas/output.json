@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Incorporate Interview Results Output",
+  "description": "Output schema for the incorporate-interview-results skill",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["success", "review", "failed", "budget_exceeded"]
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "extracted_insights": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "insight": {"type": "string"},
+              "category": {
+                "type": "string",
+                "enum": ["strategy", "audience", "voice", "competitive", "content", "products", "metrics", "general"]
+              },
+              "confidence": {"type": "string", "enum": ["high", "medium", "low"]},
+              "source_quote": {"type": "string"}
+            }
+          }
+        },
+        "assumptions_validated": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "assumption": {"type": "string"},
+              "source": {"type": "string"},
+              "status": {"type": "string", "enum": ["confirmed", "denied", "partial", "needs_review"]},
+              "notes": {"type": "string"}
+            }
+          }
+        },
+        "gaps_filled": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "gap": {"type": "string"},
+              "area": {"type": "string"},
+              "resolution": {"type": "string"},
+              "confidence": {"type": "string"},
+              "source_quote": {"type": "string"}
+            }
+          }
+        },
+        "voice_updates": {
+          "type": "object",
+          "properties": {
+            "words_analyzed": {"type": "integer"},
+            "new_phrases": {"type": "array", "items": {"type": "string"}},
+            "confirmed_tone": {"type": "array", "items": {"type": "string"}},
+            "vocabulary_patterns": {"type": "array"},
+            "confidence_delta": {"type": "number"}
+          }
+        },
+        "conflicts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "area": {"type": "string"},
+              "research_value": {"type": "string"},
+              "interview_value": {"type": "string"},
+              "resolution_required": {"type": "boolean"}
+            }
+          }
+        },
+        "docs_updated": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "interview_word_count": {"type": "integer"},
+        "update_summary": {"type": "string"},
+        "update_summary_path": {"type": "string"}
+      }
+    },
+    "evaluation": {"type": "object"},
+    "release_action": {"type": "string"},
+    "run_id": {"type": "string"},
+    "_meta": {
+      "type": "object",
+      "properties": {
+        "client_id": {"type": "string"},
+        "tenant_id": {"type": "string"},
+        "run_id": {"type": "string"},
+        "docs_updated": {"type": "integer"},
+        "runtime_seconds": {"type": "number"},
+        "cost_usd": {"type": "number"},
+        "timestamp": {"type": "string"}
+      }
+    },
+    "error": {"type": "string"},
+    "error_type": {"type": "string"}
+  },
+  "required": ["status"]
+}

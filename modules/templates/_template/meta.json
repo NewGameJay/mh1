@@ -1,0 +1,17 @@
+{
+  "module_id": "{{MODULE_ID}}",
+  "client_id": "{{CLIENT_ID}}",
+  "name": "{{MODULE_NAME}}",
+  "task_description": "{{TASK_DESCRIPTION}}",
+  "status": "draft",
+  "template_id": null,
+  "meta": {},
+  "tags": [],
+  "created_at": "{{CREATED_AT}}",
+  "updated_at": "{{UPDATED_AT}}",
+  "status_history": [],
+  "inputs": {},
+  "outputs": {},
+  "execution": null,
+  "skill_plan": []
+}

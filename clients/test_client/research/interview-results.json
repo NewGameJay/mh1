@@ -1,0 +1,28 @@
+{
+  "extracted_insights": [
+    {
+      "insight": "This is a test interview transcript with enough words to meet the minimum requirement. The founder discussed their business strategy, target audience, competitive landscape, and growth plans. They emp...",
+      "category": "general",
+      "confidence": "medium",
+      "source_quote": "This is a test interview transcript with enough words to meet the minimum requirement. The founder d"
+    }
+  ],
+  "assumptions_validated": [],
+  "gaps_filled": [],
+  "voice_updates": {
+    "words_analyzed": 53,
+    "new_phrases": [],
+    "confirmed_tone": [],
+    "vocabulary_patterns": [],
+    "sentence_lengths": {
+      "avg": 15,
+      "style": "varied"
+    },
+    "confidence_delta": 0.1
+  },
+  "conflicts": [],
+  "docs_updated": [
+    "company-research.md"
+  ],
+  "interview_word_count": 53
+}

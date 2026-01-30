@@ -1,0 +1,713 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>MH - Flowcode - Lifecycle Marketing Prototype</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2edbc009-929c-818f-8358-f91b51b8cddc" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🔄</span></div><h1 class="page-title" dir="auto">MH - Flowcode - Lifecycle Marketing Prototype</h1><p class="page-description" dir="auto"></p><table class="properties"><tbody><tr class="property-row property-row-person"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/user-circle_gray.svg" style="width:14px;height:14px;display:block"/></span>Co-Pilot</th><td><span class="user"><img src="https://lh3.googleusercontent.com/a/ACg8ocJcL6MYdBxkKwFmuk3v6nBzjy2NyVPxXZB1Nzd_U4YapOdGiA=s100" class="icon user-icon"/>Michael DiLillo</span></td></tr><tr class="property-row property-row-person"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/friends_gray.svg" style="width:14px;height:14px;display:block"/></span>Builders</th><td><span class="user"><span class="icon text-icon user-icon"><span class="user-icon-inner">J</span></span>Josh Flores</span></td></tr><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/checkmark-square_gray.svg" style="width:14px;height:14px;display:block"/></span>Client Approval</th><td><div class="checkbox checkbox-off"></div></td></tr><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/checkmark-square_gray.svg" style="width:14px;height:14px;display:block"/></span>PM approval</th><td><div class="checkbox checkbox-off"></div></td></tr><tr class="property-row property-row-status"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/burst_gray.svg" style="width:14px;height:14px;display:block"/></span>Status</th><td><span class="status-value"><div class="status-dot"></div>Not started</span></td></tr><tr class="property-row property-row-rollup"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/search_gray.svg" style="width:14px;height:14px;display:block"/></span>Uncompleted dependencies</th><td>0</td></tr><tr class="property-row property-row-checkbox"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/checkmark-square_gray.svg" style="width:14px;height:14px;display:block"/></span>Blocked Automation</th><td><div class="checkbox checkbox-off"></div></td></tr><tr class="property-row property-row-relation"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/arrow-northeast_gray.svg" style="width:14px;height:14px;display:block"/></span>Clients</th><td><a href="https://www.notion.so/Flowcode-2edbc009929c81b888d0fc4c52cb6c83?pvs=21"><img class="icon notion-static-icon" src="https://www.notion.so/icons/postcard_pink.svg"/>Flowcode</a></td></tr><tr class="property-row property-row-created_time"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/clock_gray.svg" style="width:14px;height:14px;display:block"/></span>Create</th><td><time>@January 19, 2026 2:59 AM</time></td></tr><tr class="property-row property-row-last_edited_time"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/clock_gray.svg" style="width:14px;height:14px;display:block"/></span>Last edited</th><td><time>@January 23, 2026 1:46 PM</time></td></tr><tr class="property-row property-row-formula"><th><span class="icon property-icon"><img src="https://www.notion.so/icons/formula_gray.svg" style="width:14px;height:14px;display:block"/></span>Time in State</th><td>⚪️ New / No Data</td></tr></tbody></table></header><div class="page-body"><div style="display:contents" dir="auto"><hr id="2edbc009-929c-81ff-a24f-e129df5f09b8"/></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-817f-9ffb-fb1a8ec245a9"/></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-819b-9363-e79050033391" class="">Architecture Overview [Phase 1 Prototype]</h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81dc-ac90-e62161e663f9" class=""><em>Architecture diagram and workflow visualization to be developed during build phase</em></p></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-8166-91a0-fcfc8a876905"/></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-81e5-a178-d64d1b5fa863" class=""><strong>Objective</strong></h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81ee-896c-cb4103484536" class="">Help <strong>Flowcode</strong> build a sophisticated, AI-powered lifecycle marketing system that personalizes messaging across their dual product lines (F1 QR codes + F2 feature platform) and multiple customer segments. This prototype demonstrates the capability to synthesize data from multiple sources, intelligently segment audiences, and deliver the right message at the right time — transitioning Flowcode from static, calendar-based workflows to dynamic, signal-driven personalization.</p></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-8185-b2ff-cf9a9dbcc149"/></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-81a5-9a54-d63f036c4523" class=""><strong>The Challenge</strong></h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8126-833d-fcc6020a4b02" class="">Flowcode has evolved from a QR code company into a multi-product platform, but their lifecycle marketing hasn&#x27;t kept pace with this complexity.</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81b8-a1a0-dde7c640b4c1" class=""><strong>Core Issues:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8154-94cc-c2c69b4eb431" class="bulleted-list"><li style="list-style-type:disc"><strong>Product complexity:</strong> Two distinct product lines (F1 legacy QR codes, F2 new platform with ~30+ features) create ~40-50 dimensions of personalization</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8107-b649-d6a7d7ebe17e" class="bulleted-list"><li style="list-style-type:disc"><strong>Fragmented customer journey:</strong> Customers need education and migration paths from F1 → F2, plus expansion opportunities within F2&#x27;s feature set</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-811e-b121-dceca0ec75f2" class="bulleted-list"><li style="list-style-type:disc"><strong>Data silos:</strong> Customer data lives across HubSpot, Snowflake, and Heap with no synthesis layer</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8126-b027-ecb6edd66435" class="bulleted-list"><li style="list-style-type:disc"><strong>Manual limitations:</strong> The sheer number of permutations (industry × product × feature × behavior × engagement) makes manual template creation impossible</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81d1-8f2b-f9dd18c0b115" class="bulleted-list"><li style="list-style-type:disc">Manual BDR outreach for all leads (no automation)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-817d-a04a-c9124014db98" class="bulleted-list"><li style="list-style-type:disc"><strong>Static workflows:</strong> Current HubSpot workflows are calendar-based, quickly become obsolete, and lack behavioral triggers</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81e0-b5f8-c929d470caf8" class="bulleted-list"><li style="list-style-type:disc"><strong>Content &amp; Collateral:<br/></strong>•	No systematic content marketing around F2 features<br/>•	Release notes are &quot;change log&quot; style, not marketing-oriented<br/>•	22 new features shipped last quarter with minimal marketing<br/>•	Flowcode Sightings Slack channel (10-20/day) not being leveraged<br/>•	No AI-powered content generation from use cases</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-819b-a5d0-e94afef6ad57" class="bulleted-list"><li style="list-style-type:disc"><strong>Messy data structure:</strong> Need to audit and understand current lifecycle state before optimization</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8116-9d28-ee898b58a7dd" class=""><strong>The Stakes:</strong></p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8164-94a4-e372fced2804" class="">Without intelligent lifecycle marketing, Flowcode leaves revenue on the table through missed lead opportunities, missed upsells, poor F1→F2 migration, and feature expansion blind spots.</p></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-81ae-b3b6-e353f5157e59"/></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-810a-9e78-fa4944be9e6f" class=""><strong>How This Module Helps</strong></h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81f7-887d-c359abc59a97" class="">This prototype creates a <strong>data-driven, AI-powered orchestration layer</strong> that sits between Flowcode&#x27;s data sources and their marketing execution in HubSpot.</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-811f-a6b7-c8da0895f6c2" class=""><strong>Key Benefits:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8126-a369-fdf54b117ce5" class="bulleted-list"><li style="list-style-type:disc"><strong>Unified data insights:</strong> Synthesizes HubSpot CRM data, Snowflake warehouse data, and Heap analytics to produce data insights</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8133-8b8f-eb05fb7d038a" class="bulleted-list"><li style="list-style-type:disc"><strong>Intelligent segmentation:</strong> Dynamically cohorts customers by industry, product usage (F1/F2), feature adoption, and engagement signals</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81fe-b350-f8f2644c72d1" class="bulleted-list"><li style="list-style-type:disc"><strong>AI-powered personalization:</strong> Generates contextually relevant messaging at scale using templates + dynamic content insertion</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81d5-a3f7-f09b72e5470d" class="bulleted-list"><li style="list-style-type:disc"><strong>Behavioral orchestration:</strong> Moves from calendar-based to signal-based triggers (product usage, engagement, lifecycle stage)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8199-af3b-d614b768f7b7" class="bulleted-list"><li style="list-style-type:disc"><strong>Scalable architecture:</strong> Handles complex permutations that would be impossible to maintain manually</li></ul></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-813e-97eb-c9e5db9acfab"/></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-814d-b3c3-fd4d6ae19c7e" class=""><strong>Strategy</strong></h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-810a-bf88-f2c90b59f0ee" class=""><strong>Phase 1: Prototype (1 week)</strong></p></div><div style="display:contents" dir="auto"><ol type="1" id="2edbc009-929c-81dc-b636-eed6a6119b06" class="numbered-list" start="1"><li><strong>Data audit:</strong> Assess current state in HubSpot, Snowflake, and Heap</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2edbc009-929c-813b-95ce-c936719211db" class="numbered-list" start="2"><li><strong>Segment definition:</strong> Identify top 3-5 priority customer cohorts (e.g., F1-only real estate, F1-only retail, F1-only nonprofit, F2 early adopters, F2 power users)</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2edbc009-929c-816c-b676-f17bebcc223e" class="numbered-list" start="3"><li><strong>Prototype flow:</strong> Build one complete lifecycle flow for highest-value segment</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2edbc009-929c-81be-8f28-d63c6658ed25" class="numbered-list" start="4"><li><strong>Template approach:</strong> Create base templates by industry/segment with AI-driven variable insertion (company name, specific features, usage data, etc.)</li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2edbc009-929c-8138-bfe0-c11564e7d622" class="numbered-list" start="5"><li><strong>Deliverable:</strong> 30/60/90 day roadmap + working prototype demonstrating end-to-end capability</li></ol></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8153-8299-dcc1dede25cf" class=""><strong>Phase 2: Expansion (30-60 days)</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81b3-b149-c312be8bec0a" class="bulleted-list"><li style="list-style-type:disc">Roll out lifecycle flows for remaining priority segments</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81b1-9e8a-e2fe2b9ad579" class="bulleted-list"><li style="list-style-type:disc">Add behavioral triggers and signal detection</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8171-8dd3-c33a03dc962e" class="bulleted-list"><li style="list-style-type:disc">Implement F1→F2 migration campaigns</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81f5-ba82-ccc9f955f6f2" class="bulleted-list"><li style="list-style-type:disc">Build F2 feature expansion playbooks</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81c8-bc9f-f52c0d3cc8f5" class=""><strong>Phase 3: Optimization (60-90 days)</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81f4-8c29-c1ee2df30e84" class="bulleted-list"><li style="list-style-type:disc">Performance analytics and attribution</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-811f-a65e-f7943ab0f45d" class="bulleted-list"><li style="list-style-type:disc">Continuous learning and template refinement</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81f4-b16d-c1c9d82b39fc" class="bulleted-list"><li style="list-style-type:disc">Scale to full product × industry × lifecycle stage matrix</li></ul></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-812d-a9df-e54cba9db26f"/></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-81aa-bcd3-d144b8597280" class=""><strong>Tools</strong></h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81bf-90f1-fedd0c348238" class=""><strong>Data &amp; Orchestration Layer:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8192-954e-de8935d7240c" class="bulleted-list"><li style="list-style-type:disc"><strong>Hightouch:</strong> Customer data platform that synthesizes Snowflake + Heap + HubSpot, orchestrates audience segmentation, and determines &quot;next best message&quot; logic</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81f1-b9b0-d5e76ebc36ae" class="bulleted-list"><li style="list-style-type:disc"><strong>Snowflake:</strong> Data warehouse (existing)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81f2-8c24-f2f2adb1eb79" class="bulleted-list"><li style="list-style-type:disc"><strong>Heap:</strong> Product analytics (existing)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81bb-be9a-ee13d08fbab1" class="bulleted-list"><li style="list-style-type:disc"><strong>HubSpot:</strong> CRM + email sending platform (existing)</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8136-a3bd-d9755b50839a" class=""><strong>AI &amp; Personalization:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81da-89d9-d15534317bec" class="bulleted-list"><li style="list-style-type:disc">Template-based content generation with dynamic variable insertion</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81f0-96f6-c4d9fcb72516" class="bulleted-list"><li style="list-style-type:disc"><strong>Custom prompts:</strong> Brand voice guidelines, segment-specific messaging frameworks</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8126-ae3d-fe8331f5fbb2" class=""><strong>Workflow &amp; Automation:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81cd-b32c-f13e4f455e8e" class="bulleted-list"><li style="list-style-type:disc">Additional workflow orchestration if needed beyond Hightouch capabilities</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8151-9bd3-deb81f2abcfe" class="bulleted-list"><li style="list-style-type:disc">Data enrichment and audience intelligence</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81d0-adc2-f41ff85cb5a0" class=""><strong>Analytics &amp; Reporting:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-815f-ad14-f0c2ec7cd633" class="bulleted-list"><li style="list-style-type:disc">Performance dashboards to track variant performance, segment engagement, conversion metrics</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8181-ab5c-f372d2630995" class="bulleted-list"><li style="list-style-type:disc"><strong>Custom tagging strategy:</strong> Label all variants for proper attribution and analysis</li></ul></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-81c5-873f-c4cbb5f254da"/></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-81f1-ae92-f68811e5618b" class=""><strong>Support</strong></h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8123-85c0-f673467f411c" class=""><strong>MarketerHire Team:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8162-a318-e53ca2203be5" class="bulleted-list"><li style="list-style-type:disc">End-to-end setup and implementation (1-week prototype phase)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81ee-bb62-fb55e465e66a" class="bulleted-list"><li style="list-style-type:disc">Data audit and architecture design</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8131-926a-c26cdef5f3b2" class="bulleted-list"><li style="list-style-type:disc">Template and content framework development</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81c7-b543-ca978f313f5d" class="bulleted-list"><li style="list-style-type:disc">Integration configuration (Hightouch ↔ HubSpot ↔ data sources)</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8144-9301-e044549a7ad6" class=""><strong>Advisory Support:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-816b-af14-c2af2bcbefe0" class="bulleted-list"><li style="list-style-type:disc">Michael Dilillo</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8182-99fc-ef3998ae65ec" class=""><strong>Ongoing:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8127-b1a0-e3ff60f85af2" class="bulleted-list"><li style="list-style-type:disc">Monthly performance reviews</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81e6-9e0b-cd94b00f895e" class="bulleted-list"><li style="list-style-type:disc">Template and flow optimization based on engagement data</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8190-9fcf-c5a31e56f4ce" class="bulleted-list"><li style="list-style-type:disc">Quarterly content audits to ensure relevance</li></ul></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-819d-a7d0-ee22435b03f3"/></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-812f-ad51-e4e3151835a3" class=""><strong>How It Works: The Lifecycle Orchestration Process</strong></h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8189-b7b0-e54b176e9759" class=""><strong>1. Data Synthesis &amp; Insights</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-812f-97ce-dad272c38dba" class="bulleted-list"><li style="list-style-type:disc">Pulls data from Snowflake, Heap (product usage/behavior), and HubSpot (engagement/communication history) and matches to contact</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81fb-9e6c-c59823cec8bf" class=""><strong>2. Intelligent Segmentation</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8177-842b-de3ab0b38279" class="bulleted-list"><li style="list-style-type:disc">Contacts dynamically assigned to cohorts based on:<div style="display:contents" dir="auto"><ul id="2edbc009-929c-8159-a634-c63ae6547c24" class="bulleted-list"><li style="list-style-type:circle">Product usage (F1 only, F2 only, hybrid)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81d4-acc1-d2fc8a74fdd3" class="bulleted-list"><li style="list-style-type:circle">Feature adoption level</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81c4-a514-e3e06f3a1bcf" class="bulleted-list"><li style="list-style-type:circle">Lifecycle stage</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81e4-8cec-ce52a9098f4d" class=""><strong>3. Signal Detection</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81a4-916a-d0d3f8983397" class="bulleted-list"><li style="list-style-type:disc">Behavioral triggers identify key moments, for example:<div style="display:contents" dir="auto"><ul id="2edbc009-929c-81a0-9e37-d0bff2d8a96b" class="bulleted-list"><li style="list-style-type:circle">F1 customer reaches usage threshold → F2 education sequence</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81c8-afd5-ff393af0a31e" class="bulleted-list"><li style="list-style-type:circle">F2 customer using 3/30 features → expansion opportunity</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-819a-859b-dc6e0210d9d4" class="bulleted-list"><li style="list-style-type:circle">Declining engagement → re-activation campaign</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8185-85df-c506e048cc2c" class="bulleted-list"><li style="list-style-type:circle">High engagement + feature gap → cross-sell specific features</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81c8-9798-d7cd836f9e81" class=""><strong>4. Content Selection</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81c3-89d4-f5a68a7d5717" class="bulleted-list"><li style="list-style-type:disc">System determines &quot;next best message&quot; based on:<div style="display:contents" dir="auto"><ul id="2edbc009-929c-81ed-8e9d-e42ce3cd879f" class="bulleted-list"><li style="list-style-type:circle">Customer segment and lifecycle stage</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-817e-8f33-c7c91b93ac82" class="bulleted-list"><li style="list-style-type:circle">Engagement signals (email opens, product logins, feature usage)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81a5-b75f-c590fc401e19" class="bulleted-list"><li style="list-style-type:circle">Industry (real estate, retail, nonprofit, etc.)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81fd-9ed5-e7a729f77f57" class="bulleted-list"><li style="list-style-type:circle">Recent behaviors and engagement</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-811b-a80b-f136969c8fb5" class="bulleted-list"><li style="list-style-type:circle">Communication frequency rules (avoid over-sending)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81d7-b2ca-e2500bc0d7aa" class="bulleted-list"><li style="list-style-type:circle">Predicted conversion probability</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81c4-9975-c12781204063" class=""><strong>5. Dynamic Personalization</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81ef-be6b-f8ea13d23ede" class="bulleted-list"><li style="list-style-type:disc">Base template selected for segment (e.g., &quot;F1 Real Estate → F2 Real Estate&quot;)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81a0-b596-c468b457f198" class="bulleted-list"><li style="list-style-type:disc">AI dynamically inserts personalized variables:<div style="display:contents" dir="auto"><ul id="2edbc009-929c-81ba-bfbf-fc9b3ee465f9" class="bulleted-list"><li style="list-style-type:circle">First name, company name</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8112-bc29-fedb65701b03" class="bulleted-list"><li style="list-style-type:circle">Specific F1 usage stats</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8129-999f-e80c2553b9d0" class="bulleted-list"><li style="list-style-type:circle">Relevant F2 features for their industry</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8194-924e-f7a7b859a261" class="bulleted-list"><li style="list-style-type:circle">Customized CTAs based on next best action</li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-812c-9b4d-d80e0d77b751" class="bulleted-list"><li style="list-style-type:disc">Creates multiple variants (e.g., novice vs. power user language)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81f9-a263-c8e151272e1e" class="bulleted-list"><li style="list-style-type:disc">Generates landing page personalized to company level (for ICP fit companies)</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81ae-819b-c8bd85aa385f" class=""><strong>6. Orchestration &amp; Delivery</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81c7-96c8-f18bb740dfd0" class="bulleted-list"><li style="list-style-type:disc">Sends properly formatted, personalized content to HubSpot</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8130-a000-f34c7cc3bd94" class="bulleted-list"><li style="list-style-type:disc">HubSpot deploys via appropriate channel (email, in-app, etc.)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81ff-9076-c38c166f0239" class="bulleted-list"><li style="list-style-type:disc">Trigger timing optimized based on AI recommendations, not calendar schedule</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81ca-8e1d-c2ec6dc4b7f5" class=""><strong>7. Measurement &amp; Learning</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81c6-9829-e1bfd6d3d540" class="bulleted-list"><li style="list-style-type:disc">Track engagement by segment, variant, and message type</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81bb-a0a8-e1cde0142ad1" class="bulleted-list"><li style="list-style-type:disc">Feed performance data back into data for continuous optimization</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81ac-8014-c245a4d87e5b" class="bulleted-list"><li style="list-style-type:disc">Track improvement (reduction) in time in lifecycle stage (funnel velocity)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81e0-96fe-d7d5f4c1a133" class="bulleted-list"><li style="list-style-type:disc">Surface insights: which segments respond to what messaging, which features resonate, optimal timing</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8118-90db-d635af2ad4d4" class=""><strong>8. Iteration</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8122-a2e8-ebfe97b95be9" class="bulleted-list"><li style="list-style-type:disc">Refine templates based on performance</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8142-9e9c-cb84b047bf2e" class="bulleted-list"><li style="list-style-type:disc">Expand to new segments and flows</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81f9-8a44-fbeb1cba1b1e" class="bulleted-list"><li style="list-style-type:disc">Continuously improve personalization logic</li></ul></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-8113-a5e1-e5bbaec31360"/></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-810c-bcab-d94d71076a6f" class=""><strong>FAQs</strong></h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81f7-bfe0-d6f0489a304b" class=""><strong>How do we handle the complexity of 40-50 different dimensions?</strong></p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81ec-b3ca-cec946eb1d96" class="">We start with 3-5 priority segments and build the infrastructure to scale. The system uses base templates with dynamic variable insertion rather than trying to create 30,000 static variations. Think layers: Industry (layer 1) → Product line (layer 2) → Specific features/behaviors (layer 3 via AI).</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-818f-b4a5-d0d38eb09b1a" class=""><strong>Can we migrate customers from F1 to F2?</strong></p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81a1-a80e-e1936ba0edea" class="">Yes, this is a core use case. We&#x27;ll create education sequences triggered by F1 usage patterns that introduce F2 capabilities relevant to their industry and use case.</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8151-889c-c5ebc1adda28" class=""><strong>How do we track which messages are working?</strong></p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8115-9bc0-d9fd2bd0ee92" class="">Through robust tagging and BI dashboards. Every variant is tagged by segment, content type, and personalization variables. We&#x27;ll set up reporting to show performance by cohort, message theme, and lifecycle stage.</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81c7-b204-df78da08b786" class=""><strong>What about our existing HubSpot workflows?</strong></p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81b0-ad2e-e6c9a9cc8a52" class="">They can coexist during transition. We&#x27;ll gradually replace static workflows with dynamic orchestration, starting with the prototype segment.</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-814d-9db6-cb5fc7cf866c" class=""><strong>Do we need to rebuild our entire CRM?</strong></p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81bd-bb38-e450dec425b9" class="">No. It works with your existing data structure. We may recommend some cleanup and standardization, but this is an overlay, not a replacement.</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-811a-abd2-d39b77c3560e" class=""><strong>How is this different from just building more HubSpot workflows?</strong></p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8106-a96c-db3907ca4bd4" class="">HubSpot workflows are limited by their if/then logic and require constant manual maintenance. This system synthesizes multiple data sources, uses AI for personalization at scale, and dynamically optimizes based on behavior. It&#x27;s the difference between static rules and intelligent orchestration.</p></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-8137-91de-d221b1033778"/></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-8169-beaf-f869543d103d" class=""><strong>Deliverables</strong></h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81c1-b18c-f0cea0847bc0" class=""><strong>Phase 1 (1 week) - Prototype:</strong></p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81f7-9ff8-e3c2b9ede823" class="">✅ <strong>Data Audit Report:</strong> Current state of HubSpot, Snowflake, and Heap data structure</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81b9-a1b4-eed774b82b51" class="">✅ Lifecycle <strong>Audit Report:</strong> Current state of lifecycle marketing</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8174-b1bc-f83fbd0a8d1b" class="">✅ <strong>Customer Segmentation Framework:</strong> Top 3-5 priority cohorts defined with audience sizes, characteristics, and opportunity sizing</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81fe-83e7-f423b785247a" class="">✅ <strong>Prototype Lifecycle Flow:</strong> One complete, working example for highest-priority segment including:</p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81da-9721-d854460821ea" class="bulleted-list"><li style="list-style-type:disc">Data synthesis and audience definition</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-817c-9d49-e25c2bea5d39" class="bulleted-list"><li style="list-style-type:disc">Behavioral triggers and decision logic</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81d2-a1b3-cf10e5eef8ab" class="bulleted-list"><li style="list-style-type:disc">Templated content with dynamic personalization</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8159-b52a-c1ff7986f1a3" class="bulleted-list"><li style="list-style-type:disc">Example outputs (even if not fully deployed to HubSpot)</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81f3-ab32-ce03fdcb25b5" class="">✅ <strong>Technical Architecture Document:</strong> System diagram showing data flow, orchestration logic, and integration points</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81a6-88e0-f4b0e6120079" class=""><strong>Phase 2 (30-60 days):</strong></p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8190-9e8d-d1596e3a510f" class="">✅ Rollout of 3-5 core lifecycle flows across priority segments</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81b1-adaa-e9d3698787d1" class="">✅ F1→F2 migration campaign suite</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-815b-be02-f7942759d95f" class="">✅ F2 feature expansion playbook (cross-sell/upsell)</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-815e-908e-d72d31d06af8" class="">✅ Performance dashboard and reporting</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8157-ab6b-e7e7b148e558" class=""><strong>Phase 3 (60-90 days):</strong></p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-810f-bf07-e327900fe829" class="">✅ Full lifecycle coverage across product × industry × stage matrix</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-819f-9b73-e9b23b7968dc" class="">✅ Advanced personalization and variant testing</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-819f-89b7-f808b9adcfd4" class="">✅ Continuous optimization framework</p></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-811e-8d53-d43e5729d2d3"/></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-81ee-8022-fa2fc7c70734" class=""><strong>Add-On Recommendations</strong></h3></div><div style="display:contents" dir="ltr"><table id="2edbc009-929c-81ba-96bf-ff639d6cb410" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2edbc009-929c-81fe-91c8-cc038f9531e9"><th id="V~Id" class="simple-table-header-color simple-table-header"><strong>Add-On</strong></th><th id="bLRe" class="simple-table-header-color simple-table-header"><strong>Outcome</strong></th><th id="C}GF" class="simple-table-header-color simple-table-header"><strong>Timing</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2edbc009-929c-815b-b391-f74a93b6325f"><td id="V~Id" class=""><strong>Advanced Engagement Tracking</strong></td><td id="bLRe" class="">Track not just email engagement but product usage patterns to create richer behavioral triggers</td><td id="C}GF" class="">Phase 2</td></tr></div><div style="display:contents" dir="ltr"><tr id="2edbc009-929c-8122-ac11-c3ab8d279644"><td id="V~Id" class=""><strong>Predictive Churn Modeling</strong></td><td id="bLRe" class="">AI model identifies at-risk customers before they churn, triggers retention campaigns</td><td id="C}GF" class="">Phase 3</td></tr></div><div style="display:contents" dir="ltr"><tr id="2edbc009-929c-81c9-8e91-cd4738376fff"><td id="V~Id" class=""><strong>Dynamic Content Generation</strong></td><td id="bLRe" class="">Move beyond templates to fully AI-generated messaging (via Justwords or custom solution)</td><td id="C}GF" class="">Phase 2-3</td></tr></div><div style="display:contents" dir="ltr"><tr id="2edbc009-929c-81eb-9824-e4fd5d8effff"><td id="V~Id" class=""><strong>Multi-Channel Orchestration</strong></td><td id="bLRe" class="">Expand beyond email to in-app messaging, push notifications, SMS</td><td id="C}GF" class="">Phase 3</td></tr></div><div style="display:contents" dir="ltr"><tr id="2edbc009-929c-816f-a132-dfcc29f042f5"><td id="V~Id" class=""><strong>Account-Based Marketing Layer</strong></td><td id="bLRe" class="">For enterprise customers, orchestrate at account level with multi-stakeholder journeys</td><td id="C}GF" class="">Phase 3</td></tr></div><div style="display:contents" dir="ltr"><tr id="2edbc009-929c-8167-a39c-ee75bbf235d1"><td id="V~Id" class=""><strong>Content Audit Automation</strong></td><td id="bLRe" class="">Regular automated scans to flag outdated messaging or stats</td><td id="C}GF" class="">Ongoing</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-811a-8d92-e755cb44edaa"/></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-8135-ad53-f03bc22018a5" class=""><strong>Priority Segments (Preliminary)</strong></h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81b1-b444-d5b6297d77c9" class=""><em>To be validated during data audit</em></p></div><div style="display:contents" dir="ltr"><table id="2edbc009-929c-8186-b569-c65308a2b7c9" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2edbc009-929c-81d6-92c8-c4c5e237ac82"><th id="XYpo" class="simple-table-header-color simple-table-header"><strong>Segment</strong></th><th id="XQBV" class="simple-table-header-color simple-table-header"><strong>Definition</strong></th><th id="&gt;pSa" class="simple-table-header-color simple-table-header"><strong>Primary Opportunity</strong></th><th id="|RQI" class="simple-table-header-color simple-table-header"><strong>Priority</strong></th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2edbc009-929c-8132-8b60-eb6c963b53ab"><td id="XYpo" class=""><strong>F1 Real Estate Agents</strong></td><td id="XQBV" class="">QR code users in real estate vertical, not on F2</td><td id="&gt;pSa" class="">F2 education &amp; migration</td><td id="|RQI" class="">High</td></tr></div><div style="display:contents" dir="ltr"><tr id="2edbc009-929c-813b-80cd-ed686b653718"><td id="XYpo" class=""><strong>F1 Retail Businesses</strong></td><td id="XQBV" class="">QR code users in retail, not on F2</td><td id="&gt;pSa" class="">F2 education &amp; migration</td><td id="|RQI" class="">High</td></tr></div><div style="display:contents" dir="ltr"><tr id="2edbc009-929c-8116-8e0c-e5f74595d942"><td id="XYpo" class=""><strong>F1 Nonprofit Organizations</strong></td><td id="XQBV" class="">QR code users in nonprofit sector, not on F2</td><td id="&gt;pSa" class="">F2 education &amp; migration</td><td id="|RQI" class="">Medium</td></tr></div><div style="display:contents" dir="ltr"><tr id="2edbc009-929c-814c-8c0b-dbe43055af2a"><td id="XYpo" class=""><strong>F2 Light Users</strong></td><td id="XQBV" class="">Adopted F2 but using &lt;5 features</td><td id="&gt;pSa" class="">Feature expansion &amp; activation</td><td id="|RQI" class="">High</td></tr></div><div style="display:contents" dir="ltr"><tr id="2edbc009-929c-81de-873d-c6842a9c55d4"><td id="XYpo" class=""><strong>F2 Power Users</strong></td><td id="XQBV" class="">Using 10+ features, high engagement</td><td id="&gt;pSa" class="">Expansion, advocacy, retention</td><td id="|RQI" class="">Medium</td></tr></div><div style="display:contents" dir="ltr"><tr id="2edbc009-929c-81d8-ac53-f5c50ab96285"><td id="XYpo" class=""><strong>Hybrid Users (F1+F2)</strong></td><td id="XQBV" class="">Using both product lines</td><td id="&gt;pSa" class="">Optimize usage, expand F2 adoption</td><td id="|RQI" class="">Medium</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-8126-8759-f00e83342628"/></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-812c-b011-cbbf6adcb98c" class=""><strong>Success Metrics</strong></h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-813c-b42b-d742aa4c4015" class=""><strong>Prototype Phase:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81ce-92c1-c3fff3c5f3ec" class="bulleted-list"><li style="list-style-type:disc">Successful data synthesis and audience identification</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-814a-b378-e35e6d7c2e63" class="bulleted-list"><li style="list-style-type:disc">Working prototype flow demonstrating end-to-end capability</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-811f-ba13-f84dea42254a" class="bulleted-list"><li style="list-style-type:disc">Clear 30/60/90 roadmap approved by Flowcode team</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81ed-8d84-f0fc21c7d221" class=""><strong>30-60 Day Metrics:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-810c-98b1-de3267304b23" class="bulleted-list"><li style="list-style-type:disc">10-20% increase in F1→F2 conversion rate vs. baseline</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81a2-b463-e4bba3223cae" class="bulleted-list"><li style="list-style-type:disc">15-25% lift in email engagement (opens/clicks) vs. static workflows</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81db-a69f-d183c4d8f682" class="bulleted-list"><li style="list-style-type:disc">3-5 active lifecycle flows deployed</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8109-8d05-f9b573ba671a" class=""><strong>60-90 Day Metrics:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8197-80ef-dba6afc590af" class="bulleted-list"><li style="list-style-type:disc">25%+ lift in overall lifecycle conversion vs. pre-implementation baseline</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81b9-9b43-d2cf47539a5e" class="bulleted-list"><li style="list-style-type:disc">20%+ increase in feature adoption rate for F2 users</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81dd-9073-fafd4a1a3bfc" class="bulleted-list"><li style="list-style-type:disc">Measurable impact on retention and expansion revenue</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81ad-8e44-dccaabafa643" class="bulleted-list"><li style="list-style-type:disc">Reduced manual workflow maintenance time by 70%+</li></ul></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-812e-885c-cb58ed09a4d9"/></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-8169-a0aa-eccd78326dfa" class=""><strong>Next Steps</strong></h3></div><div style="display:contents" dir="auto"><ol type="1" id="2edbc009-929c-81a9-8877-e5bd32e7cadc" class="numbered-list" start="1"><li><strong>Kick-off &amp; Data Access</strong> (Week 1)<div style="display:contents" dir="auto"><ul id="2edbc009-929c-81d7-9e75-c0f195bd0315" class="bulleted-list"><li style="list-style-type:disc">Grant access to HubSpot, Snowflake, Heap</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81c8-8b03-fd693842e74e" class="bulleted-list"><li style="list-style-type:disc">Initial data audit and structure assessment</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8180-9877-e2ddc31aec2b" class="bulleted-list"><li style="list-style-type:disc">Validate preliminary segment definitions</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2edbc009-929c-810a-ab3f-edd9c89fc704" class="numbered-list" start="2"><li><strong>Strategy Development</strong> (Week 1)<div style="display:contents" dir="auto"><ul id="2edbc009-929c-816d-9549-ead3664a0105" class="bulleted-list"><li style="list-style-type:disc">Finalize 30/60/90 roadmap</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8150-a26f-d566563244d6" class="bulleted-list"><li style="list-style-type:disc">Select prototype segment and flow</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81b2-b58d-df84f337b752" class="bulleted-list"><li style="list-style-type:disc">Design content framework and templates</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2edbc009-929c-811d-8c72-fa4179653c37" class="numbered-list" start="3"><li><strong>Prototype Build</strong> (Week 1)<div style="display:contents" dir="auto"><ul id="2edbc009-929c-8119-a589-efaeba1906a0" class="bulleted-list"><li style="list-style-type:disc">Configure Hightouch (or selected orchestration platform)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-813f-a3d7-e297106546ae" class="bulleted-list"><li style="list-style-type:disc">Build prototype lifecycle flow</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81ac-b8d3-ca8229d65e61" class="bulleted-list"><li style="list-style-type:disc">Create example personalized outputs</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><ol type="1" id="2edbc009-929c-81d1-821e-df6caad57cf3" class="numbered-list" start="4"><li><strong>Review &amp; Refinement</strong> (Week 1)<div style="display:contents" dir="auto"><ul id="2edbc009-929c-81ae-9ccd-d915889f0ab8" class="bulleted-list"><li style="list-style-type:disc">Present prototype and roadmap to Flowcode team</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81af-b491-fee4507ef29f" class="bulleted-list"><li style="list-style-type:disc">Incorporate feedback (advisory review)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8116-b79a-c0175a43f3a8" class="bulleted-list"><li style="list-style-type:disc">Finalize Phase 2 scope and timeline</li></ul></div></li></ol></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-81e5-9d33-dcd29d972d9d"/></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-81dc-8e9c-f8750cb8693e" class=""><strong>Key Learnings from Discovery</strong></h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-810d-ad22-de8f73705173" class=""><strong>From Lindsay (Fundrise Lifecycle Expert):</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81f9-879c-d6833a25d072" class="bulleted-list"><li style="list-style-type:disc">Start with <strong>3-5 core segments</strong> rather than trying to build for all permutations at once</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81a7-9c77-c3648e868155" class="bulleted-list"><li style="list-style-type:disc">Focus on <strong>template + dynamic variables</strong> approach rather than generating fully custom content from scratch (more reliable, easier to maintain)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-812b-b537-ee894203f603" class="bulleted-list"><li style="list-style-type:disc">Build robust <strong>tagging and tracking</strong> from day one — performance attribution is critical</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8191-af05-e4cee071f612" class="bulleted-list"><li style="list-style-type:disc">Expect to <strong>iterate 5-6 times</strong> on orchestration logic as you learn what works</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81dd-bd6c-cc6cc5fd2f7c" class="bulleted-list"><li style="list-style-type:disc">Balance between <strong>personalization sophistication</strong> and <strong>execution complexity</strong> — 30,000 permutations is too many</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8167-a476-f3ae5f5f8614" class="bulleted-list"><li style="list-style-type:disc">Implement <strong>content audit cadence</strong> (quarterly at minimum) to keep messaging relevant</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81d3-85ae-e231f8ec67df" class="bulleted-list"><li style="list-style-type:disc">Use <strong>control groups</strong> (10%) and <strong>uniform non-AI groups</strong> to measure true AI lift</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81c2-a3b1-f13bb6659e9a" class="bulleted-list"><li style="list-style-type:disc">Current Hightouch limitations: Complex reporting, some black-box AI logic, may need BI layer for proper analytics</li></ul></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-81e7-92b4-d30be374145c"/></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-81f3-a22d-e9227adccc77" class=""><strong>Technical Considerations</strong></h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81c6-a923-fc03e6f34ef6" class=""><strong>Hightouch Capabilities:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8108-95c2-eff30c27102d" class="bulleted-list"><li style="list-style-type:disc">✅ Synthesizes multiple data sources into unified customer profiles</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8122-91c1-f06e871df75b" class="bulleted-list"><li style="list-style-type:disc">✅ Dynamic audience segmentation and orchestration</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81fb-8f47-e5f55c9e7c53" class="bulleted-list"><li style="list-style-type:disc">✅ API connection to HubSpot for deployment</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8123-9f9b-ccd3b5de31c5" class="bulleted-list"><li style="list-style-type:disc">✅ Guardrails for frequency capping and send rules</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81db-873c-cdc29611a9c2" class="bulleted-list"><li style="list-style-type:disc">✅ Support for merge tags and dynamic content insertion in templates</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81a2-af6a-eddbba4434ab" class="bulleted-list"><li style="list-style-type:disc">✅ Some AI-driven &quot;next best message&quot; logic</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81cf-981d-ef6736410e29" class="bulleted-list"><li style="list-style-type:disc">⚠️ Limited native content generation (may need to layer in Justwords or custom AI)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8157-b152-cfdadeb64a4e" class="bulleted-list"><li style="list-style-type:disc">⚠️ Complex reporting requires external BI tool</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81af-8c3c-cdad46b7cc1f" class="bulleted-list"><li style="list-style-type:disc">⚠️ Some &quot;black box&quot; elements in AI decisioning</li></ul></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81ca-a69c-f24aedbf1a86" class=""><strong>Alternative/Supplementary Tools:</strong></p></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8118-86df-caac1b9acee7" class="bulleted-list"><li style="list-style-type:disc"><strong>Justwords:</strong> AI-powered content generation (test candidate for more dynamic personalization)</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-81a4-8325-f41478ce19b5" class="bulleted-list"><li style="list-style-type:disc"><strong>Clay:</strong> Additional enrichment and audience intelligence</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8112-9934-f8885edab06c" class="bulleted-list"><li style="list-style-type:disc"><strong>n8n:</strong> Supplementary workflow automation if needed</li></ul></div><div style="display:contents" dir="auto"><ul id="2edbc009-929c-8107-84bb-c60670ad4d5d" class="bulleted-list"><li style="list-style-type:disc"><strong>Omni/Looker/Tableau:</strong> BI dashboarding for performance analytics</li></ul></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-813d-a07b-ec5ee2f9811c"/></div><div style="display:contents" dir="auto"><h3 id="2edbc009-929c-8124-836c-e763709759a4" class=""><strong>Budget &amp; Timeline</strong></h3></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81b0-be75-d9f69594c1fd" class=""><strong>Phase 1 (1 week):</strong> Prototype + 30/60/90 roadmap</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-8107-bcf7-e02c45c27808" class=""><strong>Phase 2 (4-6 weeks):</strong> Core flow rollout</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-812c-b205-ef85ec78cdad" class=""><strong>Phase 3 (4-6 weeks):</strong> Full-scale optimization and expansion</p></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81c6-a8cf-dfeb660d9d94" class=""><em>Detailed budget and resource allocation to be finalized during contracting.</em></p></div><div style="display:contents" dir="auto"><hr id="2edbc009-929c-8163-a1eb-e81628c91d2b"/></div><div style="display:contents" dir="auto"><p id="2edbc009-929c-81cf-8b3b-eb01d2560fca" class=""><strong>Questions or want to discuss?</strong> Reach out to the MarketerHire team to move forward with this prototype.</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

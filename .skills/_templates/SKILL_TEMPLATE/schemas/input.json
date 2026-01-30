@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "[SKILL_NAME] Input Schema",
+  "type": "object",
+  "required": ["input_1"],
+  "properties": {
+    "input_1": {
+      "type": "string",
+      "description": "Description of input_1"
+    },
+    "input_2": {
+      "type": "object",
+      "description": "Description of input_2",
+      "properties": {
+        "nested_field": {
+          "type": "string"
+        }
+      }
+    },
+    "tenant_id": {
+      "type": "string",
+      "description": "Client/tenant identifier for isolation and billing"
+    },
+    "execution_mode": {
+      "type": "string",
+      "enum": ["suggest", "preview", "execute"],
+      "default": "suggest",
+      "description": "suggest=recommendations only, preview=show what would change, execute=apply changes"
+    },
+    "data_requirements_override": {
+      "type": "object",
+      "description": "Override default data requirements for this run",
+      "properties": {
+        "minimum_records": {"type": "integer"},
+        "skip_validation": {"type": "boolean", "default": false}
+      }
+    }
+  },
+  "additionalProperties": false
+}

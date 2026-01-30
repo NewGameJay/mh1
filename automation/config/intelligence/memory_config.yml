@@ -1,0 +1,43 @@
+# MH1 Intelligence System - Memory Configuration
+# Controls the multi-layer memory system behavior
+
+working_memory:
+  max_recent_outcomes: 10
+  max_active_predictions: 5
+
+episodic_memory:
+  decay_rate: 0.95              # Per-day weight decay
+  relevance_threshold: 0.3      # Below this, ready for consolidation
+  max_episodes_per_skill: 1000  # Per skill/tenant limit
+  ttl_days: 90                  # Days before archival
+  consolidation_threshold: 10   # Episodes needed for pattern extraction
+
+semantic_memory:
+  initial_confidence: 0.5
+  learning_rate: 0.1
+  decay_rate: 0.99              # Per-day confidence decay without reinforcement
+  min_confidence: 0.01
+  max_confidence: 0.99
+  forget_threshold: 0.1         # Below this, archive pattern
+  min_evidence_for_trust: 5     # Evidence needed before trusting pattern
+
+procedural_memory:
+  min_validating_skills: 3      # Skills needed for procedural knowledge
+  min_cross_skill_confidence: 0.6
+  decay_rate: 0.995             # Very slow decay for stable knowledge
+
+consolidation:
+  schedule: "0 3 * * *"         # Daily at 3 AM UTC
+  batch_size: 100               # Episodes per consolidation batch
+  enabled: true
+
+exploration:
+  base_exploration_rate: 0.15   # 15% random exploration
+  uncertainty_threshold: 0.7    # Explore if confidence below this
+  novelty_boost: 0.1            # Extra exploration for new skills
+  decay_with_evidence: true     # Reduce exploration as evidence grows
+
+learning:
+  drift_window_size: 20         # Samples for drift detection
+  drift_threshold: 2.0          # Standard deviations for drift alert
+  relearning_confidence_reduction: 0.5  # Reduce confidence by this factor on drift

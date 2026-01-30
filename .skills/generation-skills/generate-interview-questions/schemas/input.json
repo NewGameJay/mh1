@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generate Interview Questions Input",
+  "description": "Input schema for the generate-interview-questions skill",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "description": "Unique client identifier"
+    },
+    "founder_names": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Names of founders to include (uses all if not specified)"
+    },
+    "focus_areas": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["strategy", "audience", "voice", "competitive", "content", "founder", "metrics"]
+      },
+      "description": "Specific areas to focus questions on"
+    },
+    "question_count": {
+      "type": "integer",
+      "minimum": 10,
+      "maximum": 50,
+      "default": 20,
+      "description": "Target number of questions"
+    },
+    "include_voice_questions": {
+      "type": "boolean",
+      "default": true,
+      "description": "Include voice/style preference questions"
+    },
+    "tenant_id": {
+      "type": "string",
+      "description": "Tenant identifier for cost tracking"
+    },
+    "execution_mode": {
+      "type": "string",
+      "enum": ["suggest", "preview", "execute"],
+      "default": "suggest"
+    }
+  },
+  "required": ["client_id"],
+  "additionalProperties": false
+}

@@ -1,0 +1,63 @@
+{
+  "collectedAt": "2026-01-29T20:18:30.845643+00:00",
+  "count": 4,
+  "posts": [
+    {
+      "id": "linkedin_1",
+      "platform": "linkedin",
+      "author": "Sarah Johnson",
+      "text": "Just became a Swimply host! Made \\$500 first weekend.",
+      "timestamp": "2026-01-27T10:30:00Z",
+      "relevanceScore": 8,
+      "sentiment": "positive",
+      "icpFit": "high",
+      "signalTags": [
+        "host_experience",
+        "monetization"
+      ]
+    },
+    {
+      "id": "linkedin_2",
+      "platform": "linkedin",
+      "author": "Mike Chen",
+      "text": "Swimply hosts seeing 15-20% ROI.",
+      "timestamp": "2026-01-26T14:15:00Z",
+      "relevanceScore": 8,
+      "sentiment": "positive",
+      "icpFit": "high",
+      "signalTags": [
+        "host_experience",
+        "monetization"
+      ]
+    },
+    {
+      "id": "twitter_1",
+      "platform": "twitter",
+      "author": "@poolhostlife",
+      "text": "Week 3 as Swimply host!",
+      "timestamp": "2026-01-28T16:20:00Z",
+      "relevanceScore": 8,
+      "sentiment": "positive",
+      "icpFit": "high",
+      "signalTags": [
+        "host_experience",
+        "monetization"
+      ]
+    },
+    {
+      "id": "reddit_1",
+      "platform": "reddit",
+      "author": "u/poolowner123",
+      "title": "Swimply hosting - 6 months",
+      "text": "Made \\$3200 so far",
+      "timestamp": "2026-01-28T08:00:00Z",
+      "relevanceScore": 8,
+      "sentiment": "positive",
+      "icpFit": "high",
+      "signalTags": [
+        "host_experience",
+        "monetization"
+      ]
+    }
+  ]
+}

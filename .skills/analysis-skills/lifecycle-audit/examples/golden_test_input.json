@@ -1,0 +1,8 @@
+{
+  "tenant_id": "acme_corp",
+  "limit": 100,
+  "execution_mode": "suggest",
+  "stages": null,
+  "data_requirements_override": null,
+  "description": "Golden test input for lifecycle audit skill. Tests standard audit flow with 100 contacts across all lifecycle stages."
+}

@@ -1,0 +1,22 @@
+{
+  "current_step": 4,
+  "outputs": {
+    "find_profile": {
+      "linkedin_url": null
+    },
+    "scrape_linkedin": {
+      "posts": []
+    },
+    "collect_content": [],
+    "analyze_voice": {
+      "confidence": 0.0,
+      "tone": [],
+      "vocabulary_level": "professional",
+      "common_phrases": [],
+      "sentence_structure": "varied",
+      "formality": "professional",
+      "total_words_analyzed": 0
+    }
+  },
+  "tenant_id": "test_client"
+}

@@ -1,0 +1,315 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://mh1.ai/schemas/client.schema.yaml"
+title: Client Schema
+description: |
+  Schema for MH1 client entities. Each client represents an organization
+  that MH1 provides marketing operations services to. Clients are isolated
+  with their own configuration, context, and data.
+
+type: object
+required:
+  - client_id
+  - slug
+  - display_name
+  - normalized_name
+  - created_at
+  - created_by
+  - status
+
+properties:
+  client_id:
+    type: string
+    pattern: "^cli_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    description: |
+      Immutable UUID with cli_ prefix. Once assigned, this identifier
+      never changes for the lifetime of the client record.
+    examples:
+      - "cli_550e8400-e29b-41d4-a716-446655440000"
+
+  slug:
+    type: string
+    pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    minLength: 2
+    maxLength: 63
+    description: |
+      URL-safe identifier used in file paths and URLs. Must be lowercase
+      alphanumeric with hyphens. Used for clients/{slug}/ directory structure.
+    examples:
+      - "acme-corp"
+      - "big-bank-inc"
+
+  display_name:
+    type: string
+    minLength: 1
+    maxLength: 255
+    description: |
+      Human-readable name for the client. Editable by users.
+      Used in reports, dashboards, and deliverables.
+    examples:
+      - "Acme Corporation"
+      - "Big Bank, Inc."
+
+  aliases:
+    type: array
+    items:
+      type: string
+      minLength: 1
+      maxLength: 255
+    uniqueItems: true
+    default: []
+    description: |
+      Alternative names for fuzzy matching during client lookup.
+      Includes common abbreviations, former names, or spelling variations.
+    examples:
+      - ["Acme", "ACME Corp", "Acme Inc"]
+
+  normalized_name:
+    type: string
+    pattern: "^[a-z0-9 ]+$"
+    description: |
+      Lowercase, stripped version of display_name for deduplication
+      and case-insensitive matching. Auto-generated from display_name.
+    examples:
+      - "acme corporation"
+
+  created_at:
+    type: string
+    format: date-time
+    description: ISO 8601 timestamp when the client was created.
+
+  updated_at:
+    type: string
+    format: date-time
+    description: ISO 8601 timestamp when the client was last updated.
+
+  created_by:
+    type: string
+    description: |
+      Identifier of the user or system that created this client.
+      Can be a user email, API key ID, or system identifier.
+    examples:
+      - "user:jane@mh1.ai"
+      - "system:client-onboarding"
+
+  config:
+    type: object
+    description: Client-specific configuration for platforms and preferences.
+    properties:
+      industry:
+        type: string
+        description: Primary industry vertical for the client.
+        examples:
+          - "SaaS"
+          - "E-commerce"
+          - "Financial Services"
+          - "Healthcare"
+
+      platforms:
+        type: object
+        description: Platform integrations configured for this client.
+        properties:
+          crm:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                  - hubspot
+                  - salesforce
+                  - pipedrive
+                  - zoho
+                  - dynamics
+                description: CRM platform type.
+              portal_id:
+                type: string
+                description: Platform-specific identifier (e.g., HubSpot portal ID).
+              pipelines:
+                type: object
+                additionalProperties:
+                  type: string
+                description: Named pipeline mappings.
+
+          warehouse:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                  - snowflake
+                  - bigquery
+                  - redshift
+                  - databricks
+                  - postgresql
+                description: Data warehouse platform type.
+              database:
+                type: string
+                description: Database name.
+              customer_table:
+                type: string
+                description: Primary customer/account table.
+              schema:
+                type: string
+                description: Database schema (if applicable).
+
+          email:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                  - hubspot
+                  - salesforce_mc
+                  - marketo
+                  - klaviyo
+                  - mailchimp
+                description: Email marketing platform type.
+
+          analytics:
+            type: object
+            properties:
+              type:
+                type: string
+                enum:
+                  - segment
+                  - amplitude
+                  - mixpanel
+                  - ga4
+                description: Analytics platform type.
+
+        additionalProperties: true
+
+      timezone:
+        type: string
+        description: |
+          IANA timezone for the client. Used for scheduling and reporting.
+        default: "UTC"
+        examples:
+          - "America/New_York"
+          - "Europe/London"
+          - "Asia/Tokyo"
+
+      thresholds:
+        type: object
+        description: Client-specific business thresholds.
+        properties:
+          high_value_min:
+            type: number
+            description: Minimum value for high-value customer classification.
+          churn_risk_days:
+            type: integer
+            description: Days of inactivity before churn risk flag.
+        additionalProperties: true
+
+    additionalProperties: true
+
+  context:
+    type: object
+    description: Client context for AI-driven personalization and analysis.
+    properties:
+      brand_voice:
+        type: object
+        description: Brand voice characteristics for content generation.
+        properties:
+          tone:
+            type: array
+            items:
+              type: string
+            description: Tone descriptors (e.g., "professional", "friendly").
+          style_guide_ref:
+            type: string
+            description: Reference to style guide document.
+          examples:
+            type: array
+            items:
+              type: string
+            description: Example phrases or sentences in brand voice.
+          avoid:
+            type: array
+            items:
+              type: string
+            description: Words or phrases to avoid.
+
+      competitors:
+        type: array
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Competitor name.
+            domain:
+              type: string
+              format: hostname
+              description: Competitor website domain.
+            notes:
+              type: string
+              description: Competitive positioning notes.
+          required:
+            - name
+        description: List of known competitors.
+
+      key_personas:
+        type: array
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Persona name (e.g., "Marketing Manager Mary").
+            title:
+              type: string
+              description: Job title.
+            pain_points:
+              type: array
+              items:
+                type: string
+              description: Key pain points this persona experiences.
+            goals:
+              type: array
+              items:
+                type: string
+              description: Primary goals and motivations.
+            channels:
+              type: array
+              items:
+                type: string
+              description: Preferred communication channels.
+          required:
+            - name
+        description: Target buyer personas.
+
+      icp:
+        type: object
+        description: Ideal Customer Profile criteria.
+        properties:
+          company_size:
+            type: string
+            description: Target company size range.
+          industries:
+            type: array
+            items:
+              type: string
+            description: Target industries.
+          geography:
+            type: array
+            items:
+              type: string
+            description: Target geographies.
+        additionalProperties: true
+
+    additionalProperties: true
+
+  status:
+    type: string
+    enum:
+      - ACTIVE
+      - ARCHIVED
+      - SUSPENDED
+    default: ACTIVE
+    description: |
+      Current status of the client relationship.
+      - ACTIVE: Normal operations, all services available.
+      - ARCHIVED: Historical client, read-only access.
+      - SUSPENDED: Temporarily paused, no new runs allowed.
+
+additionalProperties: false

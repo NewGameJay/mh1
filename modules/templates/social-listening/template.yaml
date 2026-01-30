@@ -1,0 +1,106 @@
+name: Social Listening
+id: social-listening
+description: |
+  Monitor and analyze social media conversations about your brand, competitors,
+  and industry. Collects signals from LinkedIn, Twitter, and Reddit, scores for
+  ICP relevance, and surfaces engagement opportunities and trending topics.
+category: intelligence
+version: "1.0.0"
+
+# Timing
+typical_duration: "1-3 hours"
+estimated_cost: "$5-15"
+
+# Required inputs
+required_inputs:
+  - type: PARAMETER
+    name: keywords
+    description: Keywords and phrases to monitor (from keywords.md file)
+  - type: PARAMETER
+    name: platforms
+    description: Social platforms to monitor
+    options:
+      - linkedin
+      - twitter
+      - reddit
+    default:
+      - linkedin
+      - twitter
+      - reddit
+
+# Optional enrichment
+optional_inputs:
+  - type: DATA_SOURCE
+    name: icp_context
+    description: ICP definition for relevance scoring
+  - type: PARAMETER
+    name: date_range
+    description: Time range for collection
+    options:
+      - past-24h
+      - past-week
+      - past-month
+    default: past-week
+  - type: API_CREDENTIAL
+    name: firebase_access
+    description: Firebase for signal persistence
+
+# Suggested skills
+suggested_skills:
+  - name: social-listening-collect
+    description: Aggregate and score social mentions
+    required: true
+    order: 1
+  - name: linkedin-keyword-search
+    description: Search LinkedIn for keyword mentions
+    required: false
+    order: 0
+  - name: twitter-keyword-search
+    description: Search Twitter for keyword mentions
+    required: false
+    order: 0
+  - name: reddit-keyword-search
+    description: Search Reddit for keyword mentions
+    required: false
+    order: 0
+  - name: reddit-content-analyzer
+    description: Deep analysis of Reddit discussions
+    required: false
+    order: 2
+
+# Default outputs
+default_outputs:
+  - name: Scored Posts
+    format: json
+    description: Posts with ICP relevance scores
+  - name: Collection Report
+    format: markdown
+    description: Summary of collection with statistics
+  - name: Top Signals
+    format: json
+    description: Highest relevance posts for content inspiration
+  - name: Platform Stats
+    format: json
+    description: Breakdown by platform and keyword
+
+# Quality gates
+quality_gates:
+  - name: coverage
+    description: All requested platforms searched
+    threshold: 1.0
+  - name: relevance_scoring
+    description: Posts scored for ICP relevance
+    threshold: 1.0
+  - name: deduplication
+    description: Duplicate posts removed
+    threshold: 1.0
+
+# Tags for discovery
+tags:
+  - social-listening
+  - signals
+  - linkedin
+  - twitter
+  - reddit
+  - monitoring
+  - content-inspiration

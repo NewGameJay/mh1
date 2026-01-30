@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Cohort Retention Analysis Input Schema",
+  "type": "object",
+  "required": ["client_id"],
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "description": "Client identifier for loading lifecycle config"
+    },
+    "tenant_id": {
+      "type": "string",
+      "description": "Tenant ID for cost tracking (default: 'default')",
+      "default": "default"
+    },
+    "cohort_field": {
+      "type": "string",
+      "description": "Field to group customers by (default: 'signup_month')",
+      "default": "signup_month",
+      "examples": ["signup_month", "signup_quarter", "plan_type", "acquisition_channel"]
+    },
+    "retention_periods": {
+      "type": "array",
+      "description": "Days to measure retention at",
+      "default": [7, 14, 30, 60, 90],
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      }
+    },
+    "compare_cohorts": {
+      "type": "array",
+      "description": "Specific cohorts to compare statistically (e.g., ['Jan 2026', 'Dec 2025'])",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "segment_by": {
+      "type": "string",
+      "description": "Additional segmentation field (e.g., 'plan_type', 'industry')"
+    },
+    "min_cohort_size": {
+      "type": "integer",
+      "description": "Minimum cohort size for statistical validity",
+      "default": 30,
+      "minimum": 10
+    },
+    "lookback_months": {
+      "type": "integer",
+      "description": "How many months of cohorts to analyze",
+      "default": 12,
+      "minimum": 1,
+      "maximum": 60
+    },
+    "data_source": {
+      "type": "string",
+      "enum": ["warehouse", "crm", "auto"],
+      "default": "auto",
+      "description": "Data source to use ('warehouse', 'crm', or 'auto' for auto-detect)"
+    },
+    "data_requirements_override": {
+      "type": "object",
+      "description": "Override default data requirements for this run",
+      "properties": {
+        "min_customers_per_cohort": {"type": "integer"},
+        "min_total_customers": {"type": "integer"},
+        "skip_validation": {"type": "boolean", "default": false}
+      }
+    }
+  },
+  "additionalProperties": false
+}

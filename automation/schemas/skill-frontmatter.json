@@ -1,0 +1,251 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://mh1.marketerhire.com/schemas/skill-frontmatter.json",
+  "title": "MH1 Skill Frontmatter",
+  "description": "JSON Schema for validating SKILL.md YAML frontmatter (AgentSkills.io compatible with MH1 extensions)",
+  "type": "object",
+  "required": ["name", "description"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]*$",
+      "description": "Unique identifier (lowercase, hyphens allowed). Must match folder name.",
+      "examples": ["ghostwrite-content", "extract-pov", "linkedin-keyword-search"]
+    },
+    "description": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 1000,
+      "description": "Brief explanation including trigger phrases. Should contain 'Use when' clause.",
+      "examples": [
+        "Generate LinkedIn posts in founder's voice. Use when asked to 'write posts', 'ghostwrite', 'create content calendar'."
+      ]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version (alternative to metadata.version)",
+      "examples": ["1.0.0", "2.1.3"]
+    },
+    "license": {
+      "type": "string",
+      "enum": ["MIT", "Apache-2.0", "Proprietary", "UNLICENSED"],
+      "default": "Proprietary",
+      "description": "License for this skill"
+    },
+    "compatibility": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Requirements for this skill to work (MCPs, APIs, etc.)",
+      "examples": [["Firebase MCP", "HubSpot MCP"], ["Crustdata API"]]
+    },
+    "allowed-tools": {
+      "type": "string",
+      "description": "Space-separated list of allowed tools",
+      "examples": ["Read Write Shell CallMcpTool"]
+    },
+    "category": {
+      "type": "string",
+      "description": "Skill category for organization",
+      "examples": ["content", "analytics", "research", "crm"]
+    },
+    "author": {
+      "type": "string",
+      "description": "Author or team name (alternative to metadata.author)",
+      "default": "mh1-engineering"
+    },
+    "created": {
+      "type": "string",
+      "description": "Creation date (YYYY-MM-DD format or ISO date)"
+    },
+    "updated": {
+      "type": "string",
+      "description": "Last update date (YYYY-MM-DD format or ISO date)"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "author": {
+          "type": "string",
+          "description": "Author or team name",
+          "default": "mh1-engineering"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Semantic version",
+          "examples": ["1.0.0", "2.1.3"]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "deprecated", "experimental"],
+          "default": "active"
+        },
+        "created": {
+          "type": "string",
+          "description": "Creation date (YYYY-MM-DD)"
+        },
+        "updated": {
+          "type": "string",
+          "description": "Last update date (YYYY-MM-DD)"
+        },
+        "estimated_runtime": {
+          "type": "string",
+          "description": "Expected execution time",
+          "examples": ["10-15min", "30s", "2-5min"]
+        },
+        "max_runtime": {
+          "type": "string",
+          "description": "Maximum allowed execution time",
+          "examples": ["30min", "2h"]
+        },
+        "estimated_cost": {
+          "type": "string",
+          "pattern": "^\\$[0-9]+\\.?[0-9]*$",
+          "description": "Expected cost per run",
+          "examples": ["$0.50", "$2.00"]
+        },
+        "max_cost": {
+          "type": "string",
+          "pattern": "^\\$[0-9]+\\.?[0-9]*$",
+          "description": "Maximum allowed cost per run",
+          "examples": ["$2.00", "$10.00"]
+        },
+        "client_facing": {
+          "type": "boolean",
+          "description": "Whether output goes directly to clients",
+          "default": false
+        },
+        "requires_human_review": {
+          "type": "boolean",
+          "description": "Whether output requires human approval",
+          "default": false
+        },
+        "internal": {
+          "type": "boolean",
+          "description": "Hide from public skill discovery",
+          "default": false
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Categorization tags",
+          "examples": [["content", "linkedin", "ghostwriting"]]
+        }
+      },
+      "additionalProperties": true
+    },
+    "stages": {
+      "type": "array",
+      "description": "Skill execution stages (multi-stage skills)",
+      "items": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "required": { "type": "boolean" },
+          "checkpoint": { "type": "boolean" },
+          "model": { "type": "string" },
+          "agent": { "type": "string" },
+          "conditional": { "type": "boolean" },
+          "exit_point": { "type": "boolean" },
+          "parallel_batches": { "type": "integer" },
+          "incremental_save": { "type": "boolean" }
+        }
+      }
+    },
+    "inputs": {
+      "type": "array",
+      "description": "Input parameters definition",
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "required": { "type": "boolean" },
+          "default": {},
+          "description": { "type": "string" },
+          "enum": { "type": "array" },
+          "min": { "type": "number" },
+          "max": { "type": "number" },
+          "schema": { "type": "string" }
+        }
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "description": "Output definitions",
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "description": { "type": "string" },
+          "schema": { "type": "string" },
+          "template": { "type": "string" }
+        }
+      }
+    },
+    "requires_skills": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Skills this skill depends on"
+    },
+    "requires_context": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Context types required"
+    },
+    "requires_mcp": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "MCP servers required"
+    },
+    "requires_agents": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Agent definitions required"
+    },
+    "requires_resources": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Resource files required"
+    },
+    "quality_gates": {
+      "type": "array",
+      "description": "Quality validation gates",
+      "items": {
+        "type": "object",
+        "required": ["name", "type"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string", "enum": ["schema", "threshold", "checklist"] },
+          "schema": { "type": "string" },
+          "metric": { "type": "string" },
+          "min_value": { "type": "number" },
+          "max_value": { "type": "number" },
+          "items": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "timeout_minutes": {
+      "type": "integer",
+      "description": "Maximum execution time in minutes"
+    },
+    "max_retries": {
+      "type": "integer",
+      "description": "Maximum retry attempts"
+    },
+    "cost_estimate": {
+      "type": "string",
+      "description": "Cost estimate description"
+    }
+  },
+  "additionalProperties": true
+}

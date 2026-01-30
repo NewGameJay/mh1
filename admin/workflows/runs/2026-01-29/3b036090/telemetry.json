@@ -1,0 +1,193 @@
+{
+  "run_id": "3b036090",
+  "type": "workflow",
+  "name": "lifecycle-audit",
+  "version": "v2.0.0",
+  "status": "failed",
+  "start_time": "2026-01-29T22:01:54.858062+00:00",
+  "end_time": "2026-01-29T22:02:03.887460+00:00",
+  "duration_seconds": 9.03,
+  "tokens": {
+    "input": 3,
+    "output": 493,
+    "total": 496
+  },
+  "steps": [
+    {
+      "step_name": "discovery",
+      "status": "success",
+      "output": {
+        "total_contacts": 10,
+        "by_stage": {
+          "lead": 3,
+          "subscriber": 2,
+          "sql": 2,
+          "mql": 1,
+          "customer": 2
+        },
+        "contacts": {
+          "lead": [
+            {
+              "id": "contact_0",
+              "email": "user0@example.com",
+              "firstname": "User",
+              "lastname": "0",
+              "company": "StartupX",
+              "lifecyclestage": "lead"
+            },
+            {
+              "id": "contact_3",
+              "email": "user3@example.com",
+              "firstname": "User",
+              "lastname": "3",
+              "company": "StartupX",
+              "lifecyclestage": "lead"
+            },
+            {
+              "id": "contact_8",
+              "email": "user8@example.com",
+              "firstname": "User",
+              "lastname": "8",
+              "company": "Acme Corp",
+              "lifecyclestage": "lead"
+            }
+          ],
+          "subscriber": [
+            {
+              "id": "contact_1",
+              "email": "user1@example.com",
+              "firstname": "User",
+              "lastname": "1",
+              "company": "Acme Corp",
+              "lifecyclestage": "subscriber"
+            },
+            {
+              "id": "contact_2",
+              "email": "user2@example.com",
+              "firstname": "User",
+              "lastname": "2",
+              "company": "Acme Corp",
+              "lifecyclestage": "subscriber"
+            }
+          ],
+          "sql": [
+            {
+              "id": "contact_4",
+              "email": "user4@example.com",
+              "firstname": "User",
+              "lastname": "4",
+              "company": "TechCo",
+              "lifecyclestage": "sql"
+            },
+            {
+              "id": "contact_6",
+              "email": "user6@example.com",
+              "firstname": "User",
+              "lastname": "6",
+              "company": "TechCo",
+              "lifecyclestage": "sql"
+            }
+          ],
+          "mql": [
+            {
+              "id": "contact_5",
+              "email": "user5@example.com",
+              "firstname": "User",
+              "lastname": "5",
+              "company": "TechCo",
+              "lifecyclestage": "mql"
+            }
+          ],
+          "customer": [
+            {
+              "id": "contact_7",
+              "email": "user7@example.com",
+              "firstname": "User",
+              "lastname": "7",
+              "company": "Acme Corp",
+              "lifecyclestage": "customer",
+              "usage": {
+                "last_active_days": 21,
+                "login_trend": 0,
+                "feature_adoption": 0.14986288888572552
+              }
+            },
+            {
+              "id": "contact_9",
+              "email": "user9@example.com",
+              "firstname": "User",
+              "lastname": "9",
+              "company": "Acme Corp",
+              "lifecyclestage": "customer",
+              "usage": {
+                "last_active_days": 5,
+                "login_trend": 1,
+                "feature_adoption": 0.4305636303271567
+              }
+            }
+          ]
+        },
+        "data_validation": {
+          "valid": true,
+          "record_count": 10,
+          "field_coverage": {
+            "email": 1.0,
+            "company": 1.0,
+            "lifecyclestage": 1.0
+          },
+          "issues": [],
+          "warnings": [
+            "Below recommended: 10 < 100 recommended"
+          ]
+        },
+        "source": "hubspot"
+      },
+      "tokens_input": 3,
+      "tokens_output": 493,
+      "duration_seconds": 0.0,
+      "error": null,
+      "sub_calls": []
+    },
+    {
+      "step_name": "enrichment",
+      "status": "failed",
+      "output": null,
+      "tokens_input": 0,
+      "tokens_output": 0,
+      "duration_seconds": 3.01,
+      "error": "'str' object has no attribute 'get'",
+      "sub_calls": []
+    },
+    {
+      "step_name": "analysis",
+      "status": "failed",
+      "output": null,
+      "tokens_input": 0,
+      "tokens_output": 0,
+      "duration_seconds": 3.01,
+      "error": "'NoneType' object has no attribute 'values'",
+      "sub_calls": []
+    },
+    {
+      "step_name": "scoring",
+      "status": "failed",
+      "output": null,
+      "tokens_input": 0,
+      "tokens_output": 0,
+      "duration_seconds": 3.01,
+      "error": "'NoneType' object has no attribute 'get'",
+      "sub_calls": []
+    }
+  ],
+  "error": null,
+  "evaluation": null,
+  "client": "all",
+  "tenant_id": "test_tenant",
+  "tags": [],
+  "context_handling": {
+    "strategy": "inline",
+    "input_size_tokens": 0,
+    "chunks_processed": 0,
+    "sub_calls": []
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schema/mcp-config.json",
+  "version": "1.0",
+  "description": "Merged MCP server configuration for MH1 agent system - 12 servers total",
+
+  "mcpServers": {
+    "hubspot": {
+      "type": "stdio",
+      "description": "HubSpot CRM access for contacts, companies, deals, and workflows",
+      "command": "python",
+      "args": ["scripts/mcp_server_hubspot.py"],
+      "env": {
+        "HUBSPOT_ACCESS_TOKEN": "${HUBSPOT_ACCESS_TOKEN}"
+      }
+    },
+
+    "snowflake": {
+      "type": "stdio",
+      "description": "Snowflake data warehouse for analytics and reporting",
+      "command": "python",
+      "args": ["scripts/mcp_server_snowflake.py"],
+      "env": {
+        "SNOWFLAKE_ACCOUNT": "${SNOWFLAKE_ACCOUNT}",
+        "SNOWFLAKE_USER": "${SNOWFLAKE_USER}",
+        "SNOWFLAKE_PASSWORD": "${SNOWFLAKE_PASSWORD}",
+        "SNOWFLAKE_WAREHOUSE": "${SNOWFLAKE_WAREHOUSE}",
+        "SNOWFLAKE_DATABASE": "${SNOWFLAKE_DATABASE}",
+        "SNOWFLAKE_SCHEMA": "${SNOWFLAKE_SCHEMA}"
+      }
+    },
+
+    "airtable": {
+      "type": "stdio",
+      "description": "Airtable for structured data and client delivery tracking",
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-server-airtable"],
+      "env": {
+        "AIRTABLE_API_KEY": "${AIRTABLE_API_KEY}",
+        "AIRTABLE_BASE_ID": "${AIRTABLE_BASE_ID}"
+      }
+    },
+
+    "notion": {
+      "type": "http",
+      "description": "Notion for documentation, reports, and collaboration",
+      "url": "https://mcp.notion.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${NOTION_API_KEY}"
+      }
+    },
+
+    "perplexity": {
+      "type": "stdio",
+      "description": "Perplexity for web research and competitive intelligence",
+      "command": "python",
+      "args": ["scripts/mcp_server_perplexity.py"],
+      "env": {
+        "PERPLEXITY_API_KEY": "${PERPLEXITY_API_KEY}"
+      }
+    },
+
+    "browser": {
+      "type": "stdio",
+      "description": "Browser automation for web scraping and testing",
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-server-puppeteer"],
+      "env": {}
+    },
+
+    "filesystem": {
+      "type": "stdio",
+      "description": "Local filesystem access for project files",
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-server-filesystem", "--root", "."],
+      "env": {}
+    },
+
+    "n8n": {
+      "type": "stdio",
+      "description": "N8N workflow automation for scheduled tasks",
+      "command": "python",
+      "args": ["scripts/mcp_server_n8n.py"],
+      "env": {
+        "N8N_API_URL": "${N8N_API_URL}",
+        "N8N_API_KEY": "${N8N_API_KEY}"
+      }
+    },
+
+    "firebase-mcp": {
+      "type": "stdio",
+      "description": "Firebase for client data, voice contracts, and campaign storage",
+      "command": "npx",
+      "args": ["-y", "@gannonh/firebase-mcp"],
+      "env": {
+        "FIREBASE_PROJECT_ID": "${FIREBASE_PROJECT_ID}",
+        "SERVICE_ACCOUNT_KEY_PATH": "${SERVICE_ACCOUNT_KEY_PATH}",
+        "FIREBASE_STORAGE_BUCKET": "${FIREBASE_STORAGE_BUCKET}"
+      }
+    },
+
+    "firecrawl": {
+      "type": "stdio",
+      "description": "Firecrawl for web scraping and content extraction",
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
+      }
+    },
+
+    "parallel-search": {
+      "type": "http",
+      "description": "Parallel Search MCP for distributed web search",
+      "url": "https://search-mcp.parallel.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer ${PARALLEL_AUTH_TOKEN}"
+      }
+    },
+
+    "parallel-task": {
+      "type": "http",
+      "description": "Parallel Task MCP for distributed task execution",
+      "url": "https://task-mcp.parallel.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer ${PARALLEL_AUTH_TOKEN}"
+      }
+    },
+
+    "brightdata": {
+      "type": "stdio",
+      "description": "BrightData proxy for reliable web scraping",
+      "command": "npx",
+      "args": ["-y", "@brightdata/mcp"],
+      "env": {
+        "API_TOKEN": "${BRIGHTDATA_API_TOKEN}"
+      }
+    }
+  },
+
+  "defaults": {
+    "timeout_seconds": 30,
+    "retry_count": 2,
+    "retry_delay_ms": 1000
+  }
+}

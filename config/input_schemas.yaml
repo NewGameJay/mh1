@@ -1,0 +1,287 @@
+# MH1 Input Schemas
+# These define structured input forms triggered by [[INPUT:name]] markers
+
+onboarding_basics:
+  title: "Client Information"
+  description: "Basic information about your company"
+  fields:
+    - name: company_name
+      type: text
+      required: true
+      prompt: "Company name"
+      placeholder: "Acme Inc"
+
+    - name: industry
+      type: select
+      required: true
+      prompt: "Industry"
+      options:
+        - "SaaS"
+        - "E-commerce"
+        - "Marketplace"
+        - "Fintech"
+        - "Healthcare"
+        - "Education"
+        - "Media"
+        - "Agency"
+        - "B2B Services"
+        - "Consumer"
+        - "Other"
+
+    - name: website
+      type: url
+      required: true
+      prompt: "Website URL"
+      placeholder: "https://example.com"
+
+    - name: role
+      type: text
+      required: false
+      prompt: "Your role (optional)"
+      placeholder: "Head of Marketing"
+
+onboarding_platforms:
+  title: "Platform Setup"
+  description: "What tools does your company use?"
+  fields:
+    - name: crm
+      type: select
+      required: true
+      prompt: "CRM Platform"
+      options:
+        - "HubSpot"
+        - "Salesforce"
+        - "Pipedrive"
+        - "Zoho"
+        - "Close"
+        - "None"
+        - "Other"
+
+    - name: warehouse
+      type: select
+      required: false
+      prompt: "Data Warehouse"
+      options:
+        - "Snowflake"
+        - "BigQuery"
+        - "Redshift"
+        - "PostgreSQL"
+        - "Databricks"
+        - "None"
+
+    - name: email
+      type: select
+      required: true
+      prompt: "Email Marketing"
+      options:
+        - "HubSpot"
+        - "Klaviyo"
+        - "Mailchimp"
+        - "Marketo"
+        - "Salesforce Marketing Cloud"
+        - "Customer.io"
+        - "Other"
+
+    - name: analytics
+      type: select
+      required: false
+      prompt: "Analytics Platform"
+      options:
+        - "GA4"
+        - "Amplitude"
+        - "Mixpanel"
+        - "Segment"
+        - "PostHog"
+        - "None"
+
+onboarding_goals:
+  title: "Goals & Priorities"
+  description: "What are you trying to achieve?"
+  fields:
+    - name: primary_goal
+      type: select
+      required: true
+      prompt: "Primary marketing goal"
+      options:
+        - "Improve customer retention"
+        - "Increase activation/onboarding"
+        - "Generate more leads"
+        - "Improve conversion rates"
+        - "Scale content production"
+        - "Launch new product/feature"
+        - "Build marketing automation"
+        - "Other"
+
+    - name: biggest_challenge
+      type: text
+      required: false
+      prompt: "Biggest marketing challenge right now"
+      placeholder: "e.g., High churn in first 30 days"
+
+    - name: timeline
+      type: select
+      required: false
+      prompt: "Timeline"
+      options:
+        - "This week"
+        - "This month"
+        - "This quarter"
+        - "Ongoing"
+
+module_scope:
+  title: "Project Scope"
+  description: "Define the scope of this module"
+  fields:
+    - name: objective
+      type: text
+      required: true
+      prompt: "What's the main objective?"
+      placeholder: "Reduce churn by 20% in Q2"
+
+    - name: success_criteria
+      type: text
+      required: true
+      prompt: "How will you measure success?"
+      placeholder: "Churn rate drops from 8% to 6.4%"
+
+    - name: constraints
+      type: text
+      required: false
+      prompt: "Any constraints or limitations?"
+      placeholder: "Budget: $5k/mo, Timeline: 6 weeks"
+
+    - name: stakeholders
+      type: text
+      required: false
+      prompt: "Who needs to approve deliverables?"
+      placeholder: "VP Marketing, CEO"
+
+skill_lifecycle_audit:
+  title: "Lifecycle Audit Inputs"
+  description: "Configure the lifecycle audit"
+  fields:
+    - name: focus_areas
+      type: multiselect
+      required: false
+      prompt: "Focus areas (optional)"
+      options:
+        - "Activation"
+        - "Retention"
+        - "Expansion"
+        - "Churn"
+        - "Reactivation"
+
+    - name: date_range
+      type: select
+      required: false
+      prompt: "Analysis period"
+      options:
+        - "Last 30 days"
+        - "Last 90 days"
+        - "Last 6 months"
+        - "Last year"
+        - "All time"
+
+    - name: segment
+      type: text
+      required: false
+      prompt: "Customer segment (optional)"
+      placeholder: "Enterprise customers only"
+
+skill_email_sequences:
+  title: "Email Sequence Inputs"
+  description: "Configure email sequence generation"
+  fields:
+    - name: sequence_type
+      type: select
+      required: true
+      prompt: "Sequence type"
+      options:
+        - "Welcome/Onboarding"
+        - "Nurture"
+        - "Re-engagement"
+        - "Upsell/Cross-sell"
+        - "Win-back"
+        - "Event-triggered"
+
+    - name: email_count
+      type: select
+      required: true
+      prompt: "Number of emails"
+      options:
+        - "3 emails"
+        - "5 emails"
+        - "7 emails"
+        - "10+ emails"
+
+    - name: tone
+      type: select
+      required: false
+      prompt: "Tone"
+      options:
+        - "Professional"
+        - "Friendly"
+        - "Urgent"
+        - "Educational"
+        - "Match brand voice"
+
+skill_competitive_intel:
+  title: "Competitive Intel Inputs"
+  description: "Configure competitive analysis"
+  fields:
+    - name: competitors
+      type: text
+      required: true
+      prompt: "Competitor names (comma-separated)"
+      placeholder: "Competitor A, Competitor B, Competitor C"
+
+    - name: focus
+      type: multiselect
+      required: false
+      prompt: "Analysis focus"
+      options:
+        - "Pricing"
+        - "Features"
+        - "Positioning"
+        - "Content strategy"
+        - "Social presence"
+        - "Reviews/sentiment"
+
+    - name: depth
+      type: select
+      required: false
+      prompt: "Analysis depth"
+      options:
+        - "Quick overview"
+        - "Standard analysis"
+        - "Deep dive"
+
+confirm_module:
+  title: "Confirm Module"
+  description: "Review before proceeding"
+  type: confirmation
+  options:
+    - key: "y"
+      label: "Yes, proceed"
+      action: "PROCEED"
+    - key: "n"
+      label: "No, let me modify"
+      action: "MODIFY"
+    - key: "e"
+      label: "Edit files directly"
+      action: "EDIT"
+
+confirm_skill:
+  title: "Confirm Execution"
+  description: "Ready to run?"
+  type: confirmation
+  options:
+    - key: "y"
+      label: "Yes, run it"
+      action: "EXECUTE"
+    - key: "n"
+      label: "No, cancel"
+      action: "CANCEL"
+    - key: "p"
+      label: "Preview first"
+      action: "PREVIEW"

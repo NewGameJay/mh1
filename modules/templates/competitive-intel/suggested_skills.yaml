@@ -1,0 +1,146 @@
+# Suggested Skills for Competitive Intelligence Template
+#
+# This file defines the recommended skill sequence for competitive analysis.
+# Skills are executed in order, with research preceding comparison.
+
+template_id: competitive-intel
+version: "1.0.0"
+
+# Required skills - must be executed
+required_skills:
+  - name: research-company
+    description: |
+      Research each competitor comprehensively. Gathers company info,
+      product details, positioning, and market context.
+    version: "1.0.0"
+    order: 1
+    loop: true  # Run for each competitor
+    estimated_cost: "$2.00 per competitor"
+    estimated_duration: "10-20min per competitor"
+    inputs:
+      company_name: "{{competitor}}"
+      depth: "detailed"
+      include_social: true
+    outputs:
+      - company_profile
+      - product_details
+      - market_position
+      - recent_news
+
+  - name: research-competitors
+    description: |
+      Structured competitive comparison across all competitors.
+      Creates feature matrix, SWOT analysis, and battle cards.
+    version: "1.0.0"
+    order: 2
+    depends_on:
+      - research-company
+    estimated_cost: "$5.00"
+    estimated_duration: "30-60min"
+    inputs:
+      client_id: "{{client_id}}"
+      competitors: "{{competitors}}"
+      focus_areas: ["positioning", "features", "messaging"]
+    outputs:
+      - competitor_profiles
+      - feature_matrix
+      - positioning_analysis
+      - swot_analysis
+      - battle_cards
+
+# Optional skills - enhance competitive analysis
+optional_skills:
+  - name: positioning-angles
+    description: |
+      Identify differentiation opportunities based on competitive analysis.
+      Synthesizes research into actionable positioning recommendations.
+    version: "1.0.0"
+    order: 3
+    depends_on:
+      - research-competitors
+    estimated_cost: "$3.00"
+    estimated_duration: "20-30min"
+    inputs:
+      client_id: "{{client_id}}"
+      competitive_context: true
+    outputs:
+      - differentiation_opportunities
+      - positioning_recommendations
+      - messaging_suggestions
+
+  - name: social-listening-collect
+    description: |
+      Monitor competitor social presence and mentions.
+      Provides real-time context on competitor activity.
+    version: "1.1.0"
+    order: 0
+    prerequisites:
+      - type: config
+        name: competitor_keywords
+        description: Competitor brand keywords defined
+    estimated_cost: "$3.00"
+    estimated_duration: "10-20min"
+    inputs:
+      client_id: "{{client_id}}"
+      keywords: "{{competitor_keywords}}"
+      platforms: ["linkedin", "twitter"]
+    outputs:
+      - competitor_mentions
+      - share_of_voice
+      - content_themes
+
+  - name: brand-voice
+    description: |
+      Analyze competitor brand voice and messaging style.
+      Useful for differentiation in communications.
+    version: "1.0.0"
+    order: 3
+    depends_on:
+      - research-competitors
+    estimated_cost: "$2.00"
+    estimated_duration: "15-25min"
+    inputs:
+      companies: "{{competitors}}"
+    outputs:
+      - voice_analysis
+      - messaging_patterns
+      - tone_comparison
+
+# Skill combinations for common scenarios
+scenarios:
+  - name: quick_comparison
+    description: Fast competitive overview
+    skills:
+      - research-company
+      - research-competitors
+    estimated_cost: "$10.00"
+    estimated_duration: "1-2hr"
+
+  - name: full_analysis
+    description: Comprehensive analysis with positioning
+    skills:
+      - research-company
+      - research-competitors
+      - positioning-angles
+    estimated_cost: "$13.00"
+    estimated_duration: "2-4hr"
+
+  - name: social_monitoring
+    description: Include social listening for real-time context
+    skills:
+      - social-listening-collect
+      - research-company
+      - research-competitors
+    estimated_cost: "$13.00"
+    estimated_duration: "2-4hr"
+
+  - name: deep_dive
+    description: Full analysis with voice and social
+    skills:
+      - social-listening-collect
+      - research-company
+      - research-competitors
+      - positioning-angles
+      - brand-voice
+    estimated_cost: "$18.00"
+    estimated_duration: "4-6hr"

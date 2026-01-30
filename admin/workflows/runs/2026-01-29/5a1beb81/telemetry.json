@@ -1,0 +1,110 @@
+{
+  "run_id": "5a1beb81",
+  "type": "workflow",
+  "name": "research-founder",
+  "version": "v1.0.0",
+  "status": "failed",
+  "start_time": "2026-01-30T01:17:57.749968+00:00",
+  "end_time": "2026-01-30T01:17:57.754096+00:00",
+  "duration_seconds": 0.0,
+  "tokens": {
+    "input": 0,
+    "output": 0,
+    "total": 0
+  },
+  "steps": [
+    {
+      "step_name": "find_profile",
+      "status": "success",
+      "output": {
+        "linkedin_url": null
+      },
+      "tokens_input": 0,
+      "tokens_output": 0,
+      "duration_seconds": 0.0,
+      "error": null,
+      "sub_calls": []
+    },
+    {
+      "step_name": "scrape_linkedin",
+      "status": "success",
+      "output": {
+        "posts": []
+      },
+      "tokens_input": 0,
+      "tokens_output": 0,
+      "duration_seconds": 0.0,
+      "error": null,
+      "sub_calls": []
+    },
+    {
+      "step_name": "collect_content",
+      "status": "success",
+      "output": [],
+      "tokens_input": 0,
+      "tokens_output": 0,
+      "duration_seconds": 0.0,
+      "error": null,
+      "sub_calls": []
+    },
+    {
+      "step_name": "analyze_voice",
+      "status": "success",
+      "output": {
+        "confidence": 0.0,
+        "tone": [],
+        "vocabulary_level": "professional",
+        "common_phrases": [],
+        "sentence_structure": "varied",
+        "formality": "professional",
+        "total_words_analyzed": 0
+      },
+      "tokens_input": 0,
+      "tokens_output": 0,
+      "duration_seconds": 0.0,
+      "error": null,
+      "sub_calls": []
+    }
+  ],
+  "error": null,
+  "evaluation": {
+    "score": 0.74,
+    "pass": false,
+    "breakdown": {
+      "schema_validity": 1.0,
+      "factuality": 0,
+      "completeness": 0.85,
+      "brand_voice": 1.0,
+      "risk_flags": 1.0,
+      "context_efficiency": 1.0
+    },
+    "issues": [
+      {
+        "dimension": "factuality",
+        "severity": "high",
+        "description": "Found 2 factual claims but only 0 have sources",
+        "location": "various"
+      },
+      {
+        "dimension": "completeness",
+        "severity": "medium",
+        "description": "Missing required section: founder_profile",
+        "location": "root"
+      }
+    ],
+    "suggestions": [
+      "Add source references for factual claims (e.g., '[source: HubSpot data]')"
+    ],
+    "release_action": "auto_refine",
+    "release_message": "Output needs improvement. Applying suggestions and retrying."
+  },
+  "client": "test_client",
+  "tenant_id": "test_client",
+  "tags": [],
+  "context_handling": {
+    "strategy": "inline",
+    "input_size_tokens": 0,
+    "chunks_processed": 0,
+    "sub_calls": []
+  }
+}

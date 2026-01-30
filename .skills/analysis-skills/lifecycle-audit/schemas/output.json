@@ -1,0 +1,265 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LifecycleAuditOutput",
+  "description": "Output schema for the Lifecycle Audit skill (v2.0.0)",
+  "type": "object",
+  "required": ["summary", "recommendations", "_meta"],
+  "properties": {
+    "summary": {
+      "type": "object",
+      "required": ["total_accounts", "by_stage", "health_score"],
+      "properties": {
+        "total_accounts": {
+          "type": "integer",
+          "description": "Total number of accounts analyzed"
+        },
+        "by_stage": {
+          "type": "object",
+          "description": "Count of accounts per lifecycle stage",
+          "additionalProperties": {
+            "type": "integer"
+          }
+        },
+        "health_score": {
+          "type": "number",
+          "description": "Overall funnel health score (0-1)",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "bottlenecks": {
+      "type": "array",
+      "description": "Identified conversion bottlenecks",
+      "items": {
+        "type": "object",
+        "required": ["from_stage", "to_stage", "rate", "benchmark"],
+        "properties": {
+          "from_stage": { "type": "string" },
+          "to_stage": { "type": "string" },
+          "from_count": { "type": "integer" },
+          "to_count": { "type": "integer" },
+          "rate": { "type": "number" },
+          "benchmark": { "type": "number" },
+          "gap": { "type": "number" },
+          "severity": { 
+            "type": "string",
+            "enum": ["low", "medium", "high"]
+          }
+        }
+      }
+    },
+    "at_risk": {
+      "type": "array",
+      "description": "Accounts at risk of churning",
+      "items": {
+        "type": "object",
+        "required": ["email", "stage", "risk_score"],
+        "properties": {
+          "email": { "type": "string" },
+          "name": { "type": "string" },
+          "company": { "type": "string" },
+          "stage": { "type": "string" },
+          "risk_score": { 
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "risk_factors": { "type": "object" }
+        }
+      }
+    },
+    "upsell_candidates": {
+      "type": "array",
+      "description": "Accounts with upsell potential",
+      "items": {
+        "type": "object",
+        "required": ["email", "stage", "upsell_score"],
+        "properties": {
+          "email": { "type": "string" },
+          "name": { "type": "string" },
+          "company": { "type": "string" },
+          "stage": { "type": "string" },
+          "upsell_score": { 
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "upsell_signals": { "type": "object" }
+        }
+      }
+    },
+    "recommendations": {
+      "type": "array",
+      "description": "Actionable recommendations",
+      "items": {
+        "type": "object",
+        "required": ["priority", "action"],
+        "properties": {
+          "priority": {
+            "type": "string",
+            "enum": ["low", "medium", "high"]
+          },
+          "category": {
+            "type": "string",
+            "enum": ["conversion", "retention", "expansion", "engagement"]
+          },
+          "action": { "type": "string" },
+          "context": { "type": "string" },
+          "impact": { "type": "string" },
+          "suggested_tactics": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "conversions": {
+      "type": "array",
+      "description": "Conversion rates between stages",
+      "items": {
+        "type": "object",
+        "properties": {
+          "from_stage": { "type": "string" },
+          "to_stage": { "type": "string" },
+          "from_count": { "type": "integer" },
+          "to_count": { "type": "integer" },
+          "rate": { "type": "number" },
+          "benchmark": { "type": "number" }
+        }
+      }
+    },
+    "preview": {
+      "type": "object",
+      "description": "Preview of changes (only present in preview mode)",
+      "properties": {
+        "would_create": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of items that would be created"
+        },
+        "would_update": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of items that would be updated"
+        },
+        "estimated_impact": {
+          "type": "string",
+          "description": "Summary of expected impact"
+        }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "description": "Execution result (only present in execute mode)",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["executed", "approval_required", "failed"],
+          "description": "Execution status"
+        },
+        "changes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "List of changes made"
+        },
+        "action": {
+          "type": "string",
+          "description": "Action requiring approval (if approval_required)"
+        },
+        "impact": {
+          "type": "string",
+          "description": "Impact level (if approval_required)"
+        },
+        "message": {
+          "type": "string",
+          "description": "Explanatory message"
+        }
+      }
+    },
+    "_meta": {
+      "type": "object",
+      "description": "Run metadata for tracking and debugging",
+      "required": ["tenant_id", "run_id", "execution_mode", "runtime_seconds", "cost_usd", "release_action"],
+      "properties": {
+        "tenant_id": {
+          "type": "string",
+          "description": "Client/tenant identifier"
+        },
+        "run_id": {
+          "type": "string",
+          "description": "Unique run identifier"
+        },
+        "execution_mode": {
+          "type": "string",
+          "enum": ["suggest", "preview", "execute"],
+          "description": "Mode this run was executed in"
+        },
+        "runtime_seconds": {
+          "type": "number",
+          "description": "Total execution time in seconds"
+        },
+        "cost_usd": {
+          "type": "number",
+          "description": "Estimated cost of this run in USD"
+        },
+        "release_action": {
+          "type": "string",
+          "enum": ["auto_deliver", "auto_refine", "human_review", "blocked"],
+          "description": "Release policy decision"
+        },
+        "skill_version": {
+          "type": "string",
+          "description": "Version of skill that generated output"
+        },
+        "data_quality": {
+          "type": "object",
+          "description": "Data quality metrics",
+          "properties": {
+            "records_processed": {
+              "type": "integer",
+              "description": "Number of records processed"
+            },
+            "records_skipped": {
+              "type": "integer",
+              "description": "Number of records skipped"
+            },
+            "field_coverage": {
+              "type": "object",
+              "description": "Coverage percentage per field",
+              "additionalProperties": { "type": "number" }
+            },
+            "issues": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Data quality issues found"
+            },
+            "warnings": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Data quality warnings"
+            }
+          }
+        },
+        "tokens": {
+          "type": "object",
+          "description": "Token usage",
+          "properties": {
+            "input": { "type": "integer" },
+            "output": { "type": "integer" },
+            "total": { "type": "integer" }
+          }
+        },
+        "sub_calls": {
+          "type": "integer",
+          "description": "Number of sub-LM calls made"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO timestamp of completion"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,289 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Research Company Output Schema",
+  "description": "Complete output schema for the research-company skill",
+  "type": "object",
+  "required": ["status"],
+  "properties": {
+    "skill_name": {
+      "type": "string",
+      "const": "research-company",
+      "description": "Name of the skill that generated this output"
+    },
+    "client_id": {
+      "type": "string",
+      "description": "Client identifier"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of generation"
+    },
+    "version": {
+      "type": "string",
+      "description": "Skill version that generated this output"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["success", "review", "failed", "budget_exceeded"],
+      "description": "Execution status"
+    },
+    "output": {
+      "type": "object",
+      "description": "Primary research output",
+      "properties": {
+        "company_name": {
+          "type": "string",
+          "description": "Official company name"
+        },
+        "website_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Primary company website"
+        },
+        "industry": {
+          "type": "string",
+          "description": "Industry classification"
+        },
+        "company_profile": {
+          "type": "object",
+          "description": "Core company information",
+          "properties": {
+            "name": {"type": "string"},
+            "description": {"type": "string"},
+            "founded": {"type": ["string", "null"]},
+            "headquarters": {"type": ["string", "null"]},
+            "size": {"type": ["string", "null"]},
+            "mission": {"type": ["string", "null"]},
+            "vision": {"type": ["string", "null"]},
+            "core_values": {
+              "type": "array",
+              "items": {"type": "string"}
+            }
+          },
+          "required": ["name", "description"]
+        },
+        "market_positioning": {
+          "type": "object",
+          "description": "Market positioning analysis",
+          "properties": {
+            "target_audience": {"type": "string"},
+            "icp": {
+              "type": "object",
+              "description": "Ideal Customer Profile",
+              "properties": {
+                "industries": {
+                  "type": "array",
+                  "items": {"type": "string"}
+                },
+                "company_sizes": {
+                  "type": "array",
+                  "items": {"type": "string"}
+                },
+                "job_titles": {
+                  "type": "array",
+                  "items": {"type": "string"}
+                },
+                "pain_points": {
+                  "type": "array",
+                  "items": {"type": "string"}
+                }
+              }
+            },
+            "value_proposition": {"type": "string"},
+            "differentiators": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "competitive_advantages": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "social_proof": {
+              "type": "object",
+              "properties": {
+                "customer_logos": {
+                  "type": "array",
+                  "items": {"type": "string"}
+                },
+                "testimonials": {
+                  "type": "array",
+                  "items": {"type": "string"}
+                },
+                "metrics": {
+                  "type": "array",
+                  "items": {"type": "string"}
+                }
+              }
+            }
+          },
+          "required": ["target_audience", "value_proposition"]
+        },
+        "products_services": {
+          "type": "array",
+          "description": "Products and services offered",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "description": {"type": "string"},
+              "pricing": {"type": ["string", "null"]},
+              "features": {
+                "type": "array",
+                "items": {"type": "string"}
+              },
+              "target_user": {"type": ["string", "null"]}
+            },
+            "required": ["name", "description"]
+          },
+          "minItems": 1
+        },
+        "brand_voice": {
+          "type": "object",
+          "description": "Brand voice analysis",
+          "properties": {
+            "tone": {
+              "type": "array",
+              "items": {"type": "string"},
+              "minItems": 1
+            },
+            "personality": {"type": "string"},
+            "formality_level": {
+              "type": "string",
+              "enum": ["very_formal", "formal", "neutral", "casual", "very_casual"]
+            },
+            "key_terms": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "messaging_themes": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "example_quotes": {
+              "type": "array",
+              "items": {"type": "string"}
+            }
+          },
+          "required": ["tone"]
+        },
+        "key_messages": {
+          "type": "array",
+          "description": "Core messaging themes",
+          "items": {"type": "string"},
+          "minItems": 1
+        },
+        "research_doc": {
+          "type": "string",
+          "description": "Markdown-formatted research document"
+        },
+        "research_doc_path": {
+          "type": "string",
+          "description": "Path to saved research document"
+        },
+        "pages_scraped": {
+          "type": "integer",
+          "description": "Number of pages analyzed"
+        },
+        "sources": {
+          "type": "array",
+          "description": "Source URLs for claims",
+          "items": {
+            "type": "object",
+            "properties": {
+              "url": {"type": "string", "format": "uri"},
+              "title": {"type": "string"},
+              "section": {"type": "string"}
+            }
+          }
+        }
+      },
+      "required": ["company_name", "website_url", "company_profile", "products_services", "brand_voice", "key_messages"]
+    },
+    "evaluation": {
+      "type": "object",
+      "description": "Quality evaluation results",
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "pass": {"type": "boolean"},
+        "breakdown": {
+          "type": "object",
+          "additionalProperties": {"type": "boolean"}
+        }
+      }
+    },
+    "release_action": {
+      "type": "string",
+      "enum": ["auto_deliver", "auto_refine", "human_review", "blocked"],
+      "description": "Determined release action"
+    },
+    "release_message": {
+      "type": "string",
+      "description": "Explanation of release decision"
+    },
+    "run_id": {
+      "type": "string",
+      "description": "Unique run identifier"
+    },
+    "_meta": {
+      "type": "object",
+      "description": "Execution metadata",
+      "properties": {
+        "client_id": {"type": "string"},
+        "tenant_id": {"type": "string"},
+        "run_id": {"type": "string"},
+        "execution_mode": {
+          "type": "string",
+          "enum": ["suggest", "preview", "execute"]
+        },
+        "runtime_seconds": {"type": "number"},
+        "cost_usd": {"type": "number"},
+        "skill_version": {"type": "string"},
+        "pages_scraped": {"type": "integer"},
+        "tokens": {
+          "type": "object",
+          "properties": {
+            "input": {"type": "integer"},
+            "output": {"type": "integer"},
+            "total": {"type": "integer"}
+          }
+        },
+        "timestamp": {"type": "string", "format": "date-time"},
+        "stages_completed": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "checkpoints": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "warnings": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "quality_gates": {
+      "type": "object",
+      "description": "Quality gate results",
+      "properties": {
+        "schema_valid": {"type": "boolean"},
+        "completeness_score": {"type": "number"},
+        "factuality_score": {"type": "number"},
+        "all_passed": {"type": "boolean"}
+      }
+    },
+    "error": {
+      "type": "string",
+      "description": "Error message if status is failed"
+    },
+    "error_type": {
+      "type": "string",
+      "description": "Error type classification"
+    }
+  }
+}

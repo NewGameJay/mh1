@@ -1,0 +1,156 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Knowledge Item",
+  "description": "Schema for items stored in the knowledge base",
+  "type": "object",
+  "required": ["id", "title", "source", "content", "ingested_at"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier (UUID)"
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the content"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Source URL"
+    },
+    "source": {
+      "type": "object",
+      "required": ["name", "type"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Source name (e.g., 'Anthropic Blog')"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["docs", "blog", "release", "social", "research", "newsletter"]
+        },
+        "quality": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Pre-assigned source quality score"
+        }
+      }
+    },
+    "content": {
+      "type": "object",
+      "required": ["full_text"],
+      "properties": {
+        "full_text": {
+          "type": "string",
+          "description": "Full content text"
+        },
+        "summary": {
+          "type": "string",
+          "description": "AI-generated summary"
+        },
+        "key_points": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Key takeaways"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "published_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Original publication date"
+        },
+        "author": {
+          "type": "string"
+        },
+        "word_count": {
+          "type": "integer"
+        },
+        "language": {
+          "type": "string",
+          "default": "en"
+        }
+      }
+    },
+    "classification": {
+      "type": "object",
+      "properties": {
+        "verticals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["agentic", "marketing", "lifecycle", "content", "general"]
+          }
+        },
+        "topics": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "relevance_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Relevance to MH1 offerings"
+        }
+      }
+    },
+    "novelty": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "is_novel": {
+          "type": "boolean"
+        },
+        "novel_elements": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "action_type": {
+          "type": "string",
+          "enum": ["skill_update", "prompt_update", "playbook", "monitor", "none"]
+        },
+        "action_description": {
+          "type": "string"
+        }
+      }
+    },
+    "processing": {
+      "type": "object",
+      "properties": {
+        "is_processed": {
+          "type": "boolean",
+          "default": false
+        },
+        "is_actionable": {
+          "type": "boolean",
+          "default": false
+        },
+        "action_taken": {
+          "type": "string"
+        },
+        "action_date": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "ingested_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When this item was ingested"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

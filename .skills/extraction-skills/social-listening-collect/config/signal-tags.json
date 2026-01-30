@@ -1,0 +1,56 @@
+{
+  "description": "Signal tag taxonomy for social listening post categorization",
+  "usage": "Assign relevant tags during Stage 3 scoring based on post content triggers",
+  "tags": {
+    "ai-marketing": {
+      "description": "AI-powered marketing, AI tools, AI transformation",
+      "exampleTriggers": ["AI marketing", "marketing automation", "AI tools", "AI-powered", "AI-native"]
+    },
+    "fractional-marketing": {
+      "description": "Fractional CMO, outsourced marketing leadership",
+      "exampleTriggers": ["fractional CMO", "fractional marketing", "outsourced marketing", "part-time CMO"]
+    },
+    "marketing-ops": {
+      "description": "Marketing operations, systems, processes",
+      "exampleTriggers": ["marketing ops", "MarTech stack", "marketing operations", "marketing systems"]
+    },
+    "tool-fatigue": {
+      "description": "Too many tools, tool sprawl, integration challenges",
+      "exampleTriggers": ["too many tools", "tool fatigue", "tool sprawl", "integration nightmare", "tool consolidation"]
+    },
+    "marketing-hiring": {
+      "description": "Marketing hiring challenges, team building",
+      "exampleTriggers": ["hiring marketers", "marketing team", "finding talent", "marketing recruitment"]
+    },
+    "budget-constraints": {
+      "description": "Marketing budget, doing more with less",
+      "exampleTriggers": ["marketing budget", "budget cuts", "do more with less", "lean marketing"]
+    },
+    "demand-gen": {
+      "description": "Demand generation, pipeline, lead gen",
+      "exampleTriggers": ["demand gen", "pipeline generation", "lead generation", "B2B marketing"]
+    },
+    "saas-marketing": {
+      "description": "B2B SaaS specific marketing",
+      "exampleTriggers": ["SaaS marketing", "B2B SaaS", "software marketing", "product marketing"]
+    },
+    "competitor-mention": {
+      "description": "Direct or indirect competitor mentions",
+      "exampleTriggers": ["Toptal", "CMOx", "Growtal", "marketing agency", "marketing freelancer"]
+    },
+    "cmo-insight": {
+      "description": "CMO perspectives, marketing leadership",
+      "exampleTriggers": ["CMO", "VP Marketing", "Head of Marketing", "marketing leader"]
+    },
+    "buying-signal": {
+      "description": "Potential business opportunity",
+      "exampleTriggers": ["looking for", "need help with", "seeking marketing", "any recommendations"]
+    },
+    "industry-trend": {
+      "description": "Marketing industry trends, shifts",
+      "exampleTriggers": ["industry trend", "future of marketing", "marketing shift", "emerging"]
+    }
+  },
+  "customTagFormat": "custom:{tag_name}",
+  "maxTagsPerPost": 5
+}

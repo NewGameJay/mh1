@@ -1,0 +1,1369 @@
+{
+  "version": "0.1.20260129",
+  "status_code": 20000,
+  "status_message": "Ok.",
+  "time": "4.2789 sec.",
+  "cost": 0.0035,
+  "tasks_count": 2,
+  "tasks_error": 1,
+  "tasks": [
+    {
+      "id": "01300318-1244-0139-0000-eec9155bcb8d",
+      "status_code": 20000,
+      "status_message": "Ok.",
+      "time": "3.9481 sec.",
+      "cost": 0.0035,
+      "result_count": 1,
+      "path": [
+        "v3",
+        "serp",
+        "google",
+        "organic",
+        "live",
+        "advanced"
+      ],
+      "data": {
+        "api": "serp",
+        "function": "live",
+        "se": "google",
+        "se_type": "organic",
+        "language_code": "en",
+        "location_code": 2840,
+        "keyword": "marketing automation",
+        "depth": 20,
+        "device": "desktop",
+        "os": "windows"
+      },
+      "result": [
+        {
+          "keyword": "marketing automation",
+          "type": "organic",
+          "se_domain": "google.com",
+          "location_code": 2840,
+          "language_code": "en",
+          "check_url": "https://www.google.com/search?q=marketing%20automation&hl=en&gl=US&ie=UTF-8&uule=w+CAIQIFISCQs2MuSEtepUEUK33kOSuTsc",
+          "datetime": "2026-01-30 01:18:42 +00:00",
+          "spell": null,
+          "refinement_chips": null,
+          "item_types": [
+            "ai_overview",
+            "organic",
+            "people_also_ask",
+            "product_considerations",
+            "people_also_search",
+            "video",
+            "images",
+            "perspectives",
+            "related_searches"
+          ],
+          "se_results_count": 252000000,
+          "pages_count": 2,
+          "items_count": 26,
+          "items": [
+            {
+              "type": "ai_overview",
+              "rank_group": 1,
+              "rank_absolute": 1,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]",
+              "asynchronous_ai_overview": true,
+              "markdown": "![Simple Marketing Automation Flows Done Right - MarketingPlatform](https://api.dataforseo.com/cdn/i/01300318-1244-0139-0000-eec9155bcb8d:12)\nMarketing automation is `the use of software to automate, streamline, and measure repetitive marketing tasks` \u2014such as email campaigns, social media posting, and lead nurturing\u2014to improve efficiency and ROI. By using behavior-based triggers (e.g., website visits, form downloads), it delivers personalized, timely content across multiple channels, often integrating with CRM systems to nurture leads and convert them into customers.[[1]](https://www.hubspot.com/products/marketing/marketing-automation-information)\n\nThis video explains how marketing automation can help businesses save time and increase leads:![](https://api.dataforseo.com/cdn/i/01300318-1244-0139-0000-eec9155bcb8d:13)\n![Related video thumbnail](https://api.dataforseo.com/cdn/i/01300318-1244-0139-0000-eec9155bcb8d:14)\n01:00[![](https://api.dataforseo.com/cdn/i/01300318-1244-0139-0000-eec9155bcb8d:15)\n![](https://api.dataforseo.com/cdn/i/01300318-1244-0139-0000-eec9155bcb8d:16)\nacuwebmarketing YouTube \u2022 Sep 10, 2024](https://m.youtube.com/shorts/p9sLmyxol_c) \n\n**Key Aspects of Marketing Automation** \n\n- **Purpose:** To increase efficiency, reduce manual errors, and scale personalized customer experiences.\n- **Key Functions:** \n\t- **Email Marketing:** Automated drip campaigns, welcome series, and newsletters.\n\t- **Lead Nurturing & Scoring:** Segmenting prospects and assigning scores based on behavior to identify sales-ready leads.\n\t- **Social Media & Campaign Management:** Scheduling posts and managing cross-channel marketing from one platform.\n\t- **Analytics & Reporting:** Measuring ROI and tracking customer engagement.\n- **Common Examples:** \n\t- **Abandoned Cart Emails:** Triggered automatically when a user leaves items in their online cart.\n\t- **Welcome Sequences:** Series of emails sent to new subscribers.\n\t- **Birthday/Anniversary Offers:** Personalized messages sent on specific dates.\n\t- **Lead Magnets:** Automatically sending a guide or ebook after a form submission.\n- **Top Platforms:** [Salesforce Marketing Cloud](https://www.salesforce.com/marketing/automation/guide/), [HubSpot](https://www.hubspot.com/products/marketing/marketing-automation-information) , Adobe Marketo Engage, [{Link: Mailchimp](https://mailchimp.com/marketing-glossary/marketing-automation/)}, [{Link: Oracle Eloqua](https://www.oracle.com/cx/marketing/automation/what-is-marketing-automation/statistics/)}, [{Link: ActiveCampaign](https://www.youtube.com/watch?v=FEiiaeHNEnY)}, [{Link: Pardot (Salesforce)](https://www.salesforce.com/ap/marketing/automation/guide/) }, {Link: Klaviyo}, {Link: Constant Contact}, {Link: Brevo (formerly Sendinblue)}.[[1]](https://www.salesforce.com/marketing/automation/guide/)[[2]](https://en.wikipedia.org/wiki/Marketing_automation#:~:text=Marketing%20automation%20refers%20to%20software%20platforms%20and,%28CRM%29%20and%20customer%20data%20platform%20%28CDP%29%20software.)\n\n**Benefits**   \nMarketing automation saves significant time, reduces human error, and improves ROI by delivering personalized content at scale, which can lead to higher qualified leads.[[1]](https://www.salesforce.com/marketing/automation/guide/)[[2]](https://www.hubspot.com/products/marketing/marketing-automation-information)",
+              "items": [
+                {
+                  "type": "ai_overview_element",
+                  "position": "left",
+                  "title": null,
+                  "text": "Marketing automation is the use of software to automate, streamline, and measure repetitive marketing tasks \u2014such as email campaigns, social media posting, and lead nurturing\u2014to improve efficiency and ROI. By using behavior-based triggers (e.g., website visits, form downloads), it delivers personalized, timely content across multiple channels, often integrating with CRM systems to nurture leads and convert them into customers.",
+                  "markdown": "![Simple Marketing Automation Flows Done Right - MarketingPlatform](https://api.dataforseo.com/cdn/i/01300318-1244-0139-0000-eec9155bcb8d:6)\nMarketing automation is `the use of software to automate, streamline, and measure repetitive marketing tasks` \u2014such as email campaigns, social media posting, and lead nurturing\u2014to improve efficiency and ROI. By using behavior-based triggers (e.g., website visits, form downloads), it delivers personalized, timely content across multiple channels, often integrating with CRM systems to nurture leads and convert them into customers.[[1]](https://www.hubspot.com/products/marketing/marketing-automation-information)",
+                  "links": null,
+                  "images": [
+                    {
+                      "type": "images_element",
+                      "alt": "Simple Marketing Automation Flows Done Right - MarketingPlatform",
+                      "url": null,
+                      "image_url": "https://api.dataforseo.com/cdn/i/01300318-1244-0139-0000-eec9155bcb8d:7"
+                    }
+                  ],
+                  "references": [
+                    {
+                      "type": "ai_overview_reference",
+                      "position": "left",
+                      "source": "HubSpot",
+                      "domain": "www.hubspot.com",
+                      "url": "https://www.hubspot.com/products/marketing/marketing-automation-information",
+                      "title": "What is Marketing Automation? - HubSpot",
+                      "text": "Definition of Marketing Automation. Marketing automation is software that automates repetitive marketing tasks like email campaign..."
+                    }
+                  ]
+                },
+                {
+                  "type": "ai_overview_element",
+                  "position": "left",
+                  "title": null,
+                  "text": "This video explains how marketing automation can help businesses save time and increase leads: 01:00 acuwebmarketing YouTube \u2022 Sep 10, 2024",
+                  "markdown": "This video explains how marketing automation can help businesses save time and increase leads:![](https://api.dataforseo.com/cdn/i/01300318-1244-0139-0000-eec9155bcb8d:8)\n![Related video thumbnail](https://api.dataforseo.com/cdn/i/01300318-1244-0139-0000-eec9155bcb8d:9)\n01:00[![](https://api.dataforseo.com/cdn/i/01300318-1244-0139-0000-eec9155bcb8d:10)\n![](https://api.dataforseo.com/cdn/i/01300318-1244-0139-0000-eec9155bcb8d:11)\nacuwebmarketing YouTube \u2022 Sep 10, 2024](https://m.youtube.com/shorts/p9sLmyxol_c)",
+                  "links": null,
+                  "images": null,
+                  "references": null
+                },
+                {
+                  "type": "ai_overview_element",
+                  "position": "left",
+                  "title": null,
+                  "text": "Key Aspects of Marketing Automation",
+                  "markdown": "**Key Aspects of Marketing Automation**",
+                  "links": null,
+                  "images": null,
+                  "references": null
+                },
+                {
+                  "type": "ai_overview_element",
+                  "position": "left",
+                  "title": null,
+                  "text": "Purpose: To increase efficiency, reduce manual errors, and scale personalized customer experiences. Key Functions: Email Marketing: Automated drip campaigns, welcome series, and newsletters. Lead Nurturing & Scoring: Segmenting prospects and assigning scores based on behavior to identify sales-ready leads. Social Media & Campaign Management: Scheduling posts and managing cross-channel marketing from one platform. Analytics & Reporting: Measuring ROI and tracking customer engagement. Common Examples: Abandoned Cart Emails: Triggered automatically when a user leaves items in their online cart. Welcome Sequences: Series of emails sent to new subscribers. Birthday/Anniversary Offers: Personalized messages sent on specific dates. Lead Magnets: Automatically sending a guide or ebook after a form submission. Top Platforms: Salesforce Marketing Cloud, HubSpot, Adobe Marketo Engage, {Link: Mailchimp }, {Link: Oracle Eloqua }, {Link: ActiveCampaign }, {Link: Pardot (Salesforce) }, {Link: Klaviyo}, {Link: Constant Contact}, {Link: Brevo (formerly Sendinblue)}.",
+                  "markdown": "- **Purpose:** To increase efficiency, reduce manual errors, and scale personalized customer experiences.\n- **Key Functions:** \n\t- **Email Marketing:** Automated drip campaigns, welcome series, and newsletters.\n\t- **Lead Nurturing & Scoring:** Segmenting prospects and assigning scores based on behavior to identify sales-ready leads.\n\t- **Social Media & Campaign Management:** Scheduling posts and managing cross-channel marketing from one platform.\n\t- **Analytics & Reporting:** Measuring ROI and tracking customer engagement.\n- **Common Examples:** \n\t- **Abandoned Cart Emails:** Triggered automatically when a user leaves items in their online cart.\n\t- **Welcome Sequences:** Series of emails sent to new subscribers.\n\t- **Birthday/Anniversary Offers:** Personalized messages sent on specific dates.\n\t- **Lead Magnets:** Automatically sending a guide or ebook after a form submission.\n- **Top Platforms:** [Salesforce Marketing Cloud](https://www.salesforce.com/marketing/automation/guide/), [HubSpot](https://www.hubspot.com/products/marketing/marketing-automation-information) , Adobe Marketo Engage, [{Link: Mailchimp](https://mailchimp.com/marketing-glossary/marketing-automation/)}, [{Link: Oracle Eloqua](https://www.oracle.com/cx/marketing/automation/what-is-marketing-automation/statistics/)}, [{Link: ActiveCampaign](https://www.youtube.com/watch?v=FEiiaeHNEnY)}, [{Link: Pardot (Salesforce)](https://www.salesforce.com/ap/marketing/automation/guide/) }, {Link: Klaviyo}, {Link: Constant Contact}, {Link: Brevo (formerly Sendinblue)}.[[1]](https://www.salesforce.com/marketing/automation/guide/)[[2]](https://en.wikipedia.org/wiki/Marketing_automation#:~:text=Marketing%20automation%20refers%20to%20software%20platforms%20and,%28CRM%29%20and%20customer%20data%20platform%20%28CDP%29%20software.)",
+                  "links": [
+                    {
+                      "type": "link_element",
+                      "title": "Salesforce Marketing Cloud",
+                      "description": null,
+                      "url": "https://www.salesforce.com/marketing/automation/guide/",
+                      "domain": "www.salesforce.com"
+                    },
+                    {
+                      "type": "link_element",
+                      "title": "HubSpot",
+                      "description": null,
+                      "url": "https://www.hubspot.com/products/marketing/marketing-automation-information",
+                      "domain": "www.hubspot.com"
+                    },
+                    {
+                      "type": "link_element",
+                      "title": "{Link: Mailchimp",
+                      "description": null,
+                      "url": "https://mailchimp.com/marketing-glossary/marketing-automation/",
+                      "domain": "mailchimp.com"
+                    },
+                    {
+                      "type": "link_element",
+                      "title": "{Link: Oracle Eloqua",
+                      "description": null,
+                      "url": "https://www.oracle.com/cx/marketing/automation/what-is-marketing-automation/statistics/",
+                      "domain": "www.oracle.com"
+                    },
+                    {
+                      "type": "link_element",
+                      "title": "{Link: ActiveCampaign",
+                      "description": null,
+                      "url": "https://www.youtube.com/watch?v=FEiiaeHNEnY",
+                      "domain": "www.youtube.com"
+                    },
+                    {
+                      "type": "link_element",
+                      "title": "{Link: Pardot (Salesforce)",
+                      "description": null,
+                      "url": "https://www.salesforce.com/ap/marketing/automation/guide/",
+                      "domain": "www.salesforce.com"
+                    }
+                  ],
+                  "images": null,
+                  "references": [
+                    {
+                      "type": "ai_overview_reference",
+                      "position": "left",
+                      "source": "Salesforce",
+                      "domain": "www.salesforce.com",
+                      "url": "https://www.salesforce.com/marketing/automation/guide/",
+                      "title": "What is Marketing Automation? - Salesforce",
+                      "text": "* How does marketing automation work? Marketing automation uses special software to do marketing tasks on its own. You set up rule..."
+                    },
+                    {
+                      "type": "ai_overview_reference",
+                      "position": "left",
+                      "source": "Wikipedia",
+                      "domain": "en.wikipedia.org",
+                      "url": "https://en.wikipedia.org/wiki/Marketing_automation#:~:text=Marketing%20automation%20refers%20to%20software%20platforms%20and,%28CRM%29%20and%20customer%20data%20platform%20%28CDP%29%20software.",
+                      "title": "Marketing automation - Wikipedia",
+                      "text": "Marketing automation refers to software platforms and technologies designed for marketing departments and organizations to automat..."
+                    }
+                  ]
+                },
+                {
+                  "type": "ai_overview_element",
+                  "position": "left",
+                  "title": null,
+                  "text": "Benefits\nMarketing automation saves significant time, reduces human error, and improves ROI by delivering personalized content at scale, which can lead to higher qualified leads.",
+                  "markdown": "**Benefits**   \nMarketing automation saves significant time, reduces human error, and improves ROI by delivering personalized content at scale, which can lead to higher qualified leads.[[1]](https://www.salesforce.com/marketing/automation/guide/)[[2]](https://www.hubspot.com/products/marketing/marketing-automation-information)",
+                  "links": null,
+                  "images": null,
+                  "references": [
+                    {
+                      "type": "ai_overview_reference",
+                      "position": "left",
+                      "source": "Salesforce",
+                      "domain": "www.salesforce.com",
+                      "url": "https://www.salesforce.com/marketing/automation/guide/",
+                      "title": "What is Marketing Automation? - Salesforce",
+                      "text": "* How does marketing automation work? Marketing automation uses special software to do marketing tasks on its own. You set up rule..."
+                    }
+                  ]
+                }
+              ],
+              "references": [
+                {
+                  "type": "ai_overview_reference",
+                  "position": "right",
+                  "source": "Salesforce",
+                  "domain": "www.salesforce.com",
+                  "url": "https://www.salesforce.com/marketing/automation/guide/",
+                  "title": "What is Marketing Automation? - Salesforce",
+                  "text": "* How does marketing automation work? Marketing automation uses special software to do marketing tasks on its own. You set up rule..."
+                },
+                {
+                  "type": "ai_overview_reference",
+                  "position": "right",
+                  "source": "Wikipedia",
+                  "domain": "en.wikipedia.org",
+                  "url": "https://en.wikipedia.org/wiki/Marketing_automation#:~:text=Marketing%20automation%20refers%20to%20software%20platforms%20and,%28CRM%29%20and%20customer%20data%20platform%20%28CDP%29%20software.",
+                  "title": "Marketing automation - Wikipedia",
+                  "text": "Marketing automation refers to software platforms and technologies designed for marketing departments and organizations to automat..."
+                }
+              ],
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 1,
+              "rank_absolute": 2,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]",
+              "domain": "www.salesforce.com",
+              "title": "What is Marketing Automation?",
+              "url": "https://www.salesforce.com/marketing/automation/guide/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.salesforce.com \u203a automation \u203a guide",
+              "website_name": "Salesforce",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "description": "Marketing automation is a technology that manages marketing processes and multifunctional campaigns, across multiple channels, automatically. Read more",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "manages marketing processes and multifunctional campaigns"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "people_also_ask",
+              "rank_group": 1,
+              "rank_absolute": 3,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]",
+              "items": [
+                {
+                  "type": "people_also_ask_element",
+                  "title": "What is meant by marketing automation?",
+                  "seed_question": null,
+                  "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[2]/div[1]",
+                  "expanded_element": [
+                    {
+                      "type": "people_also_ask_expanded_element",
+                      "featured_title": null,
+                      "url": "https://en.wikipedia.org/wiki/Marketing_automation",
+                      "domain": "en.wikipedia.org",
+                      "title": "Marketing automation - Wikipedia",
+                      "description": "Marketing automation refers to software platforms and technologies designed for marketing departments and organizations to automate repetitive tasks and consolidate multi-channel (email, SMS, chatbot, and social media) interactions, tracking and web analytics, lead scoring, campaign management and reporting into one ...",
+                      "images": null,
+                      "timestamp": null,
+                      "table": null
+                    }
+                  ]
+                },
+                {
+                  "type": "people_also_ask_element",
+                  "title": "What is an example of marketing automation?",
+                  "seed_question": null,
+                  "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[2]/div[2]",
+                  "expanded_element": [
+                    {
+                      "type": "people_also_ask_expanded_element",
+                      "featured_title": null,
+                      "url": "https://mapp.com/blog/marketing-automation-strategies-use-cases/",
+                      "domain": "mapp.com",
+                      "title": "Marketing Automation Strategies: 6 Steps & Examples to Inspire You",
+                      "description": "On the day of each customer's birthday, an automated email is sent offering a discount voucher as a gift. The system checks the customer's date of birth daily and sends the email to everyone celebrating that day. This personalized touch not only makes customers feel valued but also drives repeat purchases.",
+                      "images": null,
+                      "timestamp": null,
+                      "table": null
+                    }
+                  ]
+                },
+                {
+                  "type": "people_also_ask_element",
+                  "title": "How is automation used in marketing?",
+                  "seed_question": null,
+                  "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[2]/div[3]",
+                  "expanded_element": [
+                    {
+                      "type": "people_also_ask_expanded_element",
+                      "featured_title": null,
+                      "url": "https://www.ibm.com/think/topics/marketing-automation",
+                      "domain": "www.ibm.com",
+                      "title": "What is marketing automation? - IBM",
+                      "description": "Marketing automation is the use of software and technology to manage routine marketing processes and tasks across multiple channels. A marketing automation strategy streamlines how organizations accomplish marketing tasks and segment content and experiences for people they want to influence across the customer journey.",
+                      "images": null,
+                      "timestamp": null,
+                      "table": null
+                    }
+                  ]
+                },
+                {
+                  "type": "people_also_ask_element",
+                  "title": "What skills are needed for marketing automation?",
+                  "seed_question": null,
+                  "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[2]/div[4]",
+                  "expanded_element": [
+                    {
+                      "type": "people_also_ask_expanded_element",
+                      "featured_title": "Key Skills Required for a Marketing Automation Specialist",
+                      "url": "https://www.floowitalent.com/tips/marketing-automation-specialist-key-skills-summary",
+                      "domain": "www.floowitalent.com",
+                      "title": "Marketing Automation Specialist Key Skills Summary: Essential Expertise",
+                      "description": "Marketing Technology and Automation Tools. ...\nData Analysis and Performance Measurement. ...\nEmail Marketing and Lead Nurturing. ...\nCRM Integration and Customer Journey Mapping. ...\nProject Management and Collaboration. ...\nTechnical Proficiency and Problem-Solving.",
+                      "images": null,
+                      "timestamp": null,
+                      "table": null
+                    }
+                  ]
+                }
+              ],
+              "rectangle": null
+            },
+            {
+              "type": "product_considerations",
+              "rank_group": 1,
+              "rank_absolute": 4,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[5]/div[1]",
+              "title": "Things to know",
+              "items": [
+                {
+                  "type": "product_considerations_element",
+                  "title": "Examples of marketing automation",
+                  "consideration_category": "Examples",
+                  "expanded_element": [
+                    {
+                      "type": "product_considerations_expanded_element",
+                      "title": "Top Marketing Automation Examples and Workflows | Braze",
+                      "featured_title": "10 marketing automation examples",
+                      "breadcrumb": "https://www.braze.com \u203a resources \u203a articles \u203a marketing...",
+                      "snippet": "Lead nurturing workflows. ...\nBehavioral trigger campaigns. ...\nDrip campaigns. ...\nOnboarding flows. ...\nRe-engagement campaigns. ...\neCommerce automation. ...\nCross-sell and upsell campaigns. ...\nRetention and loyalty programs.",
+                      "domain": "www.google.com",
+                      "url": "https://www.google.com/search?sca_esv=417a61bc55701add&hl=en&gl=US&q=marketing+automation+examples&sa=X&ved=2ahUKEwjnvs2GjLKSAxV3OFkFHTaCG8oQrooIegQIGhAS",
+                      "timestamp": "2025-11-10 00:00:00 +00:00",
+                      "related_searches": [
+                        "Examples of marketing automation"
+                      ],
+                      "about_this_result": null
+                    }
+                  ]
+                },
+                {
+                  "type": "product_considerations_element",
+                  "title": "Top 10 marketing automation platforms",
+                  "consideration_category": "Top Platforms",
+                  "expanded_element": [
+                    {
+                      "type": "product_considerations_expanded_element",
+                      "title": "Top 10 Marketing Automation Tools for eCommerce Start-ups for 2026",
+                      "featured_title": "The 10 Best Marketing Automation Tools for Scaling eCommerce Startup in 2026",
+                      "breadcrumb": "https://www.salesmanago.com \u203a blog \u203a marketing-autom...",
+                      "snippet": "Salesmanago. ...\nHubSpot Marketing Hub. ...\nActiveCampaign. ...\nBrevo. ...\nMailchimp. ...\nKlaviyo. ...\nZoho Marketing Plus. ...\nMarketo Engage.",
+                      "domain": "www.google.com",
+                      "url": "https://www.google.com/search?sca_esv=417a61bc55701add&hl=en&gl=US&q=top+10+marketing+automation+platforms&sa=X&ved=2ahUKEwjnvs2GjLKSAxV3OFkFHTaCG8oQrooIegQIGhAg",
+                      "timestamp": "2025-11-21 00:00:00 +00:00",
+                      "related_searches": [
+                        "Top 10 marketing automation platforms"
+                      ],
+                      "about_this_result": null
+                    }
+                  ]
+                },
+                {
+                  "type": "product_considerations_element",
+                  "title": "marketing automation purpose",
+                  "consideration_category": "Purpose",
+                  "expanded_element": [
+                    {
+                      "type": "product_considerations_expanded_element",
+                      "title": "What is Marketing Automation? - HubSpot",
+                      "featured_title": null,
+                      "breadcrumb": "https://www.hubspot.com \u203a products \u203a marketing \u203a mark...",
+                      "snippet": "Marketing automation uses software to automate repetitive marketing work. Marketing departments can automate repetitive tasks such as email marketing, social media posting, and even ad campaigns. This is not just for the sake of efficiency, but also to provide a more personalized experience for their customers.",
+                      "domain": "www.google.com",
+                      "url": "https://www.google.com/search?sca_esv=417a61bc55701add&hl=en&gl=US&q=marketing+automation+purpose&sa=X&ved=2ahUKEwjnvs2GjLKSAxV3OFkFHTaCG8oQrooIegQIGhAu",
+                      "timestamp": null,
+                      "related_searches": [
+                        "marketing automation purpose"
+                      ],
+                      "about_this_result": null
+                    }
+                  ]
+                },
+                {
+                  "type": "product_considerations_element",
+                  "title": "cost of marketing automation",
+                  "consideration_category": "Cost",
+                  "expanded_element": [
+                    {
+                      "type": "product_considerations_expanded_element",
+                      "title": "Marketing Automation Cost: What You'll Actually Pay in 2026",
+                      "featured_title": null,
+                      "breadcrumb": "https://isometrik.ai \u203a blog \u203a marketing-automation-cost",
+                      "snippet": "Marketing automation cost varies dramatically across vendors and business sizes. Small businesses start at $15 monthly for basic email automation, while enterprise solutions exceed $30,000 annually. Understanding the complete cost structure prevents budget surprises and helps you choose the right platform.",
+                      "domain": "www.google.com",
+                      "url": "https://www.google.com/search?sca_esv=417a61bc55701add&hl=en&gl=US&q=cost+of+marketing+automation&sa=X&ved=2ahUKEwjnvs2GjLKSAxV3OFkFHTaCG8oQrooIegQIGhBA",
+                      "timestamp": "2026-01-08 00:00:00 +00:00",
+                      "related_searches": [
+                        "cost of marketing automation"
+                      ],
+                      "about_this_result": null
+                    }
+                  ]
+                }
+              ],
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 2,
+              "rank_absolute": 5,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[7]/div[1]/div[1]",
+              "domain": "www.hubspot.com",
+              "title": "What is Marketing Automation?",
+              "url": "https://www.hubspot.com/products/marketing/marketing-automation-information",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.hubspot.com \u203a products \u203a marketing \u203a mar...",
+              "website_name": "HubSpot",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "description": "Marketing automation is software that automates repetitive marketing tasks like email campaigns, social media posting, and lead nurturing. It enables businesses\u00a0... Read more",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "software that automates repetitive marketing tasks"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "people_also_search",
+              "rank_group": 1,
+              "rank_absolute": 6,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[8]/div[1]/div[1]/div[1]",
+              "title": "Find related products & services",
+              "items": [
+                "Marketing automation HubSpot",
+                "Marketing automation tools free",
+                "Marketing automation n8n",
+                "Marketing automation companies",
+                "HubSpot marketing automation pricing",
+                "Digital marketing automation tools"
+              ],
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 3,
+              "rank_absolute": 7,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[9]/div[1]/div[1]",
+              "domain": "www.zoho.com",
+              "title": "Best marketing automation platform for your business - Zoho",
+              "url": "https://www.zoho.com/marketingautomation/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.zoho.com \u203a marketingautomation",
+              "website_name": "Zoho",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "description": "Zoho Marketing Automation is a multichannel software solution with features designed to ease the marketing process and generate sales-ready leads. Read more",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "multichannel software solution"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 4,
+              "rank_absolute": 8,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[11]/div[1]/div[1]",
+              "domain": "en.wikipedia.org",
+              "title": "Marketing automation",
+              "url": "https://en.wikipedia.org/wiki/Marketing_automation",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://en.wikipedia.org \u203a wiki \u203a Marketing_automation",
+              "website_name": "Wikipedia",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "description": "Marketing automation refers to software platforms and technologies designed for marketing departments and organizations to automate repetitive tasks. Read more",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "software platforms and technologies designed for marketing departments and organizations"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 5,
+              "rank_absolute": 9,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[13]/div[1]/div[1]",
+              "domain": "www.oracle.com",
+              "title": "Eloqua Marketing Automation",
+              "url": "https://www.oracle.com/cx/marketing/automation/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.oracle.com \u203a ... \u203a Marketing",
+              "website_name": "Oracle",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "description": "Plan, organize, and manage brilliant B2B marketing campaigns and produce the results you need\u2014with Oracle Eloqua Marketing Automation.",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "Oracle Eloqua Marketing Automation"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "video",
+              "rank_group": 1,
+              "rank_absolute": 10,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[15]/div[1]",
+              "items": [
+                {
+                  "type": "video_element",
+                  "source": "YouTube \u00b7 Thalita Milan - Tech & Marketing Tips",
+                  "title": "How to Implement Marketing Automation: A Step-by-Step ...",
+                  "timestamp": "2025-01-15 00:00:00 +00:00",
+                  "url": "https://www.youtube.com/watch?v=s6oqrw3UZaM"
+                },
+                {
+                  "type": "video_element",
+                  "source": "YouTube \u00b7 HubSpot Marketing",
+                  "title": "How to Automate Your Marketing in Just 2 Weeks (Step-by ...",
+                  "timestamp": "2025-05-19 00:00:00 +00:00",
+                  "url": "https://www.youtube.com/watch?v=zw-nBnWbQD4"
+                },
+                {
+                  "type": "video_element",
+                  "source": "YouTube \u00b7 Marketing Explained",
+                  "title": "The Best Marketing Automation Tools in 2025",
+                  "timestamp": "2025-08-19 00:00:00 +00:00",
+                  "url": "https://www.youtube.com/watch?v=5d2mSejXIgY"
+                }
+              ],
+              "rectangle": null
+            },
+            {
+              "type": "images",
+              "rank_group": 1,
+              "rank_absolute": 11,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[17]/div[1]",
+              "title": "Images",
+              "url": "https://www.google.com/search?sca_esv=417a61bc55701add&hl=en&gl=US&q=marketing+automation&udm=2&source=univ&fir=-Bd5i1PmxggVcM%252CuVPJPV0CesBWrM%252C_%253B7ufeT1hVjifn2M%252CJy3FTqjBZRMusM%252C_%253B0ozAPh2STDxCHM%252CEqdLC-96Bo2xWM%252C_%253B67zVvJvL2it-4M%252CkZNFTm8BG5KhTM%252C_%253BUNyC28oNdR1sFM%252CdZX-hdG9vFzn8M%252C_%253B3QelCTB1E5ta4M%252CcVDNNsnECp9-PM%252C_%253BvcK0ROpOnFB-mM%252C-HpHOExW28Ip1M%252C_%253BxR8iuVEundAqWM%252CjpQ4JZhdpuaJCM%252C_%253Bj67f5XDYXS98vM%252C0k6LxO0FYv7XcM%252C_&usg=AI4_-kRSOx12K-TIAjzDxD24r0dadbkxXA&sa=X&ved=2ahUKEwjnvs2GjLKSAxV3OFkFHTaCG8oQ7Al6BAhOEAU",
+              "items": [
+                {
+                  "type": "images_element",
+                  "alt": "The Benefits of Marketing Automation | Why You Need It",
+                  "url": "https://cargas.com/blog/the-benefits-of-marketing-automation/",
+                  "image_url": "https://api.dataforseo.com/cdn/i/01300318-1244-0139-0000-eec9155bcb8d:17"
+                },
+                {
+                  "type": "images_element",
+                  "alt": "What is Marketing Automation? How Does it Work | Creatio",
+                  "url": "https://www.creatio.com/glossary/marketing-automation",
+                  "image_url": "https://api.dataforseo.com/cdn/i/01300318-1244-0139-0000-eec9155bcb8d:18"
+                },
+                {
+                  "type": "images_element",
+                  "alt": "CRM vs Marketing Automation: The Key Differences | Woopra",
+                  "url": "https://www.woopra.com/blog/crm-vs-marketing-automation",
+                  "image_url": "https://api.dataforseo.com/cdn/i/01300318-1244-0139-0000-eec9155bcb8d:19"
+                },
+                {
+                  "type": "images_element",
+                  "alt": "B2B Marketing Automation - Examples, Tools & Strategies",
+                  "url": "https://www.ibexa.co/blog/b2b-marketing-automation-examples-tools-strategies",
+                  "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC_Gxk9Ru6YeVIzNgGbEmq3LzCXXex-FRAxObPlISJeASlUYC4h6-aciQ&s"
+                },
+                {
+                  "type": "images_element",
+                  "alt": "What is Marketing Automation? - Innova Marketing Solutions",
+                  "url": "https://innova-ms.com/en/marketing-automation/",
+                  "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcMFqj5mNtSo4nAQTFq9Q-nmC2-yTWk11QelLVndN1AaEOg9uTbMzgytk&s"
+                },
+                {
+                  "type": "images_element",
+                  "alt": "9 best marketing automation software tools in 2026 | Zapier",
+                  "url": "https://zapier.com/blog/best-marketing-automation-software/",
+                  "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr3nYvIGVoqclMR23FzbOuKtIY4dT4KlCEAS1tIBNhcbQRykok6JsGsfE&s"
+                },
+                {
+                  "type": "images_element",
+                  "alt": "13 Features to Look for in a Marketing Automation Platform ...",
+                  "url": "https://www.techfunnel.com/martech/features-marketing-automation-platform/",
+                  "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWtg41xEJC_9XaaEAImlBlufBINM1m3jotKgD2bntBqwAoFSyra43FOL0&s"
+                },
+                {
+                  "type": "images_element",
+                  "alt": "What Is Marketing Automation? - Strategies, Benefits, and ...",
+                  "url": "https://www.axelerant.com/blog/what-is-marketing-automation",
+                  "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFKETeW9YZdrGwSU7n_KlifrQrtYlhQaezsRTrx5izfZw3-GnsbHgE5RY&s"
+                },
+                {
+                  "type": "images_element",
+                  "alt": "Simple Marketing Automation Flows Done Right - MarketingPlatform",
+                  "url": "https://marketingplatform.com/resources/simple-marketing-automation-flows/",
+                  "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHon88ASMeTxSPsuV8KsHQTHIds2whpL5OxqRPbI9l8OWsBu0QdgC5Z0A&s"
+                }
+              ],
+              "related_image_searches": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 6,
+              "rank_absolute": 12,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[19]/div[1]/div[1]",
+              "domain": "neilpatel.com",
+              "title": "Marketing Automation Made Simple: A Step-by-Step Guide",
+              "url": "https://neilpatel.com/what-is-marketing-automation/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://neilpatel.com \u203a what-is-marketing-automation",
+              "website_name": "Neil Patel",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "description": "Marketing automation is the process of using software and technology to optimize, automate and measure repetitive online marketing tasks. Read more",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "Marketing automation"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "perspectives",
+              "rank_group": 1,
+              "rank_absolute": 13,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[21]/div[1]",
+              "title": "What people are saying",
+              "items": [
+                {
+                  "type": "perspectives_element",
+                  "title": "AI-Driven Marketing Automation: Streamlining Campaigns and ROI",
+                  "description": null,
+                  "url": "https://www.linkedin.com/pulse/ai-driven-marketing-automation-streamlining-campaigns-tiffany-zo5oe",
+                  "domain": "www.linkedin.com",
+                  "date": "10 hours ago",
+                  "source": "Tiffany Perkins-Munn",
+                  "timestamp": "2026-01-29 15:18:40 +00:00"
+                },
+                {
+                  "type": "perspectives_element",
+                  "title": "The Best Email Marketing Software We've Tested for 2026",
+                  "description": null,
+                  "url": "https://www.pcmag.com/picks/the-best-email-marketing-software",
+                  "domain": "www.pcmag.com",
+                  "date": "3 days ago",
+                  "source": "Gabriel Zamora",
+                  "timestamp": "2026-01-27 01:18:40 +00:00"
+                },
+                {
+                  "type": "perspectives_element",
+                  "title": "Marketing Automation & Ecommerce Email Marketing Guide (2026)",
+                  "description": null,
+                  "url": "https://www.youtube.com/watch?v=SuI_oyj1FC0",
+                  "domain": "www.youtube.com",
+                  "date": "6 days ago",
+                  "source": "Fulfillman",
+                  "timestamp": "2026-01-24 01:18:40 +00:00"
+                },
+                {
+                  "type": "perspectives_element",
+                  "title": "What is a marketing automation that actually blew your mind?",
+                  "description": null,
+                  "url": "https://www.reddit.com/r/AskMarketing/comments/1qnaxx8/what_is_a_marketing_automation_that_actually_blew/",
+                  "domain": "www.reddit.com",
+                  "date": "3 days ago",
+                  "source": "r/AskMarketing",
+                  "timestamp": "2026-01-27 01:18:40 +00:00"
+                },
+                {
+                  "type": "perspectives_element",
+                  "title": "Looking at Marketing Automation Platforms that can double as marketing CRM",
+                  "description": null,
+                  "url": "https://www.reddit.com/r/CRM/comments/1qno7kv/looking_at_marketing_automation_platforms_that/",
+                  "domain": "www.reddit.com",
+                  "date": "3 days ago",
+                  "source": "r/CRM",
+                  "timestamp": "2026-01-27 01:18:40 +00:00"
+                },
+                {
+                  "type": "perspectives_element",
+                  "title": "How to make a marketing automation strategy: https://social.semrush.com/49faDYk.",
+                  "description": null,
+                  "url": "https://www.facebook.com/Semrush/posts/how-to-make-a-marketing-automation-strategyhttpssocialsemrushcom49fadyk/1289137999922121/",
+                  "domain": "www.facebook.com",
+                  "date": "1 month ago",
+                  "source": "Semrush",
+                  "timestamp": "2025-12-30 01:18:40 +00:00"
+                },
+                {
+                  "type": "perspectives_element",
+                  "title": "3 Automation Tips Every Marketer Needs to Know About in 2026",
+                  "description": null,
+                  "url": "https://www.youtube.com/watch?v=pwHxpv8lVnQ",
+                  "domain": "www.youtube.com",
+                  "date": "3 weeks ago",
+                  "source": "WebFX",
+                  "timestamp": "2026-01-09 01:18:40 +00:00"
+                },
+                {
+                  "type": "perspectives_element",
+                  "title": "How to Make Marketing Automation Work: Avoid Six Common Pitfalls",
+                  "description": null,
+                  "url": "https://www.linkedin.com/pulse/how-make-marketing-automation-work-avoid-six-common-pitfalls-knilans-fxgac",
+                  "domain": "www.linkedin.com",
+                  "date": "Nov 24, 2025",
+                  "source": "Gerri Knilans",
+                  "timestamp": "2025-11-24 00:00:00 +00:00"
+                },
+                {
+                  "type": "perspectives_element",
+                  "title": "Best marketing automation tools to use in 2026?",
+                  "description": null,
+                  "url": "https://www.reddit.com/r/MarketingAutomation/comments/1qh2sbs/best_marketing_automation_tools_to_use_in_2026/",
+                  "domain": "www.reddit.com",
+                  "date": "1 week ago",
+                  "source": "r/MarketingAutomation",
+                  "timestamp": "2026-01-23 01:18:40 +00:00"
+                },
+                {
+                  "type": "perspectives_element",
+                  "title": "How to Automate Sales While You Sleep (AI Marketing)",
+                  "description": null,
+                  "url": "https://www.youtube.com/shorts/0SgdJgo7aYQ",
+                  "domain": "www.youtube.com",
+                  "date": "1 week ago",
+                  "source": "Ac Hampton",
+                  "timestamp": "2026-01-23 01:18:40 +00:00"
+                },
+                {
+                  "type": "perspectives_element",
+                  "title": "Bad processes don\u2019t get better with automation",
+                  "description": null,
+                  "url": "https://martech.org/bad-processes-dont-get-better-with-automation/",
+                  "domain": "martech.org",
+                  "date": "1 week ago",
+                  "source": "Vladimir Ceric",
+                  "timestamp": "2026-01-23 01:18:40 +00:00"
+                },
+                {
+                  "type": "perspectives_element",
+                  "title": "How to Automate Lead Follow-Up Using AI (Email, SMS & Ads)",
+                  "description": null,
+                  "url": "https://www.youtube.com/watch?v=-R4VuSkJbes",
+                  "domain": "www.youtube.com",
+                  "date": "3 weeks ago",
+                  "source": "Brad Smith",
+                  "timestamp": "2026-01-09 01:18:40 +00:00"
+                }
+              ],
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 7,
+              "rank_absolute": 14,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[2]/div[1]/div[2]/div[1]/div[1]/div[2]/div[23]/div[1]/div[1]",
+              "domain": "zapier.com",
+              "title": "9 best marketing automation software tools in 2026",
+              "url": "https://zapier.com/blog/best-marketing-automation-software/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://zapier.com \u203a App picks \u203a Best apps",
+              "website_name": "Zapier",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "description": "Oct 1, 2025 \u2014 If your team needs a new solution for executing self-sufficient marketing campaigns, explore these best-in-class marketing automation ...",
+              "pre_snippet": "10/01/2025 00:00:00",
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "best-in-class marketing automation"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": "2025-10-01 00:00:00 +00:00",
+              "rectangle": null
+            },
+            {
+              "type": "related_searches",
+              "rank_group": 1,
+              "rank_absolute": 15,
+              "page": 1,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[2]/div[2]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/div[2]",
+              "items": [
+                "Marketing automation examples",
+                "Marketing automation tools",
+                "Marketing Automation Zoho",
+                "Marketing Automation jobs",
+                "Marketing Automation salary",
+                "Marketing automation AI",
+                "Marketing automation courses",
+                "Top 10 marketing automation tools"
+              ],
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 8,
+              "rank_absolute": 16,
+              "page": 2,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]",
+              "domain": "www.ibm.com",
+              "title": "What is marketing automation?",
+              "url": "https://www.ibm.com/think/topics/marketing-automation",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.ibm.com \u203a think \u203a topics \u203a marketing-auto...",
+              "website_name": "IBM",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "description": "Marketing automation is the use of software and technology to manage routine marketing processes and tasks across multiple channels. Read more",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "use of software and technology to manage routine marketing processes and tasks"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 9,
+              "rank_absolute": 17,
+              "page": 2,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]",
+              "domain": "business.adobe.com",
+              "title": "Marketing automation that drives revenue",
+              "url": "https://business.adobe.com/blog/basics/marketing-automation",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://business.adobe.com \u203a blog \u203a basics \u203a marketing-...",
+              "website_name": "Adobe for Business",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "description": "Oct 9, 2025 \u2014 See how Adobe Marketo Engage delivers revenue with marketing automation using AI personalization, full-funnel attribution,\u00a0...",
+              "pre_snippet": "10/09/2025 00:00:00",
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "marketing automation"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": "2025-10-09 00:00:00 +00:00",
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 10,
+              "rank_absolute": 18,
+              "page": 2,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[1]/div[2]/div[2]/div[1]/div[1]/div[3]/div[1]/div[1]",
+              "domain": "www.klaviyo.com",
+              "title": "Klaviyo: AI Email Marketing & SMS | B2C CRM",
+              "url": "https://www.klaviyo.com/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.klaviyo.com",
+              "website_name": "Klaviyo",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "description": "AI that actually does the work. Have Klaviyo AI (K:AI) automate your marketing, power your support, and personalize every interaction. Read more",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "automate your marketing"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 11,
+              "rank_absolute": 19,
+              "page": 2,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[1]/div[2]/div[2]/div[1]/div[1]/div[4]/div[1]/div[1]",
+              "domain": "www.optimizely.com",
+              "title": "What is marketing automation?",
+              "url": "https://www.optimizely.com/optimization-glossary/marketing-automation/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.optimizely.com \u203a Glossary",
+              "website_name": "Optimizely",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "description": "Marketing automation (MA) is a term used to describe the replacement of repetitive tasks and manual marketing processes with solutions that are automated.",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "Marketing automation"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 12,
+              "rank_absolute": 20,
+              "page": 2,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[1]/div[2]/div[2]/div[1]/div[1]/div[5]/div[1]/div[1]",
+              "domain": "www.drip.com",
+              "title": "Drip: Powerful, Easy-To-Use Marketing Automation",
+              "url": "https://www.drip.com/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.drip.com",
+              "website_name": "drip.com",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "description": "Drip provides built-in marketing strategies and tools to help you be successful right from the start. Results can happen quickly. Drip's prebuilt workflows and\u00a0... Read more",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "Drip provides built-in marketing strategies and tools"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 13,
+              "rank_absolute": 21,
+              "page": 2,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[1]/div[2]/div[2]/div[1]/div[1]/div[6]/div[1]/div[1]",
+              "domain": "www.microsoft.com",
+              "title": "What is Marketing Automation - Dynamics 365",
+              "url": "https://www.microsoft.com/en-us/dynamics-365/topics/marketing/what-is-marketing-automation",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.microsoft.com \u203a dynamics-365 \u203a topics \u203a w...",
+              "website_name": "Microsoft",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "description": "Marketing automation software allows marketers to create sets of instructions, called workflows, to automate these processes. Read more",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "Marketing automation software"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 14,
+              "rank_absolute": 22,
+              "page": 2,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[1]/div[2]/div[2]/div[1]/div[1]/div[7]/div[1]/div[1]",
+              "domain": "mailchimp.com",
+              "title": "Marketing Automation Platform to Convert More Customers",
+              "url": "https://mailchimp.com/automations/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://mailchimp.com \u203a automations",
+              "website_name": "Mailchimp",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "description": "Our marketing automation platform allows your business to send the right message to the right people - automatically.",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "marketing automation platform"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 15,
+              "rank_absolute": 23,
+              "page": 2,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[1]/div[2]/div[2]/div[1]/div[1]/div[8]/div[1]/div[1]",
+              "domain": "www.getresponse.com",
+              "title": "Marketing Automation Software",
+              "url": "https://www.getresponse.com/features/marketing-automation",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://www.getresponse.com \u203a features \u203a marketing-aut...",
+              "website_name": "GetResponse",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "description": "Close all gaps in your marketing efforts with GetResponse's automated marketing solutions. Use filters, build contact profiles, and set up automated emails.",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "GetResponse's automated marketing solutions"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 16,
+              "rank_absolute": 24,
+              "page": 2,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[1]/div[2]/div[2]/div[1]/div[1]/div[9]/div[1]/div[1]",
+              "domain": "n8n.io",
+              "title": "Top 2424 Marketing automation workflows",
+              "url": "https://n8n.io/workflows/categories/marketing/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://n8n.io \u203a workflows \u203a categories \u203a marketing",
+              "website_name": "N8N",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "description": "Marketing automation is technology that manages marketing processes and multifunctional campaigns across multiple channels automatically. It streamlines and\u00a0... Read more",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "technology that manages marketing processes and multifunctional campaigns"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "organic",
+              "rank_group": 17,
+              "rank_absolute": 25,
+              "page": 2,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[1]/div[2]/div[2]/div[1]/div[1]/div[10]/div[1]/div[1]",
+              "domain": "mautic.org",
+              "title": "Mautic: Open Source Marketing Automation",
+              "url": "https://mautic.org/",
+              "cache_url": null,
+              "related_search_url": null,
+              "breadcrumb": "https://mautic.org",
+              "website_name": "Mautic",
+              "is_image": false,
+              "is_video": false,
+              "is_featured_snippet": false,
+              "is_malicious": false,
+              "is_web_story": false,
+              "description": "Mautic provides free and open source marketing automation software available to everyone. Free email marketing and lead management software.",
+              "pre_snippet": null,
+              "extended_snippet": null,
+              "images": null,
+              "amp_version": false,
+              "rating": null,
+              "price": null,
+              "highlighted": [
+                "free and open source marketing automation software"
+              ],
+              "links": null,
+              "faq": null,
+              "extended_people_also_search": null,
+              "about_this_result": null,
+              "related_result": null,
+              "timestamp": null,
+              "rectangle": null
+            },
+            {
+              "type": "related_searches",
+              "rank_group": 2,
+              "rank_absolute": 26,
+              "page": 2,
+              "position": "left",
+              "xpath": "/html[1]/body[1]/div[3]/div[1]/div[12]/div[1]/div[3]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1]/div[2]",
+              "items": [
+                "Marketing automation examples",
+                "Marketing automation tools",
+                "Marketing Automation Zoho",
+                "Marketing Automation jobs",
+                "Marketing Automation salary",
+                "Marketing automation AI",
+                "Marketing automation courses",
+                "Top 10 marketing automation tools"
+              ],
+              "rectangle": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "01300318-1244-0139-0000-e237f696288f",
+      "status_code": 40000,
+      "status_message": "You can set only one task at a time.",
+      "time": "0 sec.",
+      "cost": 0,
+      "result_count": 0,
+      "path": [
+        "v3",
+        "serp",
+        "google",
+        "organic",
+        "live",
+        "advanced"
+      ],
+      "data": {
+        "api": "serp",
+        "function": "live",
+        "se": "google",
+        "se_type": "organic",
+        "async": "true",
+        "language_code": "en",
+        "location_code": 2840,
+        "keyword": "fractional cmo",
+        "depth": 20,
+        "api_postback_url": "https://dfs-lsd-1.iotechnologies.gdn:97/api/postback"
+      },
+      "result": null
+    }
+  ]
+}

@@ -1,0 +1,444 @@
+# MRD Analysis Summary
+# Generated: 2026-01-28
+# Purpose: Map MRD requirements to existing skills per skill-development-from-mrd.md orchestrator
+
+---
+analysis_date: "2026-01-28"
+orchestrator: "skill-development-from-mrd.md"
+total_mrds_analyzed: 3
+active_mrds: 2
+superseded_mrds: 1
+
+---
+# MRD #1 (Original) - SUPERSEDED
+# Status: Tabled - awaiting ICP clarity from MRD #1 v2
+mrd_1_original:
+  title: "FFC - Product Packaging & Offer Segmentation Test"
+  client: "FFC (Female Founders Collective)"
+  status: "SUPERSEDED"
+  superseded_by: "MRD #1 v2"
+  reason: "Tabled pending ICP research completion"
+  action: "SKIP - Do not process"
+
+---
+# MRD #1 v2 (ACTIVE)
+mrd_1_v2:
+  title: "FFC - ICP Research & Customer Intelligence"
+  client: "FFC (Female Founders Collective)"
+  status: "ACTIVE"
+  timeline: "2 weeks"
+  priority: "High"
+
+  integrations:
+    - platform: "HubSpot"
+      type: "CRM"
+      purpose: "Contact management, email automation"
+
+  requirements:
+    - id: "FFC-REQ-001"
+      name: "Customer Research & Interviews"
+      description: "Conduct 10-15 customer interviews with founders"
+      deliverable: "Interview transcripts and synthesis document"
+      priority: "P0"
+
+    - id: "FFC-REQ-002"
+      name: "Retention Analysis"
+      description: "Analyze retention patterns and churn risks in member base"
+      deliverable: "Retention analysis report with cohort breakdown"
+      priority: "P0"
+
+    - id: "FFC-REQ-003"
+      name: "ICP Documentation"
+      description: "Define 2-3 clear ICP segments with behavioral profiles"
+      deliverable: "ICP document with personas and segmentation criteria"
+      priority: "P0"
+
+    - id: "FFC-REQ-004"
+      name: "Product Positioning Matrix"
+      description: "Create positioning framework for membership tiers"
+      deliverable: "Positioning matrix with value props per tier"
+      priority: "P1"
+
+    - id: "FFC-REQ-005"
+      name: "Newsletter Automation"
+      description: "Set up automated newsletter flows in HubSpot"
+      deliverable: "Active newsletter automation workflows"
+      priority: "P1"
+
+    - id: "FFC-REQ-006"
+      name: "ManyChat Audit"
+      description: "Audit and optimize ManyChat flows"
+      deliverable: "ManyChat audit report with recommendations"
+      priority: "P2"
+
+  success_metrics:
+    - "10-15 customer interviews completed"
+    - "2-3 ICP segments defined with behavioral criteria"
+    - "Retention cohort analysis complete"
+    - "Newsletter automation active in HubSpot"
+
+---
+# MRD #2 (ACTIVE)
+mrd_2:
+  title: "Flowcode - Lifecycle Marketing Prototype"
+  client: "Flowcode"
+  status: "ACTIVE"
+  timeline: "1 week prototype + 30/60/90 roadmap"
+  priority: "High"
+
+  integrations:
+    - platform: "HubSpot"
+      type: "CRM"
+      purpose: "Contact/company management, email automation"
+    - platform: "Snowflake"
+      type: "Data Warehouse"
+      purpose: "Customer data, health scores, usage analytics"
+    - platform: "Heap"
+      type: "Analytics"
+      purpose: "Behavioral event tracking"
+    - platform: "Hightouch"
+      type: "Reverse ETL"
+      purpose: "Data sync to marketing tools"
+    - platform: "Chargebee"
+      type: "Billing"
+      purpose: "Subscription and revenue data"
+
+  product_context:
+    F1_product: "QR code generator (entry point)"
+    F2_product: "Enterprise platform (upsell target)"
+    migration_goal: "Convert F1 free/paid users to F2 platform"
+
+  requirements:
+    - id: "FC-REQ-001"
+      name: "Data Audit"
+      description: "Comprehensive audit of HubSpot, Snowflake, and Heap data"
+      deliverable: "Data quality report with field coverage and recommendations"
+      priority: "P0"
+
+    - id: "FC-REQ-002"
+      name: "Lifecycle Audit"
+      description: "Map current lifecycle stages and identify gaps"
+      deliverable: "Lifecycle audit report with bottleneck analysis"
+      priority: "P0"
+
+    - id: "FC-REQ-003"
+      name: "Customer Segmentation"
+      description: "Build behavioral segments based on usage patterns"
+      deliverable: "Segmentation schema with criteria and populations"
+      priority: "P0"
+
+    - id: "FC-REQ-004"
+      name: "Prototype Flow"
+      description: "Build prototype lifecycle flow for one segment"
+      deliverable: "Working prototype automation in HubSpot"
+      priority: "P0"
+
+    - id: "FC-REQ-005"
+      name: "AI Personalization"
+      description: "Implement AI-driven content personalization"
+      deliverable: "Personalized email templates with dynamic content"
+      priority: "P1"
+
+    - id: "FC-REQ-006"
+      name: "F1→F2 Migration Campaigns"
+      description: "Design campaigns to convert F1 users to F2 platform"
+      deliverable: "Migration campaign playbook with email sequences"
+      priority: "P1"
+
+  success_metrics:
+    - "Data quality report complete with remediation plan"
+    - "Lifecycle stages mapped with conversion rates"
+    - "2-3 behavioral segments defined"
+    - "One prototype automation live"
+    - "F1→F2 migration playbook delivered"
+
+---
+# SKILL MATCHING MATRIX
+# Match scores: 90-100% = Execute as-is, 70-89% = Execute with config, 50-69% = Needs modification, <50% = New skill needed
+
+skill_matching:
+
+  # FFC Requirements (MRD #1 v2)
+  FFC-REQ-001:
+    requirement: "Customer Research & Interviews"
+    matches:
+      - skill: "generate-interview-questions"
+        match_score: 85
+        rationale: "Generates interview questions from research gaps. Direct match for preparing customer interviews."
+        action: "EXECUTE"
+        config_needed:
+          - "client_id: ffc"
+          - "include_voice_questions: true"
+          - "question_count: 25"
+      - skill: "incorporate-interview-results"
+        match_score: 75
+        rationale: "Skill exists for incorporating interview results into research. Chain after interviews."
+        action: "EXECUTE_AFTER"
+    gaps: []
+
+  FFC-REQ-002:
+    requirement: "Retention Analysis"
+    matches:
+      - skill: "at-risk-detection"
+        match_score: 90
+        rationale: "Platform-agnostic churn risk detection with health scores. Direct match."
+        action: "EXECUTE"
+        config_needed:
+          - "data_source: hubspot"
+          - "revenue_type: membership"
+      - skill: "churn-prediction"
+        match_score: 85
+        rationale: "Identifies contacts and accounts at risk of churning. Complements at-risk-detection."
+        action: "EXECUTE"
+      - skill: "dormant-detection"
+        match_score: 75
+        rationale: "Finds inactive accounts. Useful for retention cohort analysis."
+        action: "OPTIONAL"
+    gaps: []
+
+  FFC-REQ-003:
+    requirement: "ICP Documentation"
+    matches:
+      - skill: "extract-audience-persona"
+        match_score: 70
+        rationale: "Extracts audience personas from content. Can adapt for ICP documentation."
+        action: "EXECUTE_WITH_ADAPTATION"
+        config_needed:
+          - "source: interview transcripts"
+          - "output_format: ICP document"
+      - skill: "research-company"
+        match_score: 60
+        rationale: "Company research for context, but not ICP-specific."
+        action: "SUPPORT"
+    gaps:
+      - "May need ICP-specific synthesis template"
+
+  FFC-REQ-004:
+    requirement: "Product Positioning Matrix"
+    matches:
+      - skill: "extract-pov"
+        match_score: 55
+        rationale: "Extracts point of view, partially relevant for positioning."
+        action: "PARTIAL_MATCH"
+      - skill: "research-competitors"
+        match_score: 60
+        rationale: "Competitor research informs positioning but doesn't create matrix."
+        action: "SUPPORT"
+    gaps:
+      - "No direct skill for positioning matrix generation"
+    new_skill_needed: true
+    new_skill_name: "product-positioning-matrix"
+    new_skill_priority: "P2"
+
+  FFC-REQ-005:
+    requirement: "Newsletter Automation"
+    matches:
+      - skill: "cohort-email-builder"
+        match_score: 75
+        rationale: "Builds batch email campaigns. Can adapt for newsletter automation."
+        action: "EXECUTE_WITH_ADAPTATION"
+        config_needed:
+          - "cohort_type: newsletter_subscriber"
+          - "reason_codes: [ONBOARDING, ENGAGEMENT]"
+          - "crm_platform: hubspot"
+      - skill: "email-copy-generator"
+        match_score: 70
+        rationale: "Generates email copy. Chain after cohort builder."
+        action: "EXECUTE_AFTER"
+    gaps:
+      - "Newsletter-specific scheduling and cadence logic"
+
+  FFC-REQ-006:
+    requirement: "ManyChat Audit"
+    matches: []
+    match_score: 0
+    gaps:
+      - "No ManyChat integration or skill"
+    new_skill_needed: true
+    new_skill_name: "manychat-audit"
+    new_skill_priority: "P3"
+    note: "Consider browser automation fallback if no API"
+
+  # Flowcode Requirements (MRD #2)
+  FC-REQ-001:
+    requirement: "Data Audit"
+    matches:
+      - skill: "crm-discovery"
+        match_score: 95
+        rationale: "Multi-platform CRM querying. Direct match for HubSpot audit."
+        action: "EXECUTE"
+        config_needed:
+          - "crm.type: hubspot"
+          - "entities to discover"
+      - skill: "data-warehouse-discovery"
+        match_score: 95
+        rationale: "Multi-platform DW exploration. Direct match for Snowflake audit."
+        action: "EXECUTE"
+        config_needed:
+          - "warehouse.type: snowflake"
+          - "tables to discover"
+      - skill: "data-quality-audit"
+        match_score: 90
+        rationale: "Assesses data quality and coverage. Completes the audit."
+        action: "EXECUTE"
+    gaps:
+      - "Heap integration not yet in data-warehouse-discovery"
+    heap_workaround: "Use data-warehouse-discovery with Heap's Postgres-compatible SQL interface"
+
+  FC-REQ-002:
+    requirement: "Lifecycle Audit"
+    matches:
+      - skill: "lifecycle-audit"
+        match_score: 98
+        rationale: "Exact match. Analyzes lifecycle stages, bottlenecks, churn risks, upsell opportunities."
+        action: "EXECUTE"
+        config_needed:
+          - "tenant_id: flowcode"
+          - "limit: 1000"
+          - "execution_mode: suggest"
+    gaps: []
+
+  FC-REQ-003:
+    requirement: "Customer Segmentation"
+    matches:
+      - skill: "cohort-email-builder"
+        match_score: 80
+        rationale: "Includes segmentation rules and reason codes. Can generate segment definitions."
+        action: "EXECUTE"
+        config_needed:
+          - "Use segmentation config to define criteria"
+      - skill: "at-risk-detection"
+        match_score: 75
+        rationale: "Segments accounts by health status."
+        action: "EXECUTE"
+      - skill: "conversion-funnel"
+        match_score: 70
+        rationale: "Identifies conversion patterns useful for segmentation."
+        action: "SUPPORT"
+    gaps: []
+
+  FC-REQ-004:
+    requirement: "Prototype Flow"
+    matches:
+      - skill: "playbook-executor"
+        match_score: 70
+        rationale: "Executes marketing playbooks. Can run prototype automation."
+        action: "EXECUTE_WITH_ADAPTATION"
+      - skill: "cohort-email-builder"
+        match_score: 75
+        rationale: "Builds the email campaign component of the prototype."
+        action: "EXECUTE"
+    gaps:
+      - "HubSpot workflow creation not fully automated"
+    note: "May require manual workflow setup in HubSpot UI"
+
+  FC-REQ-005:
+    requirement: "AI Personalization"
+    matches:
+      - skill: "email-copy-generator"
+        match_score: 80
+        rationale: "Generates personalized email copy. Direct match."
+        action: "EXECUTE"
+      - skill: "cohort-email-builder"
+        match_score: 75
+        rationale: "Includes personalization tokens. Supports AI personalization."
+        action: "EXECUTE"
+      - skill: "ghostwrite-content"
+        match_score: 70
+        rationale: "Ghostwriting with voice matching. Can adapt for email personalization."
+        action: "OPTIONAL"
+    gaps: []
+
+  FC-REQ-006:
+    requirement: "F1→F2 Migration Campaigns"
+    matches:
+      - skill: "cohort-email-builder"
+        match_score: 85
+        rationale: "CONVERSION reason code designed for this use case."
+        action: "EXECUTE"
+        config_needed:
+          - "cohort_type: f1_users"
+          - "reason_codes: [CONVERSION, UPSELL]"
+      - skill: "upsell-candidates"
+        match_score: 80
+        rationale: "Identifies expansion-ready accounts. Supports migration targeting."
+        action: "EXECUTE"
+      - skill: "conversion-funnel"
+        match_score: 70
+        rationale: "Tracks F1→F2 funnel performance."
+        action: "SUPPORT"
+    gaps: []
+
+---
+# EXECUTION PLAN
+
+execution_summary:
+  total_requirements: 12
+  requirements_with_70_plus_match: 10
+  requirements_needing_new_skills: 2
+
+  immediate_execution:
+    - skill: "lifecycle-audit"
+      for: ["FC-REQ-002"]
+      config: "tenant_id: flowcode"
+
+    - skill: "crm-discovery"
+      for: ["FC-REQ-001"]
+      config: "crm.type: hubspot"
+
+    - skill: "data-warehouse-discovery"
+      for: ["FC-REQ-001"]
+      config: "warehouse.type: snowflake"
+
+    - skill: "at-risk-detection"
+      for: ["FFC-REQ-002", "FC-REQ-003"]
+      config: "platform-specific"
+
+    - skill: "churn-prediction"
+      for: ["FFC-REQ-002"]
+      config: "days_threshold: 30"
+
+    - skill: "generate-interview-questions"
+      for: ["FFC-REQ-001"]
+      config: "client_id: ffc"
+
+    - skill: "cohort-email-builder"
+      for: ["FFC-REQ-005", "FC-REQ-003", "FC-REQ-004", "FC-REQ-005", "FC-REQ-006"]
+      config: "reason_codes vary by requirement"
+
+    - skill: "email-copy-generator"
+      for: ["FC-REQ-005"]
+      config: "personalization enabled"
+
+    - skill: "upsell-candidates"
+      for: ["FC-REQ-006"]
+      config: "product: F2_platform"
+
+  new_skills_to_create:
+    - name: "product-positioning-matrix"
+      for: "FFC-REQ-004"
+      priority: "P2"
+      location: "skills-staging/"
+      dependencies: ["research-competitors", "extract-pov"]
+
+    - name: "manychat-audit"
+      for: "FFC-REQ-006"
+      priority: "P3"
+      location: "skills-staging/"
+      dependencies: []
+      note: "Consider browser automation if no API available"
+
+---
+# NEXT STEPS
+
+next_steps:
+  phase_2_execution:
+    1: "Execute lifecycle-audit for Flowcode (FC-REQ-002)"
+    2: "Execute crm-discovery + data-warehouse-discovery for Flowcode (FC-REQ-001)"
+    3: "Execute generate-interview-questions for FFC (FFC-REQ-001)"
+    4: "Execute at-risk-detection + churn-prediction for FFC (FFC-REQ-002)"
+    5: "Execute cohort-email-builder for multiple requirements"
+
+  phase_3_new_skills:
+    1: "Create product-positioning-matrix skill in skills-staging/"
+    2: "Create manychat-audit skill in skills-staging/"

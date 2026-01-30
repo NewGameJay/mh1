@@ -1,0 +1,113 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Research Founder Output",
+  "description": "Output schema for the research-founder skill",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["success", "review", "failed", "budget_exceeded"]
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "founder_profile": {
+          "type": "object",
+          "properties": {
+            "name": {"type": "string"},
+            "title": {"type": "string"},
+            "company": {"type": "string"},
+            "location": {"type": "string"},
+            "about": {"type": "string"},
+            "career_history": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {"type": "string"},
+                  "company": {"type": "string"},
+                  "duration": {"type": "string"},
+                  "description": {"type": "string"}
+                }
+              }
+            },
+            "education": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "school": {"type": "string"},
+                  "degree": {"type": "string"},
+                  "year": {"type": "string"}
+                }
+              }
+            },
+            "skills": {"type": "array", "items": {"type": "string"}},
+            "linkedin_url": {"type": ["string", "null"]},
+            "twitter_handle": {"type": ["string", "null"]}
+          }
+        },
+        "content_analysis": {
+          "type": "object",
+          "properties": {
+            "total_pieces": {"type": "integer"},
+            "sources": {"type": "array", "items": {"type": "string"}},
+            "topics": {"type": "array", "items": {"type": "string"}},
+            "posting_frequency": {"type": "string"}
+          }
+        },
+        "voice_patterns": {
+          "type": "object",
+          "properties": {
+            "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+            "tone": {"type": "array", "items": {"type": "string"}},
+            "vocabulary_level": {"type": "string"},
+            "common_phrases": {"type": "array", "items": {"type": "string"}},
+            "sentence_structure": {"type": "string"},
+            "formality": {"type": "string"},
+            "total_words_analyzed": {"type": "integer"}
+          }
+        },
+        "topics_of_expertise": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "topic": {"type": "string"},
+              "confidence": {"type": "number"}
+            }
+          }
+        },
+        "interview_prep": {
+          "type": "object",
+          "properties": {
+            "recommended_topics": {"type": "array", "items": {"type": "string"}},
+            "questions_to_explore": {"type": "array", "items": {"type": "string"}},
+            "gaps_to_fill": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "research_doc": {"type": "string"},
+        "research_doc_path": {"type": "string"}
+      }
+    },
+    "evaluation": {"type": "object"},
+    "release_action": {"type": "string"},
+    "run_id": {"type": "string"},
+    "_meta": {
+      "type": "object",
+      "properties": {
+        "client_id": {"type": "string"},
+        "tenant_id": {"type": "string"},
+        "founder_name": {"type": "string"},
+        "run_id": {"type": "string"},
+        "content_pieces_analyzed": {"type": "integer"},
+        "runtime_seconds": {"type": "number"},
+        "cost_usd": {"type": "number"},
+        "timestamp": {"type": "string"}
+      }
+    },
+    "error": {"type": "string"},
+    "error_type": {"type": "string"}
+  },
+  "required": ["status"]
+}

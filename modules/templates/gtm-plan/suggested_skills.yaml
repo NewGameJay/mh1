@@ -1,0 +1,188 @@
+# Suggested Skills for GTM Plan Template
+#
+# This file defines the recommended skill sequence for go-to-market planning.
+# Skills are executed in order, with dependencies respected.
+
+template_id: gtm-plan
+version: "1.0.0"
+
+# Required skills - must be executed
+required_skills:
+  - name: research-company
+    description: |
+      Gather comprehensive company and market intelligence. Foundation for
+      all subsequent GTM planning activities.
+    version: "1.0.0"
+    order: 1
+    estimated_cost: "$2.00"
+    estimated_duration: "15-30min"
+    inputs:
+      company_name: "{{company_name}}"
+      include_market_context: true
+    outputs:
+      - company_profile
+      - market_context
+      - product_details
+
+  - name: research-competitors
+    description: |
+      Analyze competitive landscape with SWOT analysis and positioning matrix.
+      Critical for differentiated positioning.
+    version: "1.0.0"
+    order: 2
+    depends_on:
+      - research-company
+    estimated_cost: "$5.00"
+    estimated_duration: "30-60min"
+    inputs:
+      client_id: "{{client_id}}"
+      competitor_count: 5
+      depth: "detailed"
+    outputs:
+      - competitor_profiles
+      - swot_analysis
+      - positioning_matrix
+      - feature_comparison
+
+  - name: extract-audience-persona
+    description: |
+      Define target personas with pain points, goals, and buying triggers.
+      Enables targeted messaging and channel selection.
+    version: "1.0.0"
+    order: 3
+    depends_on:
+      - research-company
+    estimated_cost: "$3.00"
+    estimated_duration: "20-40min"
+    inputs:
+      client_id: "{{client_id}}"
+      persona_count: 3
+      include_pain_points: true
+    outputs:
+      - persona_profiles
+      - pain_point_map
+      - buying_triggers
+      - objection_handlers
+
+  - name: positioning-angles
+    description: |
+      Develop differentiated positioning and messaging framework.
+      Synthesizes competitive and persona insights into actionable messaging.
+    version: "1.0.0"
+    order: 4
+    depends_on:
+      - research-competitors
+      - extract-audience-persona
+    estimated_cost: "$3.00"
+    estimated_duration: "20-40min"
+    inputs:
+      client_id: "{{client_id}}"
+      differentiation_focus: true
+    outputs:
+      - positioning_statement
+      - messaging_framework
+      - value_propositions
+      - differentiators
+
+# Optional skills - enhance GTM planning
+optional_skills:
+  - name: gtm-engineering
+    description: |
+      Build comprehensive GTM execution plan with phased roadmap,
+      channel strategy, and milestone tracking.
+    version: "1.0.0"
+    order: 5
+    depends_on:
+      - positioning-angles
+    estimated_cost: "$4.00"
+    estimated_duration: "30-45min"
+    inputs:
+      client_id: "{{client_id}}"
+      objective: "{{gtm_objective}}"
+      timeline_weeks: 12
+    outputs:
+      - gtm_roadmap
+      - channel_strategy
+      - milestone_plan
+      - resource_requirements
+
+  - name: icp-historical-analysis
+    description: |
+      Analyze ideal customer profile from historical CRM data.
+      Validates personas with actual customer patterns.
+    version: "1.0.0"
+    order: 2
+    depends_on:
+      - research-company
+    prerequisites:
+      - type: data_source
+        name: crm_access
+        description: CRM with customer data
+    estimated_cost: "$2.00"
+    estimated_duration: "15-30min"
+    inputs:
+      client_id: "{{client_id}}"
+    outputs:
+      - icp_profile
+      - customer_patterns
+      - segment_analysis
+
+  - name: brand-voice
+    description: |
+      Define brand voice for consistent messaging across channels.
+      Ensures GTM materials maintain brand integrity.
+    version: "1.0.0"
+    order: 4
+    depends_on:
+      - positioning-angles
+    estimated_cost: "$2.00"
+    estimated_duration: "15-25min"
+    inputs:
+      client_id: "{{client_id}}"
+    outputs:
+      - voice_guidelines
+      - tone_framework
+      - messaging_do_dont
+
+# Skill combinations for common scenarios
+scenarios:
+  - name: quick_positioning
+    description: Fast positioning and messaging only
+    skills:
+      - research-company
+      - research-competitors
+      - positioning-angles
+    estimated_cost: "$10.00"
+    estimated_duration: "1-2hr"
+
+  - name: full_gtm
+    description: Comprehensive GTM with execution roadmap
+    skills:
+      - research-company
+      - research-competitors
+      - extract-audience-persona
+      - positioning-angles
+      - gtm-engineering
+    estimated_cost: "$17.00"
+    estimated_duration: "3-5hr"
+
+  - name: data_validated_gtm
+    description: GTM with ICP validation from customer data
+    skills:
+      - research-company
+      - icp-historical-analysis
+      - research-competitors
+      - extract-audience-persona
+      - positioning-angles
+      - gtm-engineering
+    estimated_cost: "$19.00"
+    estimated_duration: "4-6hr"
+
+  - name: competitive_response
+    description: Focus on competitive positioning
+    skills:
+      - research-company
+      - research-competitors
+      - positioning-angles
+    estimated_cost: "$10.00"
+    estimated_duration: "1.5-3hr"

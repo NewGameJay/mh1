@@ -1,0 +1,332 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://mh1.ai/schemas/ai_planning_response.schema.yaml"
+title: AI Planning Response Schema
+description: |
+  Schema for the AI planning contract. This is the structured response format
+  that AI must produce when planning a module. It creates an explicit contract
+  between the AI and the human reviewer about what will be done.
+
+  This schema enforces that AI:
+  1. Explicitly states its interpretation of the task
+  2. Lists all assumptions being made
+  3. Proposes concrete outputs
+  4. Plans specific skills to run
+  5. Identifies required inputs
+  6. Flags potential risks
+  7. Asks for explicit confirmation
+
+type: object
+required:
+  - interpreted_task
+  - assumptions
+  - proposed_outputs
+  - skills_to_run
+  - confirmation_prompt
+
+properties:
+  interpreted_task:
+    type: string
+    minLength: 20
+    maxLength: 2000
+    description: |
+      AI's interpretation of what the task means and what will be delivered.
+      Must be specific and actionable. Should start with "I will" or similar
+      active voice construction.
+    examples:
+      - "I will analyze Acme Corp's customer lifecycle stages using HubSpot data, identify gaps in their email sequences, and provide a comprehensive report with recommendations for improving retention rates."
+
+  assumptions:
+    type: array
+    items:
+      type: string
+      minLength: 5
+      maxLength: 500
+    minItems: 1
+    description: |
+      Explicit assumptions the AI is making about the task. These should be
+      validated by the human reviewer. If any assumption is wrong, the plan
+      may need adjustment.
+    examples:
+      - - "HubSpot is the primary CRM and contains accurate customer data"
+        - "Email engagement data is available for the past 12 months"
+        - "The focus is on B2B customers, not B2C"
+        - "Budget/revenue data is available in the connected data warehouse"
+
+  proposed_outputs:
+    type: array
+    items:
+      $ref: "#/$defs/ProposedOutput"
+    minItems: 1
+    description: |
+      Concrete deliverables that will be produced. Each output should be
+      specific enough that success can be objectively measured.
+
+  skills_to_run:
+    type: array
+    items:
+      $ref: "#/$defs/SkillPlan"
+    minItems: 1
+    description: |
+      Ordered list of skills that will be executed to complete the task.
+      Skills are executed in order, respecting dependencies.
+
+  required_inputs:
+    type: array
+    items:
+      $ref: "#/$defs/InputRequirement"
+    default: []
+    description: |
+      Inputs needed from the user or system before execution can begin.
+      Empty array if all required data is already available.
+
+  risk_flags:
+    type: array
+    items:
+      type: string
+      minLength: 10
+      maxLength: 500
+    default: []
+    description: |
+      Potential risks, concerns, or limitations identified during planning.
+      These should be acknowledged by the reviewer before proceeding.
+    examples:
+      - - "Large dataset (500K+ contacts) may require chunked processing and longer execution time"
+        - "Missing email open rate data may limit engagement analysis accuracy"
+        - "Some lifecycle stages appear to have no associated automation"
+
+  confirmation_prompt:
+    type: string
+    minLength: 20
+    maxLength: 1000
+    pattern: "\\[y/n\\]\\s*$"
+    description: |
+      The question asked to the human reviewer for confirmation.
+      Must end with [y/n] to ensure explicit approval.
+    examples:
+      - "I've outlined my plan to audit Acme Corp's lifecycle marketing. This will analyze 3 lifecycle stages, review 12 email sequences, and produce a comprehensive report with recommendations. Estimated time: 15-20 minutes. Estimated cost: $2.50. Should I proceed? [y/n]"
+
+  estimated_duration:
+    type: string
+    description: |
+      Human-readable estimate of how long execution will take.
+    examples:
+      - "15-20 minutes"
+      - "2-3 hours"
+
+  estimated_cost_usd:
+    type: number
+    minimum: 0
+    description: |
+      Estimated cost in USD based on expected token usage.
+
+  confidence_level:
+    type: string
+    enum:
+      - HIGH
+      - MEDIUM
+      - LOW
+    description: |
+      AI's confidence in the plan:
+      - HIGH: Clear requirements, familiar pattern, low risk.
+      - MEDIUM: Some ambiguity or moderate complexity.
+      - LOW: Significant unknowns, may need iteration.
+
+  alternative_approaches:
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the alternative approach.
+        description:
+          type: string
+          description: How this approach differs.
+        tradeoffs:
+          type: string
+          description: Pros and cons vs. the primary plan.
+      required:
+        - name
+        - description
+    description: |
+      Alternative approaches considered. Useful for complex tasks
+      where multiple valid strategies exist.
+
+$defs:
+  ProposedOutput:
+    type: object
+    description: A concrete deliverable that will be produced.
+    required:
+      - name
+      - type
+      - description
+    properties:
+      name:
+        type: string
+        minLength: 1
+        maxLength: 255
+        description: |
+          Name of the output file or artifact.
+        examples:
+          - "lifecycle-audit-report.md"
+          - "engagement-analysis.json"
+
+      type:
+        type: string
+        enum:
+          - markdown
+          - json
+          - csv
+          - pdf
+          - html
+          - image
+          - data
+        description: Format of the output.
+
+      description:
+        type: string
+        minLength: 10
+        maxLength: 1000
+        description: |
+          What this output contains and how it should be used.
+        examples:
+          - "Comprehensive markdown report analyzing all lifecycle stages, identifying gaps, and providing prioritized recommendations with expected impact."
+
+      sections:
+        type: array
+        items:
+          type: string
+        description: |
+          For document outputs, the sections that will be included.
+        examples:
+          - - "Executive Summary"
+            - "Current State Analysis"
+            - "Gap Analysis"
+            - "Recommendations"
+            - "Implementation Roadmap"
+
+  SkillPlan:
+    type: object
+    description: Planned skill execution.
+    required:
+      - skill_name
+      - purpose
+    properties:
+      skill_name:
+        type: string
+        description: |
+          Name of the skill to execute. Must match a skill in skills/.
+        examples:
+          - "lifecycle-audit"
+          - "hubspot-extract"
+          - "content-generator"
+
+      purpose:
+        type: string
+        minLength: 10
+        maxLength: 500
+        description: |
+          Why this skill is being run and what it contributes to the task.
+        examples:
+          - "Extract customer lifecycle data from HubSpot including deal stages, email engagement, and activity history"
+
+      estimated_tokens:
+        type: integer
+        minimum: 0
+        description: |
+          Estimated token usage for this skill execution.
+
+      estimated_duration:
+        type: string
+        description: |
+          Estimated duration for this skill.
+        examples:
+          - "2-3 minutes"
+
+      dependencies:
+        type: array
+        items:
+          type: string
+        default: []
+        description: |
+          Names of skills that must complete before this one.
+        examples:
+          - ["hubspot-extract"]
+
+      parameters:
+        type: object
+        additionalProperties: true
+        description: |
+          Parameters to pass to the skill.
+
+      outputs:
+        type: array
+        items:
+          type: string
+        description: |
+          Expected outputs from this skill.
+
+  InputRequirement:
+    type: object
+    description: Required input for execution.
+    required:
+      - name
+      - type
+      - required
+      - description
+    properties:
+      name:
+        type: string
+        description: Input parameter name.
+        examples:
+          - "date_range"
+          - "customer_segment"
+          - "hubspot_credentials"
+
+      type:
+        type: string
+        enum:
+          - file
+          - parameter
+          - credential
+          - api_access
+          - data_source
+        description: |
+          Type of input required:
+          - file: A file upload.
+          - parameter: A configuration value.
+          - credential: API credentials or secrets.
+          - api_access: Access to an external API.
+          - data_source: Connection to a data source.
+
+      required:
+        type: boolean
+        description: Whether this input is mandatory.
+
+      description:
+        type: string
+        minLength: 10
+        maxLength: 500
+        description: |
+          What this input is used for and why it's needed.
+
+      default:
+        description: |
+          Default value if not provided.
+
+      provided:
+        type: boolean
+        default: false
+        description: |
+          Whether this input has already been provided.
+
+      source:
+        type: string
+        description: |
+          Where this input will come from if provided.
+        examples:
+          - "client config"
+          - "MCP connection"
+          - "user upload"
+
+additionalProperties: false

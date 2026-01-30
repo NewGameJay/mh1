@@ -1,0 +1,159 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Voice Contract Schema",
+  "description": "Defines a founder's voice characteristics for content generation",
+  "type": "object",
+  "required": ["founder_name", "role", "voice_characteristics", "topics_of_expertise"],
+  "properties": {
+    "founder_name": {
+      "type": "string",
+      "description": "Full name of the founder/executive"
+    },
+    "role": {
+      "type": "string",
+      "description": "Title/role (CEO, CTO, etc.)"
+    },
+    "company": {
+      "type": "string",
+      "description": "Company name"
+    },
+    "linkedin_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "LinkedIn profile URL"
+    },
+    "twitter_handle": {
+      "type": "string",
+      "description": "Twitter/X handle (without @)"
+    },
+    "voice_characteristics": {
+      "type": "object",
+      "description": "Core voice attributes",
+      "required": ["tone", "vocabulary_level", "sentence_structure"],
+      "properties": {
+        "tone": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Tone descriptors (e.g., 'conversational', 'authoritative', 'warm')",
+          "examples": [["conversational", "confident", "approachable"]]
+        },
+        "vocabulary_level": {
+          "type": "string",
+          "enum": ["simple", "moderate", "technical", "academic"],
+          "description": "Complexity of language used"
+        },
+        "sentence_structure": {
+          "type": "string",
+          "enum": ["short_punchy", "varied", "complex", "conversational"],
+          "description": "Typical sentence patterns"
+        },
+        "formality": {
+          "type": "string",
+          "enum": ["casual", "professional", "formal"],
+          "description": "Level of formality"
+        },
+        "humor_style": {
+          "type": "string",
+          "description": "How humor is used (if at all)",
+          "examples": ["dry wit", "self-deprecating", "none", "playful"]
+        },
+        "emotion_expression": {
+          "type": "string",
+          "enum": ["reserved", "moderate", "expressive"],
+          "description": "How openly emotions are expressed"
+        }
+      }
+    },
+    "signature_phrases": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Phrases or expressions frequently used",
+      "examples": [["Here's the thing...", "Let me be direct", "The data shows"]]
+    },
+    "topics_of_expertise": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Subject areas they speak about authoritatively",
+      "minItems": 1
+    },
+    "content_themes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Recurring themes in their content"
+    },
+    "anti_patterns": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Things to NEVER do when writing in this voice",
+      "examples": [["Don't use excessive exclamation points", "Avoid corporate buzzwords", "Never use 'synergy'"]]
+    },
+    "writing_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "rule": { "type": "string" },
+          "priority": {
+            "type": "string",
+            "enum": ["must", "should", "prefer"]
+          },
+          "example": { "type": "string" }
+        }
+      },
+      "description": "Specific writing rules to follow"
+    },
+    "example_posts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "type": "string",
+            "enum": ["linkedin", "twitter", "email", "blog"]
+          },
+          "content": { "type": "string" },
+          "engagement": {
+            "type": "object",
+            "properties": {
+              "likes": { "type": "integer" },
+              "comments": { "type": "integer" },
+              "shares": { "type": "integer" }
+            }
+          },
+          "date": { "type": "string", "format": "date" },
+          "notes": { "type": "string" }
+        }
+      },
+      "description": "High-performing content examples to learn from"
+    },
+    "audience_awareness": {
+      "type": "object",
+      "properties": {
+        "primary_audience": { "type": "string" },
+        "speaks_to": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "assumes_knowledge": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "description": "Who they're typically speaking to"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "created_at": { "type": "string", "format": "date-time" },
+        "updated_at": { "type": "string", "format": "date-time" },
+        "version": { "type": "string" },
+        "source_posts_analyzed": { "type": "integer" },
+        "confidence_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    }
+  }
+}

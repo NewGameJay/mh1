@@ -1,0 +1,161 @@
+# Agent Evaluation Rubric
+# Used to score agent outputs and identify improvement areas
+
+name: agent-name-evaluation
+version: 1.0.0
+min_passing_score: 0.8
+
+# Scoring weights (must sum to 1.0)
+weights:
+  accuracy: 0.25
+  completeness: 0.20
+  relevance: 0.20
+  voice_match: 0.15
+  actionability: 0.10
+  efficiency: 0.10
+
+criteria:
+  accuracy:
+    description: "Factual correctness of claims and data"
+    levels:
+      - score: 1.0
+        description: "All claims verified with sources, no errors"
+      - score: 0.8
+        description: "Minor inaccuracies that don't affect conclusions"
+      - score: 0.6
+        description: "Some unsupported claims, but core facts correct"
+      - score: 0.4
+        description: "Multiple factual errors, conclusions questionable"
+      - score: 0.2
+        description: "Major factual errors throughout"
+      - score: 0.0
+        description: "Fundamentally incorrect or fabricated"
+    auto_checks:
+      - type: source_verification
+        description: "Verify all factual claims have sources"
+      - type: data_consistency
+        description: "Check numbers and data points are consistent"
+
+  completeness:
+    description: "All required elements present and addressed"
+    levels:
+      - score: 1.0
+        description: "All required elements present, comprehensive coverage"
+      - score: 0.8
+        description: "All required elements, some areas could be deeper"
+      - score: 0.6
+        description: "Most required elements, 1-2 missing or shallow"
+      - score: 0.4
+        description: "Several required elements missing"
+      - score: 0.2
+        description: "Only partially addresses request"
+      - score: 0.0
+        description: "Does not address core request"
+    required_elements:
+      - "Executive summary"
+      - "Key findings"
+      - "Supporting data"
+      - "Recommendations"
+      - "Next steps"
+
+  relevance:
+    description: "Output directly addresses user's actual need"
+    levels:
+      - score: 1.0
+        description: "Directly addresses stated and implied needs"
+      - score: 0.8
+        description: "Addresses stated need, mostly relevant"
+      - score: 0.6
+        description: "Generally relevant but some tangential content"
+      - score: 0.4
+        description: "Partially relevant, significant off-topic content"
+      - score: 0.2
+        description: "Mostly irrelevant to actual need"
+      - score: 0.0
+        description: "Completely misses the point"
+    auto_checks:
+      - type: intent_alignment
+        description: "Compare output to parsed intent"
+
+  voice_match:
+    description: "Matches client's brand voice and style"
+    levels:
+      - score: 1.0
+        description: "Indistinguishable from client's authentic voice"
+      - score: 0.8
+        description: "Strong voice match, minor style variations"
+      - score: 0.6
+        description: "Recognizable but not perfectly matched"
+      - score: 0.4
+        description: "Generic voice, doesn't reflect client"
+      - score: 0.2
+        description: "Noticeable mismatch with client voice"
+      - score: 0.0
+        description: "Completely wrong tone/style"
+    requires_context:
+      - "voice-contract"
+    auto_checks:
+      - type: voice_contract_alignment
+        description: "Check against voice contract rules"
+
+  actionability:
+    description: "Clear, concrete next steps the user can take"
+    levels:
+      - score: 1.0
+        description: "Specific, prioritized actions with clear owners"
+      - score: 0.8
+        description: "Clear actions, mostly specific"
+      - score: 0.6
+        description: "Some actionable items, some vague"
+      - score: 0.4
+        description: "Vague recommendations, unclear next steps"
+      - score: 0.2
+        description: "Theoretical only, no practical guidance"
+      - score: 0.0
+        description: "No actionable content"
+
+  efficiency:
+    description: "Resource usage relative to output quality"
+    levels:
+      - score: 1.0
+        description: "Optimal resource use, fast execution"
+      - score: 0.8
+        description: "Good efficiency, minor improvements possible"
+      - score: 0.6
+        description: "Acceptable but room for optimization"
+      - score: 0.4
+        description: "Wasteful, unnecessary model calls or tokens"
+      - score: 0.2
+        description: "Very inefficient, significant waste"
+      - score: 0.0
+        description: "Extremely wasteful or timed out"
+    metrics:
+      - name: tokens_per_output_unit
+        threshold_good: 1000
+        threshold_acceptable: 2000
+      - name: model_calls
+        threshold_good: 5
+        threshold_acceptable: 10
+      - name: execution_time_seconds
+        threshold_good: 60
+        threshold_acceptable: 180
+
+# Automatic failure conditions
+auto_fail_conditions:
+  - condition: "accuracy < 0.4"
+    reason: "Factual accuracy too low"
+  - condition: "completeness < 0.4"
+    reason: "Missing too many required elements"
+  - condition: "relevance < 0.4"
+    reason: "Does not address user need"
+  - condition: "contains_pii"
+    reason: "Output contains unredacted PII"
+  - condition: "contains_harmful_content"
+    reason: "Output contains harmful or inappropriate content"
+
+# Scoring aggregation
+aggregation:
+  method: weighted_average
+  round_to: 2
+  passing_threshold: 0.8
+  excellence_threshold: 0.9

@@ -1,0 +1,97 @@
+name: Content Production
+id: content-production
+description: |
+  Create marketing content including LinkedIn posts, email sequences, and social media calendars.
+  Generates authentic content in the founder's voice using social listening data and voice contracts.
+  Supports ghostwriting, email campaigns, newsletters, and content atomization.
+category: content
+version: "1.0.0"
+
+# Timing
+typical_duration: "3-6 hours"
+estimated_cost: "$10-25"
+
+# Required inputs
+required_inputs:
+  - type: CONTEXT
+    name: voice_contract
+    description: Founder voice contract defining writing style, phrases, and anti-patterns
+  - type: CONTEXT
+    name: brand_context
+    description: Brand messaging, positioning, and audience documentation
+  - type: DATA_SOURCE
+    name: founder_posts
+    description: Historical founder posts for voice analysis (minimum 10 posts)
+    min_records: 10
+
+# Optional enrichment
+optional_inputs:
+  - type: DATA_SOURCE
+    name: social_signals
+    description: Social listening data for content inspiration
+  - type: DATA_SOURCE
+    name: thought_leaders
+    description: Thought leader posts for trending topics
+  - type: API_CREDENTIAL
+    name: firebase_access
+    description: Firebase access for post persistence and retrieval
+
+# Suggested skills
+suggested_skills:
+  - name: social-listening-collect
+    description: Collect social signals for inspiration
+    required: false
+    order: 0
+  - name: ghostwrite-content
+    description: Generate LinkedIn posts in founder's voice
+    required: true
+    order: 1
+  - name: email-sequences
+    description: Generate email sequences
+    required: false
+    order: 2
+  - name: newsletter-builder
+    description: Create newsletter content
+    required: false
+    order: 3
+  - name: content-atomizer
+    description: Break down long-form content into social pieces
+    required: false
+    order: 4
+
+# Default outputs
+default_outputs:
+  - name: Content Calendar
+    format: json
+    description: Structured content calendar with scheduled posts
+  - name: LinkedIn Posts
+    format: json
+    description: Generated posts ready for publishing
+  - name: Content Report
+    format: markdown
+    description: Summary of generated content with quality metrics
+  - name: Voice Analysis
+    format: json
+    description: Voice confidence scores and pattern matching
+
+# Quality gates
+quality_gates:
+  - name: voice_authenticity
+    description: Posts match founder's voice patterns
+    threshold: 0.7
+  - name: ai_tells_check
+    description: No obvious AI-generated patterns (em dashes, structures of 3)
+    threshold: 1.0
+  - name: content_completeness
+    description: All requested posts generated
+    threshold: 1.0
+
+# Tags for discovery
+tags:
+  - content
+  - linkedin
+  - ghostwriting
+  - social-media
+  - email
+  - marketing
+  - voice-contract

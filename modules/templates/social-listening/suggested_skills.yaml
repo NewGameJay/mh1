@@ -1,0 +1,154 @@
+# Suggested Skills for Social Listening Template
+#
+# This file defines the recommended skill sequence for social signal collection.
+# The main skill orchestrates platform-specific searches.
+
+template_id: social-listening
+version: "1.0.0"
+
+# Required skills - must be executed
+required_skills:
+  - name: social-listening-collect
+    description: |
+      Main orchestration skill that coordinates platform searches, scores posts
+      for ICP relevance, deduplicates, and persists to Firebase.
+    version: "1.1.0"
+    order: 1
+    estimated_cost: "$5.00"
+    estimated_duration: "10-30min"
+    inputs:
+      client_id: "{{client_id}}"
+      platforms: ["linkedin", "twitter", "reddit"]
+      date_range: "past-week"
+    outputs:
+      - scored_posts
+      - collection_report
+      - stats
+
+# Platform-specific skills - called by social-listening-collect
+platform_skills:
+  - name: linkedin-keyword-search
+    description: |
+      Search LinkedIn for posts matching keywords. Uses Bright Data
+      for reliable scraping.
+    version: "1.0.0"
+    platform: linkedin
+    parallel: true
+    estimated_cost: "$1.50"
+    estimated_duration: "3-8min"
+    inputs:
+      keywords: "{{keywords}}"
+      max_results: 50
+    outputs:
+      - posts
+      - search_metadata
+
+  - name: twitter-keyword-search
+    description: |
+      Search Twitter for posts matching keywords. Uses Bright Data
+      for reliable scraping.
+    version: "1.0.0"
+    platform: twitter
+    parallel: true
+    estimated_cost: "$1.50"
+    estimated_duration: "3-8min"
+    inputs:
+      keywords: "{{keywords}}"
+      max_results: 50
+    outputs:
+      - posts
+      - search_metadata
+
+  - name: reddit-keyword-search
+    description: |
+      Search Reddit for posts and comments matching keywords.
+      Includes subreddit filtering.
+    version: "1.0.0"
+    platform: reddit
+    parallel: true
+    estimated_cost: "$1.00"
+    estimated_duration: "3-8min"
+    inputs:
+      keywords: "{{keywords}}"
+      subreddits: []  # Empty = all
+      max_results: 50
+    outputs:
+      - posts
+      - comments
+      - search_metadata
+
+# Optional skills - enhance collection
+optional_skills:
+  - name: reddit-content-analyzer
+    description: |
+      Deep analysis of Reddit discussions including sentiment,
+      topic extraction, and engagement patterns.
+    version: "1.0.0"
+    order: 2
+    depends_on:
+      - social-listening-collect
+    prerequisites:
+      - type: output
+        name: reddit_posts
+        description: Reddit posts collected
+    estimated_cost: "$2.00"
+    estimated_duration: "5-10min"
+    inputs:
+      posts: "{{reddit_posts}}"
+    outputs:
+      - analysis_report
+      - topic_clusters
+      - sentiment_breakdown
+
+  - name: thought-leader-discovery
+    description: |
+      Identify thought leaders based on collected signals.
+      Surfaces influential voices in the conversation.
+    version: "1.0.0"
+    order: 3
+    depends_on:
+      - social-listening-collect
+    estimated_cost: "$1.50"
+    estimated_duration: "5-10min"
+    inputs:
+      signals: "{{scored_posts}}"
+      min_engagement: 100
+    outputs:
+      - thought_leaders
+      - influence_scores
+
+# Skill combinations for common scenarios
+scenarios:
+  - name: quick_linkedin
+    description: LinkedIn-only collection
+    skills:
+      - social-listening-collect
+    customizations:
+      platforms: ["linkedin"]
+    estimated_cost: "$2.50"
+    estimated_duration: "5-10min"
+
+  - name: full_collection
+    description: All platforms with analysis
+    skills:
+      - social-listening-collect
+      - reddit-content-analyzer
+    estimated_cost: "$7.00"
+    estimated_duration: "15-40min"
+
+  - name: twitter_reddit
+    description: Twitter and Reddit focus
+    skills:
+      - social-listening-collect
+    customizations:
+      platforms: ["twitter", "reddit"]
+    estimated_cost: "$3.50"
+    estimated_duration: "8-15min"
+
+  - name: thought_leader_focus
+    description: Collection with thought leader identification
+    skills:
+      - social-listening-collect
+      - thought-leader-discovery
+    estimated_cost: "$6.50"
+    estimated_duration: "15-40min"

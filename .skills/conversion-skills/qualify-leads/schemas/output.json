@@ -1,0 +1,166 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Qualify Leads Output",
+  "description": "Output schema for the qualify-leads skill",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["success", "review", "failed", "partial"],
+      "description": "Execution status"
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "summary": {
+          "type": "object",
+          "properties": {
+            "period": {"type": "string", "description": "Analysis period"},
+            "posts_analyzed": {"type": "integer"},
+            "total_engagers": {"type": "integer", "description": "Total reactors + commenters"},
+            "qualified_leads": {"type": "integer"},
+            "qualification_rate": {"type": "number", "description": "Qualified / total (0-1)"},
+            "by_icp_type": {
+              "type": "object",
+              "description": "Lead count by ICP segment",
+              "additionalProperties": {"type": "integer"}
+            },
+            "by_engagement_type": {
+              "type": "object",
+              "properties": {
+                "reactions": {"type": "integer"},
+                "comments": {"type": "integer"},
+                "both": {"type": "integer"}
+              }
+            }
+          },
+          "required": ["period", "posts_analyzed", "qualified_leads"]
+        },
+        "qualified_leads": {
+          "type": "array",
+          "description": "List of qualified leads with enriched data",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string", "description": "Full name"},
+              "company": {"type": "string", "description": "Company name"},
+              "role": {"type": "string", "description": "Job title/role"},
+              "origin_post_url": {"type": "string", "description": "LinkedIn post URL"},
+              "origin_post_id": {"type": "string", "description": "Internal post ID"},
+              "origin_post_topic": {"type": "string", "description": "Post topic/theme"},
+              "icp_type": {"type": "string", "description": "ICP segment matched"},
+              "reason": {"type": "string", "description": "Qualification reason"},
+              "draft_msg": {"type": "string", "description": "Personalized outreach message"},
+              "engagement_type": {
+                "type": "string",
+                "enum": ["reaction", "comment", "both"],
+                "description": "How they engaged"
+              },
+              "engagement_date": {"type": "string", "description": "When they engaged"},
+              "linkedin_url": {"type": "string", "description": "LinkedIn profile URL"},
+              "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+              "priority": {
+                "type": "string",
+                "enum": ["high", "medium", "low"],
+                "description": "Outreach priority"
+              },
+              "additional_context": {
+                "type": "object",
+                "description": "Extra context for personalization",
+                "properties": {
+                  "comment_text": {"type": "string"},
+                  "mutual_connections": {"type": "integer"},
+                  "profile_headline": {"type": "string"}
+                }
+              }
+            },
+            "required": ["name", "company", "role", "origin_post_url", "icp_type", "reason"]
+          }
+        },
+        "disqualified": {
+          "type": "object",
+          "description": "Breakdown of disqualified leads",
+          "properties": {
+            "total": {"type": "integer"},
+            "reasons": {
+              "type": "object",
+              "additionalProperties": {"type": "integer"}
+            },
+            "sample": {
+              "type": "array",
+              "description": "Sample of disqualified for review",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {"type": "string"},
+                  "role": {"type": "string"},
+                  "reason": {"type": "string"}
+                }
+              }
+            }
+          }
+        },
+        "post_performance": {
+          "type": "array",
+          "description": "Posts ranked by qualified lead generation",
+          "items": {
+            "type": "object",
+            "properties": {
+              "post_id": {"type": "string"},
+              "topic": {"type": "string"},
+              "qualified_leads": {"type": "integer"},
+              "total_engagers": {"type": "integer"},
+              "conversion_rate": {"type": "number"}
+            }
+          }
+        },
+        "recommendations": {
+          "type": "array",
+          "description": "Follow-up action recommendations",
+          "items": {"type": "string"}
+        }
+      },
+      "required": ["summary", "qualified_leads"]
+    },
+    "evaluation": {
+      "type": "object",
+      "description": "Quality evaluation results",
+      "properties": {
+        "score": {"type": "number"},
+        "pass": {"type": "boolean"},
+        "breakdown": {"type": "object"},
+        "issues": {"type": "array", "items": {"type": "object"}}
+      }
+    },
+    "release_action": {
+      "type": "string",
+      "enum": ["auto_deliver", "auto_refine", "human_review", "blocked"]
+    },
+    "run_id": {"type": "string"},
+    "_meta": {
+      "type": "object",
+      "properties": {
+        "client_id": {"type": "string"},
+        "tenant_id": {"type": "string"},
+        "run_id": {"type": "string"},
+        "execution_mode": {"type": "string"},
+        "runtime_seconds": {"type": "number"},
+        "cost_usd": {"type": "number"},
+        "release_action": {"type": "string"},
+        "skill_version": {"type": "string"},
+        "posts_analyzed": {"type": "integer"},
+        "engagers_processed": {"type": "integer"},
+        "messages_generated": {"type": "integer"},
+        "timestamp": {"type": "string"}
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "description": "Non-fatal warnings during execution",
+      "items": {"type": "string"}
+    },
+    "error": {"type": "string"},
+    "error_type": {"type": "string"}
+  },
+  "required": ["status"]
+}

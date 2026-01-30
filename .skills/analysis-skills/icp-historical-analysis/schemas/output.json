@@ -1,0 +1,201 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ICP Historical Analysis Output",
+  "description": "Output schema for the icp-historical-analysis skill",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["success", "review", "failed", "partial"],
+      "description": "Execution status"
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "summary": {
+          "type": "object",
+          "properties": {
+            "period": {"type": "string", "description": "Analysis period (start to end date)"},
+            "total_posts": {"type": "integer"},
+            "total_reactors": {"type": "integer"},
+            "avg_reactors_per_post": {"type": "number"},
+            "icp_engagement_rate": {"type": "number", "description": "Percentage of reactors matching ICP (0-1)"},
+            "week_over_week_change": {"type": "string", "description": "Percentage change in ICP rate"},
+            "total_icp_matches": {"type": "integer"}
+          },
+          "required": ["period", "total_posts", "icp_engagement_rate"]
+        },
+        "week1_analysis": {
+          "type": "object",
+          "description": "Metrics for days 1-7 (most recent week)",
+          "properties": {
+            "period": {"type": "string"},
+            "posts": {"type": "integer"},
+            "reactors": {"type": "integer"},
+            "avg_reactors": {"type": "number"},
+            "icp_matches": {"type": "integer"},
+            "icp_rate": {"type": "number"},
+            "top_post": {
+              "type": "object",
+              "properties": {
+                "post_id": {"type": "string"},
+                "icp_rate": {"type": "number"},
+                "topic": {"type": "string"}
+              }
+            }
+          }
+        },
+        "week2_analysis": {
+          "type": "object",
+          "description": "Metrics for days 8-14",
+          "properties": {
+            "period": {"type": "string"},
+            "posts": {"type": "integer"},
+            "reactors": {"type": "integer"},
+            "avg_reactors": {"type": "number"},
+            "icp_matches": {"type": "integer"},
+            "icp_rate": {"type": "number"},
+            "top_post": {
+              "type": "object",
+              "properties": {
+                "post_id": {"type": "string"},
+                "icp_rate": {"type": "number"},
+                "topic": {"type": "string"}
+              }
+            }
+          }
+        },
+        "comparison": {
+          "type": "object",
+          "properties": {
+            "icp_rate_change": {"type": "number", "description": "Change in ICP rate (week1 - week2)"},
+            "icp_rate_change_pct": {"type": "string", "description": "Percentage change"},
+            "reactors_change": {"type": "integer"},
+            "posts_change": {"type": "integer"},
+            "trend": {"type": "string", "enum": ["improving", "declining", "stable"]}
+          }
+        },
+        "theme_analysis": {
+          "type": "array",
+          "description": "Themes ranked by ICP engagement",
+          "items": {
+            "type": "object",
+            "properties": {
+              "theme": {"type": "string"},
+              "posts": {"type": "integer"},
+              "total_reactors": {"type": "integer"},
+              "icp_matches": {"type": "integer"},
+              "icp_rate": {"type": "number"},
+              "avg_engagement": {"type": "number"},
+              "recommendation": {
+                "type": "string",
+                "enum": ["high_performer", "average", "low_performer", "needs_data"]
+              },
+              "sample_posts": {
+                "type": "array",
+                "items": {"type": "string"},
+                "description": "Post IDs for this theme"
+              }
+            },
+            "required": ["theme", "posts", "icp_rate"]
+          }
+        },
+        "top_performing_posts": {
+          "type": "array",
+          "description": "Posts with highest ICP engagement",
+          "items": {
+            "type": "object",
+            "properties": {
+              "post_id": {"type": "string"},
+              "published_at": {"type": "string"},
+              "total_reactors": {"type": "integer"},
+              "icp_matches": {"type": "integer"},
+              "icp_rate": {"type": "number"},
+              "theme": {"type": "string"},
+              "content_preview": {"type": "string", "maxLength": 200}
+            }
+          }
+        },
+        "historical_baseline": {
+          "type": "object",
+          "description": "All-time averages for comparison",
+          "properties": {
+            "period": {"type": "string"},
+            "avg_icp_rate": {"type": "number"},
+            "avg_reactors_per_post": {"type": "number"},
+            "total_posts_analyzed": {"type": "integer"},
+            "vs_baseline": {
+              "type": "string",
+              "description": "Current vs baseline comparison"
+            }
+          }
+        },
+        "icp_breakdown": {
+          "type": "object",
+          "description": "Breakdown by ICP segment",
+          "properties": {
+            "primary_icp": {
+              "type": "object",
+              "properties": {
+                "matches": {"type": "integer"},
+                "rate": {"type": "number"}
+              }
+            },
+            "secondary_icp": {
+              "type": "object",
+              "properties": {
+                "matches": {"type": "integer"},
+                "rate": {"type": "number"}
+              }
+            }
+          }
+        },
+        "recommendations": {
+          "type": "array",
+          "description": "Content strategy recommendations",
+          "items": {"type": "string"}
+        }
+      },
+      "required": ["summary"]
+    },
+    "evaluation": {
+      "type": "object",
+      "description": "Quality evaluation results",
+      "properties": {
+        "score": {"type": "number"},
+        "pass": {"type": "boolean"},
+        "breakdown": {"type": "object"},
+        "issues": {"type": "array", "items": {"type": "object"}}
+      }
+    },
+    "release_action": {
+      "type": "string",
+      "enum": ["auto_deliver", "auto_refine", "human_review", "blocked"]
+    },
+    "run_id": {"type": "string"},
+    "_meta": {
+      "type": "object",
+      "properties": {
+        "client_id": {"type": "string"},
+        "tenant_id": {"type": "string"},
+        "run_id": {"type": "string"},
+        "execution_mode": {"type": "string"},
+        "runtime_seconds": {"type": "number"},
+        "cost_usd": {"type": "number"},
+        "release_action": {"type": "string"},
+        "skill_version": {"type": "string"},
+        "posts_analyzed": {"type": "integer"},
+        "reactors_processed": {"type": "integer"},
+        "timestamp": {"type": "string"}
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "description": "Non-fatal warnings during execution",
+      "items": {"type": "string"}
+    },
+    "error": {"type": "string"},
+    "error_type": {"type": "string"}
+  },
+  "required": ["status"]
+}

@@ -1,0 +1,117 @@
+{
+  "founder_name": "Jane Smith",
+  "role": "CEO",
+  "company": "Acme Corp",
+  "linkedin_url": "https://linkedin.com/in/janesmith",
+  "twitter_handle": "janesmith",
+  "voice_characteristics": {
+    "tone": ["conversational", "confident", "direct", "encouraging"],
+    "vocabulary_level": "moderate",
+    "sentence_structure": "varied",
+    "formality": "professional",
+    "humor_style": "occasional dry wit",
+    "emotion_expression": "moderate"
+  },
+  "signature_phrases": [
+    "Here's the thing...",
+    "Let me be direct:",
+    "I've seen this pattern before",
+    "The data doesn't lie",
+    "What I've learned is..."
+  ],
+  "topics_of_expertise": [
+    "B2B SaaS growth",
+    "Product-led growth",
+    "Building remote teams",
+    "Startup fundraising",
+    "Customer success"
+  ],
+  "content_themes": [
+    "Lessons from scaling",
+    "Counterintuitive insights",
+    "Data-driven decisions",
+    "Team building",
+    "Customer obsession"
+  ],
+  "anti_patterns": [
+    "Never use buzzwords like 'synergy', 'leverage', 'disrupt'",
+    "Don't use excessive exclamation points (max 1 per post)",
+    "Avoid generic motivational quotes",
+    "Don't start posts with 'I'm excited to announce...'",
+    "Never use 'thought leader' or 'guru'",
+    "Avoid passive voice when discussing accountability"
+  ],
+  "writing_rules": [
+    {
+      "rule": "Start with a hook or surprising statement",
+      "priority": "must",
+      "example": "We almost went bankrupt trying to hire too fast."
+    },
+    {
+      "rule": "Include at least one specific number or data point",
+      "priority": "should",
+      "example": "We saw a 47% increase in retention after this change."
+    },
+    {
+      "rule": "End with a question or call to action",
+      "priority": "prefer",
+      "example": "What's one assumption you've challenged recently?"
+    },
+    {
+      "rule": "Use line breaks for readability (no walls of text)",
+      "priority": "must",
+      "example": "Each thought gets its own line."
+    },
+    {
+      "rule": "Personal stories > abstract advice",
+      "priority": "should",
+      "example": "When I was at my previous company, we tried X and it failed because Y."
+    }
+  ],
+  "example_posts": [
+    {
+      "platform": "linkedin",
+      "content": "We almost fired our best engineer.\n\nHere's what happened:\n\nThree months in, she hadn't shipped a single feature.\nThe team was frustrated.\nI was ready to have 'the conversation.'\n\nThen I looked at the data.\n\nShe had:\n- Fixed 47 bugs others had given up on\n- Documented systems no one understood\n- Mentored 2 junior devs who are now crushing it\n\nThe lesson?\n\nWe were measuring the wrong things.\n\nNot everything that matters shows up in sprint velocity.\n\nWhat metrics are you over-indexing on?",
+      "engagement": {
+        "likes": 2341,
+        "comments": 187,
+        "shares": 156
+      },
+      "date": "2024-01-15",
+      "notes": "High engagement due to contrarian opening and specific details"
+    },
+    {
+      "platform": "linkedin",
+      "content": "The best hire I ever made had zero industry experience.\n\nShe came from hospitality.\n\nEveryone on the team pushed back.\n'She doesn't know SaaS.'\n'The learning curve will be too steep.'\n\nThree years later, she runs our entire customer success org.\n\nWhat she brought that we couldn't teach:\n- Genuine empathy for customers\n- Ability to stay calm under pressure\n- Obsession with service quality\n\nSkills can be taught.\nMindset can't.\n\nWho have you overlooked because they didn't check the 'right' boxes?",
+      "engagement": {
+        "likes": 1856,
+        "comments": 142,
+        "shares": 98
+      },
+      "date": "2024-02-22",
+      "notes": "Story-driven, specific details, ends with question"
+    }
+  ],
+  "audience_awareness": {
+    "primary_audience": "B2B SaaS founders and executives",
+    "speaks_to": [
+      "Startup founders",
+      "VPs and Directors",
+      "Aspiring entrepreneurs",
+      "Product managers"
+    ],
+    "assumes_knowledge": [
+      "Basic SaaS metrics (MRR, churn, LTV)",
+      "Startup funding stages",
+      "Remote work challenges",
+      "OKRs and goal-setting frameworks"
+    ]
+  },
+  "metadata": {
+    "created_at": "2024-03-01T10:00:00Z",
+    "updated_at": "2024-03-15T14:30:00Z",
+    "version": "1.2.0",
+    "source_posts_analyzed": 87,
+    "confidence_score": 0.85
+  }
+}

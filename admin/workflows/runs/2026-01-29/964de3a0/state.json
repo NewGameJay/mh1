@@ -1,0 +1,130 @@
+{
+  "current_step": 1,
+  "outputs": {
+    "discovery": {
+      "total_contacts": 10,
+      "by_stage": {
+        "subscriber": 2,
+        "sql": 2,
+        "lead": 3,
+        "opportunity": 1,
+        "mql": 1,
+        "customer": 1
+      },
+      "contacts": {
+        "subscriber": [
+          {
+            "id": "contact_0",
+            "email": "user0@example.com",
+            "firstname": "User",
+            "lastname": "0",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "subscriber"
+          },
+          {
+            "id": "contact_9",
+            "email": "user9@example.com",
+            "firstname": "User",
+            "lastname": "9",
+            "company": "BigBrand",
+            "lifecyclestage": "subscriber"
+          }
+        ],
+        "sql": [
+          {
+            "id": "contact_1",
+            "email": "user1@example.com",
+            "firstname": "User",
+            "lastname": "1",
+            "company": "TechCo",
+            "lifecyclestage": "sql"
+          },
+          {
+            "id": "contact_3",
+            "email": "user3@example.com",
+            "firstname": "User",
+            "lastname": "3",
+            "company": "TechCo",
+            "lifecyclestage": "sql"
+          }
+        ],
+        "lead": [
+          {
+            "id": "contact_2",
+            "email": "user2@example.com",
+            "firstname": "User",
+            "lastname": "2",
+            "company": "Acme Corp",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_4",
+            "email": "user4@example.com",
+            "firstname": "User",
+            "lastname": "4",
+            "company": "TechCo",
+            "lifecyclestage": "lead"
+          },
+          {
+            "id": "contact_6",
+            "email": "user6@example.com",
+            "firstname": "User",
+            "lastname": "6",
+            "company": "TechCo",
+            "lifecyclestage": "lead"
+          }
+        ],
+        "opportunity": [
+          {
+            "id": "contact_5",
+            "email": "user5@example.com",
+            "firstname": "User",
+            "lastname": "5",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "opportunity"
+          }
+        ],
+        "mql": [
+          {
+            "id": "contact_7",
+            "email": "user7@example.com",
+            "firstname": "User",
+            "lastname": "7",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "mql"
+          }
+        ],
+        "customer": [
+          {
+            "id": "contact_8",
+            "email": "user8@example.com",
+            "firstname": "User",
+            "lastname": "8",
+            "company": "TechCo",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 21,
+              "login_trend": 0,
+              "feature_adoption": 0.026526859634595334
+            }
+          }
+        ]
+      },
+      "data_validation": {
+        "valid": true,
+        "record_count": 10,
+        "field_coverage": {
+          "email": 1.0,
+          "company": 1.0,
+          "lifecyclestage": 1.0
+        },
+        "issues": [],
+        "warnings": [
+          "Below recommended: 10 < 100 recommended"
+        ]
+      },
+      "source": "hubspot"
+    }
+  },
+  "tenant_id": "test_tenant"
+}

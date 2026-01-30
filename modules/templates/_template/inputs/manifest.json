@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "module_id": "{{MODULE_ID}}",
+  "created_at": "{{CREATED_AT}}",
+  "files": [],
+  "required": [],
+  "optional": [],
+  "schema": {
+    "type": "object",
+    "properties": {},
+    "required": []
+  }
+}

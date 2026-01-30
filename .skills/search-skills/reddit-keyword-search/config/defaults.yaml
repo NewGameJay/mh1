@@ -1,0 +1,33 @@
+# Reddit Keyword Search - Default Configuration
+# Crustdata API integration for Reddit post discovery
+
+api:
+  provider: crustdata
+  credits_per_post: 1
+
+rate_limits:
+  requests_per_minute: 30
+  max_concurrent: 5
+  cooldown_on_error: 30  # seconds
+
+collection:
+  max_results: 200
+  include_comments: true
+  max_comments_per_post: 10
+  include_author_karma: true
+
+filters:
+  date_range: "past_week"
+  min_score: 5
+  subreddits: []  # Empty = all subreddits
+  exclude_nsfw: true
+
+output:
+  format: json
+  save_to_client_dir: true
+  path_template: "clients/{client_id}/signals/reddit/{timestamp}.json"
+
+firestore:
+  collection: "signals"
+  merge_duplicates: true
+  dedup_field: "id"

@@ -1,0 +1,557 @@
+# MH1 Semantic Layer Template - Event Dictionary
+# This file maps raw event types from your data warehouse to canonical lifecycle steps
+# 
+# To customize for your company:
+# 1. Copy this file to clients/{client_id}/config/semantic_layer/
+# 2. Replace placeholders with your specific values
+# 3. Map your raw event types to the canonical event names
+# 4. Add platform-specific mappings for your analytics tools
+#
+# Placeholders used in this file:
+#   {database}        - Your data warehouse database name
+#   {schema}          - Your schema name  
+#   {events_table}    - Your events fact table name
+#   {event_type_col}  - Column name for event type
+#   {conversion_col}  - Column name for conversion type (if applicable)
+#
+# Generated: 2026-01-15
+# Updated: 2026-01-27 (Converted to company-agnostic template)
+
+# =============================================================================
+# DATA SOURCE CONFIGURATION
+# =============================================================================
+
+data_source:
+  database: "{database}"
+  schema: "{schema}"
+  table: "{events_table}"
+  event_type_column: "{event_type_col}"
+  conversion_type_column: "{conversion_col}"  # Optional - set to null if not used
+
+# =============================================================================
+# CANONICAL EVENT CATEGORIES
+# =============================================================================
+# These are the standard event categories that all raw events map to
+
+event_categories:
+  visit:
+    description: "User visits a page or screen"
+    lifecycle_stage: "awareness"
+    
+  engage:
+    description: "User interacts with content"
+    lifecycle_stage: "engagement"
+    
+  convert:
+    description: "User completes a conversion action"
+    lifecycle_stage: "contact_captured"
+    
+  purchase:
+    description: "User completes a purchase"
+    lifecycle_stage: "purchase"
+    
+  support:
+    description: "User engages with support"
+    lifecycle_stage: "retention"
+    
+  abandon:
+    description: "User abandons a conversion flow"
+    lifecycle_stage: "form_abandoned"
+
+# =============================================================================
+# EVENT MAPPINGS
+# =============================================================================
+# Map your raw event types to canonical events
+# Add your specific event types below
+
+event_mappings:
+  # -------------------------------------------------------------------------
+  # Contact Collection Events
+  # -------------------------------------------------------------------------
+  contact_collection:
+    raw_event_type: "{your_contact_view_event}"  # e.g., "page_view", "screen_view"
+    raw_conversion_type: "{your_contact_collection_type}"  # e.g., "lead_capture"
+    canonical_name: contact_collection
+    canonical_category: convert
+    lifecycle_step: contact_captured
+    description: "User views a page that collects contact information"
+    
+  contact_collected:
+    raw_event_type: "{your_contact_submit_event}"  # e.g., "form_submit", "signup"
+    raw_conversion_type: "{your_contact_collection_type}"
+    canonical_name: contact_collected
+    canonical_category: convert
+    lifecycle_step: contact_captured
+    description: "Contact information successfully collected"
+
+  # -------------------------------------------------------------------------
+  # Form Submission Events
+  # -------------------------------------------------------------------------
+  form_viewed:
+    raw_event_type: "{your_form_view_event}"
+    raw_conversion_type: "{your_form_type}"
+    canonical_name: form_viewed
+    canonical_category: engage
+    lifecycle_step: form_viewed
+    description: "User views a form"
+    
+  form_submitted:
+    raw_event_type: "{your_form_submit_event}"
+    raw_conversion_type: "{your_form_type}"
+    canonical_name: form_submitted
+    canonical_category: convert
+    lifecycle_step: form_completed
+    description: "Form successfully submitted"
+    
+  form_abandoned:
+    raw_event_type: "{your_abandon_event}"
+    raw_conversion_type: "{your_form_type}"
+    canonical_name: form_abandoned
+    canonical_category: abandon
+    lifecycle_step: form_abandoned
+    description: "User started form but did not submit"
+
+  # -------------------------------------------------------------------------
+  # Purchase Events
+  # -------------------------------------------------------------------------
+  purchase_completed:
+    raw_event_type: "{your_purchase_event}"  # e.g., "purchase", "order_completed"
+    raw_conversion_type: "{your_purchase_type}"
+    canonical_name: purchase_completed
+    canonical_category: purchase
+    lifecycle_step: purchase
+    description: "Purchase transaction completed"
+
+  # -------------------------------------------------------------------------
+  # Engagement Events
+  # -------------------------------------------------------------------------
+  page_viewed:
+    raw_event_type: "{your_pageview_event}"  # e.g., "page_view", "screen_view"
+    raw_conversion_type: null  # No conversion type for generic views
+    canonical_name: page_viewed
+    canonical_category: visit
+    lifecycle_step: engagement
+    description: "Generic page view"
+    
+  content_clicked:
+    raw_event_type: "{your_click_event}"  # e.g., "click", "tap"
+    raw_conversion_type: null
+    canonical_name: content_clicked
+    canonical_category: engage
+    lifecycle_step: engagement
+    description: "User clicked content"
+    
+  content_viewed:
+    raw_event_type: "{your_content_view_event}"  # e.g., "video_play", "article_read"
+    raw_conversion_type: null
+    canonical_name: content_viewed
+    canonical_category: engage
+    lifecycle_step: engagement
+    description: "User viewed/consumed content"
+
+  page_exit:
+    raw_event_type: "{your_exit_event}"  # e.g., "exit", "session_end"
+    raw_conversion_type: null
+    canonical_name: page_exit
+    canonical_category: visit
+    lifecycle_step: engagement
+    description: "User exited the page"
+
+  # -------------------------------------------------------------------------
+  # Tracking/Attribution Events
+  # -------------------------------------------------------------------------
+  external_pixel_fired:
+    raw_event_type: "{your_pixel_event}"  # e.g., "pixel_fire", "conversion_pixel"
+    raw_conversion_type: "{your_pixel_type}"
+    canonical_name: external_pixel_fired
+    canonical_category: visit
+    lifecycle_step: awareness
+    description: "External tracking pixel fired"
+
+  # -------------------------------------------------------------------------
+  # Generic Conversion
+  # -------------------------------------------------------------------------
+  conversion_completed:
+    raw_event_type: "{your_conversion_event}"
+    raw_conversion_type: null
+    canonical_name: conversion_completed
+    canonical_category: convert
+    lifecycle_step: engagement
+    description: "Generic conversion event"
+
+# =============================================================================
+# PLATFORM-SPECIFIC MAPPINGS
+# =============================================================================
+# Examples of how to map events from popular analytics platforms
+
+platform_mappings:
+  # -------------------------------------------------------------------------
+  # Segment
+  # -------------------------------------------------------------------------
+  segment:
+    description: "Segment track() events"
+    event_type_column: "event"
+    timestamp_column: "timestamp"
+    user_id_column: "user_id"
+    anonymous_id_column: "anonymous_id"
+    
+    event_mapping:
+      # Segment standard events
+      "Page Viewed": page_viewed
+      "Signed Up": contact_collected
+      "Order Completed": purchase_completed
+      "Product Viewed": content_viewed
+      "Product Added": content_clicked
+      "Checkout Started": form_viewed
+      "Checkout Completed": purchase_completed
+      
+    properties_mapping:
+      revenue: "properties.revenue"
+      product_id: "properties.product_id"
+      email: "context.traits.email"
+      
+  # -------------------------------------------------------------------------
+  # Amplitude
+  # -------------------------------------------------------------------------
+  amplitude:
+    description: "Amplitude event data"
+    event_type_column: "event_type"
+    timestamp_column: "event_time"
+    user_id_column: "user_id"
+    anonymous_id_column: "device_id"
+    
+    event_mapping:
+      "pageview": page_viewed
+      "signup_complete": contact_collected
+      "purchase": purchase_completed
+      "view_content": content_viewed
+      "click": content_clicked
+      "form_start": form_viewed
+      "form_submit": form_submitted
+      "form_abandon": form_abandoned
+      
+    properties_mapping:
+      revenue: "event_properties.revenue"
+      product_id: "event_properties.product_id"
+      email: "user_properties.email"
+
+  # -------------------------------------------------------------------------
+  # Mixpanel
+  # -------------------------------------------------------------------------
+  mixpanel:
+    description: "Mixpanel event data"
+    event_type_column: "event"
+    timestamp_column: "time"
+    user_id_column: "distinct_id"
+    anonymous_id_column: "$device_id"
+    
+    event_mapping:
+      "$pageview": page_viewed
+      "Sign Up": contact_collected
+      "Purchase": purchase_completed
+      "View Item": content_viewed
+      "Button Click": content_clicked
+      "Form Viewed": form_viewed
+      "Form Submitted": form_submitted
+      
+    properties_mapping:
+      revenue: "properties.$revenue"
+      product_id: "properties.product_id"
+      email: "properties.$email"
+
+  # -------------------------------------------------------------------------
+  # Google Analytics 4 (GA4)
+  # -------------------------------------------------------------------------
+  ga4:
+    description: "Google Analytics 4 BigQuery export"
+    event_type_column: "event_name"
+    timestamp_column: "event_timestamp"
+    user_id_column: "user_id"
+    anonymous_id_column: "user_pseudo_id"
+    
+    event_mapping:
+      "page_view": page_viewed
+      "sign_up": contact_collected
+      "purchase": purchase_completed
+      "view_item": content_viewed
+      "select_content": content_clicked
+      "begin_checkout": form_viewed
+      "add_to_cart": content_clicked
+      "generate_lead": contact_collected
+      
+    properties_mapping:
+      revenue: "ecommerce.purchase_revenue"
+      product_id: "items.item_id"
+      email: "user_properties.email.value"
+
+  # -------------------------------------------------------------------------
+  # Rudderstack
+  # -------------------------------------------------------------------------
+  rudderstack:
+    description: "Rudderstack event data"
+    event_type_column: "event"
+    timestamp_column: "timestamp"
+    user_id_column: "user_id"
+    anonymous_id_column: "anonymous_id"
+    
+    event_mapping:
+      "Page": page_viewed
+      "Signed Up": contact_collected
+      "Order Completed": purchase_completed
+      "Product Viewed": content_viewed
+      "Product Clicked": content_clicked
+      "Checkout Started": form_viewed
+      
+    properties_mapping:
+      revenue: "properties.revenue"
+      product_id: "properties.product_id"
+      email: "context.traits.email"
+
+  # -------------------------------------------------------------------------
+  # Snowplow
+  # -------------------------------------------------------------------------
+  snowplow:
+    description: "Snowplow event data"
+    event_type_column: "event_name"
+    timestamp_column: "collector_tstamp"
+    user_id_column: "user_id"
+    anonymous_id_column: "domain_userid"
+    
+    event_mapping:
+      "page_view": page_viewed
+      "struct": content_clicked  # Custom structured events
+      "transaction": purchase_completed
+      "form_focus": form_viewed
+      "form_submit": form_submitted
+      
+    properties_mapping:
+      revenue: "tr_total"
+      product_id: "ti_sku"
+      email: "user_email"
+
+# =============================================================================
+# SUMMARY TEMPLATE
+# =============================================================================
+# Update these values after analyzing your data
+
+summary:
+  total_events: "{total_event_count}"
+  unique_event_types: "{unique_event_type_count}"
+  unique_conversion_types: "{unique_conversion_type_count}"
+  mapped_events: "{mapped_event_count}"
+  unmapped_events: "{unmapped_event_count}"
+  anonymous_event_pct: "{anonymous_pct}"
+  
+# =============================================================================
+# DATA QUALITY NOTES
+# =============================================================================
+
+data_quality:
+  email_coverage: "{email_pct}% of events have email"
+  user_id_coverage: "{user_id_pct}% of events have user_id"
+  anonymous_coverage: "{anonymous_pct}% of events have anonymous identifier"
+  timestamp_quality: "All events should have {timestamp_column} timestamp"
+  issues:
+    - "{data_quality_issue_1}"
+    - "{data_quality_issue_2}"
+  
+# =============================================================================
+# RECOMMENDATIONS
+# =============================================================================
+
+recommendations:
+  - "Use {primary_identifier}-based tracking for user journey analysis"
+  - "Map CRM contacts to event users via {join_key}"
+  - "Implement {tracking_method}-to-user stitching for better identity resolution"
+  - "Document conversion type meanings for business context"
+
+# =============================================================================
+# PROPERTY NORMALIZATION MAPPING
+# =============================================================================
+# Maps warehouse event/user properties to CRM contact/company properties
+
+property_mappings:
+  # -------------------------------------------------------------------------
+  # Identity/Join Keys
+  # -------------------------------------------------------------------------
+  identity_keys:
+    strategies:
+      # Strategy 1: Email-based (most reliable for contacts)
+      email:
+        warehouse:
+          - table: "{database}.{schema}.{users_table}"
+            column: "{email_column}"
+          - table: "{database}.{schema}.{events_table}"
+            column: "{event_email_column}"
+        crm:
+          - object: "contact"
+            property: "email"
+        normalization: "LOWER(TRIM(email))"
+        coverage: "{email_coverage}"
+        
+      # Strategy 2: Domain-based (for company matching)
+      domain:
+        warehouse:
+          - table: "{database}.{schema}.{events_table}"
+            column: "{domain_column}"
+            note: "Extract from email or URL if available"
+        crm:
+          - object: "company"
+            property: "domain"
+        normalization: "LOWER(TRIM(domain))"
+        coverage: "{domain_coverage}"
+        
+      # Strategy 3: Organization/Account ID
+      org_id:
+        warehouse:
+          - table: "{database}.{schema}.{events_table}"
+            column: "{org_id_column}"
+          - table: "{database}.{schema}.{orgs_table}"
+            column: "{org_id_column}"
+        crm:
+          - object: "company"
+            property: "{crm_company_id_property}"
+        normalization: "CAST(org_id AS STRING)"
+        coverage: "{org_id_coverage}"
+        
+      # Strategy 4: CRM Company ID (if available)
+      crm_company_id:
+        warehouse:
+          - table: "{database}.{schema}.{company_table}"
+            column: "{crm_company_id_column}"
+        crm:
+          - object: "company"
+            property: "id"  # Native CRM ID
+        normalization: "CAST(crm_company_id AS STRING)"
+        coverage: "{crm_company_id_coverage}"
+        
+      # Strategy 5: User IDs
+      user_id:
+        warehouse:
+          - table: "{database}.{schema}.{users_table}"
+            column: "{user_id_column}"
+        crm:
+          - object: "contact"
+            property: "{crm_user_id_property}"
+        normalization: "CAST(user_id AS STRING)"
+        coverage: "{user_id_coverage}"
+        
+      # Strategy 6: Anonymous identifier (cookie, device_id)
+      anonymous_id:
+        warehouse:
+          - table: "{database}.{schema}.{events_table}"
+            column: "{anonymous_id_column}"
+        crm:
+          - object: "contact"
+            property: "{crm_anonymous_id_property}"
+            note: "May be stored in custom property if tracking pixel is used"
+        normalization: "anonymous_id (as-is)"
+        coverage: "{anonymous_id_coverage}"
+  
+  # -------------------------------------------------------------------------
+  # Property Name Mappings
+  # -------------------------------------------------------------------------
+  property_names:
+    user_properties:
+      email:
+        warehouse: "{email_column}"
+        crm: "email"
+        type: "string"
+        
+      first_name:
+        warehouse: "{first_name_column}"
+        crm: "firstname"
+        type: "string"
+        
+      last_name:
+        warehouse: "{last_name_column}"
+        crm: "lastname"
+        type: "string"
+        
+      created_at:
+        warehouse: "{created_at_column}"
+        crm: "createdate"
+        type: "timestamp"
+        normalization: "Convert to CRM format"
+        
+    company_properties:
+      org_id:
+        warehouse: "{org_id_column}"
+        crm: "{crm_company_id_property}"
+        type: "string"
+        
+      company_name:
+        warehouse: "{company_name_column}"
+        crm: "name"
+        type: "string"
+        
+      domain:
+        warehouse: "{domain_column}"
+        crm: "domain"
+        type: "string"
+        
+    lifecycle_properties:
+      lifecycle_stage:
+        warehouse: "N/A"  # Typically CRM-only
+        crm: "lifecyclestage"
+        type: "string"
+        note: "CRM-only property - enrich from CRM API"
+        
+      mql_date:
+        warehouse: "N/A"
+        crm: "{crm_mql_date_property}"
+        type: "timestamp"
+        
+      sql_date:
+        warehouse: "N/A"
+        crm: "{crm_sql_date_property}"
+        type: "timestamp"
+        
+      customer_date:
+        warehouse: "N/A"
+        crm: "{crm_customer_date_property}"
+        type: "timestamp"
+  
+  # -------------------------------------------------------------------------
+  # Normalization Rules
+  # -------------------------------------------------------------------------
+  normalization_rules:
+    email:
+      - "LOWER(TRIM(email))"
+      - "Remove whitespace"
+      - "Handle NULL/empty strings"
+      
+    domain:
+      - "Extract from email: SPLIT(email, '@')[1]"
+      - "Extract from URL if available"
+      - "LOWER(TRIM(domain))"
+      
+    timestamps:
+      - "Warehouse: {warehouse_timestamp_format}"
+      - "CRM: {crm_timestamp_format}"
+      - "Conversion: {timestamp_conversion_function}"
+      
+    identifiers:
+      - "Cast all IDs to STRING for consistency"
+      - "Handle NULL values"
+      - "Preserve original values for debugging"
+  
+  # -------------------------------------------------------------------------
+  # Join Strategy Priority
+  # -------------------------------------------------------------------------
+  join_priority:
+    description: "Order of join strategies to attempt (highest to lowest confidence)"
+    order:
+      1: "email (if available in both systems)"
+      2: "domain (for company-level matching)"
+      3: "org_id (if org_id exists in CRM custom properties)"
+      4: "crm_company_id (direct CRM ID match)"
+      5: "user_id (if synced to CRM custom properties)"
+      6: "anonymous_id (for anonymous tracking)"
+  
+  notes:
+    - "{primary_join_key} is the primary join key. Email is optional enrichment only."
+    - "Domain matching enables company-level insights even without contact-level data"
+    - "Organization ID may need to be synced to CRM as a custom property"
+    - "CRM lifecycle stages are contact-level and need API enrichment"
+    - "Normalize properties BEFORE joining to ensure accurate matches"

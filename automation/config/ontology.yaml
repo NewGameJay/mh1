@@ -1,0 +1,211 @@
+# MH1 Ontology
+# Defines relationships between entities in the system
+# This file describes how things connect
+
+---
+
+# Entity relationships
+entities:
+
+  client:
+    description: A company we create content for
+    stored_in: Firebase (clients/{clientId})
+    has_many:
+      - founders
+      - competitors
+      - signals
+      - briefs
+      - posts
+      - audiences
+      - content_pillars
+    has_one:
+      - company_profile
+      - writing_guideline
+    belongs_to:
+      - industry
+      - company_stage
+
+  founder:
+    description: A person we ghostwrite for
+    stored_in: Firebase (clients/{clientId}/founders/{founderId})
+    belongs_to:
+      - client
+    has_one:
+      - voice_contract
+      - voice_analysis
+    has_many:
+      - posts
+      - briefs
+
+  signal:
+    description: A social media post or article we're tracking
+    stored_in: Firebase (clients/{clientId}/signals/{signalId})
+    belongs_to:
+      - client
+      - signal_source
+    can_become:
+      - brief (when qualified)
+    attributes:
+      - url (unique identifier)
+      - content
+      - author
+      - date_posted
+      - score
+      - status
+
+  brief:
+    description: An assignment for creating content
+    stored_in: Firebase (clients/{clientId}/modules/linkedin-ghostwriter/assignment-briefs/{briefId})
+    belongs_to:
+      - client
+      - founder
+      - content_pillar
+      - funnel_stage
+    has_many:
+      - signals (1-3 per brief)
+    becomes:
+      - post (when content created)
+    attributes:
+      - target_persona
+      - pov
+      - status
+
+  post:
+    description: A ghostwritten piece of content
+    stored_in: Firebase (clients/{clientId}/modules/linkedin-ghostwriter/posts/{postId})
+    belongs_to:
+      - client
+      - founder
+      - brief
+      - template
+    has_many:
+      - signals_used
+      - citations
+    attributes:
+      - content
+      - funnel_stage
+      - status
+      - word_count
+      - qa_score
+
+  audience:
+    description: A target persona for content
+    stored_in: Firebase (clients/{clientId}/audiences/{audienceId})
+    belongs_to:
+      - client
+    targeted_by:
+      - briefs
+      - posts
+
+  content_pillar:
+    description: A broad topic area for content
+    stored_in: Firebase (clients/{clientId}/content-pillars/{pillarId})
+    belongs_to:
+      - client
+    organizes:
+      - briefs
+      - posts
+
+  competitor:
+    description: A company competing with the client
+    stored_in: Firebase (clients/{clientId}/competitors/{competitorId})
+    belongs_to:
+      - client
+    attributes:
+      - name
+      - website
+      - positioning
+      - type (direct, indirect, aspirational)
+
+# Workflow relationships
+workflows:
+
+  signal_to_brief:
+    description: Converting signals into assignment briefs
+    trigger: /briefs [client]
+    flow:
+      - fetch_unused_signals
+      - score_and_qualify (threshold: 60)
+      - group_related_signals (max: 3)
+      - create_brief
+      - update_signal_status (used)
+      - upload_to_firebase
+
+  brief_to_post:
+    description: Converting briefs into posts
+    trigger: /ghostwrite [client]
+    flow:
+      - select_briefs (by funnel distribution)
+      - load_founder_context
+      - select_template
+      - write_post
+      - qa_review
+      - revise_if_needed (max: 2)
+      - upload_to_firebase
+      - upload_to_notion (optional)
+
+  onboarding:
+    description: Setting up a new client
+    trigger: /onboard [company]
+    flow:
+      - create_client_record
+      - research_company
+      - research_competitors
+      - research_founders (per founder)
+      - generate_interview_questions
+      - wait_for_interview
+      - incorporate_interview_results
+      - configure_signal_listeners
+      - create_notion_dashboard
+
+# Access patterns
+access_patterns:
+
+  by_client:
+    description: Most common - get all data for one client
+    path: clients/{clientId}
+    use_when: Running any command with [client] parameter
+
+  active_client:
+    description: Current session client
+    path: inputs/active_client.md
+    use_when: No client specified in command
+
+  cross_client:
+    description: Aggregate data across clients
+    path: Query across clients collection
+    use_when: Admin reporting, system health checks
+
+# Data ownership rules
+ownership:
+
+  client_data:
+    description: All client-specific data
+    location: Firebase only
+    includes:
+      - Research docs
+      - Voice contracts
+      - Signals
+      - Briefs  
+      - Posts
+      - Analytics
+    NOT_in_repo: true
+
+  system_data:
+    description: Shared system configuration
+    location: Repository (mh1-hq)
+    includes:
+      - Skills
+      - Agents
+      - Commands
+      - Templates
+      - Prompts
+      - Config
+
+  telemetry:
+    description: Operational data
+    location: Local (telemetry/)
+    includes:
+      - Run history
+      - Cost tracking
+      - Error logs

@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SRAC Evaluation Result",
+  "description": "Result schema for SRAC (Specificity-Relevance-Actionability-Concision) evaluation from r12.pdf research",
+  "type": "object",
+  "properties": {
+    "evaluation_id": {
+      "type": "string",
+      "description": "Unique identifier for this evaluation"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "content_hash": {
+      "type": "string",
+      "description": "Hash of evaluated content for reference"
+    },
+    "dimensions": {
+      "type": "object",
+      "properties": {
+        "specificity": {
+          "type": "object",
+          "properties": {
+            "score": {"type": "number", "minimum": 1, "maximum": 5},
+            "weight": {"type": "number", "default": 0.25},
+            "reasoning": {"type": "string"}
+          },
+          "required": ["score"]
+        },
+        "relevance": {
+          "type": "object",
+          "properties": {
+            "score": {"type": "number", "minimum": 1, "maximum": 5},
+            "weight": {"type": "number", "default": 0.25},
+            "reasoning": {"type": "string"}
+          },
+          "required": ["score"]
+        },
+        "actionability": {
+          "type": "object",
+          "properties": {
+            "score": {"type": "number", "minimum": 1, "maximum": 5},
+            "weight": {"type": "number", "default": 0.30},
+            "reasoning": {"type": "string"}
+          },
+          "required": ["score"]
+        },
+        "concision": {
+          "type": "object",
+          "properties": {
+            "score": {"type": "number", "minimum": 1, "maximum": 5},
+            "weight": {"type": "number", "default": 0.20},
+            "reasoning": {"type": "string"}
+          },
+          "required": ["score"]
+        }
+      },
+      "required": ["specificity", "relevance", "actionability", "concision"]
+    },
+    "weighted_score": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Calculated weighted score"
+    },
+    "threshold": {
+      "type": "number",
+      "default": 3.5,
+      "description": "Pass threshold"
+    },
+    "pass": {
+      "type": "boolean",
+      "description": "Whether content passed quality gate"
+    },
+    "feedback": {
+      "type": "string",
+      "description": "Textual feedback for refinement loop"
+    },
+    "improvement_suggestions": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Specific suggestions for improvement"
+    },
+    "iteration": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Which iteration of refinement loop"
+    }
+  },
+  "required": ["dimensions", "weighted_score", "pass"],
+  "additionalProperties": false
+}

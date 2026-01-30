@@ -1,0 +1,13 @@
+{
+  "name": "firestore-nav-skill",
+  "version": "1.0.0",
+  "description": "Navigate Firestore collections and documents with flexible output formats",
+  "type": "module",
+  "main": "firestore-nav.js",
+  "scripts": {
+    "test": "node firestore-nav.js clients/{CLIENT_ID} --format json"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.0.0"
+  }
+}

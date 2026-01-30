@@ -1,0 +1,280 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Social Listening Signal Schema",
+  "description": "Schema for social listening signals collected from LinkedIn, Twitter, and Reddit",
+  "type": "object",
+  "required": ["skill_name", "client_id", "timestamp", "data"],
+  "properties": {
+    "skill_name": {
+      "type": "string",
+      "const": "social-listening-collect",
+      "description": "Name of the skill that generated this output"
+    },
+    "client_id": {
+      "type": "string",
+      "description": "Client identifier"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of generation"
+    },
+    "version": {
+      "type": "string",
+      "description": "Skill version that generated this output"
+    },
+    "data": {
+      "type": "object",
+      "description": "Primary output data containing collected signals",
+      "required": ["signals", "summary"],
+      "properties": {
+        "signals": {
+          "type": "array",
+          "description": "Array of collected and scored social signals",
+          "items": {
+            "type": "object",
+            "required": ["id", "platform", "content", "postedAt", "collectedAt"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique signal identifier (UUID)"
+              },
+              "legacyId": {
+                "type": "string",
+                "description": "Original document ID from old schema (for migrated docs)"
+              },
+              "externalId": {
+                "type": "string",
+                "description": "Platform's native post ID"
+              },
+              "signalType": {
+                "type": "string",
+                "enum": ["keyword-match", "news-article", "competitor-mention", "trend"],
+                "default": "keyword-match"
+              },
+              "platform": {
+                "type": "string",
+                "enum": ["linkedin", "twitter", "reddit", "news", "other"],
+                "description": "Source platform"
+              },
+              "content": {
+                "type": "string",
+                "description": "Full post/article text content"
+              },
+              "contentPreview": {
+                "type": "string",
+                "description": "First 280 chars for display"
+              },
+              "title": {
+                "type": "string",
+                "description": "For news articles or Reddit posts"
+              },
+              "sourceUrl": {
+                "type": "string",
+                "format": "uri",
+                "description": "Direct URL to the post/article"
+              },
+              "author": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "handle": { "type": "string" },
+                  "profileUrl": { "type": "string" },
+                  "followerCount": { "type": "number" }
+                }
+              },
+              "postedAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "When originally posted"
+              },
+              "collectedAt": {
+                "type": "string",
+                "format": "date-time",
+                "description": "When we captured it"
+              },
+              "engagement": {
+                "type": "object",
+                "properties": {
+                  "likes": { "type": "number", "default": 0 },
+                  "comments": { "type": "number", "default": 0 },
+                  "shares": { "type": "number", "default": 0 },
+                  "retweets": { "type": "number" },
+                  "views": { "type": "number" }
+                }
+              },
+              "engagementScore": {
+                "type": "number",
+                "description": "Computed: likes + comments*2 + shares*3"
+              },
+              "matchedKeywords": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "term": { "type": "string" },
+                    "category": { "type": "string" },
+                    "priority": { "type": "string", "enum": ["high", "medium", "low"] },
+                    "matchType": { "type": "string" }
+                  }
+                }
+              },
+              "relevanceScore": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 10,
+                "description": "Overall relevance to client audience (0-10)"
+              },
+              "scoringReason": {
+                "type": "string",
+                "description": "Why this score was assigned"
+              },
+              "sentiment": {
+                "type": "string",
+                "enum": ["positive", "neutral", "negative", "mixed"]
+              },
+              "sentimentContext": {
+                "type": "string",
+                "description": "Why this sentiment? (1 sentence)"
+              },
+              "icpFit": {
+                "type": "string",
+                "description": "How well this aligns with target audience"
+              },
+              "contentPotential": {
+                "type": "string",
+                "enum": ["High", "Medium", "Low"],
+                "description": "Could this inspire content?"
+              },
+              "personaMatch": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Which personas would care about this"
+              },
+              "signalTags": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Strategic signal tags (e.g., 'buying-signal', 'founder-story')"
+              },
+              "themes": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Content themes (e.g., 'pricing', 'support')"
+              },
+              "status": {
+                "type": "string",
+                "enum": ["active", "archived"],
+                "default": "active"
+              },
+              "usageStatus": {
+                "type": "string",
+                "enum": ["unused", "used", "rejected"],
+                "default": "unused"
+              },
+              "source": {
+                "type": "string",
+                "const": "social-listening-collect",
+                "description": "Skill that collected this signal"
+              }
+            }
+          }
+        },
+        "summary": {
+          "type": "object",
+          "required": ["total_collected", "platforms"],
+          "properties": {
+            "total_collected": {
+              "type": "integer",
+              "description": "Total signals collected"
+            },
+            "total_scored": {
+              "type": "integer",
+              "description": "Signals with relevance scores"
+            },
+            "high_relevance": {
+              "type": "integer",
+              "description": "Signals with relevanceScore >= 7"
+            },
+            "medium_relevance": {
+              "type": "integer",
+              "description": "Signals with relevanceScore 5-6"
+            },
+            "platforms": {
+              "type": "object",
+              "description": "Per-platform collection stats",
+              "properties": {
+                "linkedin": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string" },
+                    "collected": { "type": "integer" },
+                    "queries_run": { "type": "integer" }
+                  }
+                },
+                "twitter": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string" },
+                    "collected": { "type": "integer" },
+                    "queries_run": { "type": "integer" }
+                  }
+                },
+                "reddit": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string" },
+                    "collected": { "type": "integer" },
+                    "queries_run": { "type": "integer" }
+                  }
+                }
+              }
+            },
+            "upload_stats": {
+              "type": "object",
+              "properties": {
+                "created": { "type": "integer" },
+                "updated": { "type": "integer" },
+                "errors": { "type": "integer" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Execution metadata",
+      "properties": {
+        "run_id": { "type": "string" },
+        "execution_time_ms": { "type": "integer" },
+        "stages_completed": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "model_calls": { "type": "integer" },
+        "tokens_used": { "type": "integer" },
+        "checkpoints": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "warnings": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "date_range": { "type": "string" },
+        "keyword_file": { "type": "string" }
+      }
+    },
+    "quality_gates": {
+      "type": "object",
+      "description": "Quality gate results",
+      "properties": {
+        "schema_valid": { "type": "boolean" },
+        "min_posts_collected": { "type": "boolean" },
+        "all_posts_scored": { "type": "boolean" },
+        "report_generated": { "type": "boolean" },
+        "all_passed": { "type": "boolean" }
+      }
+    }
+  }
+}

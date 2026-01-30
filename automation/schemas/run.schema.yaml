@@ -1,0 +1,405 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://mh1.ai/schemas/run.schema.yaml"
+title: Run Telemetry Schema
+description: |
+  Schema for MH1 run telemetry. A run represents a single execution attempt
+  of a module. Captures detailed telemetry including skill executions,
+  token usage, API calls, and errors for observability and cost tracking.
+
+type: object
+required:
+  - run_id
+  - module_id
+  - client_id
+  - started_at
+  - status
+
+properties:
+  run_id:
+    type: string
+    pattern: "^run_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    description: |
+      Unique identifier for the run with run_ prefix.
+    examples:
+      - "run_550e8400-e29b-41d4-a716-446655440000"
+
+  module_id:
+    type: string
+    pattern: "^mod_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    description: Foreign key reference to the module being executed.
+
+  client_id:
+    type: string
+    pattern: "^cli_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+    description: Foreign key reference to the client (denormalized for query efficiency).
+
+  started_at:
+    type: string
+    format: date-time
+    description: ISO 8601 timestamp when the run started.
+
+  completed_at:
+    type: string
+    format: date-time
+    description: ISO 8601 timestamp when the run completed (success or failure).
+
+  duration_ms:
+    type: integer
+    minimum: 0
+    description: |
+      Total run duration in milliseconds.
+      Calculated as completed_at - started_at.
+
+  status:
+    type: string
+    enum:
+      - RUNNING
+      - COMPLETED
+      - FAILED
+      - ABORTED
+    description: |
+      Current status of the run:
+      - RUNNING: Execution in progress.
+      - COMPLETED: Successfully finished all skills.
+      - FAILED: Execution failed with errors.
+      - ABORTED: Manually stopped by user or system.
+
+  triggered_by:
+    type: string
+    description: |
+      Identifier of user or system that triggered this run.
+    examples:
+      - "user:jane@mh1.ai"
+      - "system:scheduler"
+      - "api:webhook"
+
+  skill_executions:
+    type: array
+    items:
+      $ref: "#/$defs/SkillExecution"
+    description: |
+      Ordered list of skill executions within this run.
+      Captures detailed telemetry for each skill.
+
+  telemetry:
+    type: object
+    description: Aggregated telemetry for the entire run.
+    properties:
+      tokens:
+        type: object
+        properties:
+          input:
+            type: integer
+            minimum: 0
+            description: Total input tokens across all API calls.
+          output:
+            type: integer
+            minimum: 0
+            description: Total output tokens across all API calls.
+          total:
+            type: integer
+            minimum: 0
+            description: Total tokens (input + output).
+          cached:
+            type: integer
+            minimum: 0
+            default: 0
+            description: Tokens served from cache.
+        required:
+          - input
+          - output
+          - total
+
+      api_calls:
+        type: object
+        properties:
+          total:
+            type: integer
+            minimum: 0
+            description: Total API calls made.
+          by_provider:
+            type: object
+            additionalProperties:
+              type: integer
+            description: |
+              API calls broken down by provider.
+            examples:
+              - anthropic: 5
+                openai: 2
+                hubspot: 10
+          by_model:
+            type: object
+            additionalProperties:
+              type: integer
+            description: |
+              API calls broken down by model.
+            examples:
+              - claude-sonnet-4-20250514: 3
+                claude-haiku: 4
+
+      models_used:
+        type: array
+        items:
+          type: string
+        uniqueItems: true
+        description: |
+          List of AI models used during this run.
+        examples:
+          - ["claude-sonnet-4-20250514", "claude-haiku"]
+
+      cost_estimate_usd:
+        type: number
+        minimum: 0
+        description: |
+          Estimated cost in USD based on token usage and model pricing.
+
+      context_offloads:
+        type: integer
+        minimum: 0
+        default: 0
+        description: |
+          Number of times context was offloaded due to size limits.
+
+    additionalProperties: true
+
+  errors:
+    type: array
+    items:
+      $ref: "#/$defs/Error"
+    description: |
+      Errors encountered during the run. May be empty for successful runs.
+
+  checkpoints:
+    type: array
+    items:
+      type: object
+      properties:
+        checkpoint_id:
+          type: string
+          description: Unique checkpoint identifier.
+        skill_name:
+          type: string
+          description: Skill that created this checkpoint.
+        created_at:
+          type: string
+          format: date-time
+        state_ref:
+          type: string
+          description: Reference to saved state (file path or Firebase ref).
+      required:
+        - checkpoint_id
+        - created_at
+    description: |
+      Checkpoints for resumable execution. Allows runs to be resumed
+      from intermediate states after failures.
+
+  environment:
+    type: object
+    description: Environment information for debugging.
+    properties:
+      claude_code_version:
+        type: string
+        description: Version of Claude Code used.
+      mh1_version:
+        type: string
+        description: Version of MH1 system.
+      platform:
+        type: string
+        description: Operating system platform.
+      node_version:
+        type: string
+        description: Node.js version (if applicable).
+      python_version:
+        type: string
+        description: Python version (if applicable).
+    additionalProperties: true
+
+$defs:
+  SkillExecution:
+    type: object
+    description: Telemetry for a single skill execution within a run.
+    required:
+      - skill_name
+      - started_at
+      - status
+    properties:
+      skill_name:
+        type: string
+        description: Name of the skill executed.
+        examples:
+          - "lifecycle-audit"
+          - "hubspot-extract"
+
+      skill_version:
+        type: string
+        description: Version of the skill (from SKILL.md metadata).
+
+      idempotency_key:
+        type: string
+        description: |
+          Key for idempotent execution. If the same key is seen again,
+          the cached result is returned instead of re-executing.
+        examples:
+          - "cli_abc123_lifecycle-audit_2024-01-15"
+
+      attempt_number:
+        type: integer
+        minimum: 1
+        default: 1
+        description: |
+          Attempt number for this skill. Increments on retry.
+
+      started_at:
+        type: string
+        format: date-time
+        description: When this skill execution started.
+
+      completed_at:
+        type: string
+        format: date-time
+        description: When this skill execution completed.
+
+      duration_ms:
+        type: integer
+        minimum: 0
+        description: Skill execution duration in milliseconds.
+
+      status:
+        type: string
+        enum:
+          - PENDING
+          - RUNNING
+          - COMPLETED
+          - FAILED
+          - SKIPPED
+          - CACHED
+        description: |
+          Status of the skill execution:
+          - PENDING: Waiting to start.
+          - RUNNING: Currently executing.
+          - COMPLETED: Successfully finished.
+          - FAILED: Execution failed.
+          - SKIPPED: Skipped due to conditions or dependencies.
+          - CACHED: Result served from cache (idempotent).
+
+      tokens:
+        type: object
+        properties:
+          input:
+            type: integer
+            minimum: 0
+          output:
+            type: integer
+            minimum: 0
+          total:
+            type: integer
+            minimum: 0
+        description: Token usage for this skill execution.
+
+      model:
+        type: string
+        description: Primary model used for this skill.
+
+      sub_calls:
+        type: array
+        items:
+          type: object
+          properties:
+            purpose:
+              type: string
+              description: Purpose of the sub-call.
+            model:
+              type: string
+              description: Model used for sub-call.
+            tokens:
+              type: object
+              properties:
+                input:
+                  type: integer
+                output:
+                  type: integer
+        description: |
+          Sub-LLM calls made during skill execution (for chunked processing).
+
+      outputs:
+        type: array
+        items:
+          type: string
+        description: File paths or references to outputs produced.
+
+      error:
+        $ref: "#/$defs/Error"
+        description: Error details if status is FAILED.
+
+  Error:
+    type: object
+    description: Error information for failed operations.
+    required:
+      - error_class
+      - message
+      - timestamp
+    properties:
+      error_class:
+        type: string
+        enum:
+          - VALIDATION_ERROR
+          - API_ERROR
+          - RATE_LIMIT_ERROR
+          - AUTHENTICATION_ERROR
+          - TIMEOUT_ERROR
+          - CONTEXT_OVERFLOW_ERROR
+          - SKILL_ERROR
+          - DATA_ERROR
+          - PERMISSION_ERROR
+          - NETWORK_ERROR
+          - UNKNOWN_ERROR
+        description: |
+          Classification of the error type:
+          - VALIDATION_ERROR: Input or output validation failed.
+          - API_ERROR: External API returned an error.
+          - RATE_LIMIT_ERROR: Rate limit exceeded.
+          - AUTHENTICATION_ERROR: Auth credentials invalid or expired.
+          - TIMEOUT_ERROR: Operation timed out.
+          - CONTEXT_OVERFLOW_ERROR: Context size exceeded limits.
+          - SKILL_ERROR: Skill-specific execution error.
+          - DATA_ERROR: Data format or quality issue.
+          - PERMISSION_ERROR: Insufficient permissions.
+          - NETWORK_ERROR: Network connectivity issue.
+          - UNKNOWN_ERROR: Unclassified error.
+
+      message:
+        type: string
+        description: Human-readable error message.
+
+      timestamp:
+        type: string
+        format: date-time
+        description: When the error occurred.
+
+      code:
+        type: string
+        description: |
+          Error code for programmatic handling.
+        examples:
+          - "ERR_HUBSPOT_401"
+          - "ERR_TOKEN_LIMIT"
+
+      details:
+        type: object
+        additionalProperties: true
+        description: |
+          Additional error details (stack trace, API response, etc.).
+
+      recoverable:
+        type: boolean
+        default: false
+        description: |
+          Whether this error is recoverable with retry.
+
+      retry_after_ms:
+        type: integer
+        minimum: 0
+        description: |
+          Suggested wait time before retry (for rate limits).
+
+additionalProperties: false

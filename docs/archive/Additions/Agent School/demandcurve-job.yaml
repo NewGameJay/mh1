@@ -1,0 +1,68 @@
+# Demand Curve Full Extraction Job
+# Run with: python -c "from skills.bright_crawler import BrightCrawler; BrightCrawler(headed=True).run_file('demandcurve-job.yaml')"
+
+source: https://www.demandcurve.com
+
+login:
+  url: /log-in
+  email: vbp615@gmail.com
+  password: Temp1pass!
+
+targets:
+  # 1. All 49 Courses
+  - name: courses
+    path: /explore-curriculum
+    pattern: course-list → lessons → content
+    output: demandcurve-courses/{slug}.md
+
+  # 2. Tactics Vault - 3 per category
+  - name: tactics
+    path: /tactics-vault
+    pattern: list → modal
+    filters:
+      - Ads
+      - Analytics
+      - CRO
+      - Content Marketing
+      - Copywriting
+      - Email
+      - Experimentation
+      - Referral
+      - Retention
+      - SEO
+      - Sales
+      - Social Media
+      - Strategy
+    count: 3
+    output: demandcurve-tactics/{filter}.md
+
+  # 3. Ads Vault - 3 per category (images)
+  - name: ads
+    path: /ad-vault
+    pattern: list → modal → download
+    filters:
+      - Automotive
+      - Beauty
+      - Consumer Tech
+      - Ecommerce
+      - Education
+      - Entertainment
+      - Fashion
+      - Finance
+      - Food & Beverage
+      - Health & Wellness
+      - Home
+      - Pets
+      - SaaS
+      - Sports
+      - Travel
+    count: 3
+    download: [img, video]
+    output: demandcurve-ads/{filter}/
+
+  # 4. Newsletter Vault - 10 most recent
+  - name: newsletters
+    path: /newsletter-vault
+    pattern: list → page
+    count: 10
+    output: demandcurve-newsletters/{number}.md

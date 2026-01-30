@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Evaluation Result",
+  "description": "Schema for quality gate evaluation results",
+  "type": "object",
+  "required": ["score", "pass", "breakdown"],
+  "properties": {
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "description": "Overall quality score (0-1)"
+    },
+    "pass": {
+      "type": "boolean",
+      "description": "Whether the output passes quality gates"
+    },
+    "breakdown": {
+      "type": "object",
+      "required": ["schema_validity", "factuality", "completeness", "brand_voice", "risk_flags", "context_efficiency"],
+      "properties": {
+        "schema_validity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Schema compliance score"
+        },
+        "factuality": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Factual accuracy score"
+        },
+        "completeness": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Content completeness score"
+        },
+        "brand_voice": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Brand voice alignment score"
+        },
+        "risk_flags": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Risk assessment score (higher = fewer risks)"
+        },
+        "context_efficiency": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Context handling efficiency score (chunked processing, appropriate model usage)"
+        }
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["dimension", "severity", "description"],
+        "properties": {
+          "dimension": {
+            "type": "string",
+            "enum": ["schema_validity", "factuality", "completeness", "brand_voice", "risk_flags", "context_efficiency"]
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["critical", "high", "medium", "low"]
+          },
+          "description": {
+            "type": "string",
+            "description": "Specific issue description"
+          },
+          "location": {
+            "type": "string",
+            "description": "Location in the output where issue was found"
+          }
+        }
+      }
+    },
+    "suggestions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Suggestions for improvement"
+    }
+  }
+}

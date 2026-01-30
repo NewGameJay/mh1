@@ -1,0 +1,102 @@
+# Default Configuration for Social Listening Collect Skill
+# These values are used when not overridden by skill call
+
+# Processing settings
+batch_size: 100
+max_posts_per_platform: 100
+timeout_seconds: 1500  # 25 minutes total
+
+# Platform configuration
+platforms:
+  default:
+    - linkedin
+    - twitter
+    - reddit
+  linkedin:
+    api: crustdata
+    max_posts: 100
+    rate_limit_per_minute: 10
+  twitter:
+    api: twitter_v2
+    max_posts: 100
+    rate_limit_per_minute: 20
+    min_faves_filter: 5
+  reddit:
+    api: praw
+    max_posts: 100
+    rate_limit_per_minute: 30
+    default_subreddits:
+      - marketing
+      - startups
+      - smallbusiness
+      - B2B
+      - entrepreneur
+
+# Date range options
+date_range:
+  default: past-week
+  options:
+    - past-24h
+    - past-week
+    - past-month
+
+# Validation thresholds
+validation:
+  min_keywords: 3
+  min_total_posts: 10
+  min_competitor_keywords: 1
+  on_insufficient: warn_and_continue
+
+# Scoring configuration
+scoring:
+  high_relevance_threshold: 7
+  medium_relevance_threshold: 5
+  min_scored_posts: 5
+  agent: competitive-intelligence-analyst
+
+# Quality thresholds
+min_confidence: 0.5
+min_relevance_score: 5
+max_items_for_review: 100
+
+# Model settings
+default_model: claude-sonnet-4
+extraction_model: claude-haiku
+synthesis_model: claude-sonnet-4
+scoring_model: claude-sonnet-4
+
+# Context limits (tokens)
+max_inline_context: 8000
+chunk_size: 1000
+
+# Output settings
+output_format: json
+include_report: true
+include_metadata: true
+
+# Retry settings
+max_retries: 3
+retry_delay_seconds: 5
+backoff_multiplier: 2
+
+# Caching
+cache_enabled: true
+cache_ttl_hours: 24
+
+# File paths (use {CLIENT_ID} as placeholder)
+paths:
+  keyword_file: "clients/{CLIENT_ID}/social-listening/keywords.md"
+  output_dir: "clients/{CLIENT_ID}/social-listening/collection-data"
+  upload_script: "skills/firebase-bulk-upload/update_post_scores.py"
+
+# Firestore configuration
+firestore:
+  clients_collection: clients
+  signals_path: signals
+  document_path: "clients/{CLIENT_ID}/signals/{signalId}"
+
+# Context paths for scoring
+context_paths:
+  audience: "clients/{CLIENT_ID}/context/audience.md"
+  strategy: "clients/{CLIENT_ID}/context/strategy.md"
+  competitive: "clients/{CLIENT_ID}/context/competitive.md"

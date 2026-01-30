@@ -1,0 +1,982 @@
+#!/usr/bin/env python3
+"""
+MH1 CLI - AI-First Marketing Operations
+
+An AI-controlled CLI with deterministic workflows for marketing operations.
+Claude acts as a CMO co-pilot, following structured pathways for complex work.
+"""
+
+import sys
+import os
+import argparse
+import json
+import re
+from pathlib import Path
+from datetime import datetime
+
+PROJECT_ROOT = Path(__file__).parent
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from rich.console import Console
+from rich.panel import Panel
+from rich.text import Text
+from rich.markdown import Markdown
+from rich.table import Table
+
+import anthropic
+import yaml
+from dotenv import load_dotenv
+
+load_dotenv()
+
+# Import workflow components
+from lib.workflow.pathway import detect_pathway, Pathway
+from lib.workflow.inputs import InputCollector, show_confirmation, format_collected_inputs
+from lib.workflow.markers import MarkerHandler, MarkerType, parse_markers, strip_markers
+from lib.workflow.module_manager import ModuleManager, ensure_client_dir, save_client_data, save_client_report
+from lib.workflow.skill_executor import SkillExecutor, PlanExecutor, ProgressStreamer
+
+# MH1 Brand Colors
+C = {
+    "pink": "#EC4899",
+    "rose": "#F472B6",
+    "orange": "#F97316",
+    "amber": "#FBBF24",
+    "yellow": "#FDE047",
+    "white": "#FAFAFA",
+    "gray": "#9CA3AF",
+    "dim": "#4B5563",
+    "green": "#22C55E",
+    "red": "#EF4444",
+    "cyan": "#06B6D4",
+}
+
+console = Console()
+
+# ASCII Art Logo
+LOGO = f"""[bold #EC4899]███╗[/][bold #F472B6]   [/][bold #F97316]███╗[/][bold #FBBF24]██╗[/][bold #FDE047]  ██╗[/]  [bold #EC4899]██╗[/]
+[bold #EC4899]████╗[/][bold #F472B6] [/][bold #F97316]████║[/][bold #FBBF24]██║[/][bold #FDE047]  ██║[/]  [bold #F472B6]███║[/]
+[bold #EC4899]██╔████╔██║[/][bold #FBBF24]███████║[/]  [bold #F97316]╚██║[/]
+[bold #F472B6]██║[/][bold #F97316]╚██╔╝██║[/][bold #FBBF24]██╔══██║[/]   [bold #FBBF24]██║[/]
+[bold #F97316]██║[/][bold #FBBF24] ╚═╝ [/][bold #FDE047]██║██║[/]  [bold #FDE047]██║[/]   [bold #FDE047]██║[/]
+[bold #FBBF24]╚═╝[/]     [bold #FDE047]╚═╝╚═╝[/]  [bold #FDE047]╚═╝[/]   [bold #FDE047]╚═╝[/]"""
+
+QUICK_ACTIONS = f"[{C['dim']}][[/][{C['yellow']}]1[/][{C['dim']}]] Skills  [[/][{C['yellow']}]2[/][{C['dim']}]] Agents  [[/][{C['yellow']}]3[/][{C['dim']}]] Client  [[/][{C['yellow']}]?[/][{C['dim']}]] Help  [[/][{C['yellow']}]q[/][{C['dim']}]] Quit[/]"
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# SCANNING
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+def scan_skills() -> list[dict]:
+    skills = []
+    for dirname in [".skills", "skills"]:
+        skills_dir = PROJECT_ROOT / dirname
+        if not skills_dir.exists():
+            continue
+        for category_dir in sorted(skills_dir.iterdir()):
+            if not category_dir.is_dir() or category_dir.name.startswith("_"):
+                continue
+            for skill_dir in sorted(category_dir.iterdir()):
+                if not skill_dir.is_dir() or skill_dir.name.startswith("_") or "TEMPLATE" in skill_dir.name:
+                    continue
+                skill_md = skill_dir / "SKILL.md"
+                if not skill_md.exists():
+                    continue
+                try:
+                    content = skill_md.read_text()
+                    if content.startswith("---"):
+                        parts = content.split("---", 2)
+                        if len(parts) >= 3:
+                            fm = yaml.safe_load(parts[1])
+                            cat = category_dir.name.replace("-skills", "")
+                            skills.append({
+                                "name": fm.get("name", skill_dir.name),
+                                "description": fm.get("description", "")[:100],
+                                "category": cat,
+                            })
+                except:
+                    continue
+    return skills
+
+
+def scan_agents() -> list[dict]:
+    agents = []
+    for dirname in [".agents", "agents"]:
+        agents_dir = PROJECT_ROOT / dirname
+        if not agents_dir.exists():
+            continue
+        for agent_type in ["orchestrators", "workers", "evaluators"]:
+            type_dir = agents_dir / agent_type
+            if not type_dir.exists():
+                continue
+            for f in sorted(type_dir.glob("*.md")):
+                if f.name.startswith("_") or "TEMPLATE" in f.name:
+                    continue
+                try:
+                    content = f.read_text()
+                    name = f.stem.replace("-", " ").title()
+                    desc = ""
+                    for line in content.split("\n"):
+                        if line.strip() and not line.startswith("#") and not line.startswith("---"):
+                            desc = line.strip()[:60]
+                            break
+                    agents.append({"name": name, "type": agent_type.rstrip("s"), "description": desc})
+                except:
+                    continue
+    return agents
+
+
+def scan_clients() -> list[str]:
+    clients_dir = PROJECT_ROOT / "clients"
+    if not clients_dir.exists():
+        return []
+    return [d.name for d in sorted(clients_dir.iterdir()) if d.is_dir() and not d.name.startswith("_")]
+
+
+SKILLS_CACHE = None
+AGENTS_CACHE = None
+
+def get_skills():
+    global SKILLS_CACHE
+    if SKILLS_CACHE is None:
+        SKILLS_CACHE = scan_skills()
+    return SKILLS_CACHE
+
+def get_agents():
+    global AGENTS_CACHE
+    if AGENTS_CACHE is None:
+        AGENTS_CACHE = scan_agents()
+    return AGENTS_CACHE
+
+def get_skill_names() -> list[str]:
+    return [s["name"] for s in get_skills()]
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# SESSION
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+class Session:
+    def __init__(self):
+        self.client_name = None
+        self.client_id = None
+        self.messages = []
+        self.display_messages = []
+        self.active_module = None
+        self.module_manager = None
+        self.skill_executor = None
+        self.plan_executor = None
+        self.collected_inputs = {}
+        self.pending_skills = []  # Skills queued for execution
+        self.execution_context = {}  # Context from previous skill outputs
+
+    def add_user(self, content: str):
+        self.messages.append({"role": "user", "content": content})
+        self.display_messages.append({"role": "user", "content": content})
+
+    def add_assistant(self, content: str):
+        self.messages.append({"role": "assistant", "content": content})
+        self.display_messages.append({"role": "assistant", "content": content})
+
+    def add_collected_input(self, schema_name: str, data: dict):
+        self.collected_inputs[schema_name] = data
+        formatted = format_collected_inputs(data)
+        self.add_user(f"[Collected {schema_name}]\n{formatted}")
+
+    def init_module(self, name: str, description: str = "") -> dict:
+        """Initialize a new module."""
+        if not self.client_id:
+            self.client_id = "default"
+            self.client_name = "Default"
+
+        self.module_manager = ModuleManager(self.client_id)
+        result = self.module_manager.create_module(name, description)
+        self.active_module = result["module_id"]
+        self.skill_executor = SkillExecutor(self.client_id)
+        self.plan_executor = PlanExecutor(self.client_id, self.module_manager)
+        return result
+
+    def get_module_path(self) -> str:
+        if self.module_manager and self.module_manager.current_module_path:
+            return str(self.module_manager.current_module_path)
+        return None
+
+session = Session()
+input_collector = InputCollector()
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# SYSTEM PROMPT
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+def load_system_prompt_template() -> str:
+    prompt_path = PROJECT_ROOT / "prompts" / "system" / "mh1-cmo-copilot.md"
+    if prompt_path.exists():
+        return prompt_path.read_text()
+    return """You are MH1, a CMO co-pilot for marketing operations.
+Be concise, direct, and action-oriented.
+Use [[INPUT:name]], [[CONFIRM]], [[SKILL:name]], and [[MODULE:create:name]] markers when appropriate."""
+
+
+def load_client_context(client_id: str) -> str:
+    """
+    Load existing context for a client from local files.
+
+    Checks clients/{client_id}/ for:
+    - config/ - datasources, thresholds, semantic layer
+    - data/ - skill outputs and collected data
+    - reports/ - generated reports
+    """
+    if not client_id:
+        return ""
+
+    client_dir = PROJECT_ROOT / "clients" / client_id
+    if not client_dir.exists():
+        return ""
+
+    context_parts = []
+
+    # Load config if exists
+    config_dir = client_dir / "config"
+    if config_dir.exists():
+        config_files = list(config_dir.glob("*.yaml")) + list(config_dir.glob("*.yml"))
+        if config_files:
+            context_parts.append("### Client Configuration")
+            for cf in config_files[:3]:  # Limit to avoid token bloat
+                try:
+                    content = cf.read_text()[:1000]  # First 1000 chars
+                    context_parts.append(f"**{cf.name}:**\n```yaml\n{content}\n```")
+                except:
+                    pass
+
+    # Load recent skill outputs from reports/ (markdown) and data/ (legacy json)
+    reports_dir = client_dir / "reports"
+    data_dir = client_dir / "data"
+
+    # Collect all skill output files
+    output_files = []
+    if reports_dir.exists():
+        output_files.extend(sorted(reports_dir.glob("*.md"), key=lambda x: x.stat().st_mtime, reverse=True))
+    if data_dir.exists():
+        output_files.extend(sorted(data_dir.glob("*.json"), key=lambda x: x.stat().st_mtime, reverse=True))
+
+    # Sort all by modification time
+    output_files = sorted(output_files, key=lambda x: x.stat().st_mtime, reverse=True)
+
+    if output_files:
+        context_parts.append("\n### Recent Skill Outputs (Local Data)")
+        context_parts.append(f"Found {len(output_files)} skill outputs for this client:")
+
+        # Group by skill name
+        skill_outputs = {}
+        for df in output_files:
+            # Parse filename: skill-name-YYYYMMDD-HHMMSS.md or .json
+            name_parts = df.stem.rsplit("-", 2)
+            if len(name_parts) >= 3:
+                skill_name = name_parts[0]
+            else:
+                skill_name = df.stem
+
+            if skill_name not in skill_outputs:
+                skill_outputs[skill_name] = []
+            skill_outputs[skill_name].append(df)
+
+        for skill_name, files in skill_outputs.items():
+            latest = files[0]
+            context_parts.append(f"- **{skill_name}**: {len(files)} run(s), latest: {latest.name}")
+
+        # Include summary of most recent outputs
+        context_parts.append("\n**Recent Output Summaries:**")
+        for df in output_files[:5]:  # Last 5 outputs
+            try:
+                if df.suffix == ".json":
+                    data = json.loads(df.read_text())
+                    if "structured" in data and data["structured"]:
+                        structured = data["structured"]
+                        summary = json.dumps(structured, indent=2)[:500]
+                        context_parts.append(f"\n`{df.name}` structured output:\n```json\n{summary}\n```")
+                elif df.suffix == ".md":
+                    # For markdown, include first 500 chars after the header
+                    content = df.read_text()
+                    # Skip the header section, get the meat
+                    if "## " in content:
+                        main_content = content.split("## ", 1)[1][:500]
+                        context_parts.append(f"\n`{df.name}` summary:\n{main_content}...")
+            except:
+                pass
+
+    if context_parts:
+        return "\n## Existing Client Context (Local Files)\n\n" + "\n".join(context_parts) + "\n\n**IMPORTANT:** Use this existing context when running skills. Check local data before fetching from external sources.\n"
+
+    return ""
+
+
+def get_system_prompt() -> str:
+    skills = get_skills()
+    agents = get_agents()
+
+    skills_by_cat = {}
+    for s in skills:
+        cat = s.get("category", "general")
+        if cat not in skills_by_cat:
+            skills_by_cat[cat] = []
+        skills_by_cat[cat].append(s)
+
+    skills_summary = ""
+    for cat, items in sorted(skills_by_cat.items()):
+        skills_summary += f"\n**{cat.title()}:** " + ", ".join(s["name"] for s in items[:8])
+        if len(items) > 8:
+            skills_summary += f" +{len(items)-8} more"
+
+    agents_summary = ""
+    for t in ["orchestrator", "worker", "evaluator"]:
+        typed = [a for a in agents if a["type"] == t]
+        if typed:
+            agents_summary += f"\n**{t.title()}s:** " + ", ".join(a["name"] for a in typed[:5])
+
+    # Add module context if active
+    module_context = ""
+    if session.active_module:
+        module_context = f"\n**Active Module:** {session.active_module}"
+        if session.module_manager:
+            status = session.module_manager.get_status()
+            module_context += f" (Status: {status.get('status', 'unknown')}, {status.get('skills_completed', 0)}/{status.get('skills_planned', 0)} skills)"
+        module_path = session.get_module_path()
+        if module_path:
+            module_context += f"\n**Module Path:** {module_path}"
+
+    template = load_system_prompt_template()
+
+    # Add execution instructions
+    execution_instructions = """
+
+## Execution Markers
+
+When you need to take action, use these markers:
+
+- `[[MODULE:create:Module Name]]` - Create a new module folder (use for 3+ skill tasks)
+- `[[SKILL:skill-name]]` - Execute a skill (ONLY after collecting required inputs!)
+- `[[PLAN:approve]]` - Signal that plan is ready for execution
+- `[[EXECUTE]]` - Begin executing the approved plan
+
+## CRITICAL: Pre-Flight Checks
+
+**NEVER execute a skill without first:**
+1. Checking what inputs the skill requires
+2. Asking the user for any missing inputs
+3. Verifying data source access (CRM, warehouse, etc.)
+4. Getting explicit confirmation
+
+If you trigger [[SKILL:name]] without required inputs, it will FAIL.
+
+## Module Creation Flow
+
+For complex tasks (3+ skills), ALWAYS:
+1. First output `[[MODULE:create:Descriptive Name]]` to create the folder
+2. Ask clarifying questions about goals, scope, outputs
+3. Update the MRD with gathered information
+4. Propose skills and get confirmation
+5. Create the execution plan
+6. Get approval with [[CONFIRM]]
+7. Execute with [[EXECUTE]]
+
+## Single Skill Flow
+
+For simple tasks (1-2 skills):
+1. Identify the skill
+2. Check what inputs are required - ASK if missing!
+3. Verify data access (do we have CRM/warehouse connected?)
+4. Collect any needed inputs from the user
+5. Confirm with [[CONFIRM]] showing all inputs
+6. ONLY THEN execute with `[[SKILL:skill-name]]`
+"""
+
+    replacements = {
+        "{client_name}": session.client_name or "None",
+        "{client_id}": session.client_id or "none",
+        "{skills_count}": str(len(skills)),
+        "{agents_count}": str(len(agents)),
+        "{active_module}": session.active_module or "None",
+        "{skills_summary}": skills_summary,
+        "{agents_summary}": agents_summary,
+    }
+
+    for key, value in replacements.items():
+        template = template.replace(key, value)
+
+    # Load existing client context from local files
+    client_context = load_client_context(session.client_id)
+
+    return template + module_context + client_context + execution_instructions
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# UI FUNCTIONS
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def render_welcome():
+    clear()
+    console.print()
+    console.print(LOGO)
+    console.print()
+    console.print(f"[{C['white']}]Run marketing operations from your terminal.[/]")
+    console.print(f"[{C['gray']}]To get started, enter [bold {C['yellow']}]START[/][{C['gray']}][/]")
+    console.print()
+    console.print(QUICK_ACTIONS)
+    console.print()
+
+    skills = get_skills()
+    agents = get_agents()
+    clients = scan_clients()
+
+    status = Text()
+    status.append("● ", style=C['green'])
+    status.append(f"{len(skills)} skills", style=C['white'])
+    status.append("  ", style=C['dim'])
+    status.append(f"{len(agents)} agents", style=C['gray'])
+    status.append("  ", style=C['dim'])
+    status.append(f"{len(clients)} clients", style=C['gray'])
+    console.print(status)
+
+    if session.client_name:
+        console.print(f"\n[{C['pink']}]◆[/] [{C['white']}]Client:[/] [{C['amber']}]{session.client_name}[/]")
+        if session.active_module:
+            console.print(f"[{C['cyan']}]◆[/] [{C['white']}]Module:[/] [{C['cyan']}]{session.active_module}[/]")
+    else:
+        console.print(f"\n[{C['dim']}]◇ No client selected (use [bold]3[/bold] to switch)[/]")
+
+    console.print()
+
+
+def render_prompt() -> str:
+    try:
+        user_input = console.input(f"[{C['pink']}]>[/] ")
+        return user_input.strip()
+    except (KeyboardInterrupt, EOFError):
+        return "q"
+
+
+def show_help():
+    clear()
+    console.print()
+    console.print(LOGO)
+    console.print()
+    help_text = f"""
+[bold {C['pink']}]COMMANDS[/]
+  [{C['yellow']}]START[/]  [{C['white']}]Quickstart guide[/]
+  [{C['yellow']}]1[/]      [{C['white']}]List skills by category[/]
+  [{C['yellow']}]2[/]      [{C['white']}]List available agents[/]
+  [{C['yellow']}]3[/]      [{C['white']}]Switch client[/]
+  [{C['yellow']}]?[/]      [{C['white']}]Show this help[/]
+  [{C['yellow']}]h[/]      [{C['white']}]View chat history[/]
+  [{C['yellow']}]q[/]      [{C['white']}]Quit[/]
+
+[bold {C['orange']}]HOW IT WORKS[/]
+  [{C['gray']}]MH1 detects what you need and follows the right workflow:[/]
+
+  [{C['white']}]• Simple questions[/] [{C['dim']}]→ Direct answers[/]
+  [{C['white']}]• Single skill request[/] [{C['dim']}]→ Collect inputs, execute skill[/]
+  [{C['white']}]• Complex task (3+ skills)[/] [{C['dim']}]→ Create module, MRD, plan, execute[/]
+  [{C['white']}]• New client[/] [{C['dim']}]→ Onboarding flow[/]
+
+[bold {C['amber']}]EXAMPLES[/]
+  [{C['gray']}]"Run a lifecycle audit"[/]
+  [{C['gray']}]"What skills help with churn?"[/]
+  [{C['gray']}]"Create a comprehensive GTM plan"[/]
+  [{C['gray']}]"New client: Acme Corp"[/]
+"""
+    console.print(help_text)
+    input(f"\n  Press Enter to continue...")
+
+
+def show_skills():
+    clear()
+    skills = get_skills()
+    by_cat = {}
+    for s in skills:
+        cat = s["category"]
+        if cat not in by_cat:
+            by_cat[cat] = []
+        by_cat[cat].append(s)
+
+    console.print(f"\n[bold {C['pink']}]SKILLS[/] [{C['gray']}]({len(skills)} total)[/]\n")
+    for cat, items in sorted(by_cat.items()):
+        console.print(f"[bold {C['orange']}]{cat.upper()}[/] [{C['dim']}]({len(items)})[/]")
+        for s in items:
+            console.print(f"  [{C['gray']}]•[/] [{C['white']}]{s['name']}[/]")
+        console.print()
+    input(f"  Press Enter to continue...")
+
+
+def show_agents():
+    clear()
+    agents = get_agents()
+    console.print(f"\n[bold {C['pink']}]AGENTS[/] [{C['gray']}]({len(agents)} total)[/]\n")
+    for t in ["orchestrator", "worker", "evaluator"]:
+        typed = [a for a in agents if a["type"] == t]
+        if typed:
+            console.print(f"[bold {C['orange']}]{t.upper()}S[/]")
+            for a in typed:
+                console.print(f"  [{C['gray']}]•[/] [{C['white']}]{a['name']}[/]")
+            console.print()
+    input(f"  Press Enter to continue...")
+
+
+def show_clients():
+    clear()
+    clients = scan_clients()
+    console.print(f"\n[bold {C['pink']}]CLIENTS[/]\n")
+    for i, c in enumerate(clients, 1):
+        if c == session.client_id:
+            console.print(f"  [{C['green']}]●[/] [{C['white']}]{i}. {c}[/] [{C['green']}](active)[/]")
+        else:
+            console.print(f"  [{C['dim']}]○[/] [{C['gray']}]{i}. {c}[/]")
+    console.print(f"\n[{C['gray']}]Enter number to switch, or type a new client name:[/]")
+    choice = input("  > ").strip()
+    if choice.isdigit() and 1 <= int(choice) <= len(clients):
+        session.client_id = clients[int(choice) - 1]
+        session.client_name = session.client_id.replace("-", " ").title()
+        ensure_client_dir(session.client_id)
+        console.print(f"\n  [{C['green']}]✓ Switched to {session.client_name}[/]")
+    elif choice:
+        session.client_id = choice.lower().replace(" ", "-")
+        session.client_name = choice.title()
+        ensure_client_dir(session.client_id)
+        console.print(f"\n  [{C['green']}]✓ Set client: {session.client_name}[/]")
+    input("  Press Enter to continue...")
+
+
+def show_history():
+    clear()
+    console.print(f"\n[bold {C['pink']}]CHAT HISTORY[/]\n")
+    if not session.display_messages:
+        console.print(f"  [{C['gray']}]No messages yet.[/]")
+    else:
+        for msg in session.display_messages[-10:]:
+            if msg["role"] == "user":
+                console.print(f"  [{C['cyan']}]You:[/] {msg['content'][:100]}...")
+            else:
+                console.print(f"  [{C['amber']}]MH1:[/] {msg['content'][:100]}...")
+            console.print()
+    input(f"  Press Enter to continue...")
+
+
+def show_start():
+    clear()
+    console.print()
+    console.print(LOGO)
+    console.print()
+    intro = f"""
+[bold {C['pink']}]Welcome to MH1[/]
+
+[{C['white']}]MH1 is your AI-powered marketing operations platform.[/]
+
+[bold {C['orange']}]1. Select a Client[/]
+   [{C['gray']}]Press [bold]3[/bold] to choose or create a client.[/]
+
+[bold {C['orange']}]2. Describe Your Task[/]
+   [{C['gray']}]Just type what you need. Examples:[/]
+   [{C['dim']}]• "Run a lifecycle audit" → Single skill[/]
+   [{C['dim']}]• "Create a comprehensive retention strategy" → Full module[/]
+
+[bold {C['orange']}]3. Review & Approve[/]
+   [{C['gray']}]For complex tasks, MH1 creates:[/]
+   [{C['dim']}]• Module folder with MRD and execution plan[/]
+   [{C['dim']}]• You review and approve before execution[/]
+
+[bold {C['orange']}]4. Execute & Monitor[/]
+   [{C['gray']}]Watch real-time progress as skills execute[/]
+   [{C['dim']}]• Checkpoints saved after each skill[/]
+   [{C['dim']}]• Outputs stored in module/outputs/[/]
+
+[bold {C['amber']}]Tip:[/] [{C['gray']}]MH1 uses AI. Always review outputs before client delivery.[/]
+"""
+    console.print(intro)
+    input(f"  Press Enter to continue...")
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# MARKER HANDLING
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# Extended marker pattern to catch MODULE:create and other actions
+MODULE_MARKER_PATTERN = re.compile(r'\[\[MODULE:(\w+):([^\]]+)\]\]')
+SKILL_MARKER_PATTERN = re.compile(r'\[\[SKILL:([^\]]+)\]\]')
+PLAN_SKILLS_PATTERN = re.compile(r'\[\[PLAN_SKILLS:(.*?)\]\]', re.DOTALL)
+EXECUTE_PATTERN = re.compile(r'\[\[EXECUTE\]\]')
+
+
+def handle_marker(marker_type: MarkerType, data: str = None) -> str:
+    """Handle a marker from Claude's response."""
+
+    if marker_type == MarkerType.INPUT:
+        schema_name = data or "unknown"
+        collected = input_collector.collect(schema_name)
+        if collected:
+            session.add_collected_input(schema_name, collected)
+            return format_collected_inputs(collected)
+        return "[No input provided]"
+
+    elif marker_type == MarkerType.CONFIRM:
+        choice = show_confirmation("Confirm to proceed?")
+        return f"[User chose: {choice}]"
+
+    elif marker_type == MarkerType.SKILL:
+        # Execute the skill
+        skill_name = data or "unknown"
+        return execute_skill(skill_name)
+
+    elif marker_type == MarkerType.PROGRESS:
+        percent = data or "0"
+        console.print(f"[{C['dim']}]Progress: {percent}%[/]")
+        return ""
+
+    elif marker_type == MarkerType.CHECKPOINT:
+        console.print(f"[{C['green']}]✓ Checkpoint saved[/]")
+        if session.module_manager:
+            session.module_manager.log_event("Checkpoint saved")
+        return ""
+
+    elif marker_type == MarkerType.COUNCIL:
+        console.print(f"\n[{C['amber']}]Running agent council deliberation...[/]\n")
+        return "[Council deliberation complete - proceed with plan]"
+
+    elif marker_type == MarkerType.MODULE:
+        # Handle module creation
+        return handle_module_marker(data)
+
+    return ""
+
+
+def handle_module_marker(data: str) -> str:
+    """Handle MODULE:action:name markers."""
+    if not data:
+        return "[Invalid module marker]"
+
+    parts = data.split(":", 1)
+    action = parts[0] if parts else ""
+    name = parts[1] if len(parts) > 1 else ""
+
+    if action == "create":
+        return create_module(name)
+
+    return f"[Unknown module action: {action}]"
+
+
+def create_module(name: str) -> str:
+    """Create a new module folder."""
+    if not name:
+        name = f"module-{datetime.now().strftime('%Y%m%d-%H%M')}"
+
+    console.print(f"\n[{C['pink']}]Creating module: {name}[/]\n")
+
+    result = session.init_module(name)
+
+    console.print(f"[{C['green']}]✓ Module created:[/] {result['path']}")
+    console.print(f"  [{C['dim']}]MRD:[/] {result['mrd_path']}")
+    console.print(f"  [{C['dim']}]Plan:[/] {result['plan_path']}")
+    console.print()
+
+    return f"""[Module created successfully]
+- Module ID: {result['module_id']}
+- Path: {result['path']}
+- MRD: {result['mrd_path']}
+- Plan: {result['plan_path']}
+
+The module folder is ready. Now gather requirements to fill out the MRD."""
+
+
+def format_skill_output_as_markdown(skill_name: str, output: dict) -> str:
+    """Format skill output as human-readable Markdown."""
+    lines = [
+        f"# Skill Output: {skill_name}",
+        f"",
+        f"**Generated:** {output.get('timestamp', datetime.now().isoformat())}",
+        f"**Skill:** {output.get('skill', skill_name)}",
+        f"",
+        "---",
+        "",
+    ]
+
+    # Include structured data if present
+    if "structured" in output and output["structured"]:
+        lines.append("## Structured Output")
+        lines.append("")
+        lines.append("```json")
+        lines.append(json.dumps(output["structured"], indent=2))
+        lines.append("```")
+        lines.append("")
+
+    # Include raw output
+    if "raw" in output and output["raw"]:
+        lines.append("## Full Output")
+        lines.append("")
+        lines.append(output["raw"])
+        lines.append("")
+
+    return "\n".join(lines)
+
+
+def execute_skill(skill_name: str, inputs: dict = None) -> str:
+    """Execute a single skill."""
+    if not session.skill_executor:
+        session.skill_executor = SkillExecutor(session.client_id)
+
+    # Build context from previous outputs
+    context = ""
+    if session.execution_context:
+        context = f"Previous outputs:\n{json.dumps(session.execution_context, indent=2)[:2000]}"
+
+    console.print(f"\n[{C['amber']}]Executing skill: {skill_name}[/]\n")
+
+    result = session.skill_executor.execute(
+        skill_name=skill_name,
+        inputs=inputs or {},
+        context=context
+    )
+
+    # Store output for chaining
+    session.execution_context[skill_name] = result.output
+
+    # Save to client dir if we have a client (as Markdown for human readability)
+    if session.client_id and result.success:
+        filename = f"{skill_name}-{datetime.now().strftime('%Y%m%d-%H%M%S')}.md"
+        md_content = format_skill_output_as_markdown(skill_name, result.output)
+        save_client_report(session.client_id, filename, md_content)
+
+    if result.success:
+        return f"[Skill {skill_name} completed successfully]\nOutput summary: {str(result.output)[:500]}"
+    else:
+        return f"[Skill {skill_name} failed: {result.error}]"
+
+
+def execute_plan(skills: list) -> str:
+    """Execute a plan with multiple skills."""
+    if not session.plan_executor:
+        if not session.module_manager:
+            session.init_module("plan-execution")
+        session.plan_executor = PlanExecutor(session.client_id, session.module_manager)
+
+    console.print(f"\n[{C['amber']}]Executing plan with {len(skills)} skills[/]\n")
+
+    results = session.plan_executor.execute_plan(skills)
+
+    # Summarize
+    succeeded = sum(1 for r in results if r.success)
+    failed = sum(1 for r in results if not r.success)
+
+    # Store all outputs
+    for result in results:
+        if result.success:
+            session.execution_context[result.skill_name] = result.output
+
+    return f"""[Plan execution complete]
+- Skills succeeded: {succeeded}
+- Skills failed: {failed}
+- Total time: {sum(r.duration_seconds for r in results):.1f}s
+
+Results stored in module outputs folder."""
+
+
+def process_extended_markers(text: str) -> tuple[str, list]:
+    """Process extended markers that aren't in the standard set."""
+    actions = []
+
+    # Check for MODULE:create markers
+    for match in MODULE_MARKER_PATTERN.finditer(text):
+        action = match.group(1)
+        name = match.group(2)
+        actions.append(("MODULE", f"{action}:{name}"))
+        text = text.replace(match.group(0), "")
+
+    # Check for SKILL markers
+    for match in SKILL_MARKER_PATTERN.finditer(text):
+        skill_name = match.group(1)
+        actions.append(("SKILL", skill_name))
+        text = text.replace(match.group(0), "")
+
+    # Check for EXECUTE marker
+    if EXECUTE_PATTERN.search(text):
+        actions.append(("EXECUTE", None))
+        text = EXECUTE_PATTERN.sub("", text)
+
+    # Check for PLAN_SKILLS marker (skills to execute as JSON)
+    for match in PLAN_SKILLS_PATTERN.finditer(text):
+        skills_json = match.group(1)
+        try:
+            skills = json.loads(skills_json)
+            actions.append(("PLAN_SKILLS", skills))
+        except:
+            pass
+        text = text.replace(match.group(0), "")
+
+    return text, actions
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# CLAUDE API
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+def call_claude(user_input: str, interactive: bool = True) -> str:
+    """Call Claude with the current conversation context."""
+    client = anthropic.Anthropic()
+
+    # Detect pathway and provide hints to Claude
+    existing_clients = scan_clients()
+    pathway, pathway_meta = detect_pathway(
+        user_input,
+        client_id=session.client_id,
+        available_skills=get_skill_names(),
+        existing_clients=existing_clients
+    )
+
+    # Add pathway hint if relevant
+    pathway_hint = ""
+    if pathway == Pathway.ONBOARDING and pathway_meta.get("reason") == "new_client_name":
+        client_name = pathway_meta.get("client_name", user_input)
+        pathway_hint = f"\n[SYSTEM HINT: User entered '{client_name}' which appears to be a new client name. Start the onboarding flow for this client.]\n"
+        if interactive:
+            console.print(f"[{C['cyan']}]Detected new client: {client_name}[/]\n")
+
+    # Prepend hint to user input if detected
+    effective_input = pathway_hint + user_input if pathway_hint else user_input
+    session.add_user(effective_input)
+    api_messages = session.messages[-20:]
+
+    try:
+        if interactive:
+            console.print(f"\n[{C['dim']}]Thinking...[/]\n")
+
+        full_response = ""
+        marker_handler = MarkerHandler()
+        pending_markers = []
+
+        with client.messages.stream(
+            model="claude-sonnet-4-20250514",
+            max_tokens=4096,
+            system=get_system_prompt(),
+            messages=api_messages,
+        ) as stream:
+            for text in stream.text_stream:
+                safe_text, new_markers = marker_handler.process(text)
+                if interactive and safe_text:
+                    console.print(safe_text, end="", markup=False)
+                full_response += text
+                pending_markers.extend(new_markers)
+
+        remaining_text, final_markers = marker_handler.flush()
+        if interactive and remaining_text:
+            console.print(remaining_text, end="", markup=False)
+        pending_markers.extend(final_markers)
+
+        if interactive:
+            console.print("\n")
+
+        session.add_assistant(full_response)
+
+        # Process standard markers
+        marker_responses = []
+        for marker in pending_markers:
+            response = handle_marker(marker.type, marker.data)
+            if response:
+                marker_responses.append(response)
+
+        # Process extended markers (MODULE:create, SKILL:, EXECUTE, etc.)
+        _, extended_actions = process_extended_markers(full_response)
+        for action_type, action_data in extended_actions:
+            if action_type == "MODULE":
+                response = handle_module_marker(action_data)
+                if response:
+                    marker_responses.append(response)
+            elif action_type == "SKILL":
+                response = execute_skill(action_data)
+                if response:
+                    marker_responses.append(response)
+            elif action_type == "PLAN_SKILLS":
+                response = execute_plan(action_data)
+                if response:
+                    marker_responses.append(response)
+            elif action_type == "EXECUTE":
+                # Execute pending skills from session
+                if session.pending_skills:
+                    response = execute_plan(session.pending_skills)
+                    session.pending_skills = []
+                    if response:
+                        marker_responses.append(response)
+
+        # If we handled markers that need follow-up, call Claude again
+        if marker_responses:
+            combined_response = "\n".join(marker_responses)
+            return call_claude(combined_response, interactive)
+
+        if interactive:
+            input(f"[{C['dim']}]Press Enter to continue...[/]")
+
+        return full_response
+
+    except anthropic.APIError as e:
+        error_msg = f"API Error: {e}"
+        session.add_assistant(error_msg)
+        console.print(f"[{C['red']}]{error_msg}[/]")
+        return error_msg
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# MAIN
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+def main():
+    parser = argparse.ArgumentParser(description="MH1 - Marketing Intelligence Platform")
+    parser.add_argument("--client", "-c", help="Start with client")
+    parser.add_argument("command", nargs="*", help="Direct command")
+    args = parser.parse_args()
+
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        console.print(f"[{C['red']}]Error: ANTHROPIC_API_KEY not set[/]")
+        console.print(f"[{C['gray']}]Add to .env or: export ANTHROPIC_API_KEY=...[/]")
+        sys.exit(1)
+
+    if args.client:
+        session.client_name = args.client.title()
+        session.client_id = args.client.lower().replace(" ", "-")
+        ensure_client_dir(session.client_id)
+
+    # Direct command mode
+    if args.command:
+        call_claude(" ".join(args.command), interactive=True)
+        return
+
+    # Interactive mode
+    while True:
+        render_welcome()
+        user_input = render_prompt()
+
+        if not user_input:
+            continue
+
+        cmd = user_input.lower()
+        if cmd in ["q", "quit", "exit"]:
+            console.print(f"\n[{C['green']}]Goodbye![/]\n")
+            break
+        elif cmd in ["start"]:
+            show_start()
+        elif cmd in ["?", "help"]:
+            show_help()
+        elif cmd in ["1", "s", "skills"]:
+            show_skills()
+        elif cmd in ["2", "a", "agents"]:
+            show_agents()
+        elif cmd in ["3", "c", "client", "clients"]:
+            show_clients()
+        elif cmd in ["h", "history"]:
+            show_history()
+        else:
+            call_claude(user_input)
+
+
+if __name__ == "__main__":
+    main()

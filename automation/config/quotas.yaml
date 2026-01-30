@@ -1,0 +1,22 @@
+# Tenant Budget Quotas
+#
+# Define spending limits per tenant.
+# Tenants not listed use default limits.
+
+defaults:
+  daily_limit_usd: 100.0
+  monthly_limit_usd: 2000.0
+  per_run_limit_usd: 10.0
+  warn_at_percent: 0.8
+  block_on_exceed: false
+
+# Per-tenant overrides
+# tenants:
+#   enterprise_client:
+#     daily_limit_usd: 500.0
+#     monthly_limit_usd: 10000.0
+#     block_on_exceed: true
+#   
+#   starter_client:
+#     daily_limit_usd: 25.0
+#     monthly_limit_usd: 500.0

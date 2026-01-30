@@ -1,0 +1,208 @@
+{
+  "skill_name": "social-listening-collect",
+  "client_id": "example-client",
+  "timestamp": "2026-01-28T10:30:00Z",
+  "version": "1.1.0",
+  "data": {
+    "signals": [
+      {
+        "id": "550e8400-e29b-41d4-a716-446655440001",
+        "externalId": "linkedin_abc123",
+        "signalType": "keyword-match",
+        "platform": "linkedin",
+        "content": "Just closed our Series A after 47 rejections. The fractional CMO we brought on helped us refine our pitch and positioning. If you're a female founder struggling with investor comms, don't underestimate the value of experienced marketing leadership.",
+        "contentPreview": "Just closed our Series A after 47 rejections. The fractional CMO we brought on helped us refine our pitch and positioning...",
+        "sourceUrl": "https://linkedin.com/feed/update/urn:li:activity:1234567890",
+        "author": {
+          "name": "Sarah Chen",
+          "handle": "sarahchen",
+          "profileUrl": "https://linkedin.com/in/sarahchen",
+          "followerCount": 15420
+        },
+        "postedAt": "2026-01-25T14:30:00Z",
+        "collectedAt": "2026-01-28T10:30:00Z",
+        "engagement": {
+          "likes": 234,
+          "comments": 45,
+          "shares": 12
+        },
+        "engagementScore": 360,
+        "matchedKeywords": [
+          {
+            "term": "fractional CMO",
+            "category": "Industry",
+            "priority": "high",
+            "matchType": "content"
+          },
+          {
+            "term": "female founder",
+            "category": "Industry",
+            "priority": "high",
+            "matchType": "content"
+          }
+        ],
+        "relevanceScore": 9.2,
+        "scoringReason": "Direct mention of fractional CMO value, female founder perspective, funding context",
+        "sentiment": "positive",
+        "sentimentContext": "Celebratory tone about overcoming rejection and achieving funding milestone",
+        "icpFit": "Excellent - Female founder sharing direct experience with fractional marketing leadership",
+        "contentPotential": "High",
+        "personaMatch": ["Startup Founder", "Growth Marketer"],
+        "signalTags": ["founder-story", "funding-news", "buying-signal"],
+        "themes": ["fundraising", "marketing-leadership", "investor-relations"],
+        "status": "active",
+        "usageStatus": "unused",
+        "source": "social-listening-collect"
+      },
+      {
+        "id": "550e8400-e29b-41d4-a716-446655440002",
+        "externalId": "twitter_xyz789",
+        "signalType": "keyword-match",
+        "platform": "twitter",
+        "content": "Hot take: Most B2B SaaS companies don't need a full-time CMO until $10M ARR. What they need is strategic marketing leadership 10-15 hrs/week. The fractional model just makes more sense at scale-up stage.",
+        "contentPreview": "Hot take: Most B2B SaaS companies don't need a full-time CMO until $10M ARR...",
+        "sourceUrl": "https://twitter.com/marketingleader/status/1234567890",
+        "author": {
+          "name": "Mike Rodriguez",
+          "handle": "@marketingleader",
+          "profileUrl": "https://twitter.com/marketingleader",
+          "followerCount": 8750
+        },
+        "postedAt": "2026-01-26T09:15:00Z",
+        "collectedAt": "2026-01-28T10:30:00Z",
+        "engagement": {
+          "likes": 89,
+          "comments": 23,
+          "retweets": 15,
+          "views": 4500
+        },
+        "engagementScore": 180,
+        "matchedKeywords": [
+          {
+            "term": "fractional CMO",
+            "category": "Industry",
+            "priority": "high",
+            "matchType": "content"
+          },
+          {
+            "term": "B2B SaaS",
+            "category": "Industry",
+            "priority": "medium",
+            "matchType": "content"
+          }
+        ],
+        "relevanceScore": 8.5,
+        "scoringReason": "Industry thought leadership on fractional marketing model, clear B2B SaaS context",
+        "sentiment": "positive",
+        "sentimentContext": "Confident advocacy for fractional model with specific revenue threshold",
+        "icpFit": "Strong - Marketing leader perspective on when fractional makes sense",
+        "contentPotential": "High",
+        "personaMatch": ["CMO/VP Marketing", "Startup Founder"],
+        "signalTags": ["industry-trend", "b2b-marketing", "leadership"],
+        "themes": ["scaling", "marketing-strategy", "resource-allocation"],
+        "status": "active",
+        "usageStatus": "unused",
+        "source": "social-listening-collect"
+      },
+      {
+        "id": "550e8400-e29b-41d4-a716-446655440003",
+        "externalId": "reddit_post456",
+        "signalType": "keyword-match",
+        "platform": "reddit",
+        "content": "r/startups question: We're at $2M ARR and need marketing help but can't afford a full CMO. Has anyone used fractional CMO services? What was your experience? Looking for recommendations.",
+        "contentPreview": "r/startups question: We're at $2M ARR and need marketing help but can't afford a full CMO...",
+        "title": "Fractional CMO experiences?",
+        "sourceUrl": "https://reddit.com/r/startups/comments/abc123/fractional_cmo_experiences",
+        "author": {
+          "name": "startup_founder_2024",
+          "handle": "startup_founder_2024",
+          "profileUrl": "https://reddit.com/u/startup_founder_2024"
+        },
+        "postedAt": "2026-01-27T16:45:00Z",
+        "collectedAt": "2026-01-28T10:30:00Z",
+        "engagement": {
+          "likes": 45,
+          "comments": 67
+        },
+        "engagementScore": 179,
+        "matchedKeywords": [
+          {
+            "term": "fractional CMO",
+            "category": "Industry",
+            "priority": "high",
+            "matchType": "content"
+          }
+        ],
+        "relevanceScore": 9.5,
+        "scoringReason": "Direct buying signal - actively seeking fractional CMO recommendations at ideal revenue stage",
+        "sentiment": "neutral",
+        "sentimentContext": "Inquiry tone seeking information and recommendations",
+        "icpFit": "Excellent - Perfect ICP: $2M ARR startup actively looking for fractional marketing help",
+        "contentPotential": "Medium",
+        "personaMatch": ["Startup Founder"],
+        "signalTags": ["buying-signal", "demand-gen"],
+        "themes": ["budget-constraints", "marketing-hiring"],
+        "status": "active",
+        "usageStatus": "unused",
+        "source": "social-listening-collect"
+      }
+    ],
+    "summary": {
+      "total_collected": 77,
+      "total_scored": 77,
+      "high_relevance": 23,
+      "medium_relevance": 31,
+      "platforms": {
+        "linkedin": {
+          "status": "success",
+          "collected": 45,
+          "queries_run": 3
+        },
+        "twitter": {
+          "status": "success",
+          "collected": 20,
+          "queries_run": 4
+        },
+        "reddit": {
+          "status": "success",
+          "collected": 12,
+          "queries_run": 5
+        }
+      },
+      "upload_stats": {
+        "created": 65,
+        "updated": 12,
+        "errors": 0
+      }
+    }
+  },
+  "metadata": {
+    "run_id": "a1b2c3d4",
+    "execution_time_ms": 845000,
+    "stages_completed": [
+      "00-id-resolution",
+      "01-keyword-processing",
+      "02-social-scraping",
+      "03-scoring-enrichment",
+      "04-stats-extraction",
+      "05-collection-report"
+    ],
+    "model_calls": 8,
+    "tokens_used": 45000,
+    "checkpoints": [
+      "01-keyword-processing",
+      "02-social-scraping",
+      "03-scoring-enrichment"
+    ],
+    "warnings": [],
+    "date_range": "past-week",
+    "keyword_file": "clients/example-client/social-listening/keywords.md"
+  },
+  "quality_gates": {
+    "schema_valid": true,
+    "min_posts_collected": true,
+    "all_posts_scored": true,
+    "report_generated": true,
+    "all_passed": true
+  }
+}

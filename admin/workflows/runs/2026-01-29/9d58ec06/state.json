@@ -1,0 +1,9 @@
+{
+  "current_step": 1,
+  "outputs": {
+    "flaky-step": {
+      "success": true
+    }
+  },
+  "tenant_id": "test"
+}

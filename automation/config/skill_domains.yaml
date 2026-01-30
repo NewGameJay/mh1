@@ -1,0 +1,203 @@
+# Skill to Domain Mapping for Intelligence System
+# Each skill must map to exactly one domain
+# Used by IntelligenceBridge to route predictions to appropriate adapters
+#
+# Domains:
+#   - revenue: Skills focused on revenue, pipeline, churn, customer lifecycle
+#   - content: Skills focused on content creation, voice, writing
+#   - campaign: Skills focused on social listening, advertising, lead generation
+#   - health: Skills focused on data quality, audits, system integrity
+#   - research: Skills focused on company/competitor/founder research
+#   - utility: Internal tools, navigation, data management
+#   - meta: Self-evolving skills, skill generation, onboarding
+#
+# Total skills: 64
+
+---
+
+# Revenue domain - customer lifecycle, pipeline, and retention
+revenue:
+  # Lifecycle analysis
+  - lifecycle-audit
+  - conversion-funnel
+  - engagement-velocity
+
+  # Churn and retention
+  - churn-prediction
+  - at-risk-detection
+  - dormant-detection
+  - reactivation-detection
+  - renewal-tracker
+  - cohort-retention-analysis
+
+  # Pipeline and deals
+  - pipeline-analysis
+  - deal-velocity
+
+  # Customer intelligence
+  - icp-historical-analysis
+  - account-360
+  - upsell-candidates
+
+  # Sales performance
+  - sales-rep-performance
+  - qualify-leads
+
+# Content domain - writing, voice, and content creation
+content:
+  # Content generation
+  - ghostwrite-content
+  - email-copy-generator
+  - cohort-email-builder
+
+  # Brief and assignment creation
+  - create-assignment-brief
+
+  # Brand voice and positioning (NEW)
+  - brand-voice
+  - positioning-angles
+
+  # NEW: Direct response and conversion copy
+  - direct-response-copy
+  - seo-content
+  - email-sequences
+  - lead-magnet
+  - newsletter-builder
+  - content-atomizer
+
+  # Voice and style extraction
+  - extract-founder-voice
+  - extract-pov
+  - extract-audience-persona
+  - extract-writing-guideline
+  - extract-company-profile
+
+  # Interview and research support
+  - generate-interview-questions
+  - incorporate-interview-results
+
+  # Context management
+  - generate-context-summary
+
+# Campaign domain - social listening, advertising, lead gen
+campaign:
+  # Social listening collection
+  - social-listening-collect
+  - linkedin-keyword-search
+  - twitter-keyword-search
+  - reddit-keyword-search
+
+  # Social platform specific
+  - linkedin-browser-scrape
+  - upload-posts-to-notion
+
+  # Call analytics
+  - call-analytics
+
+  # NEW: SEO and outreach
+  - keyword-research
+  - cold-email-personalization
+  - foreplay-ads
+  - bright-crawler
+
+# Health domain - data quality and system integrity
+health:
+  # Data quality
+  - data-quality-audit
+
+  # Discovery and validation
+  - crm-discovery
+  - data-warehouse-discovery
+  - identity-mapping
+
+# Research domain - company, competitor, and founder research
+research:
+  - research-company
+  - research-competitors
+  - research-founder
+  - needs-assessment
+  - gtm-engineering
+  - dataforseo
+
+# Utility domain - internal tools and data management
+utility:
+  # Firebase/Firestore operations
+  - firestore-nav
+  - get-client
+  - firebase-bulk-upload
+
+  # Data management
+  - artifact-manager
+
+  # Workflow execution
+  - playbook-executor
+
+# Meta domain - self-evolving and system configuration
+meta:
+  # Skill and client management
+  - skill-builder
+  - client-onboarding
+
+  # Marketing orchestration (NEW)
+  - marketing-orchestrator
+
+# Domain metadata for intelligence routing
+domain_config:
+  revenue:
+    adapter: RevenueAdapter
+    default_metrics:
+      - conversion_rate
+      - churn_rate
+      - pipeline_velocity
+      - revenue_impact
+    consolidation_frequency: daily
+
+  content:
+    adapter: ContentAdapter
+    default_metrics:
+      - engagement_rate
+      - voice_authenticity
+      - content_quality
+      - production_velocity
+    consolidation_frequency: weekly
+
+  campaign:
+    adapter: CampaignAdapter
+    default_metrics:
+      - reach
+      - engagement
+      - lead_quality
+      - signal_relevance
+    consolidation_frequency: daily
+
+  health:
+    adapter: HealthAdapter
+    default_metrics:
+      - coverage_rate
+      - null_rate
+      - join_accuracy
+      - freshness
+    consolidation_frequency: daily
+
+  research:
+    adapter: ResearchAdapter
+    default_metrics:
+      - accuracy
+      - completeness
+      - freshness
+      - actionability
+    consolidation_frequency: weekly
+
+  utility:
+    adapter: GenericAdapter
+    default_metrics:
+      - success_rate
+      - execution_time
+    consolidation_frequency: never
+
+  meta:
+    adapter: GenericAdapter
+    default_metrics:
+      - success_rate
+      - skill_quality
+    consolidation_frequency: weekly

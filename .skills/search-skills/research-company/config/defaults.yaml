@@ -1,0 +1,91 @@
+# Default Configuration for Research Company Skill
+# These values are used when not overridden by skill call
+
+# Research depth settings
+depth:
+  quick:
+    max_pages: 5
+    timeout_seconds: 60
+    description: "Fast overview, time-sensitive"
+  standard:
+    max_pages: 20
+    timeout_seconds: 120
+    description: "Normal onboarding (default)"
+  deep:
+    max_pages: 50
+    timeout_seconds: 300
+    description: "Complex enterprise clients"
+
+# Default depth level
+default_depth: standard
+
+# Processing settings
+batch_size: 10
+timeout_seconds: 180  # Maximum overall timeout (3 minutes)
+
+# Quality thresholds
+min_confidence: 0.6
+min_content_kb: 5
+recommended_content_kb: 50
+min_pages_scraped: 3
+recommended_pages_scraped: 20
+
+# Model settings
+default_model: claude-sonnet-4
+extraction_model: claude-haiku
+synthesis_model: claude-sonnet-4
+
+# Context limits (tokens)
+max_inline_context: 8000
+chunk_size: 1000
+
+# Output settings
+output_format: json
+include_report: true
+include_metadata: true
+output_max_words: 10000
+
+# Retry settings
+max_retries: 3
+retry_delay_seconds: 5
+backoff_multiplier: 2
+
+# Caching
+cache_enabled: true
+cache_ttl_hours: 24
+
+# Cost settings (USD)
+cost_target: 1.00
+cost_warning_threshold: 0.80  # Warn at 80% of max
+cost_max: 3.00
+
+# SLA settings
+runtime_target_seconds: 60
+runtime_max_seconds: 180
+
+# Human review settings
+human_review:
+  first_run_required: true
+  eval_score_threshold: 0.7
+  review_sla_hours: 24
+  low_score_review_sla_hours: 8
+  blocked_review_sla_hours: 4
+
+# URL patterns to prioritize during scraping
+priority_paths:
+  - "/"              # Home page
+  - "/about"         # About page
+  - "/about-us"      # About page variant
+  - "/products"      # Products page
+  - "/services"      # Services page
+  - "/solutions"     # Solutions page
+  - "/pricing"       # Pricing page
+  - "/team"          # Team page
+  - "/customers"     # Customers/case studies
+  - "/blog"          # Blog for voice analysis
+
+# Scraping constraints
+scraping:
+  respect_robots_txt: true
+  allow_login_required: false
+  user_agent: "MH1-Research-Bot/1.0"

@@ -1,0 +1,172 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Cohort Retention Analysis Output Schema",
+  "type": "object",
+  "required": ["retention_curves", "recommendations", "_meta"],
+  "properties": {
+    "retention_curves": {
+      "type": "array",
+      "description": "Retention rates at each period for each cohort",
+      "items": {
+        "type": "object",
+        "required": ["cohort", "cohort_size", "retention"],
+        "properties": {
+          "cohort": {
+            "type": "string",
+            "description": "Cohort identifier (e.g., 'Jan 2026')"
+          },
+          "cohort_size": {
+            "type": "integer",
+            "description": "Number of customers in this cohort"
+          },
+          "retention": {
+            "type": "object",
+            "description": "Retention rate at each period",
+            "additionalProperties": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        }
+      }
+    },
+    "cohort_comparison": {
+      "type": "object",
+      "description": "Statistical comparison between specified cohorts",
+      "properties": {
+        "cohort_a": {"type": "string"},
+        "cohort_b": {"type": "string"},
+        "retention_diff_day_30": {"type": "number"},
+        "retention_diff_day_90": {"type": "number"},
+        "p_value": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "significant": {"type": "boolean"},
+        "effect_size": {"type": "number"},
+        "interpretation": {"type": "string"}
+      }
+    },
+    "retention_drivers": {
+      "type": "array",
+      "description": "Factors correlated with higher retention",
+      "items": {
+        "type": "object",
+        "properties": {
+          "factor": {"type": "string"},
+          "correlation": {
+            "type": "number",
+            "minimum": -1,
+            "maximum": 1
+          },
+          "retained_rate": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "not_retained_rate": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "significance": {
+            "type": "string",
+            "enum": ["high", "medium", "low"]
+          },
+          "recommendation": {"type": "string"}
+        }
+      }
+    },
+    "churn_analysis": {
+      "type": "object",
+      "description": "Analysis of when and why customers churn",
+      "properties": {
+        "median_churn_day": {"type": "integer"},
+        "churn_spike_periods": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "primary_churn_reasons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "reason": {"type": "string"},
+              "percentage": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "segment_insights": {
+      "type": "array",
+      "description": "Retention patterns by segment (if segment_by provided)",
+      "items": {
+        "type": "object",
+        "properties": {
+          "segment": {"type": "string"},
+          "retention_day_30": {"type": "number"},
+          "retention_day_90": {"type": "number"},
+          "vs_average": {"type": "string"}
+        }
+      }
+    },
+    "recommendations": {
+      "type": "array",
+      "description": "Actionable recommendations based on findings",
+      "items": {
+        "type": "object",
+        "required": ["priority", "category", "action"],
+        "properties": {
+          "priority": {
+            "type": "string",
+            "enum": ["high", "medium", "low"]
+          },
+          "category": {
+            "type": "string",
+            "enum": ["activation", "engagement", "retention", "reactivation", "product"]
+          },
+          "action": {"type": "string"},
+          "expected_impact": {"type": "string"},
+          "based_on": {"type": "string"}
+        }
+      }
+    },
+    "_meta": {
+      "type": "object",
+      "description": "Execution metadata",
+      "required": ["tenant_id", "run_id", "runtime_seconds", "cost_usd"],
+      "properties": {
+        "tenant_id": {"type": "string"},
+        "run_id": {"type": "string"},
+        "runtime_seconds": {"type": "number"},
+        "cost_usd": {"type": "number"},
+        "data_quality": {
+          "type": "object",
+          "properties": {
+            "total_customers_analyzed": {"type": "integer"},
+            "cohorts_analyzed": {"type": "integer"},
+            "min_cohort_size": {"type": "integer"},
+            "data_completeness": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        },
+        "lifecycle_config_used": {"type": "string"},
+        "warnings": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

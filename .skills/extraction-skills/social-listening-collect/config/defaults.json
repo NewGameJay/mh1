@@ -1,0 +1,36 @@
+{
+  "description": "Default parameters for social listening collection (client loaded from inputs/active_client.md)",
+  "client": {
+    "note": "Read from inputs/active_client.md at runtime"
+  },
+  "parameters": {
+    "platforms": ["linkedin", "twitter", "reddit"],
+    "dateRange": "past-week",
+    "dateRangeOptions": ["past-24h", "past-week", "past-month"],
+    "maxPostsPerPlatform": 100
+  },
+  "validation": {
+    "minTotalPosts": 10,
+    "minKeywords": 3,
+    "minCompetitorKeywords": 1
+  },
+  "scoring": {
+    "highRelevanceThreshold": 7,
+    "mediumRelevanceThreshold": 5,
+    "minScoredPosts": 5
+  },
+  "paths": {
+    "defaultKeywordFile": "clients/{CLIENT_ID}/social-listening/keywords.md",
+    "outputDir": "clients/{CLIENT_ID}/social-listening/collection-data",
+    "updatePostsScript": "skills/firebase-bulk-upload/update_post_scores.py"
+  },
+  "firestore": {
+    "clientsCollection": "clients",
+    "signalsPath": "signals"
+  },
+  "contextPaths": {
+    "audience": "clients/{CLIENT_ID}/context/audience.md",
+    "strategy": "clients/{CLIENT_ID}/context/strategy.md",
+    "competitive": "clients/{CLIENT_ID}/context/competitive.md"
+  }
+}

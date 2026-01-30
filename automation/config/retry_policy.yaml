@@ -1,0 +1,104 @@
+# Idempotency and Retry Policy Configuration for MH1
+#
+# Controls how failed operations are retried and how duplicate
+# executions are handled across the system.
+
+idempotency:
+  # Format for generating idempotency keys
+  # Variables: {client_id}, {module_id}, {skill_name}, {input_hash}
+  key_format: "{client_id}:{module_id}:{skill_name}:{input_hash}"
+
+  # How long to cache successful results (hours)
+  cache_ttl_hours: 24
+
+  # What to do when we see a duplicate request with a cached SUCCESS
+  # SKIP = return cached result immediately
+  # RETRY = ignore cache, re-execute
+  on_duplicate_success: SKIP
+
+  # What to do when we see a duplicate request with a cached FAILURE
+  # RETRY = attempt again
+  # SKIP = return cached failure
+  on_duplicate_failure: RETRY
+
+# Retry policies per error class
+# Each error class has different retry behavior
+retry_policy:
+  # Transient API errors (network, rate limits, temporary unavailability)
+  TRANSIENT_API:
+    max_attempts: 3
+    backoff_type: exponential  # exponential | fixed | linear
+    initial_delay_ms: 1000
+    max_delay_ms: 30000
+    jitter: true  # Add random jitter to prevent thundering herd
+
+  # Evaluator/quality gate failures (content didn't pass QA)
+  EVALUATOR_FAILURE:
+    max_attempts: 2
+    backoff_type: fixed
+    delay_ms: 5000
+
+  # Validation errors (bad input, schema mismatch)
+  VALIDATION_ERROR:
+    max_attempts: 1  # Don't retry - needs human intervention
+    escalate_to: human_review
+
+  # Timeout errors (operation took too long)
+  TIMEOUT:
+    max_attempts: 2
+    backoff_type: exponential
+    initial_delay_ms: 5000
+    max_delay_ms: 60000
+
+  # Unknown/unexpected errors
+  UNKNOWN:
+    max_attempts: 1  # Don't retry - needs investigation
+    escalate_to: human_review
+
+# Hard limits to prevent runaway retries
+hard_limits:
+  # Maximum total attempts for a single skill execution
+  max_total_attempts_per_skill: 5
+
+  # Maximum total attempts across all skills in a module/workflow
+  max_total_attempts_per_module: 20
+
+  # Minimum cooldown between module-level retries (ms)
+  cooldown_between_module_retries_ms: 60000
+
+# Error classification rules
+# Maps exception types and patterns to error classes
+error_classification:
+  # Exception class name patterns -> ErrorClass
+  exception_patterns:
+    - pattern: "ConnectionError|ConnectionRefusedError|ConnectionResetError"
+      error_class: TRANSIENT_API
+    - pattern: "TimeoutError|ReadTimeout|ConnectTimeout"
+      error_class: TIMEOUT
+    - pattern: "RateLimitError|TooManyRequests|429"
+      error_class: TRANSIENT_API
+    - pattern: "ValidationError|SchemaError|InvalidInput"
+      error_class: VALIDATION_ERROR
+    - pattern: "EvaluatorFailure|QualityGateFailure"
+      error_class: EVALUATOR_FAILURE
+
+  # HTTP status codes -> ErrorClass
+  http_status_codes:
+    429: TRANSIENT_API  # Rate limit
+    500: TRANSIENT_API  # Server error
+    502: TRANSIENT_API  # Bad gateway
+    503: TRANSIENT_API  # Service unavailable
+    504: TIMEOUT        # Gateway timeout
+    400: VALIDATION_ERROR
+    422: VALIDATION_ERROR
+
+# Telemetry settings for retry tracking
+telemetry:
+  # Log each retry attempt
+  log_retries: true
+
+  # Include retry metadata in run telemetry
+  include_retry_metadata: true
+
+  # Alert on repeated failures (threshold)
+  alert_on_repeated_failures: 3

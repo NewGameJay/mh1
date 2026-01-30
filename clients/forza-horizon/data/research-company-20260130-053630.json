@@ -1,0 +1,29 @@
+{
+  "raw": "I'll execute the research-company skill. Since no specific inputs were provided, I'll need to request the required parameters.\n\n## Stage 0: Setup & Validation\n\n**ERROR: Missing Required Inputs**\n\nThe research-company skill requires the following mandatory parameters:\n\n```json\n{\n  \"error\": \"missing_required_inputs\",\n  \"message\": \"Cannot execute research-company skill without required parameters\",\n  \"required_inputs\": {\n    \"client_id\": \"string - Unique client identifier\",\n    \"company_name\": \"string - Official company name\", \n    \"website_url\": \"string - Primary company website URL\"\n  },\n  \"optional_inputs\": {\n    \"additional_urls\": \"array - Additional URLs to analyze\",\n    \"industry\": \"string - Industry vertical (auto-detected if not provided)\",\n    \"tenant_id\": \"string - Tenant identifier for cost tracking\",\n    \"execution_mode\": \"string - suggest|preview|execute (default: suggest)\",\n    \"depth\": \"string - quick|standard|deep (default: standard)\"\n  },\n  \"context_available\": {\n    \"client_id\": \"forza-horizon\",\n    \"suggested_inputs\": {\n      \"client_id\": \"forza-horizon\",\n      \"company_name\": \"Forza Horizon\",\n      \"industry\": \"Gaming/Entertainment\"\n    }\n  }\n}\n```\n\n**Next Steps Required:**\n\nTo execute this skill, please provide:\n\n1. **website_url** (Required) - The primary website URL for Forza Horizon\n2. **company_name** (Confirm) - Is \"Forza Horizon\" the correct official company name?\n3. **additional_urls** (Optional) - Any additional URLs to analyze (blog, documentation, etc.)\n4. **depth** (Optional) - Research depth: \"quick\" (5 pages), \"standard\" (20 pages), or \"deep\" (50+ pages)\n\n**Example Input:**\n```json\n{\n  \"client_id\": \"forza-horizon\",\n  \"company_name\": \"Forza Horizon\",\n  \"website_url\": \"https://forzamotorsport.net/en-us/games/forza-horizon-5/\",\n  \"industry\": \"Gaming/Entertainment\",\n  \"depth\": \"standard\"\n}\n```\n\nWould you like to provide these inputs so I can execute the complete research-company skill?",
+  "skill": "research-company",
+  "timestamp": "2026-01-30T05:36:30.994646",
+  "structured": {
+    "error": "missing_required_inputs",
+    "message": "Cannot execute research-company skill without required parameters",
+    "required_inputs": {
+      "client_id": "string - Unique client identifier",
+      "company_name": "string - Official company name",
+      "website_url": "string - Primary company website URL"
+    },
+    "optional_inputs": {
+      "additional_urls": "array - Additional URLs to analyze",
+      "industry": "string - Industry vertical (auto-detected if not provided)",
+      "tenant_id": "string - Tenant identifier for cost tracking",
+      "execution_mode": "string - suggest|preview|execute (default: suggest)",
+      "depth": "string - quick|standard|deep (default: standard)"
+    },
+    "context_available": {
+      "client_id": "forza-horizon",
+      "suggested_inputs": {
+        "client_id": "forza-horizon",
+        "company_name": "Forza Horizon",
+        "industry": "Gaming/Entertainment"
+      }
+    }
+  }
+}

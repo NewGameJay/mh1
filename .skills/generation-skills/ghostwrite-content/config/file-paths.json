@@ -1,0 +1,62 @@
+{
+  "description": "Centralized file paths for ghostwrite-content skill (mh1-hq structure)",
+  "client": {
+    "note": "Read from clients/{clientId}/ in Firebase or active_client.md",
+    "active_client_file": "inputs/active_client.md"
+  },
+  "scripts": {
+    "preload_all_context": "skills/ghostwrite-content/scripts/preload_all_context.py",
+    "fetch_source_posts": "skills/ghostwrite-content/scripts/fetch_source_posts.py",
+    "fetch_thought_leader_posts": "skills/ghostwrite-content/scripts/fetch_thought_leader_posts.py",
+    "fetch_parallel_events": "skills/ghostwrite-content/scripts/fetch_parallel_events.py",
+    "write_json": "skills/ghostwrite-content/scripts/write_json.py",
+    "checkpoint": "skills/ghostwrite-content/scripts/checkpoint.py"
+  },
+  "templates": {
+    "linkedin_post_templates": "inputs/_templates/linkedin-post-templates.csv"
+  },
+  "outputs": {
+    "campaigns": "clients/{clientId}/campaigns/ghostwrite-{platform}-{date}/",
+    "context_snapshots": "clients/{clientId}/context-snapshots/",
+    "context_data": "clients/{clientId}/context-data/"
+  },
+  "campaign_structure": {
+    "root": "clients/{clientId}/campaigns/ghostwrite-{platform}-{date}/",
+    "source_data": "{campaign_root}/source-data/",
+    "posts": "{campaign_root}/posts/",
+    "files": {
+      "readme": "{campaign_root}/README.md",
+      "calendar_md": "{campaign_root}/CONTENT_CALENDAR_FINAL.md",
+      "calendar_json": "{campaign_root}/CONTENT_CALENDAR_FINAL.json",
+      "final_posts": "{campaign_root}/final-{platform}-posts-{date}.json",
+      "template_selections": "{campaign_root}/source-data/template-selections.json",
+      "template_summary": "{campaign_root}/source-data/template-selections-summary.md",
+      "source_posts": "{campaign_root}/source-data/social-listening-posts.json",
+      "context_snapshot": "{campaign_root}/source-data/context-snapshot.json",
+      "checkpoint": "{campaign_root}/checkpoint.json",
+      "qa_report": "{campaign_root}/qa-report.json"
+    }
+  },
+  "context_snapshot_files": {
+    "orchestrator": "clients/{clientId}/context-snapshots/00-ORCHESTRATOR_CONTEXT_{timestamp}.md",
+    "topic_curator": "clients/{clientId}/context-snapshots/01-TOPIC_CURATOR_CONTEXT_{timestamp}.md",
+    "template_selector": "clients/{clientId}/context-snapshots/02-TEMPLATE_SELECTOR_CONTEXT_{timestamp}.md",
+    "ghostwriter": "clients/{clientId}/context-snapshots/03-GHOSTWRITER_CONTEXT_{timestamp}.md"
+  },
+  "temp_files": {
+    "source_posts": "source_posts.json",
+    "thought_leader_posts": "thought_leader_posts.json",
+    "parallel_events": "parallel_events.json"
+  },
+  "firebase_paths": {
+    "client_doc": "clients/{clientId}",
+    "client_context": "clients/{clientId}/context/{doc_id}",
+    "founders": "clients/{clientId}/founders/{founder_id}",
+    "founder_posts": "clients/{clientId}/founders/{founder_id}/posts",
+    "content_calendar": "clients/{clientId}/contentCalendar/{run_id}",
+    "signals": "clients/{clientId}/signals",
+    "thought_leaders": "clients/{clientId}/thoughtLeaders",
+    "parallel_events": "clients/{clientId}/parallelEvents",
+    "posts": "clients/{clientId}/posts"
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LifecycleAuditInput",
+  "description": "Input schema for the Lifecycle Audit skill (v2.0.0)",
+  "type": "object",
+  "properties": {
+    "tenant_id": {
+      "type": "string",
+      "description": "Client/tenant identifier for cost tracking and isolation",
+      "default": "default"
+    },
+    "company_id": {
+      "type": "string",
+      "description": "Specific company ID to analyze (optional, analyzes all if not provided)"
+    },
+    "limit": {
+      "type": "integer",
+      "description": "Maximum number of accounts to analyze",
+      "default": 100,
+      "minimum": 1,
+      "maximum": 5000
+    },
+    "stages": {
+      "type": "array",
+      "description": "Lifecycle stages to include (optional, includes all if not provided)",
+      "items": {
+        "type": "string",
+        "enum": ["subscriber", "lead", "mql", "sql", "opportunity", "customer", "evangelist"]
+      }
+    },
+    "execution_mode": {
+      "type": "string",
+      "description": "Execution mode determining what actions are taken",
+      "enum": ["suggest", "preview", "execute"],
+      "default": "suggest",
+      "enumDescriptions": {
+        "suggest": "Generate recommendations only (read-only)",
+        "preview": "Show what changes would be made (dry-run)",
+        "execute": "Apply changes to external systems (with approval if high-impact)"
+      }
+    },
+    "data_requirements_override": {
+      "type": "object",
+      "description": "Override default data validation requirements",
+      "properties": {
+        "minimum_records": {
+          "type": "integer",
+          "description": "Override minimum required records (default: 20)",
+          "minimum": 1
+        },
+        "skip_validation": {
+          "type": "boolean",
+          "description": "Skip data validation entirely (use with caution)",
+          "default": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "hubspot_config": {
+      "type": "object",
+      "description": "Optional HubSpot-specific configuration",
+      "properties": {
+        "properties": {
+          "type": "array",
+          "description": "Additional HubSpot properties to fetch",
+          "items": {"type": "string"}
+        },
+        "use_cache": {
+          "type": "boolean",
+          "description": "Use cached data if available (max 24h)",
+          "default": true
+        }
+      }
+    },
+    "snowflake_config": {
+      "type": "object",
+      "description": "Optional Snowflake-specific configuration",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "description": "Snowflake schema to query"
+        },
+        "engagement_table": {
+          "type": "string",
+          "description": "Table name for user engagement data",
+          "default": "user_engagement"
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

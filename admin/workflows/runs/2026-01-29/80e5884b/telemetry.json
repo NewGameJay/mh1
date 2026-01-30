@@ -1,0 +1,27 @@
+{
+  "run_id": "80e5884b",
+  "type": "workflow",
+  "name": "linkedin-keyword-search",
+  "version": "v1.0.0",
+  "status": "failed",
+  "start_time": "2026-01-30T01:16:05.292559+00:00",
+  "end_time": "2026-01-30T01:16:05.296268+00:00",
+  "duration_seconds": 0.0,
+  "tokens": {
+    "input": 0,
+    "output": 0,
+    "total": 0
+  },
+  "steps": [],
+  "error": null,
+  "evaluation": null,
+  "client": "standalone",
+  "tenant_id": "default",
+  "tags": [],
+  "context_handling": {
+    "strategy": "inline",
+    "input_size_tokens": 0,
+    "chunks_processed": 0,
+    "sub_calls": []
+  }
+}

@@ -1,0 +1,134 @@
+# MH1 Taxonomy
+# Classification schema for client data and content
+# This file defines the "vocabulary" of the system
+
+---
+
+# Industries we serve
+industries:
+  - b2b-saas
+  - ecommerce
+  - marketplace
+  - fintech
+  - healthcare-tech
+  - edtech
+  - agency
+  - consulting
+  - media
+  - enterprise-software
+
+# Company stages
+company_stages:
+  - pre-seed
+  - seed
+  - series-a
+  - series-b
+  - series-c-plus
+  - growth
+  - enterprise
+
+# Content types
+content_types:
+  linkedin:
+    - thought-leadership
+    - industry-insight
+    - personal-story
+    - how-to
+    - listicle
+    - hot-take
+    - case-study
+    - announcement
+    - question
+    - poll
+  
+  funnel_stages:
+    - TOFU  # Top of funnel - awareness
+    - MOFU  # Middle of funnel - consideration
+    - BOFU  # Bottom of funnel - decision
+
+# Signal sources
+signal_sources:
+  - linkedin-posts
+  - linkedin-thought-leaders
+  - twitter-posts
+  - reddit-posts
+  - rss-feeds
+  - web-sources
+
+# Signal quality
+signal_quality:
+  scores:
+    qualified: 60      # Minimum score for brief creation
+    high_quality: 80   # Priority processing
+  
+  statuses:
+    - unused           # New signal, not processed
+    - used             # Used in a brief
+    - rejected         # Reviewed and rejected
+
+# Brief statuses
+brief_statuses:
+  - draft             # Being created
+  - ready             # Ready for content creation
+  - used              # Content created from this brief
+  - archived          # No longer relevant
+
+# Post statuses
+post_statuses:
+  - draft             # Being written
+  - review            # In QA review
+  - approved          # Passed QA, ready to publish
+  - rejected          # Failed QA
+  - published         # Live on LinkedIn
+  - archived          # Removed or outdated
+
+# Founder roles
+founder_roles:
+  - ceo
+  - cto
+  - cmo
+  - coo
+  - co-founder
+  - founder
+  - president
+  - managing-partner
+
+# ICP types (customize per client)
+icp_types:
+  default:
+    - decision-maker
+    - influencer
+    - end-user
+    - champion
+  
+  # Clients can define their own ICP types
+  # stored in Firebase: clients/{clientId}/config/icp_types
+
+# Voice authenticity criteria
+voice_criteria:
+  minimum_score: 7    # Out of 10
+  critical_violations:
+    - em-dashes
+    - rhetorical-questions
+    - structures-of-three
+    - its-not-x-its-y
+    - heres-x-language
+    - fabricated-anecdotes
+
+# Quality thresholds
+quality:
+  qa_pass_threshold: 0.85
+  voice_authenticity_minimum: 0.70
+  max_revision_attempts: 2
+
+# Data lifecycle
+lifecycle:
+  statuses:
+    - active          # Currently in use
+    - archived        # Stored but not active
+    - deleted         # Marked for removal
+  
+  retention:
+    signals: 90       # Days to keep unused signals
+    briefs: 180       # Days to keep unused briefs
+    posts: forever    # Keep all posts

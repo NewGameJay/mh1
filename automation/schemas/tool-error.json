@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Tool Error Record",
+  "description": "Schema for tool error tracking based on r7.pdf 12-category taxonomy",
+  "type": "object",
+  "properties": {
+    "error_id": {
+      "type": "string",
+      "description": "Unique identifier for this error"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "error_type": {
+      "type": "string",
+      "enum": ["not_initialized", "args_mismatch", "execution_error", "result_mismatch"],
+      "description": "Error type from 4-category classification"
+    },
+    "tool_category": {
+      "type": "string",
+      "description": "Category of tool that failed (e.g., OCR, DB_QUERY, DB_UPDATE)"
+    },
+    "tool_name": {
+      "type": "string",
+      "description": "Specific tool that failed"
+    },
+    "failure_mode": {
+      "type": "string",
+      "enum": ["omission", "malformed"],
+      "description": "Omission (~68%): Failed to recognize tool needed. Malformed (~32%): Incorrect invocation."
+    },
+    "step_count": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Number of steps taken before failure"
+    },
+    "model": {
+      "type": "string",
+      "description": "Model that produced the error"
+    },
+    "context": {
+      "type": "object",
+      "properties": {
+        "task_description": {"type": "string"},
+        "input_summary": {"type": "string"},
+        "expected_action": {"type": "string"},
+        "actual_action": {"type": "string"}
+      }
+    },
+    "remediation": {
+      "type": "object",
+      "properties": {
+        "strategy": {"type": "string"},
+        "applied": {"type": "boolean"},
+        "result": {"type": "string"}
+      }
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"]
+    }
+  },
+  "required": ["error_type", "tool_name", "failure_mode", "step_count", "model"],
+  "additionalProperties": false
+}

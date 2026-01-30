@@ -1,0 +1,116 @@
+name: GTM Plan
+id: gtm-plan
+description: |
+  Go-to-market planning and execution support. Includes competitive analysis,
+  persona development, messaging framework creation, and market positioning.
+  Delivers actionable GTM strategy documents with phased execution plans.
+category: strategy
+version: "1.0.0"
+
+# Timing
+typical_duration: "4-8 hours"
+estimated_cost: "$15-40"
+
+# Required inputs
+required_inputs:
+  - type: CONTEXT
+    name: company_profile
+    description: Company information, product/service details, and value proposition
+  - type: PARAMETER
+    name: target_market
+    description: Primary market or segment to target
+  - type: PARAMETER
+    name: gtm_objective
+    description: Primary GTM objective (launch, expansion, repositioning)
+    options:
+      - new_product_launch
+      - market_expansion
+      - repositioning
+      - competitive_response
+    default: new_product_launch
+
+# Optional enrichment
+optional_inputs:
+  - type: DATA_SOURCE
+    name: competitor_data
+    description: Existing competitor intelligence
+  - type: DATA_SOURCE
+    name: customer_data
+    description: CRM data for persona validation
+  - type: API_CREDENTIAL
+    name: crm_access
+    description: CRM for customer intelligence
+    platforms:
+      - hubspot
+      - salesforce
+      - pipedrive
+  - type: PARAMETER
+    name: budget_range
+    description: Marketing budget range for recommendations
+
+# Suggested skills
+suggested_skills:
+  - name: research-company
+    description: Research company and market context
+    required: true
+    order: 1
+  - name: research-competitors
+    description: Analyze competitive landscape
+    required: true
+    order: 2
+  - name: extract-audience-persona
+    description: Define target personas
+    required: true
+    order: 3
+  - name: positioning-angles
+    description: Develop positioning and messaging
+    required: true
+    order: 4
+  - name: gtm-engineering
+    description: Build GTM execution plan
+    required: false
+    order: 5
+
+# Default outputs
+default_outputs:
+  - name: Competitive Analysis
+    format: markdown
+    description: Detailed competitor landscape analysis
+  - name: Persona Profiles
+    format: json
+    description: Target audience persona definitions
+  - name: Messaging Framework
+    format: markdown
+    description: Positioning, value props, and messaging hierarchy
+  - name: GTM Roadmap
+    format: markdown
+    description: Phased execution plan with milestones
+  - name: Channel Strategy
+    format: markdown
+    description: Recommended channels and tactics
+
+# Quality gates
+quality_gates:
+  - name: research_depth
+    description: Competitive analysis covers key competitors
+    threshold: 0.8
+  - name: persona_validation
+    description: Personas grounded in data
+    threshold: 0.7
+  - name: messaging_differentiation
+    description: Clear differentiation from competitors
+    threshold: 0.8
+  - name: actionability
+    description: Strategy includes actionable recommendations
+    threshold: 0.9
+
+# Tags for discovery
+tags:
+  - gtm
+  - strategy
+  - competitive-intel
+  - personas
+  - messaging
+  - positioning
+  - market-research
+  - launch

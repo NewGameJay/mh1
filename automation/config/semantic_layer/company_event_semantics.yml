@@ -1,0 +1,323 @@
+# MH1 Semantic Layer Template - Company Event Semantics
+# This file defines the data model for company-level event analysis
+# 
+# To customize for your company:
+# 1. Copy this file to clients/{client_id}/config/semantic_layer/
+# 2. Replace placeholders with your specific values
+# 3. Update table names, column names, and join strategies for your data warehouse
+# 4. Adjust thresholds based on your business model
+#
+# Placeholders used in this file:
+#   {database}              - Your data warehouse database name (e.g., "ANALYTICS")
+#   {schema}                - Your schema name (e.g., "PUBLIC", "REPORTING")
+#   {events_table}          - Your events fact table (e.g., "EVENTS_FCT")
+#   {orgs_table}            - Your organizations dimension table (e.g., "ORGS_DIM")
+#   {company_health_table}  - Your company health/scores table (e.g., "COMPANY_SCORES")
+#
+# Generated: 2026-01-15
+# Updated: 2026-01-27 (Converted to company-agnostic template)
+
+# =============================================================================
+# TABLE DEFINITIONS
+# =============================================================================
+
+tables:
+  # -------------------------------------------------------------------------
+  # Events Fact Table
+  # -------------------------------------------------------------------------
+  events:
+    name: "{database}.{schema}.{events_table}"
+    description: "Event-level data from your product/website tracking"
+    
+    # Column mappings - update these to match your schema
+    columns:
+      company_id: "{company_id_col}"      # Primary identifier for company-level analysis
+      event_type: "{event_type_col}"       # Event type/name column
+      event_timestamp: "{event_ts_col}"    # Event timestamp column
+      anonymous_id: "{anonymous_id_col}"   # Cookie, device_id, or other anonymous identifier
+      user_id: "{user_id_col}"             # Authenticated user ID (optional)
+      email: "{email_col}"                 # Email address (optional enrichment)
+      
+    notes:
+      - "company_id is the primary join key for company-level analysis"
+      - "email is optional enrichment only - may have low coverage"
+      - "anonymous_id provides tracking for unauthenticated users"
+    
+  # -------------------------------------------------------------------------
+  # Organizations Dimension Table
+  # -------------------------------------------------------------------------
+  orgs_dim:
+    name: "{database}.{schema}.{orgs_table}"
+    description: "Organization dimension table - maps internal IDs to CRM IDs"
+    
+    columns:
+      org_id: "{org_id_col}"
+      org_name: "{org_name_col}"
+      crm_company_id: "{crm_company_id_col}"
+      created_at: "{org_created_at_col}"
+      industry: "{industry_col}"           # Optional
+      company_size: "{company_size_col}"   # Optional
+      
+    notes:
+      - "Maps internal organization IDs to CRM company IDs"
+      - "May contain additional firmographic data"
+    
+  # -------------------------------------------------------------------------
+  # Company Health/Scores Table
+  # -------------------------------------------------------------------------
+  company_health:
+    name: "{database}.{schema}.{company_health_table}"
+    description: "Company health scores and key metrics"
+    
+    columns:
+      account_id: "{account_id_col}"
+      crm_company_id: "{crm_company_id_col}"
+      company_name: "{company_name_col}"
+      health_score: "{health_score_col}"
+      health_status: "{health_status_col}"
+      mrr: "{mrr_col}"                     # Monthly Recurring Revenue
+      arr: "{arr_col}"                     # Annual Recurring Revenue
+      report_date: "{report_date_col}"
+      
+    notes:
+      - "Contains derived health metrics per company"
+      - "May be daily/weekly snapshot or real-time"
+
+# =============================================================================
+# JOIN STRATEGY
+# =============================================================================
+
+join_strategy:
+  description: "Events -> Orgs -> Health Scores via CRM Company ID"
+  
+  # Step 1: Events to Organizations
+  step1:
+    from: events
+    to: orgs_dim
+    from_key: "{company_id_col}"
+    to_key: "{org_id_col}"
+    join_type: "INNER JOIN"
+    note: "Filters to orgs with CRM mapping"
+    
+  # Step 2: Organizations to Company Health
+  step2:
+    from: orgs_dim
+    to: company_health
+    from_key: "{crm_company_id_col}"
+    to_key: "{crm_company_id_col}"
+    join_type: "LEFT JOIN"
+    note: "May need to cast types for join (e.g., TEXT to INT)"
+    
+  # Example SQL (customize for your warehouse)
+  example_sql: |
+    SELECT 
+      e.*,
+      o.{org_name_col},
+      h.{health_score_col},
+      h.{health_status_col}
+    FROM {database}.{schema}.{events_table} e
+    INNER JOIN {database}.{schema}.{orgs_table} o 
+      ON e.{company_id_col} = o.{org_id_col}
+    LEFT JOIN {database}.{schema}.{company_health_table} h 
+      ON CAST(o.{crm_company_id_col} AS TEXT) = CAST(h.{crm_company_id_col} AS TEXT)
+    WHERE e.{event_ts_col} >= DATEADD('day', -90, CURRENT_DATE())
+
+# =============================================================================
+# COVERAGE METRICS (Template)
+# =============================================================================
+# Update these values after analyzing your data
+
+coverage_metrics:
+  events_with_company_id: "{events_company_id_pct}%"
+  orgs_with_crm_id: "{orgs_crm_id_pct}%"
+  orgs_matched_to_health: "{orgs_health_match_pct}%"
+  anonymous_id_stability: "{anonymous_stability_pct}%"  # % of anonymous IDs that map consistently to companies
+  email_coverage: "{email_coverage_pct}%"
+
+# =============================================================================
+# FILTERS
+# =============================================================================
+
+filters:
+  time_window_days: 90
+  exclude_future_dates: true
+  date_filter_template: "{event_ts_col} >= DATEADD('day', -{time_window_days}, CURRENT_DATE()) AND {event_ts_col} < CURRENT_DATE()"
+  
+  # Optional filters
+  exclude_internal: true
+  internal_domains:
+    - "{your_company_domain}"
+    - "test.com"
+    - "example.com"
+    
+  exclude_bots: true
+  bot_user_agents:
+    - "Googlebot"
+    - "bingbot"
+    - "Slackbot"
+
+# =============================================================================
+# EVENT TYPE MAPPING
+# =============================================================================
+# Map your raw event types to canonical categories
+
+event_type_mapping:
+  # Format: raw_event_type: canonical_category
+  
+  # Engagement events (typically highest volume)
+  "{pageview_event}": engagement        # e.g., "page_view"
+  "{click_event}": engagement           # e.g., "click"
+  "{interaction_event}": engagement     # e.g., "feature_used"
+  "{exit_event}": engagement            # e.g., "exit", "session_end"
+  
+  # Conversion events (key business actions)
+  "{conversion_event}": conversion      # e.g., "purchase", "signup"
+  "{form_submit_event}": conversion     # e.g., "form_submitted"
+  
+  # Abandonment events
+  "{abandon_event}": abandonment        # e.g., "cart_abandoned", "form_abandoned"
+
+# =============================================================================
+# HEALTH STATUS VALUES
+# =============================================================================
+# Define the health status categories for your business
+
+health_status_values:
+  # Standard health statuses - customize based on your health model
+  - "Healthy"
+  - "At-Risk"
+  - "Watchlist"
+  - "Churned"
+  
+  # Sales statuses (if applicable)
+  - "Closed Won"
+  - "Onboarding"
+  - "Active"
+  
+  # Add your custom statuses below
+  # - "Enterprise"
+  # - "SMB"
+
+# =============================================================================
+# USAGE FREQUENCY THRESHOLDS
+# =============================================================================
+# Define engagement tiers based on activity frequency
+
+usage_frequency_thresholds:
+  # Time window for calculating activity
+  window_days: 90
+  
+  # Tier definitions
+  daily_active:
+    min_active_days: 45
+    description: "Active on 45+ days in last 90 (high engagement)"
+    health_impact: "positive"
+    
+  weekly_active:
+    min_active_days: 12
+    max_active_days: 44
+    description: "Active on 12-44 days in last 90 (moderate engagement)"
+    health_impact: "neutral"
+    
+  monthly_active:
+    min_active_days: 2
+    max_active_days: 11
+    description: "Active on 2-11 days in last 90 (low engagement)"
+    health_impact: "warning"
+    
+  inactive:
+    min_active_days: 0
+    max_active_days: 1
+    description: "Active on 0-1 days in last 90 (minimal engagement)"
+    health_impact: "critical"
+
+# =============================================================================
+# STALL/CHURN CRITERIA
+# =============================================================================
+# Define when a company is considered stalled or at risk of churn
+
+stall_criteria:
+  # Company is stalled if ANY of these conditions are true
+  conditions:
+    - usage_frequency_in: ["monthly_active", "inactive"]
+    - last_event_older_than_days: 14
+    - no_conversion_events_days: 30
+    
+  description: "Company is stalled if usage_frequency is monthly_active or inactive, OR last event is older than 14 days"
+
+churn_criteria:
+  # Company is at high churn risk if ALL of these conditions are true
+  conditions:
+    - usage_frequency: "inactive"
+    - last_event_older_than_days: 30
+    - health_status_in: ["At-Risk", "Watchlist"]
+    
+  description: "Company is at high churn risk if inactive for 30+ days and flagged in health model"
+
+# =============================================================================
+# INDUSTRY-SPECIFIC CONFIGURATIONS
+# =============================================================================
+
+industry_templates:
+  saas:
+    description: "Software-as-a-Service"
+    key_events:
+      - "login"
+      - "feature_used"
+      - "api_call"
+      - "integration_connected"
+    health_indicators:
+      positive: ["daily_active_users", "feature_adoption", "integration_count"]
+      negative: ["login_decline", "support_tickets", "downgrade_intent"]
+    stall_threshold_days: 7
+    churn_threshold_days: 30
+    
+  ecommerce:
+    description: "E-commerce / DTC"
+    key_events:
+      - "product_viewed"
+      - "add_to_cart"
+      - "checkout_started"
+      - "purchase"
+    health_indicators:
+      positive: ["purchase_frequency", "aov_trend", "category_expansion"]
+      negative: ["cart_abandonment_rate", "return_rate", "browse_without_buy"]
+    stall_threshold_days: 30
+    churn_threshold_days: 90
+    
+  b2b_services:
+    description: "B2B Professional Services"
+    key_events:
+      - "meeting_scheduled"
+      - "document_shared"
+      - "deliverable_reviewed"
+      - "invoice_paid"
+    health_indicators:
+      positive: ["engagement_frequency", "response_time", "project_velocity"]
+      negative: ["meeting_cancellations", "delayed_approvals", "scope_disputes"]
+    stall_threshold_days: 14
+    churn_threshold_days: 60
+    
+  marketplace:
+    description: "Two-sided Marketplace"
+    key_events:
+      - "listing_created"
+      - "search"
+      - "message_sent"
+      - "transaction_completed"
+    health_indicators:
+      positive: ["listing_count", "transaction_frequency", "response_rate"]
+      negative: ["listing_decline", "dispute_rate", "inactive_listings"]
+    stall_threshold_days: 14
+    churn_threshold_days: 45
+
+# =============================================================================
+# NOTES
+# =============================================================================
+
+notes:
+  - "Update placeholder values with your actual column names and table names"
+  - "Adjust thresholds based on your business model and customer behavior"
+  - "Review coverage metrics after initial data analysis"
+  - "Health status values should align with your CRM/sales process"
+  - "Consider industry-specific configurations as starting points"

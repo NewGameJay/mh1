@@ -1,0 +1,34 @@
+{
+  "company_name": "Test Company",
+  "website_url": "https://example.com",
+  "industry": null,
+  "depth": "quick",
+  "company_profile": {
+    "name": "Test Company",
+    "description": "",
+    "founded": null,
+    "headquarters": null,
+    "size": null,
+    "mission": null,
+    "vision": null
+  },
+  "market_positioning": {
+    "target_audience": "",
+    "icp": {},
+    "value_proposition": "",
+    "differentiators": [],
+    "competitive_advantages": []
+  },
+  "products_services": [],
+  "brand_voice": {
+    "tone": [],
+    "personality": "",
+    "formality_level": "",
+    "key_terms": [],
+    "messaging_themes": []
+  },
+  "pages_scraped": 0,
+  "interview_insights": [],
+  "last_updated": "2026-01-30T01:15:28.079083+00:00",
+  "interview_date": "2026-01-29"
+}

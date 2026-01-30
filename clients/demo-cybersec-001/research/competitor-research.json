@@ -1,0 +1,130 @@
+{
+  "company_name": "Demo Cyber Security Company",
+  "industry": "cyber security",
+  "competitors": [
+    {
+      "name": "Splunk",
+      "website": null,
+      "description": "",
+      "products": [],
+      "pricing": {
+        "available": false,
+        "tiers": []
+      },
+      "target_audience": "",
+      "differentiators": [],
+      "content_approach": {
+        "blog": false,
+        "newsletter": false,
+        "social": [],
+        "topics": []
+      }
+    },
+    {
+      "name": "CrowdStrike",
+      "website": null,
+      "description": "",
+      "products": [],
+      "pricing": {
+        "available": false,
+        "tiers": []
+      },
+      "target_audience": "",
+      "differentiators": [],
+      "content_approach": {
+        "blog": false,
+        "newsletter": false,
+        "social": [],
+        "topics": []
+      }
+    },
+    {
+      "name": "Proofpoint",
+      "website": null,
+      "description": "",
+      "products": [],
+      "pricing": {
+        "available": false,
+        "tiers": []
+      },
+      "target_audience": "",
+      "differentiators": [],
+      "content_approach": {
+        "blog": false,
+        "newsletter": false,
+        "social": [],
+        "topics": []
+      }
+    },
+    {
+      "name": "Zscaler",
+      "website": null,
+      "description": "",
+      "products": [],
+      "pricing": {
+        "available": false,
+        "tiers": []
+      },
+      "target_audience": "",
+      "differentiators": [],
+      "content_approach": {
+        "blog": false,
+        "newsletter": false,
+        "social": [],
+        "topics": []
+      }
+    }
+  ],
+  "positioning_matrix": {
+    "features": [],
+    "comparison": {
+      "Splunk": {
+        "features": [],
+        "positioning": "",
+        "target": ""
+      },
+      "CrowdStrike": {
+        "features": [],
+        "positioning": "",
+        "target": ""
+      },
+      "Proofpoint": {
+        "features": [],
+        "positioning": "",
+        "target": ""
+      },
+      "Zscaler": {
+        "features": [],
+        "positioning": "",
+        "target": ""
+      }
+    }
+  },
+  "market_gaps": [],
+  "content_strategies": [
+    {
+      "blog": false,
+      "newsletter": false,
+      "social": [],
+      "topics": []
+    },
+    {
+      "blog": false,
+      "newsletter": false,
+      "social": [],
+      "topics": []
+    },
+    {
+      "blog": false,
+      "newsletter": false,
+      "social": [],
+      "topics": []
+    },
+    {
+      "blog": false,
+      "newsletter": false,
+      "social": [],
+      "topics": []
+    }
+  ]
+}

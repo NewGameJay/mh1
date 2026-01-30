@@ -1,0 +1,102 @@
+{
+  "description": "Default parameter values for ghostwrite-content skill",
+  "client": {
+    "note": "Read from clients/{clientId}/ in Firebase or active_client.md"
+  },
+  "founder": {
+    "name": "default",
+    "note": "Founder ID resolved dynamically from Firebase founders subcollection"
+  },
+  "parameters": {
+    "platform": {
+      "default": "linkedin",
+      "options": ["linkedin", "twitter"],
+      "description": "Target social platform"
+    },
+    "post_count": {
+      "default": 20,
+      "min": 1,
+      "max": 50,
+      "description": "Number of posts to generate"
+    },
+    "min_relevance": {
+      "default": 5,
+      "min": 1,
+      "max": 10,
+      "description": "Minimum relevance score filter for source posts"
+    },
+    "max_source_posts": {
+      "default": 25,
+      "min": 5,
+      "max": 100,
+      "description": "Maximum source posts to include (sorted by relevance)"
+    },
+    "source": {
+      "default": "all",
+      "options": ["all", "social-listening", "case-studies"],
+      "description": "Content source filter"
+    }
+  },
+  "validation": {
+    "min_founder_posts": 10,
+    "min_source_posts": 5,
+    "founder_posts_to_load": 50,
+    "founder_posts_to_pass": 50
+  },
+  "voice_matching": {
+    "enabled": true,
+    "include_post_variety_analysis": true,
+    "min_short_takes_per_batch": 1,
+    "prioritize_voice_over_template": true,
+    "description": "Pass all founder posts to ghostwriter for voice pattern matching"
+  },
+  "thought_leaders": {
+    "min_relevance": 7.0,
+    "limit_leaders": 10,
+    "limit_per_leader": 5,
+    "limit_total_posts": 50
+  },
+  "parallel_events": {
+    "days": 14,
+    "limit": 20
+  },
+  "batching": {
+    "batch_size": 5,
+    "max_parallel_batches": 4,
+    "max_qa_regeneration_attempts": 2
+  },
+  "platforms": {
+    "linkedin": {
+      "status": "full_support",
+      "agents": {
+        "topic_curator": "linkedin-topic-curator",
+        "template_selector": "linkedin-template-selector",
+        "ghostwriter": "linkedin-ghostwriter",
+        "qa_reviewer": "linkedin-qa-reviewer"
+      },
+      "funnel_stages": ["TOFU", "MOFU", "BOFU"],
+      "posting_schedule": "Mon/Wed/Fri at 9:00 AM ET"
+    },
+    "twitter": {
+      "status": "coming_soon",
+      "agents": {
+        "ghostwriter": "twitter-ghostwriter"
+      },
+      "note": "Twitter ghostwriting is planned but not yet implemented"
+    }
+  },
+  "fallback_templates": {
+    "TOFU": 8,
+    "MOFU": 15,
+    "BOFU": 22,
+    "description": "Fallback template IDs if template selection fails"
+  },
+  "cost_estimates": {
+    "per_post_tokens_input": 5000,
+    "per_post_tokens_output": 1500,
+    "sonnet_input_per_1k": 0.003,
+    "sonnet_output_per_1k": 0.015,
+    "haiku_input_per_1k": 0.00025,
+    "haiku_output_per_1k": 0.00125
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Research Company Output",
+  "description": "Output schema for the research-company skill",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["success", "review", "failed", "budget_exceeded"],
+      "description": "Execution status"
+    },
+    "output": {
+      "type": "object",
+      "properties": {
+        "company_name": {
+          "type": "string"
+        },
+        "website_url": {
+          "type": "string"
+        },
+        "industry": {
+          "type": "string"
+        },
+        "company_profile": {
+          "type": "object",
+          "properties": {
+            "name": {"type": "string"},
+            "description": {"type": "string"},
+            "founded": {"type": ["string", "null"]},
+            "headquarters": {"type": ["string", "null"]},
+            "size": {"type": ["string", "null"]},
+            "mission": {"type": ["string", "null"]},
+            "vision": {"type": ["string", "null"]}
+          }
+        },
+        "market_positioning": {
+          "type": "object",
+          "properties": {
+            "target_audience": {"type": "string"},
+            "icp": {"type": "object"},
+            "value_proposition": {"type": "string"},
+            "differentiators": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "competitive_advantages": {
+              "type": "array",
+              "items": {"type": "string"}
+            }
+          }
+        },
+        "products_services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "description": {"type": "string"},
+              "pricing": {"type": ["string", "null"]},
+              "features": {
+                "type": "array",
+                "items": {"type": "string"}
+              }
+            }
+          }
+        },
+        "brand_voice": {
+          "type": "object",
+          "properties": {
+            "tone": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "personality": {"type": "string"},
+            "formality_level": {"type": "string"},
+            "key_terms": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "messaging_themes": {
+              "type": "array",
+              "items": {"type": "string"}
+            }
+          }
+        },
+        "key_messages": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "research_doc": {
+          "type": "string",
+          "description": "Markdown-formatted research document"
+        },
+        "research_doc_path": {
+          "type": "string",
+          "description": "Path to saved research document"
+        },
+        "pages_scraped": {
+          "type": "integer"
+        }
+      }
+    },
+    "evaluation": {
+      "type": "object",
+      "properties": {
+        "score": {"type": "number"},
+        "pass": {"type": "boolean"},
+        "breakdown": {"type": "object"}
+      }
+    },
+    "release_action": {
+      "type": "string",
+      "enum": ["auto_deliver", "auto_refine", "human_review", "blocked"]
+    },
+    "release_message": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "_meta": {
+      "type": "object",
+      "properties": {
+        "client_id": {"type": "string"},
+        "tenant_id": {"type": "string"},
+        "run_id": {"type": "string"},
+        "execution_mode": {"type": "string"},
+        "runtime_seconds": {"type": "number"},
+        "cost_usd": {"type": "number"},
+        "release_action": {"type": "string"},
+        "skill_version": {"type": "string"},
+        "pages_scraped": {"type": "integer"},
+        "tokens": {
+          "type": "object",
+          "properties": {
+            "input": {"type": "integer"},
+            "output": {"type": "integer"},
+            "total": {"type": "integer"}
+          }
+        },
+        "timestamp": {"type": "string"}
+      }
+    },
+    "error": {
+      "type": "string",
+      "description": "Error message if status is failed"
+    },
+    "error_type": {
+      "type": "string",
+      "description": "Error type if status is failed"
+    }
+  },
+  "required": ["status"]
+}

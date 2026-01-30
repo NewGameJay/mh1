@@ -1,0 +1,253 @@
+{
+  "description": "Firestore document schema for signals (social listening posts, news, etc.)",
+  "documentPath": "clients/{CLIENT_ID}/signals/{signalId}",
+  "documentIdGeneration": {
+    "format": "UUID v4",
+    "legacyIdStorage": "legacyId field stores original document ID if migrated",
+    "examples": [
+      "550e8400-e29b-41d4-a716-446655440000",
+      "6ba7b810-9dad-11d1-80b4-00c04fd430c8"
+    ]
+  },
+  "fields": {
+    "identity": {
+      "description": "Document identity fields",
+      "fields": {
+        "id": {
+          "type": "string",
+          "description": "Firestore document ID (UUID)",
+          "required": true
+        },
+        "legacyId": {
+          "type": "string",
+          "description": "Original document ID from old schema (for migrated docs)",
+          "required": false
+        },
+        "externalId": {
+          "type": "string",
+          "description": "Platform's native post ID",
+          "required": false
+        }
+      }
+    },
+    "signalType": {
+      "type": "string",
+      "enum": ["keyword-match", "news-article", "competitor-mention", "trend"],
+      "required": true,
+      "default": "keyword-match"
+    },
+    "content": {
+      "description": "Core content fields",
+      "fields": {
+        "content": {
+          "type": "string",
+          "description": "Full post/article text content",
+          "required": true
+        },
+        "contentPreview": {
+          "type": "string",
+          "description": "First 280 chars for display",
+          "required": false
+        },
+        "title": {
+          "type": "string",
+          "description": "For news articles",
+          "required": false
+        }
+      }
+    },
+    "source": {
+      "description": "Platform and source information",
+      "fields": {
+        "platform": {
+          "type": "string",
+          "enum": ["linkedin", "twitter", "reddit", "news", "other"],
+          "required": true
+        },
+        "sourceUrl": {
+          "type": "string",
+          "description": "Direct URL to the post/article",
+          "required": false
+        },
+        "sourceDomain": {
+          "type": "string",
+          "description": "Domain for news articles (e.g., techcrunch.com)",
+          "required": false
+        }
+      }
+    },
+    "author": {
+      "type": "object",
+      "description": "Author info for anonymous/external sources (not tracked people)",
+      "required": false,
+      "properties": {
+        "name": { "type": "string" },
+        "handle": { "type": "string" },
+        "profileUrl": { "type": "string" },
+        "followerCount": { "type": "number" }
+      }
+    },
+    "timestamps": {
+      "description": "Temporal fields",
+      "fields": {
+        "postedAt": {
+          "type": "timestamp",
+          "description": "When originally posted",
+          "required": true
+        },
+        "collectedAt": {
+          "type": "timestamp",
+          "description": "When we captured it",
+          "required": true
+        },
+        "updatedAt": {
+          "type": "timestamp",
+          "description": "Last update in our system",
+          "required": true
+        }
+      }
+    },
+    "engagement": {
+      "type": "object",
+      "description": "Engagement metrics (raw platform values)",
+      "properties": {
+        "likes": { "type": "number", "default": 0 },
+        "comments": { "type": "number", "default": 0 },
+        "shares": { "type": "number", "default": 0 },
+        "retweets": { "type": "number", "description": "Twitter-specific" },
+        "views": { "type": "number" }
+      }
+    },
+    "engagementScore": {
+      "type": "number",
+      "description": "Computed: likes + comments*2 + shares*3",
+      "required": true
+    },
+    "discovery": {
+      "description": "How this signal was discovered",
+      "fields": {
+        "matchedKeywords": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Keywords that matched (e.g., ['AI marketing', 'fractional CMO'])"
+        },
+        "keywordCategory": {
+          "type": "string",
+          "enum": ["competitors", "industry", "brand"],
+          "required": false
+        },
+        "keywordPriority": {
+          "type": "string",
+          "enum": ["high", "medium", "low"],
+          "required": false
+        }
+      }
+    },
+    "scoring": {
+      "description": "Analysis and scoring fields",
+      "fields": {
+        "relevanceScore": {
+          "type": "number",
+          "min": 1,
+          "max": 10,
+          "description": "Overall relevance to client audience"
+        },
+        "scoringReason": {
+          "type": "string",
+          "description": "Why this score"
+        },
+        "sentiment": {
+          "type": "string",
+          "enum": ["positive", "neutral", "negative", "mixed"]
+        },
+        "icpFit": {
+          "type": "string",
+          "description": "e.g., 'High - decision maker'"
+        },
+        "contentPotential": {
+          "type": "string",
+          "description": "e.g., 'High - original insight'"
+        },
+        "signalTags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "e.g., ['pain-point', 'comparison-request']"
+        },
+        "themes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "e.g., ['pricing', 'support']"
+        }
+      }
+    },
+    "workflow": {
+      "description": "Content lifecycle tracking",
+      "fields": {
+        "status": {
+          "type": "string",
+          "enum": ["active", "archived"],
+          "default": "active",
+          "required": true
+        },
+        "usageStatus": {
+          "type": "string",
+          "enum": ["unused", "used", "rejected"],
+          "default": "unused",
+          "required": true
+        },
+        "usedInPosts": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "IDs of ghostwritten posts that used this"
+        },
+        "usedAt": {
+          "type": "timestamp",
+          "required": false
+        },
+        "rejectedReason": {
+          "type": "string",
+          "required": false
+        }
+      }
+    },
+    "provenance": {
+      "description": "Data source tracking",
+      "fields": {
+        "source": {
+          "type": "string",
+          "description": "e.g., 'social-listening-collect', 'news-monitor'",
+          "required": true
+        },
+        "collectionJobId": {
+          "type": "string",
+          "description": "Which job collected this"
+        },
+        "searchQuery": {
+          "type": "string",
+          "description": "The actual search that found this"
+        },
+        "reportId": {
+          "type": "string",
+          "description": "Which report run discovered this"
+        }
+      }
+    },
+    "metadata": {
+      "description": "System metadata",
+      "fields": {
+        "createdAt": {
+          "type": "timestamp",
+          "required": true
+        },
+        "_migratedFrom": {
+          "type": "string",
+          "description": "Original path for migrated documents"
+        },
+        "_migratedAt": {
+          "type": "timestamp",
+          "description": "When document was migrated"
+        }
+      }
+    }
+  }
+}

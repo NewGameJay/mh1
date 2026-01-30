@@ -1,0 +1,35 @@
+# Default Configuration for Skill
+# These values are used when not overridden by skill call
+
+# Processing settings
+batch_size: 500
+max_items: 10000
+timeout_seconds: 1800  # 30 minutes
+
+# Quality thresholds
+min_confidence: 0.7
+min_relevance_score: 0.5
+max_items_for_review: 100
+
+# Model settings
+default_model: claude-sonnet-4
+extraction_model: claude-haiku
+synthesis_model: claude-sonnet-4
+
+# Context limits (tokens)
+max_inline_context: 8000
+chunk_size: 1000
+
+# Output settings
+output_format: json
+include_report: true
+include_metadata: true
+
+# Retry settings
+max_retries: 2
+retry_delay_seconds: 5
+backoff_multiplier: 2
+
+# Caching
+cache_enabled: true
+cache_ttl_hours: 24

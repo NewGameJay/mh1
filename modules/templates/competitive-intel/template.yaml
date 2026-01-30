@@ -1,0 +1,116 @@
+name: Competitive Intelligence
+id: competitive-intel
+description: |
+  Deep competitive analysis covering positioning, messaging, feature comparison,
+  pricing, and market movements. Delivers actionable intelligence for strategic
+  differentiation and market positioning. Includes battle cards for sales enablement.
+category: intelligence
+version: "1.0.0"
+
+# Timing
+typical_duration: "4-8 hours"
+estimated_cost: "$15-40"
+
+# Required inputs
+required_inputs:
+  - type: PARAMETER
+    name: competitors
+    description: List of competitors to analyze (3-7 recommended)
+  - type: CONTEXT
+    name: company_context
+    description: Your company profile for comparison baseline
+
+# Optional enrichment
+optional_inputs:
+  - type: PARAMETER
+    name: focus_areas
+    description: Specific areas to focus analysis on
+    options:
+      - positioning
+      - pricing
+      - features
+      - messaging
+      - hiring
+      - funding
+      - content_strategy
+    default:
+      - positioning
+      - features
+      - messaging
+  - type: DATA_SOURCE
+    name: existing_intel
+    description: Previously gathered competitive intelligence
+  - type: API_CREDENTIAL
+    name: data_enrichment
+    description: Data enrichment APIs for deeper intelligence
+    platforms:
+      - crunchbase
+      - linkedin
+
+# Suggested skills
+suggested_skills:
+  - name: research-company
+    description: Research each competitor comprehensively
+    required: true
+    order: 1
+  - name: research-competitors
+    description: Structured competitive comparison
+    required: true
+    order: 2
+  - name: positioning-angles
+    description: Identify positioning opportunities
+    required: false
+    order: 3
+  - name: social-listening-collect
+    description: Monitor competitor social presence
+    required: false
+    order: 0
+
+# Default outputs
+default_outputs:
+  - name: Competitor Profiles
+    format: json
+    description: Detailed profiles for each competitor
+  - name: Feature Comparison Matrix
+    format: json
+    description: Side-by-side feature comparison
+  - name: Positioning Analysis
+    format: markdown
+    description: How competitors position themselves
+  - name: Messaging Teardown
+    format: markdown
+    description: Analysis of competitor messaging and claims
+  - name: SWOT Analysis
+    format: markdown
+    description: Strengths, weaknesses, opportunities, threats
+  - name: Strategic Recommendations
+    format: markdown
+    description: Differentiation opportunities and threats
+  - name: Battle Cards
+    format: json
+    description: Sales-ready competitive battle cards
+
+# Quality gates
+quality_gates:
+  - name: competitor_coverage
+    description: All specified competitors analyzed
+    threshold: 1.0
+  - name: data_recency
+    description: Information is current (within 3 months)
+    threshold: 0.7
+  - name: analysis_depth
+    description: Analysis covers all focus areas
+    threshold: 0.8
+  - name: actionability
+    description: Recommendations are actionable
+    threshold: 0.8
+
+# Tags for discovery
+tags:
+  - competitive-intelligence
+  - market-research
+  - positioning
+  - differentiation
+  - battle-cards
+  - strategy
+  - swot

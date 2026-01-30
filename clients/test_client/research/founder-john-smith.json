@@ -1,0 +1,44 @@
+{
+  "founder_profile": {
+    "name": "John Smith",
+    "title": "",
+    "company": "Acme Corp",
+    "location": "",
+    "about": "",
+    "career_history": [],
+    "education": [],
+    "skills": [],
+    "linkedin_url": null,
+    "twitter_handle": null
+  },
+  "content_analysis": {
+    "total_pieces": 0,
+    "sources": [],
+    "topics": []
+  },
+  "voice_patterns": {
+    "confidence": 0.0,
+    "tone": [],
+    "vocabulary_level": "professional",
+    "common_phrases": [],
+    "sentence_structure": "varied",
+    "formality": "professional",
+    "total_words_analyzed": 0
+  },
+  "topics_of_expertise": [],
+  "interview_prep": {
+    "recommended_topics": [],
+    "questions_to_explore": [
+      "What are your top 3 content themes you want to focus on?",
+      "Who is your primary target audience?",
+      "What differentiates your perspective in the industry?",
+      "Are there any topics you want to avoid?",
+      "What tone resonates best with your audience?"
+    ],
+    "gaps_to_fill": [
+      "Content preferences not publicly available",
+      "Internal voice guidelines",
+      "Competitor content to avoid"
+    ]
+  }
+}

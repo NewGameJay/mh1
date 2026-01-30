@@ -1,0 +1,40 @@
+{
+  "run_id": "53ab8336",
+  "type": "workflow",
+  "name": "checkpoint-test",
+  "version": "v1.0.0",
+  "status": "pending",
+  "start_time": "2026-01-29T22:02:57.329770+00:00",
+  "end_time": null,
+  "duration_seconds": 0,
+  "tokens": {
+    "input": 20,
+    "output": 10,
+    "total": 30
+  },
+  "steps": [
+    {
+      "step_name": "checkpoint-step",
+      "status": "success",
+      "output": {
+        "checkpoint": "saved"
+      },
+      "tokens_input": 20,
+      "tokens_output": 10,
+      "duration_seconds": 0.0,
+      "error": null,
+      "sub_calls": []
+    }
+  ],
+  "error": null,
+  "evaluation": null,
+  "client": null,
+  "tenant_id": "test",
+  "tags": [],
+  "context_handling": {
+    "strategy": "inline",
+    "input_size_tokens": 0,
+    "chunks_processed": 0,
+    "sub_calls": []
+  }
+}

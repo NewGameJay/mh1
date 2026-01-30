@@ -1,0 +1,2834 @@
+{
+  "current_step": 5,
+  "outputs": {
+    "discovery": {
+      "total_contacts": 100,
+      "by_stage": {
+        "evangelist": 76,
+        "customer": 24
+      },
+      "contacts": {
+        "evangelist": [
+          {
+            "id": "contact_0",
+            "email": "user0@example.com",
+            "firstname": "User",
+            "lastname": "0",
+            "company": "BigBrand",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 56,
+              "login_trend": 1,
+              "feature_adoption": 0.4800132459404143
+            }
+          },
+          {
+            "id": "contact_1",
+            "email": "user1@example.com",
+            "firstname": "User",
+            "lastname": "1",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 22,
+              "login_trend": 0,
+              "feature_adoption": 0.22009963516696285
+            }
+          },
+          {
+            "id": "contact_2",
+            "email": "user2@example.com",
+            "firstname": "User",
+            "lastname": "2",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 29,
+              "login_trend": 0,
+              "feature_adoption": 0.12428421624804187
+            }
+          },
+          {
+            "id": "contact_3",
+            "email": "user3@example.com",
+            "firstname": "User",
+            "lastname": "3",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 50,
+              "login_trend": -1,
+              "feature_adoption": 0.6602406760946036
+            }
+          },
+          {
+            "id": "contact_4",
+            "email": "user4@example.com",
+            "firstname": "User",
+            "lastname": "4",
+            "company": "TechCo",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 14,
+              "login_trend": -1,
+              "feature_adoption": 0.5723395859829667
+            }
+          },
+          {
+            "id": "contact_6",
+            "email": "user6@example.com",
+            "firstname": "User",
+            "lastname": "6",
+            "company": "TechCo",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 35,
+              "login_trend": 1,
+              "feature_adoption": 0.3659953806931461
+            }
+          },
+          {
+            "id": "contact_7",
+            "email": "user7@example.com",
+            "firstname": "User",
+            "lastname": "7",
+            "company": "Acme Corp",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 16,
+              "login_trend": 0,
+              "feature_adoption": 0.9841239577511381
+            }
+          },
+          {
+            "id": "contact_8",
+            "email": "user8@example.com",
+            "firstname": "User",
+            "lastname": "8",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 18,
+              "login_trend": 0,
+              "feature_adoption": 0.6213873334635351
+            }
+          },
+          {
+            "id": "contact_9",
+            "email": "user9@example.com",
+            "firstname": "User",
+            "lastname": "9",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 9,
+              "login_trend": 1,
+              "feature_adoption": 0.1286919142391918
+            }
+          },
+          {
+            "id": "contact_10",
+            "email": "user10@example.com",
+            "firstname": "User",
+            "lastname": "10",
+            "company": "TechCo",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 10,
+              "login_trend": 0,
+              "feature_adoption": 0.6271031834741099
+            }
+          },
+          {
+            "id": "contact_11",
+            "email": "user11@example.com",
+            "firstname": "User",
+            "lastname": "11",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 8,
+              "login_trend": 0,
+              "feature_adoption": 0.06938409628903552
+            }
+          },
+          {
+            "id": "contact_12",
+            "email": "user12@example.com",
+            "firstname": "User",
+            "lastname": "12",
+            "company": "Acme Corp",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 26,
+              "login_trend": 1,
+              "feature_adoption": 0.803594064152363
+            }
+          },
+          {
+            "id": "contact_13",
+            "email": "user13@example.com",
+            "firstname": "User",
+            "lastname": "13",
+            "company": "Acme Corp",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 20,
+              "login_trend": -1,
+              "feature_adoption": 0.7076878858438298
+            }
+          },
+          {
+            "id": "contact_14",
+            "email": "user14@example.com",
+            "firstname": "User",
+            "lastname": "14",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 5,
+              "login_trend": -1,
+              "feature_adoption": 0.888951704625143
+            }
+          },
+          {
+            "id": "contact_16",
+            "email": "user16@example.com",
+            "firstname": "User",
+            "lastname": "16",
+            "company": "TechCo",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 4,
+              "login_trend": 0,
+              "feature_adoption": 0.29719572723611043
+            }
+          },
+          {
+            "id": "contact_17",
+            "email": "user17@example.com",
+            "firstname": "User",
+            "lastname": "17",
+            "company": "BigBrand",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 40,
+              "login_trend": 0,
+              "feature_adoption": 0.8932724004586701
+            }
+          },
+          {
+            "id": "contact_18",
+            "email": "user18@example.com",
+            "firstname": "User",
+            "lastname": "18",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 32,
+              "login_trend": 0,
+              "feature_adoption": 0.7166688776514336
+            }
+          },
+          {
+            "id": "contact_19",
+            "email": "user19@example.com",
+            "firstname": "User",
+            "lastname": "19",
+            "company": "BigBrand",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 17,
+              "login_trend": 0,
+              "feature_adoption": 0.4163305078596984
+            }
+          },
+          {
+            "id": "contact_20",
+            "email": "user20@example.com",
+            "firstname": "User",
+            "lastname": "20",
+            "company": "Acme Corp",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 56,
+              "login_trend": 1,
+              "feature_adoption": 0.3415674209021047
+            }
+          },
+          {
+            "id": "contact_21",
+            "email": "user21@example.com",
+            "firstname": "User",
+            "lastname": "21",
+            "company": "Acme Corp",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 14,
+              "login_trend": 0,
+              "feature_adoption": 0.6848962569627982
+            }
+          },
+          {
+            "id": "contact_22",
+            "email": "user22@example.com",
+            "firstname": "User",
+            "lastname": "22",
+            "company": "TechCo",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 57,
+              "login_trend": 0,
+              "feature_adoption": 0.824589650132462
+            }
+          },
+          {
+            "id": "contact_24",
+            "email": "user24@example.com",
+            "firstname": "User",
+            "lastname": "24",
+            "company": "TechCo",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 42,
+              "login_trend": 1,
+              "feature_adoption": 0.19121159674771548
+            }
+          },
+          {
+            "id": "contact_26",
+            "email": "user26@example.com",
+            "firstname": "User",
+            "lastname": "26",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 30,
+              "login_trend": 1,
+              "feature_adoption": 0.19856364033771368
+            }
+          },
+          {
+            "id": "contact_28",
+            "email": "user28@example.com",
+            "firstname": "User",
+            "lastname": "28",
+            "company": "Acme Corp",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 39,
+              "login_trend": -1,
+              "feature_adoption": 0.5782602555352512
+            }
+          },
+          {
+            "id": "contact_29",
+            "email": "user29@example.com",
+            "firstname": "User",
+            "lastname": "29",
+            "company": "Acme Corp",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 43,
+              "login_trend": 0,
+              "feature_adoption": 0.7862714162539782
+            }
+          },
+          {
+            "id": "contact_30",
+            "email": "user30@example.com",
+            "firstname": "User",
+            "lastname": "30",
+            "company": "Acme Corp",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 30,
+              "login_trend": -1,
+              "feature_adoption": 0.7850055699619248
+            }
+          },
+          {
+            "id": "contact_31",
+            "email": "user31@example.com",
+            "firstname": "User",
+            "lastname": "31",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 52,
+              "login_trend": 0,
+              "feature_adoption": 0.5783842328505711
+            }
+          },
+          {
+            "id": "contact_32",
+            "email": "user32@example.com",
+            "firstname": "User",
+            "lastname": "32",
+            "company": "Acme Corp",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 28,
+              "login_trend": -1,
+              "feature_adoption": 0.3205544598767178
+            }
+          },
+          {
+            "id": "contact_33",
+            "email": "user33@example.com",
+            "firstname": "User",
+            "lastname": "33",
+            "company": "BigBrand",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 34,
+              "login_trend": 0,
+              "feature_adoption": 0.48822205129961393
+            }
+          },
+          {
+            "id": "contact_34",
+            "email": "user34@example.com",
+            "firstname": "User",
+            "lastname": "34",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 6,
+              "login_trend": -1,
+              "feature_adoption": 0.2853923751200732
+            }
+          },
+          {
+            "id": "contact_35",
+            "email": "user35@example.com",
+            "firstname": "User",
+            "lastname": "35",
+            "company": "TechCo",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 42,
+              "login_trend": -1,
+              "feature_adoption": 0.98522035301605
+            }
+          },
+          {
+            "id": "contact_36",
+            "email": "user36@example.com",
+            "firstname": "User",
+            "lastname": "36",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 60,
+              "login_trend": -1,
+              "feature_adoption": 0.22080216139234532
+            }
+          },
+          {
+            "id": "contact_40",
+            "email": "user40@example.com",
+            "firstname": "User",
+            "lastname": "40",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 3,
+              "login_trend": -1,
+              "feature_adoption": 0.6242086657050193
+            }
+          },
+          {
+            "id": "contact_41",
+            "email": "user41@example.com",
+            "firstname": "User",
+            "lastname": "41",
+            "company": "Acme Corp",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 48,
+              "login_trend": 0,
+              "feature_adoption": 0.9393515237771435
+            }
+          },
+          {
+            "id": "contact_42",
+            "email": "user42@example.com",
+            "firstname": "User",
+            "lastname": "42",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 11,
+              "login_trend": -1,
+              "feature_adoption": 0.6535973676190739
+            }
+          },
+          {
+            "id": "contact_43",
+            "email": "user43@example.com",
+            "firstname": "User",
+            "lastname": "43",
+            "company": "Acme Corp",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 24,
+              "login_trend": -1,
+              "feature_adoption": 0.9007082988195122
+            }
+          },
+          {
+            "id": "contact_45",
+            "email": "user45@example.com",
+            "firstname": "User",
+            "lastname": "45",
+            "company": "TechCo",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 11,
+              "login_trend": 1,
+              "feature_adoption": 0.26432892644102723
+            }
+          },
+          {
+            "id": "contact_46",
+            "email": "user46@example.com",
+            "firstname": "User",
+            "lastname": "46",
+            "company": "TechCo",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 24,
+              "login_trend": -1,
+              "feature_adoption": 0.08994424857357608
+            }
+          },
+          {
+            "id": "contact_47",
+            "email": "user47@example.com",
+            "firstname": "User",
+            "lastname": "47",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 14,
+              "login_trend": 1,
+              "feature_adoption": 0.32544420583012457
+            }
+          },
+          {
+            "id": "contact_48",
+            "email": "user48@example.com",
+            "firstname": "User",
+            "lastname": "48",
+            "company": "Acme Corp",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 3,
+              "login_trend": 0,
+              "feature_adoption": 0.8371299483017718
+            }
+          },
+          {
+            "id": "contact_49",
+            "email": "user49@example.com",
+            "firstname": "User",
+            "lastname": "49",
+            "company": "TechCo",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 51,
+              "login_trend": -1,
+              "feature_adoption": 0.686591270011589
+            }
+          },
+          {
+            "id": "contact_50",
+            "email": "user50@example.com",
+            "firstname": "User",
+            "lastname": "50",
+            "company": "Acme Corp",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 8,
+              "login_trend": -1,
+              "feature_adoption": 0.16648077828704566
+            }
+          },
+          {
+            "id": "contact_51",
+            "email": "user51@example.com",
+            "firstname": "User",
+            "lastname": "51",
+            "company": "Acme Corp",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 22,
+              "login_trend": -1,
+              "feature_adoption": 0.0004577604351889697
+            }
+          },
+          {
+            "id": "contact_53",
+            "email": "user53@example.com",
+            "firstname": "User",
+            "lastname": "53",
+            "company": "Acme Corp",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 30,
+              "login_trend": 0,
+              "feature_adoption": 0.20939122309131097
+            }
+          },
+          {
+            "id": "contact_55",
+            "email": "user55@example.com",
+            "firstname": "User",
+            "lastname": "55",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 9,
+              "login_trend": 0,
+              "feature_adoption": 0.15214783957165945
+            }
+          },
+          {
+            "id": "contact_56",
+            "email": "user56@example.com",
+            "firstname": "User",
+            "lastname": "56",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 56,
+              "login_trend": -1,
+              "feature_adoption": 0.3721954684211246
+            }
+          },
+          {
+            "id": "contact_57",
+            "email": "user57@example.com",
+            "firstname": "User",
+            "lastname": "57",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 25,
+              "login_trend": -1,
+              "feature_adoption": 0.9755466561435805
+            }
+          },
+          {
+            "id": "contact_58",
+            "email": "user58@example.com",
+            "firstname": "User",
+            "lastname": "58",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 3,
+              "login_trend": 0,
+              "feature_adoption": 0.8154122925251951
+            }
+          },
+          {
+            "id": "contact_61",
+            "email": "user61@example.com",
+            "firstname": "User",
+            "lastname": "61",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 58,
+              "login_trend": 0,
+              "feature_adoption": 0.5805913817820506
+            }
+          },
+          {
+            "id": "contact_63",
+            "email": "user63@example.com",
+            "firstname": "User",
+            "lastname": "63",
+            "company": "BigBrand",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 40,
+              "login_trend": 1,
+              "feature_adoption": 0.5369011720782155
+            }
+          },
+          {
+            "id": "contact_64",
+            "email": "user64@example.com",
+            "firstname": "User",
+            "lastname": "64",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 17,
+              "login_trend": 0,
+              "feature_adoption": 0.3764459599494192
+            }
+          },
+          {
+            "id": "contact_65",
+            "email": "user65@example.com",
+            "firstname": "User",
+            "lastname": "65",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 47,
+              "login_trend": 0,
+              "feature_adoption": 0.19913117428936356
+            }
+          },
+          {
+            "id": "contact_66",
+            "email": "user66@example.com",
+            "firstname": "User",
+            "lastname": "66",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 34,
+              "login_trend": 0,
+              "feature_adoption": 0.09102382929219766
+            }
+          },
+          {
+            "id": "contact_67",
+            "email": "user67@example.com",
+            "firstname": "User",
+            "lastname": "67",
+            "company": "TechCo",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 26,
+              "login_trend": 0,
+              "feature_adoption": 0.2598261303904126
+            }
+          },
+          {
+            "id": "contact_68",
+            "email": "user68@example.com",
+            "firstname": "User",
+            "lastname": "68",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 40,
+              "login_trend": 0,
+              "feature_adoption": 0.6130179362860751
+            }
+          },
+          {
+            "id": "contact_69",
+            "email": "user69@example.com",
+            "firstname": "User",
+            "lastname": "69",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 21,
+              "login_trend": 0,
+              "feature_adoption": 0.4337951870366462
+            }
+          },
+          {
+            "id": "contact_70",
+            "email": "user70@example.com",
+            "firstname": "User",
+            "lastname": "70",
+            "company": "TechCo",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 25,
+              "login_trend": 1,
+              "feature_adoption": 0.8614517126343723
+            }
+          },
+          {
+            "id": "contact_71",
+            "email": "user71@example.com",
+            "firstname": "User",
+            "lastname": "71",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 5,
+              "login_trend": 1,
+              "feature_adoption": 0.34243530460381144
+            }
+          },
+          {
+            "id": "contact_74",
+            "email": "user74@example.com",
+            "firstname": "User",
+            "lastname": "74",
+            "company": "TechCo",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 15,
+              "login_trend": -1,
+              "feature_adoption": 0.6904689907535466
+            }
+          },
+          {
+            "id": "contact_76",
+            "email": "user76@example.com",
+            "firstname": "User",
+            "lastname": "76",
+            "company": "TechCo",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 30,
+              "login_trend": 0,
+              "feature_adoption": 0.806352906939146
+            }
+          },
+          {
+            "id": "contact_77",
+            "email": "user77@example.com",
+            "firstname": "User",
+            "lastname": "77",
+            "company": "BigBrand",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 39,
+              "login_trend": -1,
+              "feature_adoption": 0.25288582502183243
+            }
+          },
+          {
+            "id": "contact_78",
+            "email": "user78@example.com",
+            "firstname": "User",
+            "lastname": "78",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 11,
+              "login_trend": -1,
+              "feature_adoption": 0.4913365471700665
+            }
+          },
+          {
+            "id": "contact_79",
+            "email": "user79@example.com",
+            "firstname": "User",
+            "lastname": "79",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 34,
+              "login_trend": -1,
+              "feature_adoption": 0.7117210850568636
+            }
+          },
+          {
+            "id": "contact_81",
+            "email": "user81@example.com",
+            "firstname": "User",
+            "lastname": "81",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 39,
+              "login_trend": 1,
+              "feature_adoption": 0.60021024709026
+            }
+          },
+          {
+            "id": "contact_83",
+            "email": "user83@example.com",
+            "firstname": "User",
+            "lastname": "83",
+            "company": "TechCo",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 58,
+              "login_trend": 0,
+              "feature_adoption": 0.3104941641681783
+            }
+          },
+          {
+            "id": "contact_84",
+            "email": "user84@example.com",
+            "firstname": "User",
+            "lastname": "84",
+            "company": "BigBrand",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 36,
+              "login_trend": 0,
+              "feature_adoption": 0.18458807189970394
+            }
+          },
+          {
+            "id": "contact_85",
+            "email": "user85@example.com",
+            "firstname": "User",
+            "lastname": "85",
+            "company": "BigBrand",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 9,
+              "login_trend": 1,
+              "feature_adoption": 0.7436388095433026
+            }
+          },
+          {
+            "id": "contact_86",
+            "email": "user86@example.com",
+            "firstname": "User",
+            "lastname": "86",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 43,
+              "login_trend": 1,
+              "feature_adoption": 0.9129266981304137
+            }
+          },
+          {
+            "id": "contact_88",
+            "email": "user88@example.com",
+            "firstname": "User",
+            "lastname": "88",
+            "company": "BigBrand",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 41,
+              "login_trend": 0,
+              "feature_adoption": 0.8317952856654292
+            }
+          },
+          {
+            "id": "contact_89",
+            "email": "user89@example.com",
+            "firstname": "User",
+            "lastname": "89",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 2,
+              "login_trend": 1,
+              "feature_adoption": 0.9653179388175035
+            }
+          },
+          {
+            "id": "contact_90",
+            "email": "user90@example.com",
+            "firstname": "User",
+            "lastname": "90",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 41,
+              "login_trend": 1,
+              "feature_adoption": 0.013383037759571947
+            }
+          },
+          {
+            "id": "contact_93",
+            "email": "user93@example.com",
+            "firstname": "User",
+            "lastname": "93",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 28,
+              "login_trend": -1,
+              "feature_adoption": 0.3065257654632336
+            }
+          },
+          {
+            "id": "contact_94",
+            "email": "user94@example.com",
+            "firstname": "User",
+            "lastname": "94",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 11,
+              "login_trend": 1,
+              "feature_adoption": 0.3654383199442103
+            }
+          },
+          {
+            "id": "contact_95",
+            "email": "user95@example.com",
+            "firstname": "User",
+            "lastname": "95",
+            "company": "BigBrand",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 41,
+              "login_trend": 0,
+              "feature_adoption": 0.07231071066711525
+            }
+          },
+          {
+            "id": "contact_97",
+            "email": "user97@example.com",
+            "firstname": "User",
+            "lastname": "97",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 49,
+              "login_trend": -1,
+              "feature_adoption": 0.9229279145296899
+            }
+          },
+          {
+            "id": "contact_98",
+            "email": "user98@example.com",
+            "firstname": "User",
+            "lastname": "98",
+            "company": "StartupX",
+            "lifecyclestage": "evangelist",
+            "usage": {
+              "last_active_days": 57,
+              "login_trend": 1,
+              "feature_adoption": 0.9575087683897755
+            }
+          }
+        ],
+        "customer": [
+          {
+            "id": "contact_5",
+            "email": "user5@example.com",
+            "firstname": "User",
+            "lastname": "5",
+            "company": "TechCo",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 42,
+              "login_trend": -1,
+              "feature_adoption": 0.07894974777672259
+            }
+          },
+          {
+            "id": "contact_15",
+            "email": "user15@example.com",
+            "firstname": "User",
+            "lastname": "15",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 44,
+              "login_trend": 1,
+              "feature_adoption": 0.15031748789831745
+            }
+          },
+          {
+            "id": "contact_23",
+            "email": "user23@example.com",
+            "firstname": "User",
+            "lastname": "23",
+            "company": "StartupX",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 54,
+              "login_trend": -1,
+              "feature_adoption": 0.20471005152758104
+            }
+          },
+          {
+            "id": "contact_25",
+            "email": "user25@example.com",
+            "firstname": "User",
+            "lastname": "25",
+            "company": "BigBrand",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 24,
+              "login_trend": -1,
+              "feature_adoption": 0.8039547149741648
+            }
+          },
+          {
+            "id": "contact_27",
+            "email": "user27@example.com",
+            "firstname": "User",
+            "lastname": "27",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 17,
+              "login_trend": -1,
+              "feature_adoption": 0.8971381085226946
+            }
+          },
+          {
+            "id": "contact_37",
+            "email": "user37@example.com",
+            "firstname": "User",
+            "lastname": "37",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 34,
+              "login_trend": 0,
+              "feature_adoption": 0.7410501381364597
+            }
+          },
+          {
+            "id": "contact_38",
+            "email": "user38@example.com",
+            "firstname": "User",
+            "lastname": "38",
+            "company": "BigBrand",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 19,
+              "login_trend": 0,
+              "feature_adoption": 0.1597059076326307
+            }
+          },
+          {
+            "id": "contact_39",
+            "email": "user39@example.com",
+            "firstname": "User",
+            "lastname": "39",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 17,
+              "login_trend": -1,
+              "feature_adoption": 0.5779160621964982
+            }
+          },
+          {
+            "id": "contact_44",
+            "email": "user44@example.com",
+            "firstname": "User",
+            "lastname": "44",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 35,
+              "login_trend": 0,
+              "feature_adoption": 0.38526014798084507
+            }
+          },
+          {
+            "id": "contact_52",
+            "email": "user52@example.com",
+            "firstname": "User",
+            "lastname": "52",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 50,
+              "login_trend": -1,
+              "feature_adoption": 0.04693227163809466
+            }
+          },
+          {
+            "id": "contact_54",
+            "email": "user54@example.com",
+            "firstname": "User",
+            "lastname": "54",
+            "company": "StartupX",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 29,
+              "login_trend": -1,
+              "feature_adoption": 0.7005280362686945
+            }
+          },
+          {
+            "id": "contact_59",
+            "email": "user59@example.com",
+            "firstname": "User",
+            "lastname": "59",
+            "company": "Acme Corp",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 15,
+              "login_trend": 1,
+              "feature_adoption": 0.1619332526183228
+            }
+          },
+          {
+            "id": "contact_60",
+            "email": "user60@example.com",
+            "firstname": "User",
+            "lastname": "60",
+            "company": "TechCo",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 15,
+              "login_trend": 1,
+              "feature_adoption": 0.1356012185290416
+            }
+          },
+          {
+            "id": "contact_62",
+            "email": "user62@example.com",
+            "firstname": "User",
+            "lastname": "62",
+            "company": "TechCo",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 2,
+              "login_trend": -1,
+              "feature_adoption": 0.7575943077127874
+            }
+          },
+          {
+            "id": "contact_72",
+            "email": "user72@example.com",
+            "firstname": "User",
+            "lastname": "72",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 22,
+              "login_trend": 1,
+              "feature_adoption": 0.973190821918382
+            }
+          },
+          {
+            "id": "contact_73",
+            "email": "user73@example.com",
+            "firstname": "User",
+            "lastname": "73",
+            "company": "BigBrand",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 13,
+              "login_trend": -1,
+              "feature_adoption": 0.15807754278509933
+            }
+          },
+          {
+            "id": "contact_75",
+            "email": "user75@example.com",
+            "firstname": "User",
+            "lastname": "75",
+            "company": "Acme Corp",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 26,
+              "login_trend": 1,
+              "feature_adoption": 0.10600956836927033
+            }
+          },
+          {
+            "id": "contact_80",
+            "email": "user80@example.com",
+            "firstname": "User",
+            "lastname": "80",
+            "company": "BigBrand",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 45,
+              "login_trend": -1,
+              "feature_adoption": 0.38664835963560173
+            }
+          },
+          {
+            "id": "contact_82",
+            "email": "user82@example.com",
+            "firstname": "User",
+            "lastname": "82",
+            "company": "BigBrand",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 52,
+              "login_trend": 1,
+              "feature_adoption": 0.7899390300575168
+            }
+          },
+          {
+            "id": "contact_87",
+            "email": "user87@example.com",
+            "firstname": "User",
+            "lastname": "87",
+            "company": "TechCo",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 56,
+              "login_trend": 1,
+              "feature_adoption": 0.8754034231462695
+            }
+          },
+          {
+            "id": "contact_91",
+            "email": "user91@example.com",
+            "firstname": "User",
+            "lastname": "91",
+            "company": "TechCo",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 19,
+              "login_trend": -1,
+              "feature_adoption": 0.24871564141789582
+            }
+          },
+          {
+            "id": "contact_92",
+            "email": "user92@example.com",
+            "firstname": "User",
+            "lastname": "92",
+            "company": "Acme Corp",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 4,
+              "login_trend": 0,
+              "feature_adoption": 0.9816627606371218
+            }
+          },
+          {
+            "id": "contact_96",
+            "email": "user96@example.com",
+            "firstname": "User",
+            "lastname": "96",
+            "company": "Enterprise Inc",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 27,
+              "login_trend": 1,
+              "feature_adoption": 0.8194488510697183
+            }
+          },
+          {
+            "id": "contact_99",
+            "email": "user99@example.com",
+            "firstname": "User",
+            "lastname": "99",
+            "company": "BigBrand",
+            "lifecyclestage": "customer",
+            "usage": {
+              "last_active_days": 46,
+              "login_trend": 0,
+              "feature_adoption": 0.2262573972416002
+            }
+          }
+        ]
+      },
+      "data_validation": {
+        "valid": true,
+        "record_count": 100,
+        "field_coverage": {
+          "email": 1.0,
+          "company": 1.0,
+          "lifecyclestage": 1.0
+        },
+        "issues": [],
+        "warnings": []
+      },
+      "source": "hubspot"
+    },
+    "enrichment": {
+      "evangelist": [
+        {
+          "id": "contact_0",
+          "email": "user0@example.com",
+          "firstname": "User",
+          "lastname": "0",
+          "company": "BigBrand",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 56,
+            "login_trend": 1,
+            "feature_adoption": 0.4800132459404143
+          }
+        },
+        {
+          "id": "contact_1",
+          "email": "user1@example.com",
+          "firstname": "User",
+          "lastname": "1",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 22,
+            "login_trend": 0,
+            "feature_adoption": 0.22009963516696285
+          }
+        },
+        {
+          "id": "contact_2",
+          "email": "user2@example.com",
+          "firstname": "User",
+          "lastname": "2",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 29,
+            "login_trend": 0,
+            "feature_adoption": 0.12428421624804187
+          }
+        },
+        {
+          "id": "contact_3",
+          "email": "user3@example.com",
+          "firstname": "User",
+          "lastname": "3",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 50,
+            "login_trend": -1,
+            "feature_adoption": 0.6602406760946036
+          }
+        },
+        {
+          "id": "contact_4",
+          "email": "user4@example.com",
+          "firstname": "User",
+          "lastname": "4",
+          "company": "TechCo",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 14,
+            "login_trend": -1,
+            "feature_adoption": 0.5723395859829667
+          }
+        },
+        {
+          "id": "contact_6",
+          "email": "user6@example.com",
+          "firstname": "User",
+          "lastname": "6",
+          "company": "TechCo",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 35,
+            "login_trend": 1,
+            "feature_adoption": 0.3659953806931461
+          }
+        },
+        {
+          "id": "contact_7",
+          "email": "user7@example.com",
+          "firstname": "User",
+          "lastname": "7",
+          "company": "Acme Corp",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 16,
+            "login_trend": 0,
+            "feature_adoption": 0.9841239577511381
+          }
+        },
+        {
+          "id": "contact_8",
+          "email": "user8@example.com",
+          "firstname": "User",
+          "lastname": "8",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 18,
+            "login_trend": 0,
+            "feature_adoption": 0.6213873334635351
+          }
+        },
+        {
+          "id": "contact_9",
+          "email": "user9@example.com",
+          "firstname": "User",
+          "lastname": "9",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 9,
+            "login_trend": 1,
+            "feature_adoption": 0.1286919142391918
+          }
+        },
+        {
+          "id": "contact_10",
+          "email": "user10@example.com",
+          "firstname": "User",
+          "lastname": "10",
+          "company": "TechCo",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 10,
+            "login_trend": 0,
+            "feature_adoption": 0.6271031834741099
+          }
+        },
+        {
+          "id": "contact_11",
+          "email": "user11@example.com",
+          "firstname": "User",
+          "lastname": "11",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 8,
+            "login_trend": 0,
+            "feature_adoption": 0.06938409628903552
+          }
+        },
+        {
+          "id": "contact_12",
+          "email": "user12@example.com",
+          "firstname": "User",
+          "lastname": "12",
+          "company": "Acme Corp",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 26,
+            "login_trend": 1,
+            "feature_adoption": 0.803594064152363
+          }
+        },
+        {
+          "id": "contact_13",
+          "email": "user13@example.com",
+          "firstname": "User",
+          "lastname": "13",
+          "company": "Acme Corp",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 20,
+            "login_trend": -1,
+            "feature_adoption": 0.7076878858438298
+          }
+        },
+        {
+          "id": "contact_14",
+          "email": "user14@example.com",
+          "firstname": "User",
+          "lastname": "14",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 5,
+            "login_trend": -1,
+            "feature_adoption": 0.888951704625143
+          }
+        },
+        {
+          "id": "contact_16",
+          "email": "user16@example.com",
+          "firstname": "User",
+          "lastname": "16",
+          "company": "TechCo",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 4,
+            "login_trend": 0,
+            "feature_adoption": 0.29719572723611043
+          }
+        },
+        {
+          "id": "contact_17",
+          "email": "user17@example.com",
+          "firstname": "User",
+          "lastname": "17",
+          "company": "BigBrand",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 40,
+            "login_trend": 0,
+            "feature_adoption": 0.8932724004586701
+          }
+        },
+        {
+          "id": "contact_18",
+          "email": "user18@example.com",
+          "firstname": "User",
+          "lastname": "18",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 32,
+            "login_trend": 0,
+            "feature_adoption": 0.7166688776514336
+          }
+        },
+        {
+          "id": "contact_19",
+          "email": "user19@example.com",
+          "firstname": "User",
+          "lastname": "19",
+          "company": "BigBrand",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 17,
+            "login_trend": 0,
+            "feature_adoption": 0.4163305078596984
+          }
+        },
+        {
+          "id": "contact_20",
+          "email": "user20@example.com",
+          "firstname": "User",
+          "lastname": "20",
+          "company": "Acme Corp",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 56,
+            "login_trend": 1,
+            "feature_adoption": 0.3415674209021047
+          }
+        },
+        {
+          "id": "contact_21",
+          "email": "user21@example.com",
+          "firstname": "User",
+          "lastname": "21",
+          "company": "Acme Corp",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 14,
+            "login_trend": 0,
+            "feature_adoption": 0.6848962569627982
+          }
+        },
+        {
+          "id": "contact_22",
+          "email": "user22@example.com",
+          "firstname": "User",
+          "lastname": "22",
+          "company": "TechCo",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 57,
+            "login_trend": 0,
+            "feature_adoption": 0.824589650132462
+          }
+        },
+        {
+          "id": "contact_24",
+          "email": "user24@example.com",
+          "firstname": "User",
+          "lastname": "24",
+          "company": "TechCo",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 42,
+            "login_trend": 1,
+            "feature_adoption": 0.19121159674771548
+          }
+        },
+        {
+          "id": "contact_26",
+          "email": "user26@example.com",
+          "firstname": "User",
+          "lastname": "26",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 30,
+            "login_trend": 1,
+            "feature_adoption": 0.19856364033771368
+          }
+        },
+        {
+          "id": "contact_28",
+          "email": "user28@example.com",
+          "firstname": "User",
+          "lastname": "28",
+          "company": "Acme Corp",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 39,
+            "login_trend": -1,
+            "feature_adoption": 0.5782602555352512
+          }
+        },
+        {
+          "id": "contact_29",
+          "email": "user29@example.com",
+          "firstname": "User",
+          "lastname": "29",
+          "company": "Acme Corp",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 43,
+            "login_trend": 0,
+            "feature_adoption": 0.7862714162539782
+          }
+        },
+        {
+          "id": "contact_30",
+          "email": "user30@example.com",
+          "firstname": "User",
+          "lastname": "30",
+          "company": "Acme Corp",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 30,
+            "login_trend": -1,
+            "feature_adoption": 0.7850055699619248
+          }
+        },
+        {
+          "id": "contact_31",
+          "email": "user31@example.com",
+          "firstname": "User",
+          "lastname": "31",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 52,
+            "login_trend": 0,
+            "feature_adoption": 0.5783842328505711
+          }
+        },
+        {
+          "id": "contact_32",
+          "email": "user32@example.com",
+          "firstname": "User",
+          "lastname": "32",
+          "company": "Acme Corp",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 28,
+            "login_trend": -1,
+            "feature_adoption": 0.3205544598767178
+          }
+        },
+        {
+          "id": "contact_33",
+          "email": "user33@example.com",
+          "firstname": "User",
+          "lastname": "33",
+          "company": "BigBrand",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 34,
+            "login_trend": 0,
+            "feature_adoption": 0.48822205129961393
+          }
+        },
+        {
+          "id": "contact_34",
+          "email": "user34@example.com",
+          "firstname": "User",
+          "lastname": "34",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 6,
+            "login_trend": -1,
+            "feature_adoption": 0.2853923751200732
+          }
+        },
+        {
+          "id": "contact_35",
+          "email": "user35@example.com",
+          "firstname": "User",
+          "lastname": "35",
+          "company": "TechCo",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 42,
+            "login_trend": -1,
+            "feature_adoption": 0.98522035301605
+          }
+        },
+        {
+          "id": "contact_36",
+          "email": "user36@example.com",
+          "firstname": "User",
+          "lastname": "36",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 60,
+            "login_trend": -1,
+            "feature_adoption": 0.22080216139234532
+          }
+        },
+        {
+          "id": "contact_40",
+          "email": "user40@example.com",
+          "firstname": "User",
+          "lastname": "40",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 3,
+            "login_trend": -1,
+            "feature_adoption": 0.6242086657050193
+          }
+        },
+        {
+          "id": "contact_41",
+          "email": "user41@example.com",
+          "firstname": "User",
+          "lastname": "41",
+          "company": "Acme Corp",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 48,
+            "login_trend": 0,
+            "feature_adoption": 0.9393515237771435
+          }
+        },
+        {
+          "id": "contact_42",
+          "email": "user42@example.com",
+          "firstname": "User",
+          "lastname": "42",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 11,
+            "login_trend": -1,
+            "feature_adoption": 0.6535973676190739
+          }
+        },
+        {
+          "id": "contact_43",
+          "email": "user43@example.com",
+          "firstname": "User",
+          "lastname": "43",
+          "company": "Acme Corp",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 24,
+            "login_trend": -1,
+            "feature_adoption": 0.9007082988195122
+          }
+        },
+        {
+          "id": "contact_45",
+          "email": "user45@example.com",
+          "firstname": "User",
+          "lastname": "45",
+          "company": "TechCo",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 11,
+            "login_trend": 1,
+            "feature_adoption": 0.26432892644102723
+          }
+        },
+        {
+          "id": "contact_46",
+          "email": "user46@example.com",
+          "firstname": "User",
+          "lastname": "46",
+          "company": "TechCo",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 24,
+            "login_trend": -1,
+            "feature_adoption": 0.08994424857357608
+          }
+        },
+        {
+          "id": "contact_47",
+          "email": "user47@example.com",
+          "firstname": "User",
+          "lastname": "47",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 14,
+            "login_trend": 1,
+            "feature_adoption": 0.32544420583012457
+          }
+        },
+        {
+          "id": "contact_48",
+          "email": "user48@example.com",
+          "firstname": "User",
+          "lastname": "48",
+          "company": "Acme Corp",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 3,
+            "login_trend": 0,
+            "feature_adoption": 0.8371299483017718
+          }
+        },
+        {
+          "id": "contact_49",
+          "email": "user49@example.com",
+          "firstname": "User",
+          "lastname": "49",
+          "company": "TechCo",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 51,
+            "login_trend": -1,
+            "feature_adoption": 0.686591270011589
+          }
+        },
+        {
+          "id": "contact_50",
+          "email": "user50@example.com",
+          "firstname": "User",
+          "lastname": "50",
+          "company": "Acme Corp",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 8,
+            "login_trend": -1,
+            "feature_adoption": 0.16648077828704566
+          }
+        },
+        {
+          "id": "contact_51",
+          "email": "user51@example.com",
+          "firstname": "User",
+          "lastname": "51",
+          "company": "Acme Corp",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 22,
+            "login_trend": -1,
+            "feature_adoption": 0.0004577604351889697
+          }
+        },
+        {
+          "id": "contact_53",
+          "email": "user53@example.com",
+          "firstname": "User",
+          "lastname": "53",
+          "company": "Acme Corp",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 30,
+            "login_trend": 0,
+            "feature_adoption": 0.20939122309131097
+          }
+        },
+        {
+          "id": "contact_55",
+          "email": "user55@example.com",
+          "firstname": "User",
+          "lastname": "55",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 9,
+            "login_trend": 0,
+            "feature_adoption": 0.15214783957165945
+          }
+        },
+        {
+          "id": "contact_56",
+          "email": "user56@example.com",
+          "firstname": "User",
+          "lastname": "56",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 56,
+            "login_trend": -1,
+            "feature_adoption": 0.3721954684211246
+          }
+        },
+        {
+          "id": "contact_57",
+          "email": "user57@example.com",
+          "firstname": "User",
+          "lastname": "57",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 25,
+            "login_trend": -1,
+            "feature_adoption": 0.9755466561435805
+          }
+        },
+        {
+          "id": "contact_58",
+          "email": "user58@example.com",
+          "firstname": "User",
+          "lastname": "58",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 3,
+            "login_trend": 0,
+            "feature_adoption": 0.8154122925251951
+          }
+        },
+        {
+          "id": "contact_61",
+          "email": "user61@example.com",
+          "firstname": "User",
+          "lastname": "61",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 58,
+            "login_trend": 0,
+            "feature_adoption": 0.5805913817820506
+          }
+        },
+        {
+          "id": "contact_63",
+          "email": "user63@example.com",
+          "firstname": "User",
+          "lastname": "63",
+          "company": "BigBrand",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 40,
+            "login_trend": 1,
+            "feature_adoption": 0.5369011720782155
+          }
+        },
+        {
+          "id": "contact_64",
+          "email": "user64@example.com",
+          "firstname": "User",
+          "lastname": "64",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 17,
+            "login_trend": 0,
+            "feature_adoption": 0.3764459599494192
+          }
+        },
+        {
+          "id": "contact_65",
+          "email": "user65@example.com",
+          "firstname": "User",
+          "lastname": "65",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 47,
+            "login_trend": 0,
+            "feature_adoption": 0.19913117428936356
+          }
+        },
+        {
+          "id": "contact_66",
+          "email": "user66@example.com",
+          "firstname": "User",
+          "lastname": "66",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 34,
+            "login_trend": 0,
+            "feature_adoption": 0.09102382929219766
+          }
+        },
+        {
+          "id": "contact_67",
+          "email": "user67@example.com",
+          "firstname": "User",
+          "lastname": "67",
+          "company": "TechCo",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 26,
+            "login_trend": 0,
+            "feature_adoption": 0.2598261303904126
+          }
+        },
+        {
+          "id": "contact_68",
+          "email": "user68@example.com",
+          "firstname": "User",
+          "lastname": "68",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 40,
+            "login_trend": 0,
+            "feature_adoption": 0.6130179362860751
+          }
+        },
+        {
+          "id": "contact_69",
+          "email": "user69@example.com",
+          "firstname": "User",
+          "lastname": "69",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 21,
+            "login_trend": 0,
+            "feature_adoption": 0.4337951870366462
+          }
+        },
+        {
+          "id": "contact_70",
+          "email": "user70@example.com",
+          "firstname": "User",
+          "lastname": "70",
+          "company": "TechCo",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 25,
+            "login_trend": 1,
+            "feature_adoption": 0.8614517126343723
+          }
+        },
+        {
+          "id": "contact_71",
+          "email": "user71@example.com",
+          "firstname": "User",
+          "lastname": "71",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 5,
+            "login_trend": 1,
+            "feature_adoption": 0.34243530460381144
+          }
+        },
+        {
+          "id": "contact_74",
+          "email": "user74@example.com",
+          "firstname": "User",
+          "lastname": "74",
+          "company": "TechCo",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 15,
+            "login_trend": -1,
+            "feature_adoption": 0.6904689907535466
+          }
+        },
+        {
+          "id": "contact_76",
+          "email": "user76@example.com",
+          "firstname": "User",
+          "lastname": "76",
+          "company": "TechCo",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 30,
+            "login_trend": 0,
+            "feature_adoption": 0.806352906939146
+          }
+        },
+        {
+          "id": "contact_77",
+          "email": "user77@example.com",
+          "firstname": "User",
+          "lastname": "77",
+          "company": "BigBrand",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 39,
+            "login_trend": -1,
+            "feature_adoption": 0.25288582502183243
+          }
+        },
+        {
+          "id": "contact_78",
+          "email": "user78@example.com",
+          "firstname": "User",
+          "lastname": "78",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 11,
+            "login_trend": -1,
+            "feature_adoption": 0.4913365471700665
+          }
+        },
+        {
+          "id": "contact_79",
+          "email": "user79@example.com",
+          "firstname": "User",
+          "lastname": "79",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 34,
+            "login_trend": -1,
+            "feature_adoption": 0.7117210850568636
+          }
+        },
+        {
+          "id": "contact_81",
+          "email": "user81@example.com",
+          "firstname": "User",
+          "lastname": "81",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 39,
+            "login_trend": 1,
+            "feature_adoption": 0.60021024709026
+          }
+        },
+        {
+          "id": "contact_83",
+          "email": "user83@example.com",
+          "firstname": "User",
+          "lastname": "83",
+          "company": "TechCo",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 58,
+            "login_trend": 0,
+            "feature_adoption": 0.3104941641681783
+          }
+        },
+        {
+          "id": "contact_84",
+          "email": "user84@example.com",
+          "firstname": "User",
+          "lastname": "84",
+          "company": "BigBrand",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 36,
+            "login_trend": 0,
+            "feature_adoption": 0.18458807189970394
+          }
+        },
+        {
+          "id": "contact_85",
+          "email": "user85@example.com",
+          "firstname": "User",
+          "lastname": "85",
+          "company": "BigBrand",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 9,
+            "login_trend": 1,
+            "feature_adoption": 0.7436388095433026
+          }
+        },
+        {
+          "id": "contact_86",
+          "email": "user86@example.com",
+          "firstname": "User",
+          "lastname": "86",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 43,
+            "login_trend": 1,
+            "feature_adoption": 0.9129266981304137
+          }
+        },
+        {
+          "id": "contact_88",
+          "email": "user88@example.com",
+          "firstname": "User",
+          "lastname": "88",
+          "company": "BigBrand",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 41,
+            "login_trend": 0,
+            "feature_adoption": 0.8317952856654292
+          }
+        },
+        {
+          "id": "contact_89",
+          "email": "user89@example.com",
+          "firstname": "User",
+          "lastname": "89",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 2,
+            "login_trend": 1,
+            "feature_adoption": 0.9653179388175035
+          }
+        },
+        {
+          "id": "contact_90",
+          "email": "user90@example.com",
+          "firstname": "User",
+          "lastname": "90",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 41,
+            "login_trend": 1,
+            "feature_adoption": 0.013383037759571947
+          }
+        },
+        {
+          "id": "contact_93",
+          "email": "user93@example.com",
+          "firstname": "User",
+          "lastname": "93",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 28,
+            "login_trend": -1,
+            "feature_adoption": 0.3065257654632336
+          }
+        },
+        {
+          "id": "contact_94",
+          "email": "user94@example.com",
+          "firstname": "User",
+          "lastname": "94",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 11,
+            "login_trend": 1,
+            "feature_adoption": 0.3654383199442103
+          }
+        },
+        {
+          "id": "contact_95",
+          "email": "user95@example.com",
+          "firstname": "User",
+          "lastname": "95",
+          "company": "BigBrand",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 41,
+            "login_trend": 0,
+            "feature_adoption": 0.07231071066711525
+          }
+        },
+        {
+          "id": "contact_97",
+          "email": "user97@example.com",
+          "firstname": "User",
+          "lastname": "97",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 49,
+            "login_trend": -1,
+            "feature_adoption": 0.9229279145296899
+          }
+        },
+        {
+          "id": "contact_98",
+          "email": "user98@example.com",
+          "firstname": "User",
+          "lastname": "98",
+          "company": "StartupX",
+          "lifecyclestage": "evangelist",
+          "usage": {
+            "last_active_days": 57,
+            "login_trend": 1,
+            "feature_adoption": 0.9575087683897755
+          }
+        }
+      ],
+      "customer": [
+        {
+          "id": "contact_5",
+          "email": "user5@example.com",
+          "firstname": "User",
+          "lastname": "5",
+          "company": "TechCo",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 42,
+            "login_trend": -1,
+            "feature_adoption": 0.07894974777672259
+          }
+        },
+        {
+          "id": "contact_15",
+          "email": "user15@example.com",
+          "firstname": "User",
+          "lastname": "15",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 44,
+            "login_trend": 1,
+            "feature_adoption": 0.15031748789831745
+          }
+        },
+        {
+          "id": "contact_23",
+          "email": "user23@example.com",
+          "firstname": "User",
+          "lastname": "23",
+          "company": "StartupX",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 54,
+            "login_trend": -1,
+            "feature_adoption": 0.20471005152758104
+          }
+        },
+        {
+          "id": "contact_25",
+          "email": "user25@example.com",
+          "firstname": "User",
+          "lastname": "25",
+          "company": "BigBrand",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 24,
+            "login_trend": -1,
+            "feature_adoption": 0.8039547149741648
+          }
+        },
+        {
+          "id": "contact_27",
+          "email": "user27@example.com",
+          "firstname": "User",
+          "lastname": "27",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 17,
+            "login_trend": -1,
+            "feature_adoption": 0.8971381085226946
+          }
+        },
+        {
+          "id": "contact_37",
+          "email": "user37@example.com",
+          "firstname": "User",
+          "lastname": "37",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 34,
+            "login_trend": 0,
+            "feature_adoption": 0.7410501381364597
+          }
+        },
+        {
+          "id": "contact_38",
+          "email": "user38@example.com",
+          "firstname": "User",
+          "lastname": "38",
+          "company": "BigBrand",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 19,
+            "login_trend": 0,
+            "feature_adoption": 0.1597059076326307
+          }
+        },
+        {
+          "id": "contact_39",
+          "email": "user39@example.com",
+          "firstname": "User",
+          "lastname": "39",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 17,
+            "login_trend": -1,
+            "feature_adoption": 0.5779160621964982
+          }
+        },
+        {
+          "id": "contact_44",
+          "email": "user44@example.com",
+          "firstname": "User",
+          "lastname": "44",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 35,
+            "login_trend": 0,
+            "feature_adoption": 0.38526014798084507
+          }
+        },
+        {
+          "id": "contact_52",
+          "email": "user52@example.com",
+          "firstname": "User",
+          "lastname": "52",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 50,
+            "login_trend": -1,
+            "feature_adoption": 0.04693227163809466
+          }
+        },
+        {
+          "id": "contact_54",
+          "email": "user54@example.com",
+          "firstname": "User",
+          "lastname": "54",
+          "company": "StartupX",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 29,
+            "login_trend": -1,
+            "feature_adoption": 0.7005280362686945
+          }
+        },
+        {
+          "id": "contact_59",
+          "email": "user59@example.com",
+          "firstname": "User",
+          "lastname": "59",
+          "company": "Acme Corp",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 15,
+            "login_trend": 1,
+            "feature_adoption": 0.1619332526183228
+          }
+        },
+        {
+          "id": "contact_60",
+          "email": "user60@example.com",
+          "firstname": "User",
+          "lastname": "60",
+          "company": "TechCo",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 15,
+            "login_trend": 1,
+            "feature_adoption": 0.1356012185290416
+          }
+        },
+        {
+          "id": "contact_62",
+          "email": "user62@example.com",
+          "firstname": "User",
+          "lastname": "62",
+          "company": "TechCo",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 2,
+            "login_trend": -1,
+            "feature_adoption": 0.7575943077127874
+          }
+        },
+        {
+          "id": "contact_72",
+          "email": "user72@example.com",
+          "firstname": "User",
+          "lastname": "72",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 22,
+            "login_trend": 1,
+            "feature_adoption": 0.973190821918382
+          }
+        },
+        {
+          "id": "contact_73",
+          "email": "user73@example.com",
+          "firstname": "User",
+          "lastname": "73",
+          "company": "BigBrand",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 13,
+            "login_trend": -1,
+            "feature_adoption": 0.15807754278509933
+          }
+        },
+        {
+          "id": "contact_75",
+          "email": "user75@example.com",
+          "firstname": "User",
+          "lastname": "75",
+          "company": "Acme Corp",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 26,
+            "login_trend": 1,
+            "feature_adoption": 0.10600956836927033
+          }
+        },
+        {
+          "id": "contact_80",
+          "email": "user80@example.com",
+          "firstname": "User",
+          "lastname": "80",
+          "company": "BigBrand",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 45,
+            "login_trend": -1,
+            "feature_adoption": 0.38664835963560173
+          }
+        },
+        {
+          "id": "contact_82",
+          "email": "user82@example.com",
+          "firstname": "User",
+          "lastname": "82",
+          "company": "BigBrand",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 52,
+            "login_trend": 1,
+            "feature_adoption": 0.7899390300575168
+          }
+        },
+        {
+          "id": "contact_87",
+          "email": "user87@example.com",
+          "firstname": "User",
+          "lastname": "87",
+          "company": "TechCo",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 56,
+            "login_trend": 1,
+            "feature_adoption": 0.8754034231462695
+          }
+        },
+        {
+          "id": "contact_91",
+          "email": "user91@example.com",
+          "firstname": "User",
+          "lastname": "91",
+          "company": "TechCo",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 19,
+            "login_trend": -1,
+            "feature_adoption": 0.24871564141789582
+          }
+        },
+        {
+          "id": "contact_92",
+          "email": "user92@example.com",
+          "firstname": "User",
+          "lastname": "92",
+          "company": "Acme Corp",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 4,
+            "login_trend": 0,
+            "feature_adoption": 0.9816627606371218
+          }
+        },
+        {
+          "id": "contact_96",
+          "email": "user96@example.com",
+          "firstname": "User",
+          "lastname": "96",
+          "company": "Enterprise Inc",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 27,
+            "login_trend": 1,
+            "feature_adoption": 0.8194488510697183
+          }
+        },
+        {
+          "id": "contact_99",
+          "email": "user99@example.com",
+          "firstname": "User",
+          "lastname": "99",
+          "company": "BigBrand",
+          "lifecyclestage": "customer",
+          "usage": {
+            "last_active_days": 46,
+            "login_trend": 0,
+            "feature_adoption": 0.2262573972416002
+          }
+        }
+      ]
+    },
+    "analysis": {
+      "stage_counts": {
+        "subscriber": 0,
+        "lead": 0,
+        "mql": 0,
+        "sql": 0,
+        "opportunity": 0,
+        "customer": 24,
+        "evangelist": 76
+      },
+      "conversions": [
+        {
+          "from_stage": "customer",
+          "to_stage": "evangelist",
+          "from_count": 24,
+          "to_count": 76,
+          "rate": 3.167,
+          "benchmark": 0.25
+        }
+      ],
+      "bottlenecks": [],
+      "context_handling": {
+        "strategy": "inline",
+        "input_size_tokens": 6025,
+        "chunks_processed": 0,
+        "sub_calls": []
+      }
+    },
+    "scoring": {
+      "at_risk": [
+        {
+          "email": "user5@example.com",
+          "name": "User 5",
+          "company": "TechCo",
+          "stage": "customer",
+          "risk_score": 0.8,
+          "risk_factors": {
+            "days_inactive": 42,
+            "negative_trend": true
+          }
+        },
+        {
+          "email": "user23@example.com",
+          "name": "User 23",
+          "company": "StartupX",
+          "stage": "customer",
+          "risk_score": 0.8,
+          "risk_factors": {
+            "days_inactive": 54,
+            "negative_trend": true
+          }
+        },
+        {
+          "email": "user52@example.com",
+          "name": "User 52",
+          "company": "Enterprise Inc",
+          "stage": "customer",
+          "risk_score": 0.8,
+          "risk_factors": {
+            "days_inactive": 50,
+            "negative_trend": true
+          }
+        },
+        {
+          "email": "user80@example.com",
+          "name": "User 80",
+          "company": "BigBrand",
+          "stage": "customer",
+          "risk_score": 0.8,
+          "risk_factors": {
+            "days_inactive": 45,
+            "negative_trend": true
+          }
+        },
+        {
+          "email": "user15@example.com",
+          "name": "User 15",
+          "company": "Enterprise Inc",
+          "stage": "customer",
+          "risk_score": 0.6,
+          "risk_factors": {
+            "days_inactive": 44,
+            "negative_trend": false
+          }
+        },
+        {
+          "email": "user37@example.com",
+          "name": "User 37",
+          "company": "Enterprise Inc",
+          "stage": "customer",
+          "risk_score": 0.6,
+          "risk_factors": {
+            "days_inactive": 34,
+            "negative_trend": false
+          }
+        },
+        {
+          "email": "user44@example.com",
+          "name": "User 44",
+          "company": "Enterprise Inc",
+          "stage": "customer",
+          "risk_score": 0.6,
+          "risk_factors": {
+            "days_inactive": 35,
+            "negative_trend": false
+          }
+        },
+        {
+          "email": "user82@example.com",
+          "name": "User 82",
+          "company": "BigBrand",
+          "stage": "customer",
+          "risk_score": 0.6,
+          "risk_factors": {
+            "days_inactive": 52,
+            "negative_trend": false
+          }
+        },
+        {
+          "email": "user87@example.com",
+          "name": "User 87",
+          "company": "TechCo",
+          "stage": "customer",
+          "risk_score": 0.6,
+          "risk_factors": {
+            "days_inactive": 56,
+            "negative_trend": false
+          }
+        },
+        {
+          "email": "user99@example.com",
+          "name": "User 99",
+          "company": "BigBrand",
+          "stage": "customer",
+          "risk_score": 0.6,
+          "risk_factors": {
+            "days_inactive": 46,
+            "negative_trend": false
+          }
+        }
+      ],
+      "upsell_candidates": [
+        {
+          "email": "user62@example.com",
+          "name": "User 62",
+          "company": "TechCo",
+          "stage": "customer",
+          "upsell_score": 0.7,
+          "upsell_signals": {
+            "highly_active": true,
+            "growing_usage": false,
+            "high_adoption": true
+          }
+        },
+        {
+          "email": "user92@example.com",
+          "name": "User 92",
+          "company": "Acme Corp",
+          "stage": "customer",
+          "upsell_score": 0.7,
+          "upsell_signals": {
+            "highly_active": true,
+            "growing_usage": false,
+            "high_adoption": true
+          }
+        }
+      ]
+    },
+    "synthesis": {
+      "recommendations": [
+        {
+          "priority": "high",
+          "category": "retention",
+          "action": "Launch re-engagement campaign for 10 at-risk accounts",
+          "context": "Average risk score: 68%",
+          "impact": "Potential save of 10 accounts",
+          "suggested_tactics": [
+            "Personal outreach from CSM",
+            "Offer exclusive content or training",
+            "Review product friction points"
+          ]
+        },
+        {
+          "priority": "medium",
+          "category": "expansion",
+          "action": "Target 2 high-potential accounts for upsell",
+          "context": "Average upsell score: 70%",
+          "impact": "Potential revenue expansion",
+          "suggested_tactics": [
+            "Introduce premium features",
+            "Offer enterprise tier upgrade",
+            "Schedule QBR with success metrics"
+          ]
+        }
+      ],
+      "health_score": 0.54
+    }
+  },
+  "tenant_id": "test_tenant"
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Incorporate Interview Results Input",
+  "description": "Input schema for the incorporate-interview-results skill",
+  "type": "object",
+  "properties": {
+    "client_id": {
+      "type": "string",
+      "description": "Unique client identifier"
+    },
+    "interview_transcript": {
+      "type": "string",
+      "description": "Full interview transcript text"
+    },
+    "interview_notes": {
+      "type": "string",
+      "description": "Interview notes (if no transcript available)"
+    },
+    "interview_file": {
+      "type": "string",
+      "description": "Path to transcript/notes file"
+    },
+    "interviewee_name": {
+      "type": "string",
+      "description": "Name of person interviewed"
+    },
+    "validate_only": {
+      "type": "boolean",
+      "default": false,
+      "description": "Only validate, don't update documents"
+    },
+    "tenant_id": {
+      "type": "string",
+      "description": "Tenant identifier for cost tracking"
+    },
+    "execution_mode": {
+      "type": "string",
+      "enum": ["suggest", "preview", "execute"],
+      "default": "suggest"
+    }
+  },
+  "required": ["client_id"],
+  "anyOf": [
+    {"required": ["interview_transcript"]},
+    {"required": ["interview_notes"]},
+    {"required": ["interview_file"]}
+  ],
+  "additionalProperties": false
+}

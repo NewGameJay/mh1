@@ -1,0 +1,38 @@
+{
+  "run_id": "873509ad",
+  "type": "workflow",
+  "name": "ghostwrite-content",
+  "version": "v1.0.0",
+  "status": "failed",
+  "start_time": "2026-01-30T01:17:23.129594+00:00",
+  "end_time": "2026-01-30T01:17:27.308129+00:00",
+  "duration_seconds": 4.18,
+  "tokens": {
+    "input": 0,
+    "output": 0,
+    "total": 0
+  },
+  "steps": [
+    {
+      "step_name": "context_loading",
+      "status": "failed",
+      "output": null,
+      "tokens_input": 0,
+      "tokens_output": 0,
+      "duration_seconds": 4.18,
+      "error": "Failed to load context: ERROR: Could not find Firebase credentials file.\n",
+      "sub_calls": []
+    }
+  ],
+  "error": null,
+  "evaluation": null,
+  "client": "test_client",
+  "tenant_id": "test_client",
+  "tags": [],
+  "context_handling": {
+    "strategy": "inline",
+    "input_size_tokens": 0,
+    "chunks_processed": 0,
+    "sub_calls": []
+  }
+}
