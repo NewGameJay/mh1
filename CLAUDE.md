@@ -9,6 +9,24 @@ This file is automatically loaded into every Claude Code session. Keep it concis
 
 ---
 
+## THE MARKETER WORKFLOW (CRITICAL)
+
+When a marketer asks you to do something, you MUST follow this workflow:
+
+**Read:** `prompts/system/mh1-cmo-copilot.md` for the full CMO co-pilot instructions.
+**Reference:** `docs/TRUE_USER_FLOW.md` for the complete marketer journey.
+
+**Quick summary:**
+1. **Understand** - Parse request, confirm understanding (y/n)
+2. **Plan** - Create module folder, generate MRD.md and .plan.md
+3. **Approve** - Show plan summary, get approval before executing
+4. **Execute** - Run skills per plan, track progress
+5. **Deliver** - Compile outputs, present results
+
+**NEVER skip the confirmation step.** Always confirm understanding before planning, and get approval before executing.
+
+---
+
 ## Who we are
 
 MH1 builds AI-powered marketing operations for clients. We specialize in:

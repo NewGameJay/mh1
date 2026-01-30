@@ -201,17 +201,19 @@ def show_help():
   [{C['yellow']}]q[/]      [{C['white']}]Quit[/]
 
 [bold {C['orange']}]HOW IT WORKS[/]
-  [{C['gray']}]Type what you need. MH1 uses Claude Code with full tool access:[/]
+  [{C['gray']}]1. Select a client (press 3)[/]
+  [{C['gray']}]2. Type what you need[/]
+  [{C['gray']}]3. MH1 launches Claude Code with your request[/]
 
-  [{C['white']}]• Read/write files[/]
-  [{C['white']}]• Run shell commands[/]
-  [{C['white']}]• Access MCP servers (Firestore, HubSpot, etc.)[/]
-  [{C['white']}]• Execute skills from skills/[/]
+  [{C['white']}]Claude Code has full access to:[/]
+  [{C['dim']}]• All MCP servers (Firestore, HubSpot, Firecrawl)[/]
+  [{C['dim']}]• Read/write files, run commands[/]
+  [{C['dim']}]• Execute skills from skills/[/]
 
 [bold {C['amber']}]EXAMPLES[/]
   [{C['gray']}]"Run a lifecycle audit"[/]
+  [{C['gray']}]"Onboard Acme Corp as a new client"[/]
   [{C['gray']}]"What skills help with churn?"[/]
-  [{C['gray']}]"Create a comprehensive GTM plan"[/]
 """
     console.print(help_text)
     input(f"\n  Press Enter to continue...")
@@ -412,18 +414,15 @@ def check_claude_installed() -> bool:
 
 def run_claude(prompt: str = None):
     """
-    Launch Claude Code.
-
-    If prompt is given, pass it to Claude interactively.
-    Claude Code handles all the tools, MCP servers, etc.
+    Launch Claude Code with optional initial prompt.
+    Claude Code takes over the terminal completely.
     """
     if not check_claude_installed():
         console.print(f"\n[{C['red']}]Claude Code not installed.[/]")
         console.print(f"\n[{C['white']}]Install it:[/]")
         console.print(f"  [{C['cyan']}]npm install -g @anthropic-ai/claude-code[/]")
         console.print()
-        input("Press Enter to continue...")
-        return
+        sys.exit(1)
 
     # Build context for Claude
     context_parts = []
@@ -433,23 +432,16 @@ def run_claude(prompt: str = None):
 
     context = "\n".join(context_parts) if context_parts else ""
 
-    console.print(f"\n[{C['dim']}]Launching Claude Code...[/]\n")
-
+    # Build command
+    cmd = ["claude"]
     if prompt:
-        # Build full prompt with context
         full_prompt = prompt
         if context:
             full_prompt = f"[Context: {context}]\n\n{prompt}"
+        cmd.append(full_prompt)
 
-        # Launch Claude interactively with the prompt
-        # This gives Claude full access to tools, MCP servers, etc.
-        subprocess.run(
-            ["claude", full_prompt],
-            cwd=PROJECT_ROOT
-        )
-    else:
-        # Interactive mode - just launch claude
-        subprocess.run(["claude"], cwd=PROJECT_ROOT)
+    # Hand off to Claude Code completely (replaces this process)
+    os.execvp("claude", cmd)
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -457,14 +449,13 @@ def run_claude(prompt: str = None):
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 def main():
-    # Check for direct command
+    # Direct command mode: ./mh1 "run lifecycle audit"
     if len(sys.argv) > 1:
-        # Direct command mode: ./mh1 "run lifecycle audit"
         prompt = " ".join(sys.argv[1:])
-        run_claude(prompt)
+        run_claude(prompt)  # This replaces the process, won't return
         return
 
-    # Interactive mode
+    # Menu mode - select client, then hand off to Claude
     while True:
         render_welcome()
         user_input = render_prompt()
@@ -485,9 +476,8 @@ def main():
         elif cmd in ["3", "c", "client", "clients"]:
             show_clients()
         else:
-            # Pass to Claude Code
+            # Hand off to Claude Code - this replaces the process
             run_claude(user_input)
-            input(f"\n[{C['dim']}]Press Enter to continue...[/]")
 
 
 if __name__ == "__main__":
