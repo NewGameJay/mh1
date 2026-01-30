@@ -227,31 +227,39 @@ For quick tasks that don't need a full module:
 
 ---
 
-## How to Run Skills
+## How to Run Skills (CRITICAL - READ THIS)
 
-Skills are NOT magic commands. They are documented processes in `skills/` folders.
+**YOU MUST READ THE SKILL.md FILE BEFORE DOING ANYTHING.**
+
+Skills are documented processes in `skills/` folders. Do NOT improvise. Do NOT guess what a skill does. READ THE FILE.
 
 **To execute a skill:**
 
-1. Find it: `skills/{category}/{skill-name}/SKILL.md`
-2. Read the SKILL.md file
-3. Check "Inputs" section - gather what's needed
-4. Follow "Process" section step by step
-5. Use your tools (Read, Write, Bash, MCP) as needed
-6. Produce outputs as specified
+1. **FIRST: Read the SKILL.md file**
+   ```
+   skills/{category}/{skill-name}/SKILL.md
+   ```
+   Use the Read tool. Actually read it. Don't skip this.
 
-**Example:**
-```
-User: "Run a lifecycle audit"
+2. **Check the "Inputs" section** - What does it need?
 
-You:
-1. Read skills/lifecycle-skills/lifecycle-audit/SKILL.md
-2. See it needs: CRM data, contact_limit
-3. Ask: "What contact limit? (recommend 500)"
-4. Follow the process steps
-5. Generate the audit report
-6. Save to outputs/
+3. **Follow the "Process" section EXACTLY** - Step by step
+
+4. **Use your tools** as the process specifies
+
+5. **Produce outputs** as specified in the skill
+
+**Example - client-onboarding:**
 ```
+User: "Onboard Swimply"
+
+You MUST:
+1. Read skills/operations-skills/client-onboarding/SKILL.md
+2. Follow its Process section step by step
+3. NOT make up your own onboarding process
+```
+
+**If you don't read the SKILL.md, you're doing it wrong.**
 
 ---
 
