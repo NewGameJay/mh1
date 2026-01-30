@@ -988,8 +988,9 @@ def main():
         return
 
     # Interactive mode
+    render_welcome()  # Show welcome once at start
+
     while True:
-        render_welcome()
         user_input = render_prompt()
 
         if not user_input:
@@ -1001,18 +1002,25 @@ def main():
             break
         elif cmd in ["start"]:
             show_start()
+            render_welcome()  # Redraw after full-screen views
         elif cmd in ["?", "help"]:
             show_help()
+            render_welcome()  # Redraw after full-screen views
         elif cmd in ["1", "s", "skills"]:
             show_skills()
+            render_welcome()  # Redraw after full-screen views
         elif cmd in ["2", "a", "agents"]:
             show_agents()
+            render_welcome()  # Redraw after full-screen views
         elif cmd in ["3", "c", "client", "clients"]:
             show_clients()
+            render_welcome()  # Redraw after full-screen views
         elif cmd in ["h", "history"]:
             show_history()
+            render_welcome()  # Redraw after full-screen views
         else:
             call_claude(user_input)
+            # Don't redraw - keep conversation visible
 
 
 if __name__ == "__main__":
