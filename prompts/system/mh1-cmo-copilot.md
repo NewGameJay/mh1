@@ -332,9 +332,15 @@ Use these markers in your responses when needed:
 - `[[INPUT:schema_name]]` - Trigger structured input collection
 - `[[CONFIRM]]` - Require user confirmation (YES/NO/EDIT)
 - `[[COUNCIL]]` - Run agent council deliberation (internal)
-- `[[SKILL:skill-name]]` - Execute a specific skill
+- `[[SKILL:skill-name]]` - Execute a specific skill (uses collected inputs)
+- `[[SKILL:skill-name|key=value|key2=value2]]` - Execute with inline inputs
+- `[[SKILL:skill-name:{"key":"value"}]]` - Execute with JSON inputs
 - `[[PROGRESS:percent]]` - Update progress indicator
 - `[[CHECKPOINT]]` - Save state, allow pause
+
+**IMPORTANT:** Skills require inputs. If you haven't collected them yet, either:
+1. Use `[[INPUT:schema]]` first, OR
+2. Pass them inline: `[[SKILL:research-company|client_id=acme|company_name=Acme Corp|website_url=https://acme.com]]`
 
 ## Response Style
 

@@ -197,18 +197,19 @@ class SkillExecutor:
                 missing_str = "\n".join(f"  - {m}" for m in missing)
                 console.print(f"\n[{C['red']}]Cannot execute {skill_name}: Missing required inputs[/]")
                 console.print(f"[{C['amber']}]Required inputs not provided:[/]\n{missing_str}\n")
+                console.print(f"[{C['cyan']}]ACTION REQUIRED:[/] Ask the user for these inputs before retrying.\n")
                 return SkillResult(
                     skill_name=skill_name,
                     success=False,
-                    output={"missing_inputs": missing},
-                    error=f"Missing required inputs: {', '.join(missing)}. Please collect these inputs before executing."
+                    output={"missing_inputs": missing, "action": "collect_inputs"},
+                    error=f"BLOCKED: Missing required inputs. You must ask the user for: {', '.join(m.split(':')[0] for m in missing)}. Then retry with [[SKILL:{skill_name}]]."
                 )
 
         # Build execution prompt
         prompt = self._build_execution_prompt(skill, inputs, context)
 
-        # Show progress
-        self._show_start(skill_name, skill.get("description", ""))
+        # Show progress with inputs
+        self._show_start(skill_name, skill.get("description", ""), inputs)
 
         try:
             # Execute via Claude
@@ -323,14 +324,22 @@ Do not refuse or skip steps. Execute fully."""
 
         return output
 
-    def _show_start(self, skill_name: str, description: str):
-        """Show skill start indicator."""
+    def _show_start(self, skill_name: str, description: str, inputs: dict = None):
+        """Show skill start indicator with inputs."""
         console.print()
         console.print(Panel(
             f"[{C['white']}]{description}[/]",
             title=f"[bold {C['pink']}]Running: {skill_name}[/]",
             border_style=C['pink']
         ))
+        # Show inputs being passed
+        if inputs:
+            console.print(f"[{C['dim']}]Inputs:[/]")
+            for k, v in inputs.items():
+                val_preview = str(v)[:50] + "..." if len(str(v)) > 50 else str(v)
+                console.print(f"  [{C['cyan']}]{k}[/]: {val_preview}")
+        else:
+            console.print(f"[{C['amber']}]No inputs provided to skill[/]")
         console.print()
 
     def _show_complete(self, skill_name: str, duration: float):

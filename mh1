@@ -626,9 +626,13 @@ def handle_marker(marker_type: MarkerType, data: str = None) -> str:
         return f"[User chose: {choice}]"
 
     elif marker_type == MarkerType.SKILL:
-        # Execute the skill
+        # Execute the skill with collected inputs
         skill_name = data or "unknown"
-        return execute_skill(skill_name)
+        # Merge all collected inputs from previous [[INPUT:...]] markers
+        inputs = {}
+        for schema_name, schema_data in session.collected_inputs.items():
+            inputs.update(schema_data)
+        return execute_skill(skill_name, inputs)
 
     elif marker_type == MarkerType.PROGRESS:
         percent = data or "0"
@@ -793,10 +797,31 @@ def process_extended_markers(text: str) -> tuple[str, list]:
         actions.append(("MODULE", f"{action}:{name}"))
         text = text.replace(match.group(0), "")
 
-    # Check for SKILL markers
+    # Check for SKILL markers (supports inline inputs)
+    # Formats: [[SKILL:name]] or [[SKILL:name:{"key":"value"}]] or [[SKILL:name|key=value|key2=value2]]
     for match in SKILL_MARKER_PATTERN.finditer(text):
-        skill_name = match.group(1)
-        actions.append(("SKILL", skill_name))
+        skill_content = match.group(1)
+        skill_name = skill_content
+        inline_inputs = {}
+
+        # Check for JSON format: skill-name:{"key":"value"}
+        if ":{" in skill_content:
+            parts = skill_content.split(":", 1)
+            skill_name = parts[0]
+            try:
+                inline_inputs = json.loads(parts[1])
+            except:
+                pass
+        # Check for pipe format: skill-name|key=value|key2=value2
+        elif "|" in skill_content:
+            parts = skill_content.split("|")
+            skill_name = parts[0]
+            for part in parts[1:]:
+                if "=" in part:
+                    k, v = part.split("=", 1)
+                    inline_inputs[k.strip()] = v.strip()
+
+        actions.append(("SKILL", (skill_name, inline_inputs)))
         text = text.replace(match.group(0), "")
 
     # Check for EXECUTE marker
@@ -893,7 +918,19 @@ def call_claude(user_input: str, interactive: bool = True) -> str:
                 if response:
                     marker_responses.append(response)
             elif action_type == "SKILL":
-                response = execute_skill(action_data)
+                # Unpack skill name and inline inputs
+                if isinstance(action_data, tuple):
+                    skill_name, inline_inputs = action_data
+                else:
+                    skill_name, inline_inputs = action_data, {}
+
+                # Merge all collected inputs from session, then override with inline
+                inputs = {}
+                for schema_name, schema_data in session.collected_inputs.items():
+                    inputs.update(schema_data)
+                inputs.update(inline_inputs)  # Inline inputs take precedence
+
+                response = execute_skill(skill_name, inputs)
                 if response:
                     marker_responses.append(response)
             elif action_type == "PLAN_SKILLS":
