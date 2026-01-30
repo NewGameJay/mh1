@@ -2,7 +2,6 @@
 Skill Executor for MH1
 
 Loads and executes skills, streams progress, handles outputs.
-Includes pre-flight checking for requirements.
 """
 
 import os
@@ -22,9 +21,6 @@ from rich.panel import Panel
 from rich.live import Live
 from rich.table import Table
 from rich.text import Text
-from rich.markdown import Markdown
-
-from lib.workflow.preflight import PreflightChecker, check_skill_requirements
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 
@@ -194,28 +190,7 @@ class SkillExecutor:
                 error=f"Skill '{skill_name}' not found"
             )
 
-        # Pre-flight check: verify platform connections and requirements
-        if not skip_validation:
-            preflight = check_skill_requirements(skill_name, self.client_id, inputs)
-            if not preflight.can_execute:
-                # Show what's missing with setup guides
-                self._show_preflight_failure(preflight)
-                return SkillResult(
-                    skill_name=skill_name,
-                    success=False,
-                    output={
-                        "preflight_failed": True,
-                        "missing_requirements": [
-                            {"name": r.name, "type": r.type, "description": r.description}
-                            for r in preflight.missing_requirements
-                        ],
-                        "setup_guides": preflight.setup_guides,
-                        "user_actions": preflight.user_actions_needed,
-                    },
-                    error=f"BLOCKED: Pre-flight check failed. {'; '.join(preflight.user_actions_needed)}"
-                )
-
-        # Input validation: check required inputs are provided
+        # Pre-flight validation: check required inputs
         if not skip_validation:
             is_valid, missing = self.validate_inputs(skill_name, inputs)
             if not is_valid:
@@ -365,37 +340,6 @@ Do not refuse or skip steps. Execute fully."""
                 console.print(f"  [{C['cyan']}]{k}[/]: {val_preview}")
         else:
             console.print(f"[{C['amber']}]No inputs provided to skill[/]")
-        console.print()
-
-    def _show_preflight_failure(self, result):
-        """Show pre-flight check failure with setup guides."""
-        from lib.workflow.preflight import PreflightResult
-
-        console.print()
-        console.print(Panel(
-            f"[{C['red']}]Pre-flight check failed - requirements not met[/]",
-            title=f"[bold {C['red']}]Cannot Execute: {result.skill_name}[/]",
-            border_style=C['red']
-        ))
-
-        # Show what's missing
-        if result.user_actions_needed:
-            console.print(f"\n[{C['amber']}]Actions needed before this skill can run:[/]")
-            for action in result.user_actions_needed:
-                console.print(f"  [{C['yellow']}]→[/] {action}")
-
-        # Show setup guides for platform connections
-        if result.setup_guides:
-            console.print(f"\n[{C['cyan']}]Setup Guides:[/]")
-            for platform, guide in result.setup_guides.items():
-                console.print(f"\n  [{C['white']}]{platform}:[/]")
-                for step in guide.get("steps", [])[:5]:  # Show first 5 steps
-                    console.print(f"    [{C['dim']}]{step}[/]")
-                if guide.get("docs"):
-                    console.print(f"    [{C['cyan']}]Docs:[/] {guide['docs']}")
-
-        console.print()
-        console.print(f"[{C['green']}]Once configured, retry the skill.[/]")
         console.print()
 
     def _show_complete(self, skill_name: str, duration: float):
