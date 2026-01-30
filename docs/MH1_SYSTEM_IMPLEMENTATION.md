@@ -139,7 +139,11 @@ STEP 1: COLLECT BASIC INFO
 - Company name (required)
 - Industry (required)
 - Website URL (required)
-- Your role (optional)
+- Company LinkedIn (optional)
+- Company X (optional)
+- Your Name (required)
+- Your role (required)
+- Your LinkedIn (optional)
 
 STEP 2: COLLECT PLATFORMS
 [[INPUT:onboarding_platforms]]
@@ -147,6 +151,7 @@ STEP 2: COLLECT PLATFORMS
 - Data warehouse: [Snowflake | BigQuery | Redshift | PostgreSQL | None]
 - Email platform: [HubSpot | Klaviyo | Mailchimp | Marketo | Other]
 - Analytics: [GA4 | Amplitude | Mixpanel | Segment | Other]
+- Finance: [Stripe | Chargebee | Recurly | Zuora | Other | None ]
 
 STEP 3: VERIFY CONNECTIONS
 For each platform selected:

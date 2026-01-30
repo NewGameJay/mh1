@@ -29,6 +29,13 @@ allowed-tools: Read Write CallMcpTool
 
 Generate personalized email copy based on customer signals, reason codes, and cohort data.
 
+## References
+Refer to the following markdown files when generating copy:
+- copy-frameworks.md
+- plain-language.md
+- natural-transitions.md
+
+
 ## Supported Platforms
 
 | Platform | Integration Method | Notes |

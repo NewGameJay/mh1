@@ -1,0 +1,167 @@
+# clients/B0bCCLkqvFhK7JCWKNR1/config/integrations/marketing.yaml
+# Swimply Marketing Platform Configuration
+# Updated: 2026-01-30
+
+engagement_platform:
+  platform: "braze"
+  status: "configured"
+
+  # Credentials stored in credentials/.env
+  credentials:
+    api_key_env: "BRAZE_API_KEY"
+    # REST endpoint depends on Braze instance (US-01, US-02, EU-01, etc.)
+    # Common endpoints:
+    # US-01: https://rest.iad-01.braze.com
+    # US-02: https://rest.iad-02.braze.com
+    # US-03: https://rest.iad-03.braze.com
+    rest_endpoint_env: "BRAZE_REST_ENDPOINT"
+
+  # Braze capabilities
+  capabilities:
+    email: true
+    push_notifications: true
+    in_app_messaging: true
+    sms: true
+    content_cards: true
+    webhooks: true
+    currents: true  # Data streaming/export
+
+  # Expected segments in Braze
+  expected_segments:
+    guest:
+      - "new_signups"
+      - "first_time_bookers"
+      - "repeat_guests"
+      - "power_guests"
+      - "lapsed_guests"
+      - "abandoned_checkout"
+      - "abandoned_search"
+    host:
+      - "new_applicants"
+      - "pending_approval"
+      - "new_hosts"
+      - "active_hosts"
+      - "superhosts"
+      - "at_risk_hosts"
+      - "dormant_hosts"
+
+  # Recommended Canvas flows (Braze terminology)
+  recommended_canvases:
+    guest:
+      - name: "Guest Welcome Series"
+        trigger: "account_created"
+        channels: ["email", "push"]
+        steps: 4
+
+      - name: "Abandoned Search Recovery"
+        trigger: "search_no_booking_24h"
+        channels: ["email", "push"]
+        steps: 3
+
+      - name: "Abandoned Checkout"
+        trigger: "checkout_abandoned"
+        channels: ["email", "push", "sms"]
+        steps: 3
+
+      - name: "Post-Booking Prep"
+        trigger: "booking_confirmed"
+        channels: ["email", "push"]
+        steps: 2
+
+      - name: "Post-Experience Review"
+        trigger: "experience_completed"
+        channels: ["email", "push", "in_app"]
+        steps: 2
+
+      - name: "Guest Reactivation"
+        trigger: "days_since_booking > 60"
+        channels: ["email", "push"]
+        steps: 3
+
+      - name: "Win-Back Campaign"
+        trigger: "days_since_booking > 180"
+        channels: ["email"]
+        steps: 4
+
+      - name: "Seasonal Push"
+        trigger: "season_start"
+        channels: ["email", "push", "in_app"]
+        steps: 2
+
+    host:
+      - name: "Host Onboarding"
+        trigger: "application_approved"
+        channels: ["email", "push"]
+        steps: 5
+
+      - name: "First Listing Guide"
+        trigger: "listing_created"
+        channels: ["email", "in_app"]
+        steps: 3
+
+      - name: "First Booking Celebration"
+        trigger: "first_booking_received"
+        channels: ["email", "push"]
+        steps: 2
+
+      - name: "Superhost Journey"
+        trigger: "bookings >= 5"
+        channels: ["email", "in_app"]
+        steps: 4
+
+      - name: "Host Re-engagement"
+        trigger: "days_inactive > 14"
+        channels: ["email", "push"]
+        steps: 2
+
+      - name: "Season Preparation"
+        trigger: "before_peak_season"
+        channels: ["email"]
+        steps: 2
+
+analytics:
+  primary:
+    platform: "fullstory"
+    status: "not_configured"
+    credentials_required:
+      - FULLSTORY_ORG_ID
+      - FULLSTORY_API_KEY
+
+  secondary: null
+
+ads:
+  platforms:
+    - name: "facebook"
+      status: "not_configured"
+      credentials_required:
+        - FB_AD_ACCOUNT_ID
+        - FB_ACCESS_TOKEN
+
+    - name: "google"
+      status: "not_configured"
+      credentials_required:
+        - GOOGLE_ADS_CUSTOMER_ID
+        - GOOGLE_ADS_DEVELOPER_TOKEN
+
+    - name: "adroll"
+      status: "not_configured"
+      credentials_required:
+        - ADROLL_API_KEY
+
+social:
+  platforms:
+    - name: "instagram"
+      handle: "@swimply"
+      status: "active"
+
+    - name: "tiktok"
+      handle: "@swimply"
+      status: "active"
+
+    - name: "facebook"
+      handle: "swimply"
+      status: "active"
+
+    - name: "linkedin"
+      handle: "company/swimply"
+      status: "active"

@@ -1,0 +1,155 @@
+# clients/B0bCCLkqvFhK7JCWKNR1/config/semantic_layer/lifecycle_stages.yaml
+# Swimply Lifecycle Stage Mapping
+# Two-sided marketplace requires dual funnels
+
+# Guest Lifecycle (Demand Side)
+guest_lifecycle:
+  stages:
+    - canonical: "anonymous"
+      display_name: "Visitor"
+      description: "Browsing the platform, not signed up"
+      entry_trigger: "page_view"
+
+    - canonical: "subscriber"
+      display_name: "Signed Up"
+      description: "Created account, no booking yet"
+      entry_trigger: "account_created"
+
+    - canonical: "lead"
+      display_name: "Browser"
+      description: "Searching listings, favoriting, but no booking"
+      entry_trigger: "listing_favorited OR search_performed"
+
+    - canonical: "mql"
+      display_name: "Intent"
+      description: "Started checkout or contacted host"
+      entry_trigger: "checkout_started OR host_messaged"
+
+    - canonical: "customer"
+      display_name: "First Booker"
+      description: "Completed first booking"
+      entry_trigger: "first_booking_completed"
+
+    - canonical: "active_customer"
+      display_name: "Repeat Guest"
+      description: "2+ bookings in last 12 months"
+      entry_trigger: "booking_count >= 2 AND days_since_last_booking <= 365"
+
+    - canonical: "evangelist"
+      display_name: "Power Guest"
+      description: "5+ bookings, leaves reviews, refers friends"
+      entry_trigger: "booking_count >= 5 AND review_count >= 3"
+
+    - canonical: "at_risk"
+      display_name: "Lapsed"
+      description: "No booking in 180 days (was active)"
+      entry_trigger: "days_since_last_booking > 180 AND lifetime_bookings >= 1"
+
+    - canonical: "churned"
+      display_name: "Churned"
+      description: "No booking in 365 days"
+      entry_trigger: "days_since_last_booking > 365"
+
+# Host Lifecycle (Supply Side)
+host_lifecycle:
+  stages:
+    - canonical: "prospect"
+      display_name: "Interested"
+      description: "Visited host signup page"
+      entry_trigger: "host_landing_page_view"
+
+    - canonical: "lead"
+      display_name: "Applied"
+      description: "Started host application"
+      entry_trigger: "host_application_started"
+
+    - canonical: "mql"
+      display_name: "Approved"
+      description: "Application approved, no listing yet"
+      entry_trigger: "host_application_approved"
+
+    - canonical: "sql"
+      display_name: "Listed"
+      description: "Created first listing (pool/space)"
+      entry_trigger: "first_listing_published"
+
+    - canonical: "customer"
+      display_name: "First Booking"
+      description: "Received first guest booking"
+      entry_trigger: "first_booking_received"
+
+    - canonical: "active_customer"
+      display_name: "Active Host"
+      description: "Regular bookings, responsive"
+      entry_trigger: "bookings_last_30_days >= 2 AND response_rate >= 0.90"
+
+    - canonical: "evangelist"
+      display_name: "Superhost"
+      description: "10+ bookings, 4.8+ rating, high responsiveness"
+      entry_trigger: "lifetime_bookings >= 10 AND avg_rating >= 4.8 AND response_rate >= 0.95"
+
+    - canonical: "at_risk"
+      display_name: "Declining"
+      description: "Bookings dropping, listing inactive"
+      entry_trigger: "bookings_trend_negative AND days_since_last_booking > 30"
+
+    - canonical: "dormant"
+      display_name: "Dormant"
+      description: "No bookings in 90 days"
+      entry_trigger: "days_since_last_booking > 90"
+
+    - canonical: "churned"
+      display_name: "Delisted"
+      description: "Listing removed or account closed"
+      entry_trigger: "listing_status = 'delisted' OR account_status = 'closed'"
+
+# Stage Transitions (for funnel analysis)
+guest_transitions:
+  - from: "anonymous"
+    to: "subscriber"
+    benchmark_rate: 0.05
+
+  - from: "subscriber"
+    to: "lead"
+    benchmark_rate: 0.40
+
+  - from: "lead"
+    to: "mql"
+    benchmark_rate: 0.25
+
+  - from: "mql"
+    to: "customer"
+    benchmark_rate: 0.15
+
+  - from: "customer"
+    to: "active_customer"
+    benchmark_rate: 0.30
+
+  - from: "active_customer"
+    to: "evangelist"
+    benchmark_rate: 0.20
+
+host_transitions:
+  - from: "prospect"
+    to: "lead"
+    benchmark_rate: 0.10
+
+  - from: "lead"
+    to: "mql"
+    benchmark_rate: 0.60
+
+  - from: "mql"
+    to: "sql"
+    benchmark_rate: 0.70
+
+  - from: "sql"
+    to: "customer"
+    benchmark_rate: 0.50
+
+  - from: "customer"
+    to: "active_customer"
+    benchmark_rate: 0.60
+
+  - from: "active_customer"
+    to: "evangelist"
+    benchmark_rate: 0.25

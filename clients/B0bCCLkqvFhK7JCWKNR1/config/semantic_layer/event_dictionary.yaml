@@ -1,0 +1,209 @@
+# clients/B0bCCLkqvFhK7JCWKNR1/config/semantic_layer/event_dictionary.yaml
+# Swimply Event Dictionary
+# Maps platform events to canonical MH1 event types
+
+# Platform Events (expected from Fullstory/Segment)
+events:
+  # Guest Journey Events
+  guest:
+    acquisition:
+      - name: "page_view"
+        canonical: "impression"
+        description: "Any page viewed"
+
+      - name: "search_performed"
+        canonical: "engagement"
+        description: "Guest searched for pools/spaces"
+        properties:
+          - location
+          - date
+          - guests
+          - price_range
+          - amenities
+
+      - name: "listing_viewed"
+        canonical: "engagement"
+        description: "Guest viewed a listing detail page"
+        properties:
+          - listing_id
+          - host_id
+          - price
+          - location
+
+      - name: "listing_favorited"
+        canonical: "intent"
+        description: "Guest saved a listing to favorites"
+
+      - name: "account_created"
+        canonical: "signup"
+        description: "Guest created an account"
+
+    conversion:
+      - name: "checkout_started"
+        canonical: "intent"
+        description: "Guest began booking checkout"
+
+      - name: "host_messaged"
+        canonical: "intent"
+        description: "Guest sent message to host"
+
+      - name: "booking_completed"
+        canonical: "purchase"
+        description: "Guest completed a booking"
+        properties:
+          - booking_id
+          - listing_id
+          - host_id
+          - booking_value
+          - guest_fee
+          - booking_date
+          - duration_hours
+          - guest_count
+
+      - name: "booking_cancelled"
+        canonical: "churn_signal"
+        description: "Guest cancelled a booking"
+        properties:
+          - cancellation_reason
+          - refund_amount
+
+    retention:
+      - name: "review_submitted"
+        canonical: "advocacy"
+        description: "Guest left a review"
+        properties:
+          - rating
+          - review_text
+
+      - name: "referral_sent"
+        canonical: "advocacy"
+        description: "Guest referred a friend"
+
+      - name: "app_installed"
+        canonical: "engagement"
+        description: "Guest installed mobile app"
+
+  # Host Journey Events
+  host:
+    acquisition:
+      - name: "host_landing_view"
+        canonical: "impression"
+        description: "Viewed become-a-host page"
+
+      - name: "host_application_started"
+        canonical: "signup"
+        description: "Started host application"
+
+      - name: "host_application_submitted"
+        canonical: "conversion"
+        description: "Completed host application"
+
+      - name: "host_application_approved"
+        canonical: "activation"
+        description: "Host approved by Swimply"
+
+    listing:
+      - name: "listing_created"
+        canonical: "activation"
+        description: "Host created a new listing"
+
+      - name: "listing_published"
+        canonical: "activation"
+        description: "Listing went live"
+        properties:
+          - listing_type  # pool, hot_tub, court, backyard
+          - amenities
+          - price_per_hour
+          - location
+
+      - name: "listing_updated"
+        canonical: "engagement"
+        description: "Host updated listing details"
+
+      - name: "listing_paused"
+        canonical: "churn_signal"
+        description: "Host paused their listing"
+
+      - name: "listing_deleted"
+        canonical: "churn"
+        description: "Host removed their listing"
+
+    operations:
+      - name: "booking_received"
+        canonical: "revenue"
+        description: "Host received a booking"
+        properties:
+          - booking_value
+          - host_payout
+          - commission
+
+      - name: "booking_accepted"
+        canonical: "engagement"
+        description: "Host accepted a booking request"
+
+      - name: "booking_declined"
+        canonical: "churn_signal"
+        description: "Host declined a booking request"
+
+      - name: "guest_messaged"
+        canonical: "engagement"
+        description: "Host responded to guest message"
+
+      - name: "payout_received"
+        canonical: "revenue"
+        description: "Host received payout"
+
+    retention:
+      - name: "superhost_achieved"
+        canonical: "milestone"
+        description: "Host earned Superhost status"
+
+      - name: "review_received"
+        canonical: "feedback"
+        description: "Host received a review"
+
+      - name: "host_referral_sent"
+        canonical: "advocacy"
+        description: "Host referred another host"
+
+# Canonical Event Categories (for cross-client analysis)
+canonical_mapping:
+  impression:
+    weight: 1
+    funnel_stage: "awareness"
+
+  engagement:
+    weight: 2
+    funnel_stage: "consideration"
+
+  intent:
+    weight: 3
+    funnel_stage: "intent"
+
+  signup:
+    weight: 4
+    funnel_stage: "acquisition"
+
+  activation:
+    weight: 5
+    funnel_stage: "activation"
+
+  purchase:
+    weight: 10
+    funnel_stage: "revenue"
+
+  revenue:
+    weight: 10
+    funnel_stage: "revenue"
+
+  advocacy:
+    weight: 8
+    funnel_stage: "referral"
+
+  churn_signal:
+    weight: -3
+    funnel_stage: "retention"
+
+  churn:
+    weight: -10
+    funnel_stage: "retention"
