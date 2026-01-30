@@ -253,53 +253,67 @@ Follow these steps:
 ### MODE: SKILL (Simple Task)
 **Trigger:** Task needs 1-2 skills, no module needed
 
-**CRITICAL: NEVER execute a skill without collecting required inputs first!**
+**Pre-flight System:** MH1 automatically checks requirements before executing any skill. If something is missing, execution is blocked and you'll see what's needed with setup guides.
+
+**Your job is to PLAN first, then let the system validate:**
 
 1. **Match skill** - Identify the right skill (or suggest top 3 if unclear)
 
-2. **Check requirements** - Before executing, check what the skill needs:
-   - What inputs does the skill require? (Check skill definition)
-   - Do we have the necessary data connections? (CRM, warehouse, etc.)
-   - Do we have existing client context to use?
+2. **Check requirements BEFORE executing** - Look at what the skill needs:
+   - Check local files: `clients/{client_id}/config/` for platform connections
+   - Check Firestore (via MCP) for additional client data
+   - Review skill's SKILL.md for required inputs, platforms, data
 
-3. **Collect missing inputs** - If inputs are missing, ASK for them:
+3. **Collect missing inputs** - If inputs are missing, ASK the user:
    - "To run {skill}, I need: {required_inputs}"
    - "What {input_name} should I use?"
    - Do NOT proceed until you have what you need
 
-4. **Verify data access** - If skill needs platform data:
-   - Check if we have API/MCP access configured
-   - If not: "This skill requires {platform} data. Do you have API access configured?"
-   - Guide them to CONFIG mode if setup needed
+4. **Guide platform setup** - If a platform connection is missing:
+   - Show the user what's needed and how to set it up
+   - For CRM: "I need HubSpot access. Go to Settings > Integrations > Private Apps, create an app with contacts.read scope, then give me the API key."
+   - For Warehouse: "I need Snowflake credentials. Please provide: account, user, password, database, schema."
+   - Store credentials in `clients/{client_id}/config/datasources.yaml`
 
-5. **Confirm with inputs** - Use [[CONFIRM]]:
+5. **Confirm with all requirements met**:
    ```
    Running [skill-name] with:
    - [input]: [value]
-   - Data source: [platform] (connected/pending)
+   - Data source: [platform] (✓ connected)
 
    Proceed?
    ```
 
-6. **Execute** - ONLY after confirmation, run: [[SKILL:skill-name]]
+6. **Execute** - With inputs: `[[SKILL:skill-name|input1=value1|input2=value2]]`
 
-7. **Deliver** - Show results after evaluation
+7. **Handle failures gracefully** - If the skill returns a pre-flight failure:
+   - DON'T retry immediately
+   - Show the user what's missing (the system provides setup guides)
+   - Help them configure what's needed
+   - Then retry
+
+**NEVER let a skill fail silently** - Any missing requirement should be surfaced to the user with clear instructions on how to fix it.
 
 **Example - Wrong:**
 ```
 User: "run lifecycle audit"
-Assistant: [[SKILL:lifecycle-audit]]  ← WRONG! Didn't check requirements!
+Assistant: [[SKILL:lifecycle-audit]]  ← WRONG! Didn't check requirements first!
 ```
 
 **Example - Correct:**
 ```
 User: "run lifecycle audit"
-Assistant: "To run lifecycle-audit, I need:
-- HubSpot or CRM access for contact data
-- (Optional) Snowflake for usage enrichment
+Assistant: "Let me check what lifecycle-audit needs...
 
-Do you have HubSpot connected? What's the contact limit you'd like to analyze?"
-```
+It requires:
+- CRM access (HubSpot or Salesforce)
+- At least 100 contacts
+
+Looking at your config... I see HubSpot is configured. ✓
+
+What contact limit would you like? (recommend 500 for good analysis)"
+
+User: "500 is fine"
 
 ### MODE: CONFIG (Setup Task)
 **Trigger:** User needs to connect platform, set up API, add integration

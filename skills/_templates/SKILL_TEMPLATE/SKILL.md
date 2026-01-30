@@ -60,14 +60,46 @@ Do NOT use when:
 
 ---
 
+## Requirements
+
+**What this skill needs to run:**
+
+### Platform Connections (Required)
+
+| Platform | Type | Purpose | How to Setup |
+|----------|------|---------|--------------|
+| [HubSpot/Salesforce/etc] | CRM | Pull contact data | Add API key to .env or clients/{id}/config/datasources.yaml |
+| [Snowflake/BigQuery/etc] | Warehouse | Query usage data | Configure connection in datasources.yaml |
+
+### Platform Connections (Optional)
+
+| Platform | Type | Purpose | Benefit if Available |
+|----------|------|---------|---------------------|
+| [Platform] | [type] | [purpose] | [what it adds] |
+
+### Client Data Needed
+
+| Data | Location | Required | How to Provide |
+|------|----------|----------|----------------|
+| Company profile | clients/{id}/config/profile.yaml | Yes | Run client-onboarding or create manually |
+| Contact list | clients/{id}/data/contacts.json | No | Export from CRM or upload CSV |
+
+### User Inputs (Collected at Runtime)
+
+| Input | Type | Required | Description |
+|-------|------|----------|-------------|
+| `input_name` | string | yes | What this input is for |
+
+**Pre-flight check:** MH1 will verify these requirements before execution and guide you through setup if anything is missing.
+
+---
+
 ## Dependencies
 
 | Type | Name | Purpose |
 |------|------|---------|
 | Skill | [skill-name] | [purpose] |
 | MCP | [mcp-name] | [purpose] |
-| API | [api-name] | [purpose] |
-| Script | [script-path] | [purpose] |
 
 ---
 

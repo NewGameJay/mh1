@@ -5,7 +5,15 @@ description: |
   Use when asked to 'audit lifecycle', 'analyze customer journey', 'find churn risks',
   'identify bottlenecks', or 'assess pipeline health'.
 license: Proprietary
-compatibility: [HubSpot MCP, Snowflake MCP]
+
+# Required platform connections (skill will fail without these)
+requires_mcp:
+  - hubspot  # Required for contact/lifecycle data
+
+# Optional platforms (enhances results if available)
+compatibility:
+  - snowflake  # Adds usage data enrichment
+
 metadata:
   author: mh1-engineering
   version: "2.0.0"
